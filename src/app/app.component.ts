@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as packageInfo from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shalary-gui';
+  shalaryGuiVersion = packageInfo
+
 }

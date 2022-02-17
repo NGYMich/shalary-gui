@@ -1,0 +1,18 @@
+
+.header {
+  /*min-width: 1024px;*/
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.mat-toolbar {
+  background-color:transparent;
+}
+body {
+  background-color: whitesmoke;
+}
+
+.white-smoke {
+  background-color: whitesmoke;
+}
