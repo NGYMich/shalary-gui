@@ -1,0 +1,14 @@
+<div>
+  <div style="text-align: center; font-size: 31px;">Awesome Salaries</div>
+  <br>
+  <ag-grid-angular
+    style="width: 100%; height: 100%;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="desktopColumnDefs"
+    [gridOptions]="gridOptions"
+    (gridReady)="onGridReady($event)"
+    (rowClicked)="openUserInfos($event)"
+  >
+  </ag-grid-angular>
+</div>

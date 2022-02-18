@@ -12,9 +12,11 @@ import {DataComponent} from './data/data.component';
 import {AboutComponent} from './about/about.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AgGridModule} from "ag-grid-angular";
-import { UserInfosComponent } from './user-infos/user-infos.component';
-import { UserInfosDialogComponent } from './user-infos/user-infos-dialog/user-infos-dialog.component';
+import {UserInfosComponent} from './user-infos/user-infos.component';
+import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-infos-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule} from "@angular/forms";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -42,6 +44,9 @@ const routes: Routes = [
     HttpClientModule,
     MatDialogModule,
     AgGridModule.withComponents([]),
+    FormsModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

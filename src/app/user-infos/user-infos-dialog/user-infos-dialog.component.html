@@ -1,0 +1,34 @@
+<h1 style="font-family: Trebuchet MS,serif">
+  <div id="alignedToTheLeft">
+    {{this.currentUser.username != null ? this.currentUser.username : ""}}
+    {{this.mostRecentJobName != null ? " - " + this.mostRecentJobName : ""}}
+    {{this.currentUser.mainSector != null ? "(" + this.currentUser.mainSector + ")" : ""}}
+  </div>
+  <div id="alignedToTheRight">
+    {{this.currentUser.gender != null ? this.currentUser.gender : ""}}
+    {{this.currentUser.age != null ? " - " + this.currentUser.age : ""}} years old
+    {{this.currentUser.location != null ? " - " + this.currentUser.location : ""}}
+    {{this.currentUser.education != null ? " - " + this.currentUser.education : ""}}
+  </div>
+</h1>
+
+<br>
+<br>
+
+<ngx-charts-line-chart
+  [view]="view"
+  [legend]="legend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [showGridLines]="showGridLines"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [timeline]="timeline"
+  [results]="dataGraph"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+>
+</ngx-charts-line-chart>

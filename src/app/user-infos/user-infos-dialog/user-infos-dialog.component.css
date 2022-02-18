@@ -1,0 +1,14 @@
+h1 {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#alignedToTheLeft{
+  width:50%;
+  text-align:left;
+}
+
+#alignedToTheRight{
+  width:50%;
+  text-align:right;
+}
