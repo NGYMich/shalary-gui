@@ -1,0 +1,42 @@
+.mat-form-field {
+
+}
+
+/** {*/
+/*  background-color: aliceblue !important;*/
+/*}*/
+
+.optional {
+  font-style: italic;
+}
+
+.mat-raised-button.mat-remove-job{
+  background-color: darkgrey;
+  color: white;
+}
+.mat-raised-button.mat-add-job{
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.job-form-line {
+  float: left;
+}
+
+.full-width-line {
+  width: 100%;
+}
+
+.job-form-field {
+  width: 10%;
+}
+
+.job-form-field.with-margin-left-30px {
+  margin-left: 30px;
+}
+
+.job-form-field.with-margin-left-30px.italic {
+  font-style: italic;
+}
+
+

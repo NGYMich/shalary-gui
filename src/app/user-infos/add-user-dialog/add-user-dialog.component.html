@@ -1,0 +1,122 @@
+<div class="colored">
+  <div class="row">
+    <div class="col-xs-3">
+      <div>
+        <h1>
+          Informations
+        </h1>
+
+        <form [formGroup]="userInformationsForm">
+          <mat-form-field class="full-width-line">
+            <mat-label>Username *</mat-label>
+            <input formControlName="username" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label>Password *</mat-label>
+            <input formControlName="password" matInput>
+          </mat-form-field>
+          <br>
+
+
+          <mat-form-field class="full-width-line">
+            <mat-label>Mail *</mat-label>
+            <input formControlName="mail" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label>Job Name *</mat-label>
+            <input formControlName="jobName" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Job Level (optional)</mat-label>
+            <mat-select [(value)]="selectedJobLevel" formControlName="jobLevel">
+              <mat-option *ngFor="let jobLevel of jobLevels" [value]="jobLevel">{{jobLevel}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Education (optional)</mat-label>
+            <input formControlName="education" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Age (optional)</mat-label>
+            <input formControlName="age" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Main working sector (optional)</mat-label>
+            <input formControlName="mainSector" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Location (optional)</mat-label>
+            <input formControlName="location" matInput>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Gender (optional)</mat-label>
+            <mat-select [(value)]="selectedGender" formControlName="gender">
+              <mat-option *ngFor="let gender of ['Male', 'Female', 'Unknown']"
+                          [value]="gender">{{gender}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary" (click)="addUser($event)">Share your salary !</button>
+          <h3 *ngIf="isUserAdded">User informations added.</h3>
+        </form>
+
+
+      </div>
+    </div>
+    <div class="col-xs-9">
+      <h1>Work History</h1>
+      <div class="job-form-line">
+        <form [formGroup]="jobHistoryForm">
+          <button (click)="addJob()" color="add-job" mat-raised-button>
+            Add an experience
+          </button>
+          <div formArrayName="jobs">
+            <div *ngFor="let job of jobs.controls; let pointIndex=index" [formGroupName]="pointIndex">
+              <mat-form-field [floatLabel]="'never'" class="job-form-field">
+                <input formControlName="jobName" matInput/>
+                <mat-placeholder class="placeholder">Job Name *</mat-placeholder>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic">
+                <input formControlName="company" matInput/>
+                <mat-placeholder class="placeholder">Company</mat-placeholder>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'" style="margin-left: 30px; width: 16%;">
+                <input formControlName="yearsOfExperience" matInput/>
+                <mat-placeholder class="placeholder">Prior years of experience *</mat-placeholder>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px">
+                <input formControlName="baseSalary" matInput/>
+                <mat-placeholder class="placeholder">Base Salary *</mat-placeholder>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic">
+                <input formControlName="bonusSalary" matInput/>
+                <mat-placeholder class="placeholder">Bonus Salary</mat-placeholder>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic" style="margin-right: 3%">
+                <input formControlName="stockSalary" matInput/>
+                <mat-placeholder class="placeholder">Stock Salary</mat-placeholder>
+              </mat-form-field>
+
+              <button (click)="removeJob(pointIndex)" color="remove-job" mat-raised-button type="button">
+                Remove job
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

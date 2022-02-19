@@ -5,6 +5,7 @@ import {ColDef, GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-infos-dialog.component";
+import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
 
 @Component({
   selector: 'app-salaries',
@@ -39,9 +40,15 @@ export class SalariesComponent implements OnInit {
     }
   };
 
+  currentJobGetter = function (params) {
+    let salaryInfos = params.getValue('salaryHistory.salaryInfos');
+    return salaryInfos.length > 0 ? salaryInfos[salaryInfos.length - 1].jobName : null
+  }
+
   desktopColumnDefs: ColDef[] = [
     {field: 'id', sortable: true, width: 50},
     {field: 'username', sortable: true},
+    {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true},
     {field: 'age', sortable:true, width: 75},
     {field: 'gender', sortable: true, width: 100},
     {field: 'education', sortable: true},
@@ -94,6 +101,15 @@ export class SalariesComponent implements OnInit {
       width: '100%',
       height: '80%',
       data: {selectedUser: selectedUser},
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    });
+  }
+
+  openSalaryAddingDialog(event): void {
+    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+      width: '100%',
+      height: '80%',
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });

@@ -6,9 +6,9 @@
   flex-grow: 0;
 }
 
-.mat-toolbar {
-  background-color:transparent;
-}
+/*.mat-toolbar {*/
+/*  background-color:transparent;*/
+/*}*/
 body {
   background-color: whitesmoke;
 }

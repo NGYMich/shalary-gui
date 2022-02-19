@@ -1,15 +1,15 @@
 import {SalaryHistory} from "./salaryHistory";
 
 export class User {
-  id: number;
-  validated: boolean;
-  username: string;
-  password: string;
-  mail: string;
-  mainSector: string;
-  location: string;
-  education: string;
-  age: number;
+  id: number | null;
+  validated: boolean | null;
+  username: string | null;
+  password: string | null;
+  mail: string | null;
+  mainSector: string | null;
+  location: string | null;
+  education: string | null;
+  age: number | null;
   gender: Gender;
   salaryHistory: SalaryHistory;
 }

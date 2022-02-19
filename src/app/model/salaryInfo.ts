@@ -1,5 +1,3 @@
-import {SalaryHistory} from "./salaryHistory";
-
 export class SalaryInfo {
   yearsOfExperience: number;
   jobLevel: string;
@@ -9,4 +7,11 @@ export class SalaryInfo {
   bonusSalary: number;
   totalSalary: number;
   netTotalSalary: number;
+  company: Company;
+}
+
+export class Company {
+  name: string;
+  sector: string;
+  size: string;
 }

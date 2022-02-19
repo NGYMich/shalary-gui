@@ -4,6 +4,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/*mat-dialog-container {*/
+/*  background: yellow !important;*/
+/*  background-color: #bbbbbbf2;*/
+/*  backdrop-filter: blur(4px);*/
+/*}*/
 
 html, body {
   /*height: 100%;*/

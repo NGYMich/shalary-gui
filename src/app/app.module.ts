@@ -15,8 +15,12 @@ import {AgGridModule} from "ag-grid-angular";
 import {UserInfosComponent} from './user-infos/user-infos.component';
 import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-infos-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { AddUserDialogComponent } from './user-infos/add-user-dialog/add-user-dialog.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -33,7 +37,8 @@ const routes: Routes = [
     DataComponent,
     AboutComponent,
     UserInfosComponent,
-    UserInfosDialogComponent
+    UserInfosDialogComponent,
+    AddUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,11 @@ const routes: Routes = [
     AgGridModule.withComponents([]),
     FormsModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
