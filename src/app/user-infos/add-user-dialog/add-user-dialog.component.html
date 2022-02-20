@@ -58,13 +58,13 @@
           <mat-form-field class="full-width-line">
             <mat-label class="optional">Gender (optional)</mat-label>
             <mat-select [(value)]="selectedGender" formControlName="gender">
-              <mat-option *ngFor="let gender of ['Male', 'Female', 'Unknown']"
+              <mat-option *ngFor="let gender of ['Male', 'Female']"
                           [value]="gender">{{gender}}</mat-option>
             </mat-select>
           </mat-form-field>
           <br>
           <button mat-raised-button color="primary" (click)="addUser($event)">Share your experience !</button>
-          <h3 *ngIf="isUserAdded">User informations added.</h3>
+          <h3 style="margin-top: 2%;" *ngIf="isUserAdded">User informations added.</h3>
         </form>
 
 
@@ -74,50 +74,56 @@
       <h1>Work History</h1>
       <div class="job-form-line">
         <form [formGroup]="salaryInfosForm">
-          <button (click)="addNewJobFormLine()" color="add-job" mat-raised-button>
+          <button (click)="addNewJobFormLine()" color="add-job"  style="margin-bottom: 10px;" mat-raised-button>
             Add an experience
           </button>
           <div formArrayName="salaryInfos">
             <div *ngFor="let job of salaryInfos.controls; let pointIndex=index" [formGroupName]="pointIndex">
-              <mat-form-field [floatLabel]="'never'" style="float: left;" class="job-form-field with-margin-right-30px">
+              <mat-form-field style="float: left;" class="job-form-field with-margin-right-30px">
                 <input formControlName="jobName" matInput/>
-                <mat-placeholder class="placeholder">Job Name</mat-placeholder>
+                <mat-label class="optional">Job Name</mat-label>
               </mat-form-field>
 
               <div formGroupName="company">
-                <mat-form-field [floatLabel]="'never'" style="float: left;" class="job-form-field with-margin-right-30px italic">
+                <mat-form-field style="float: left;"
+                                class="job-form-field with-margin-right-30px italic">
                   <input formControlName="name" matInput/>
-                  <mat-placeholder class="placeholder">Company</mat-placeholder>
+                  <mat-label>Company</mat-label>
                 </mat-form-field>
               </div>
 
 
-              <mat-form-field [floatLabel]="'never'" style="margin-right: 30px; width: 13%;">
+              <mat-form-field style="margin-right: 30px; width: 13%;">
+                <mat-label>Years of Experience</mat-label>
                 <input formControlName="yearsOfExperience" matInput/>
-                <mat-placeholder class="placeholder">Years of Experience *</mat-placeholder>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px">
+<!--              <mat-form-field class="full-width-line">-->
+<!--                <mat-label class="optional">Location (optional)</mat-label>-->
+<!--                <input formControlName="location" matInput>-->
+<!--              </mat-form-field>-->
+<!--              -->
+
+              <mat-form-field class="job-form-field with-margin-right-30px">
                 <input formControlName="baseSalary" matInput/>
-                <mat-placeholder class="placeholder">Base Salary *</mat-placeholder>
+                <mat-label>Base Salary</mat-label>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px italic">
+              <mat-form-field class="job-form-field with-margin-right-30px italic">
                 <input formControlName="bonusSalary" matInput/>
-                <mat-placeholder class="placeholder">Bonus Salary</mat-placeholder>
+                <mat-label>Bonus Salary</mat-label>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px italic">
+              <mat-form-field class="job-form-field with-margin-right-30px italic">
                 <input formControlName="stockSalary" matInput/>
-                <mat-placeholder class="placeholder">Stock Salary</mat-placeholder>
+                <mat-label>Stock Salary</mat-label>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field"
-                              style="margin-right: 3%">
+              <mat-form-field class="job-form-field" style="margin-right: 3%">
                 <input formControlName="totalSalary" matInput [readonly]="true"/>
-                <mat-placeholder class="placeholder">{{
+                <mat-label>{{
                   calculateTotalSalary(pointIndex)
-                  }}</mat-placeholder>
+                  }}</mat-label>
               </mat-form-field>
 
 

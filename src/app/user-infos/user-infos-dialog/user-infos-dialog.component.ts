@@ -49,26 +49,31 @@ export class UserInfosDialogComponent implements OnInit {
 
 
   private addSalariesSeriesToDataGraph(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
+
     this.dataGraph.push({
       name: 'Base Salary',
       series: baseSalariesSeries
     })
 
-    this.dataGraph.push({
-      name: 'Bonus Salary',
-      series: bonusSalariesSeries
-    })
+    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0)) {
+      this.dataGraph.push({
+        name: 'Bonus Salary',
+        series: bonusSalariesSeries
+      })
+    }
+    if (stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) {
+      this.dataGraph.push({
+        name: 'Stock Salary',
+        series: stockSalariesSeries
+      })
+    }
 
-    this.dataGraph.push({
-      name: 'Stock Salary',
-      series: stockSalariesSeries
-    })
-
-
-    this.dataGraph.push({
-      name: 'Total Salary',
-      series: totalSalariesSeries
-    })
+    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) {
+      this.dataGraph.push({
+        name: 'Total Salary',
+        series: totalSalariesSeries
+      })
+    }
   }
 
   private computeSalariesSeries() {

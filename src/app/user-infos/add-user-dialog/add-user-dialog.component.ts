@@ -50,17 +50,19 @@ export class AddUserDialogComponent implements OnInit {
         salaryInfos: this.salaryInfos.value
       }
     });
+
+    this.isUserAdded = true;
   }
 
   addNewJobFormLine() {
     this.salaryInfos.push(this.formBuilder.group({
-          yearsOfExperience: '',
-          jobLevel: '',
-          jobName: '',
-          baseSalary: '',
-          stockSalary: '',
-          bonusSalary: '',
-          totalSalary: '',
+          yearsOfExperience: new FormControl('', Validators.min(0)),
+          jobLevel: new FormControl('', Validators.required),
+          jobName: new FormControl('', Validators.required),
+          baseSalary: new FormControl('', Validators.required),
+          stockSalary: new FormControl(''),
+          bonusSalary: new FormControl(''),
+          totalSalary: new FormControl(''),
           company: this.formBuilder.group({name: ''}),
         }
       )
@@ -121,5 +123,22 @@ export class AddUserDialogComponent implements OnInit {
       salaryInfos: this.formBuilder.array([])
     });
   }
+
+  // private initSalaryInfosForm() {
+  //   this.salaryInfosForm = this.formBuilder.group({
+  //     salaryInfos: this.formBuilder.array([
+  //       {
+  //         yearsOfExperience: new FormControl('', Validators.required),
+  //         jobLevel: new FormControl('', Validators.required),
+  //         jobName: new FormControl('', Validators.required),
+  //         baseSalary: new FormControl('', Validators.required),
+  //         stockSalary: new FormControl('', Validators.required),
+  //         bonusSalary: new FormControl('', Validators.required),
+  //         totalSalary: new FormControl('', Validators.required),
+  //         company: new FormControl('', Validators.required),
+  //       },
+  //     ])
+  //   });
+  // }
 
 }

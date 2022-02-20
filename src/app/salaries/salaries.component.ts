@@ -22,7 +22,8 @@ export class SalariesComponent implements OnInit {
   salaryValueGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
     if (salaryInfos.length > 0) {
-      return Number(salaryInfos[salaryInfos.length - 1].totalSalary).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " " + params.getValue('salaryHistory.salaryCurrency');
+      // return Number(salaryInfos[salaryInfos.length - 1].totalSalary).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " " + params.getValue('salaryHistory.salaryCurrency');
+      return Number(salaryInfos[salaryInfos.length - 1].totalSalary);
     } else {
       return null;
     }
@@ -46,24 +47,24 @@ export class SalariesComponent implements OnInit {
   }
 
   desktopColumnDefs: ColDef[] = [
-    {field: 'id', sortable: true, width: 50},
+    {field: 'id', sortable: true, width: 100, filter: 'agNumberColumnFilter'},
     {field: 'username', sortable: true},
-    {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true},
-    {field: 'age', sortable:true, width: 75},
-    {field: 'gender', sortable: true, width: 100},
-    {field: 'education', sortable: true},
-    {field: 'location', sortable: true},
+    {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, filter: 'agTextColumnFilter'},
+    {field: 'age', sortable:true, width: 100, filter: 'agNumberColumnFilter'},
+    {field: 'gender', sortable: true, width: 100, filter: 'agTextColumnFilter'},
+    {field: 'education', sortable: true, filter: 'agTextColumnFilter'},
+    {field: 'location', sortable: true, filter: 'agTextColumnFilter'},
     {field: 'salaryHistory.salaryCurrency', hide: true},
     {field: 'salaryHistory.salaryInfos', hide: true},
-    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, valueFormatter: this.experienceFormatter},
-    {valueGetter: this.salaryValueGetter, headerName: 'Current Salary', sortable: true},
-    {valueGetter: this.increaseValueGetter, headerName: 'Increase since beginning', sortable: true},
+    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
+    {valueGetter: this.salaryValueGetter, headerName: 'Current Salary', sortable: true, filter: 'agNumberColumnFilter'},
+    {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
   ];
 
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
-    paginationPageSize: 15,
+    paginationPageSize: 100,
     domLayout: 'autoHeight'
   };
 
