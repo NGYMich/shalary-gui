@@ -43,6 +43,7 @@ export class AddUserDialogComponent implements OnInit {
       education: this.userInformationsForm.get('education')!.value,
       age: this.userInformationsForm.get('age')!.value,
       gender: this.userInformationsForm.get('gender')!.value,
+      comment: this.userInformationsForm.get('comment')!.value,
       salaryHistory: {
         id: null,
         salaryCurrency: this.userInformationsForm.get('currency')!.value,
@@ -56,14 +57,17 @@ export class AddUserDialogComponent implements OnInit {
 
   addNewJobFormLine() {
     this.salaryInfos.push(this.formBuilder.group({
-          yearsOfExperience: new FormControl('', Validators.min(0)),
+          yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
           jobLevel: new FormControl('', Validators.required),
           jobName: new FormControl('', Validators.required),
           baseSalary: new FormControl('', Validators.required),
           stockSalary: new FormControl(''),
           bonusSalary: new FormControl(''),
           totalSalary: new FormControl(''),
-          company: this.formBuilder.group({name: ''}),
+          company: this.formBuilder.group({
+            name: '',
+            sector: ''
+          }),
         }
       )
     );
@@ -106,6 +110,7 @@ export class AddUserDialogComponent implements OnInit {
       education: new FormControl(''),
       age: new FormControl('', Validators.pattern('^[0-9]*$')),
       gender: new FormControl(''),
+      comment: new FormControl(''),
     });
   }
 

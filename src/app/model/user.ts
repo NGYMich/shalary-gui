@@ -10,6 +10,7 @@ export class User {
   location: string | null;
   education: string | null;
   age: number | null;
+  comment: string | null;
   gender: Gender;
   salaryHistory: SalaryHistory;
 }

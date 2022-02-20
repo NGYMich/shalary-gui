@@ -1,6 +1,6 @@
 <div class="colored">
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-xs-2">
       <div>
         <h1>
           Informations
@@ -14,7 +14,7 @@
           <br>
           <mat-form-field class="full-width-line">
             <mat-label>Password</mat-label>
-            <input formControlName="password" matInput>
+            <input type="password" formControlName="password" matInput>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
@@ -23,7 +23,7 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label class="optional">Salary Currency</mat-label>
+            <mat-label>Salary Currency</mat-label>
             <mat-select [(value)]="selectedCurrency" formControlName="currency">
               <mat-option *ngFor="let currency of currencies"
                           [value]="currency">{{currency}}</mat-option>
@@ -31,7 +31,7 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label>Years of Experience</mat-label>
+            <mat-label>Total Years of Experience</mat-label>
             <input formControlName="yearsOfExperience" matInput>
           </mat-form-field>
           <br>
@@ -63,6 +63,11 @@
             </mat-select>
           </mat-form-field>
           <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">Comment (optional)</mat-label>
+            <textarea style="white-space: pre-wrap;" formControlName="comment" matInput> </textarea>
+          </mat-form-field>
+          <br>
           <button mat-raised-button color="primary" (click)="addUser($event)">Share your experience !</button>
           <h3 style="margin-top: 2%;" *ngIf="isUserAdded">User informations added.</h3>
         </form>
@@ -70,11 +75,15 @@
 
       </div>
     </div>
-    <div class="col-xs-9">
-      <h1>Work History</h1>
+    <div class="col-xs-10">
+      <div job-form-line>
+        <h1>Work History</h1>
+<!--        <button mat-raised-button style="margin-left: 1%">See example</button>-->
+      </div>
+
       <div class="job-form-line">
         <form [formGroup]="salaryInfosForm">
-          <button (click)="addNewJobFormLine()" color="add-job"  style="margin-bottom: 10px;" mat-raised-button>
+          <button (click)="addNewJobFormLine()" color="add-job" style="margin-bottom: 10px;" mat-raised-button>
             Add an experience
           </button>
           <div formArrayName="salaryInfos">
@@ -85,24 +94,30 @@
               </mat-form-field>
 
               <div formGroupName="company">
-                <mat-form-field style="float: left;"
-                                class="job-form-field with-margin-right-30px italic">
+                <mat-form-field style="float: left; width: 6%;" class="job-form-field with-margin-right-30px italic">
                   <input formControlName="name" matInput/>
                   <mat-label>Company</mat-label>
                 </mat-form-field>
               </div>
 
+              <div formGroupName="company">
+                <mat-form-field style="float: left; width: 6%;"
+                                class="job-form-field with-margin-right-30px italic">
+                  <input formControlName="sector" matInput/>
+                  <mat-label>Sector</mat-label>
+                </mat-form-field>
+              </div>
 
-              <mat-form-field style="margin-right: 30px; width: 13%;">
-                <mat-label>Years of Experience</mat-label>
+              <mat-form-field style="margin-right: 30px; width: 12%;">
+                <mat-label>Prior Years of XP *</mat-label>
                 <input formControlName="yearsOfExperience" matInput/>
               </mat-form-field>
 
-<!--              <mat-form-field class="full-width-line">-->
-<!--                <mat-label class="optional">Location (optional)</mat-label>-->
-<!--                <input formControlName="location" matInput>-->
-<!--              </mat-form-field>-->
-<!--              -->
+              <!--              <mat-form-field class="full-width-line">-->
+              <!--                <mat-label class="optional">Location (optional)</mat-label>-->
+              <!--                <input formControlName="location" matInput>-->
+              <!--              </mat-form-field>-->
+              <!--              -->
 
               <mat-form-field class="job-form-field with-margin-right-30px">
                 <input formControlName="baseSalary" matInput/>

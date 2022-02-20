@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../services/UserService";
 import {User} from "../model/user";
-import {ColDef, GridOptions} from "ag-grid-community";
+import {GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-infos-dialog.component";
@@ -19,15 +19,22 @@ export class SalariesComponent implements OnInit {
   @Input() isMobile: boolean;
   private gridApi;
   private gridColumnApi;
-  salaryValueGetter = function (params) {
-    let salaryInfos = params.getValue('salaryHistory.salaryInfos');
-    if (salaryInfos.length > 0) {
-      // return Number(salaryInfos[salaryInfos.length - 1].totalSalary).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " " + params.getValue('salaryHistory.salaryCurrency');
-      return Number(salaryInfos[salaryInfos.length - 1].totalSalary);
-    } else {
-      return null;
-    }
+  totalSalaryValueGetter = function (params) {
+    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
   };
+
+  baseSalaryValueGetter = function (params) {
+    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
+  };
+
+  bonusSalaryValueGetter = function (params) {
+    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
+  };
+
+  stockSalaryValueGetter = function (params) {
+    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
+  };
+
 
   increaseValueGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
@@ -46,19 +53,32 @@ export class SalariesComponent implements OnInit {
     return salaryInfos.length > 0 ? salaryInfos[salaryInfos.length - 1].jobName : null
   }
 
-  desktopColumnDefs: ColDef[] = [
-    {field: 'id', sortable: true, width: 100, filter: 'agNumberColumnFilter'},
-    {field: 'username', sortable: true},
-    {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, filter: 'agTextColumnFilter'},
-    {field: 'age', sortable:true, width: 100, filter: 'agNumberColumnFilter'},
-    {field: 'gender', sortable: true, width: 100, filter: 'agTextColumnFilter'},
-    {field: 'education', sortable: true, filter: 'agTextColumnFilter'},
-    {field: 'location', sortable: true, filter: 'agTextColumnFilter'},
-    {field: 'salaryHistory.salaryCurrency', hide: true},
-    {field: 'salaryHistory.salaryInfos', hide: true},
-    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
-    {valueGetter: this.salaryValueGetter, headerName: 'Current Salary', sortable: true, filter: 'agNumberColumnFilter'},
-    {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
+  desktopColumnDefs = [
+    {
+      headerName: 'User Informations',
+      children: [
+        // {field: 'id', sortable: true, width: 100, filter: 'agNumberColumnFilter'},
+        {field: 'username', sortable: true},
+        {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, filter: 'agTextColumnFilter'},
+        {field: 'age', sortable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {field: 'gender', sortable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'education', sortable: true, filter: 'agTextColumnFilter'},
+        {field: 'location', sortable: true, filter: 'agTextColumnFilter'},
+        {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Work Experience', sortable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
+      ]
+    },
+    {
+      headerName: 'Salary Informations',
+      children: [
+        {field: 'salaryHistory.salaryCurrency', hide: true},
+        {field: 'salaryHistory.salaryInfos', hide: true},
+        {valueGetter: this.totalSalaryValueGetter,  width: 150, headerName: 'Total Salary', sortable: true, filter: 'agNumberColumnFilter'},
+        {valueGetter: this.baseSalaryValueGetter, width: 150,  headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.bonusSalaryValueGetter, width: 150,  headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.stockSalaryValueGetter, width: 150,  headerName: 'Stock Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
+      ]
+    },
   ];
 
   gridOptions: GridOptions = {
@@ -110,7 +130,7 @@ export class SalariesComponent implements OnInit {
   openSalaryAddingDialog(event): void {
     const dialogRef = this.dialog.open(AddUserDialogComponent, {
       width: '100%',
-      height: '80%',
+      height: '90%',
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });

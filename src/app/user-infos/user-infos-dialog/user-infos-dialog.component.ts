@@ -25,7 +25,7 @@ export class UserInfosDialogComponent implements OnInit {
   xAxisLabel: string = 'Years of experience';
   yAxisLabel: string = 'Salary';
   timeline: boolean = true;
-  showGridLines: boolean = false;
+  showGridLines: boolean = true;
   mostRecentJobName: string;
 
   colorScheme = {
