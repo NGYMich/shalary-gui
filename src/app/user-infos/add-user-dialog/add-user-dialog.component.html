@@ -8,32 +8,31 @@
 
         <form [formGroup]="userInformationsForm">
           <mat-form-field class="full-width-line">
-            <mat-label>Username *</mat-label>
+            <mat-label>Username</mat-label>
             <input formControlName="username" matInput>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label>Password *</mat-label>
+            <mat-label>Password</mat-label>
             <input formControlName="password" matInput>
           </mat-form-field>
           <br>
-
-
           <mat-form-field class="full-width-line">
-            <mat-label>Mail *</mat-label>
+            <mat-label>Mail</mat-label>
             <input formControlName="mail" matInput>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label>Job Name *</mat-label>
-            <input formControlName="jobName" matInput>
+            <mat-label class="optional">Salary Currency</mat-label>
+            <mat-select [(value)]="selectedCurrency" formControlName="currency">
+              <mat-option *ngFor="let currency of currencies"
+                          [value]="currency">{{currency}}</mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label class="optional">Job Level (optional)</mat-label>
-            <mat-select [(value)]="selectedJobLevel" formControlName="jobLevel">
-              <mat-option *ngFor="let jobLevel of jobLevels" [value]="jobLevel">{{jobLevel}}</mat-option>
-            </mat-select>
+            <mat-label>Years of Experience</mat-label>
+            <input formControlName="yearsOfExperience" matInput>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
@@ -64,7 +63,7 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <button mat-raised-button color="primary" (click)="addUser($event)">Share your salary !</button>
+          <button mat-raised-button color="primary" (click)="addUser($event)">Share your experience !</button>
           <h3 *ngIf="isUserAdded">User informations added.</h3>
         </form>
 
@@ -74,44 +73,56 @@
     <div class="col-xs-9">
       <h1>Work History</h1>
       <div class="job-form-line">
-        <form [formGroup]="jobHistoryForm">
-          <button (click)="addJob()" color="add-job" mat-raised-button>
+        <form [formGroup]="salaryInfosForm">
+          <button (click)="addNewJobFormLine()" color="add-job" mat-raised-button>
             Add an experience
           </button>
-          <div formArrayName="jobs">
-            <div *ngFor="let job of jobs.controls; let pointIndex=index" [formGroupName]="pointIndex">
-              <mat-form-field [floatLabel]="'never'" class="job-form-field">
+          <div formArrayName="salaryInfos">
+            <div *ngFor="let job of salaryInfos.controls; let pointIndex=index" [formGroupName]="pointIndex">
+              <mat-form-field [floatLabel]="'never'" style="float: left;" class="job-form-field with-margin-right-30px">
                 <input formControlName="jobName" matInput/>
-                <mat-placeholder class="placeholder">Job Name *</mat-placeholder>
+                <mat-placeholder class="placeholder">Job Name</mat-placeholder>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic">
-                <input formControlName="company" matInput/>
-                <mat-placeholder class="placeholder">Company</mat-placeholder>
-              </mat-form-field>
+              <div formGroupName="company">
+                <mat-form-field [floatLabel]="'never'" style="float: left;" class="job-form-field with-margin-right-30px italic">
+                  <input formControlName="name" matInput/>
+                  <mat-placeholder class="placeholder">Company</mat-placeholder>
+                </mat-form-field>
+              </div>
 
-              <mat-form-field [floatLabel]="'never'" style="margin-left: 30px; width: 16%;">
+
+              <mat-form-field [floatLabel]="'never'" style="margin-right: 30px; width: 13%;">
                 <input formControlName="yearsOfExperience" matInput/>
-                <mat-placeholder class="placeholder">Prior years of experience *</mat-placeholder>
+                <mat-placeholder class="placeholder">Years of Experience *</mat-placeholder>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px">
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px">
                 <input formControlName="baseSalary" matInput/>
                 <mat-placeholder class="placeholder">Base Salary *</mat-placeholder>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic">
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px italic">
                 <input formControlName="bonusSalary" matInput/>
                 <mat-placeholder class="placeholder">Bonus Salary</mat-placeholder>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-left-30px italic" style="margin-right: 3%">
+              <mat-form-field [floatLabel]="'never'" class="job-form-field with-margin-right-30px italic">
                 <input formControlName="stockSalary" matInput/>
                 <mat-placeholder class="placeholder">Stock Salary</mat-placeholder>
               </mat-form-field>
 
-              <button (click)="removeJob(pointIndex)" color="remove-job" mat-raised-button type="button">
-                Remove job
+              <mat-form-field [floatLabel]="'never'" class="job-form-field"
+                              style="margin-right: 3%">
+                <input formControlName="totalSalary" matInput [readonly]="true"/>
+                <mat-placeholder class="placeholder">{{
+                  calculateTotalSalary(pointIndex)
+                  }}</mat-placeholder>
+              </mat-form-field>
+
+
+              <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-raised-button type="button">
+                Remove
               </button>
             </div>
           </div>

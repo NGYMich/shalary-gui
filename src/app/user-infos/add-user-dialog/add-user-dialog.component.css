@@ -28,14 +28,14 @@
 }
 
 .job-form-field {
-  width: 10%;
+  width: 9%;
 }
 
-.job-form-field.with-margin-left-30px {
-  margin-left: 30px;
+.job-form-field.with-margin-right-30px {
+  margin-right: 30px;
 }
 
-.job-form-field.with-margin-left-30px.italic {
+.job-form-field.with-margin-right-30px.italic {
   font-style: italic;
 }
 

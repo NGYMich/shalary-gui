@@ -1,7 +1,7 @@
 import {SalaryInfo} from "./salaryInfo";
 
 export class SalaryHistory {
-  id: number;
+  id: number | null;
   salaryCurrency: string;
   totalYearsOfExperience: number;
   salaryInfos: SalaryInfo[];
