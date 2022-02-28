@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
+import {SalaryCellRenderer} from "./salary-cell-renderer";
 
 @Component({
   selector: 'app-salaries',
@@ -17,8 +18,18 @@ export class SalariesComponent implements OnInit {
   users: User[] = [];
   @Input() rowData: any;
   @Input() isMobile: boolean;
+  gridOptions: GridOptions = {
+    rowSelection: 'single',
+    pagination: true,
+    paginationPageSize: 100,
+    domLayout: 'autoHeight',
+  };
   private gridApi;
   private gridColumnApi;
+
+  constructor(private userService: UserService, public dialog: MatDialog, private deviceService: DeviceDetectorService) {
+  }
+
   totalSalaryValueGetter = function (params) {
     return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
   };
@@ -34,7 +45,6 @@ export class SalariesComponent implements OnInit {
   stockSalaryValueGetter = function (params) {
     return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
   };
-
 
   increaseValueGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
@@ -72,24 +82,14 @@ export class SalariesComponent implements OnInit {
       children: [
         {field: 'salaryHistory.salaryCurrency', hide: true},
         {field: 'salaryHistory.salaryInfos', hide: true},
-        {valueGetter: this.totalSalaryValueGetter,  width: 150, headerName: 'Total Salary', sortable: true, filter: 'agNumberColumnFilter'},
-        {valueGetter: this.baseSalaryValueGetter, width: 150,  headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {valueGetter: this.bonusSalaryValueGetter, width: 150,  headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {valueGetter: this.stockSalaryValueGetter, width: 150,  headerName: 'Stock Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.totalSalaryValueGetter, width: 150, headerName: 'Total Salary', sortable: true, filter: 'agNumberColumnFilter', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Stock Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
       ]
     },
   ];
-
-  gridOptions: GridOptions = {
-    rowSelection: 'single',
-    pagination: true,
-    paginationPageSize: 100,
-    domLayout: 'autoHeight'
-  };
-
-  constructor(private userService: UserService, public dialog: MatDialog, private deviceService: DeviceDetectorService) {
-  }
 
   experienceFormatter(params) {
     return params.value + ' years'
@@ -134,5 +134,9 @@ export class SalariesComponent implements OnInit {
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
+  }
+
+  onFilterTextBoxChanged() {
+    this.gridOptions.api!.setQuickFilter((document.getElementById('filter-text-box') as HTMLInputElement).value);
   }
 }

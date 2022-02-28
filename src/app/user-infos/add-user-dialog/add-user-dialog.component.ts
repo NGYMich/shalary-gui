@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../services/UserService";
 import {User} from "../../model/user";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -21,7 +22,6 @@ export class AddUserDialogComponent implements OnInit {
   selectedJobLevel;
   selectedGender;
   selectedCurrency;
-
   isUserAdded: boolean;
   test: any;
 
@@ -32,33 +32,35 @@ export class AddUserDialogComponent implements OnInit {
 
 
   addUser($event: MouseEvent) {
-    this.userService.addUser({
-      id: null,
-      validated: true,
-      username: this.userInformationsForm.get('username')!.value,
-      password: this.userInformationsForm.get('password')!.value,
-      mail: this.userInformationsForm.get('mail')!.value,
-      mainSector: this.userInformationsForm.get('mainSector')!.value,
-      location: this.userInformationsForm.get('location')!.value,
-      education: this.userInformationsForm.get('education')!.value,
-      age: this.userInformationsForm.get('age')!.value,
-      gender: this.userInformationsForm.get('gender')!.value,
-      comment: this.userInformationsForm.get('comment')!.value,
-      salaryHistory: {
+    console.info("salary infos : ", this.salaryInfos)
+    if (this.userInformationsForm.valid && this.salaryInfos.valid) {
+      this.userService.addUser({
         id: null,
-        salaryCurrency: this.userInformationsForm.get('currency')!.value,
-        totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
-        salaryInfos: this.salaryInfos.value
-      }
-    });
+        validated: true,
+        username: this.userInformationsForm.get('username')!.value,
+        password: this.userInformationsForm.get('password')!.value,
+        mail: this.userInformationsForm.get('mail')!.value,
+        mainSector: this.userInformationsForm.get('mainSector')!.value,
+        location: this.userInformationsForm.get('location')!.value,
+        education: this.userInformationsForm.get('education')!.value,
+        age: this.userInformationsForm.get('age')!.value,
+        gender: this.userInformationsForm.get('gender')!.value,
+        comment: this.userInformationsForm.get('comment')!.value,
+        salaryHistory: {
+          id: null,
+          salaryCurrency: this.userInformationsForm.get('currency')!.value,
+          totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
+          salaryInfos: this.salaryInfos.value
+        }
+      });
+      this.isUserAdded = true;
+    }
 
-    this.isUserAdded = true;
   }
 
   addNewJobFormLine() {
     this.salaryInfos.push(this.formBuilder.group({
           yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-          jobLevel: new FormControl('', Validators.required),
           jobName: new FormControl('', Validators.required),
           baseSalary: new FormControl('', Validators.required),
           stockSalary: new FormControl(''),
