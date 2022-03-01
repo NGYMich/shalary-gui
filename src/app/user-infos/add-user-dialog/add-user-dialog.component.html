@@ -35,6 +35,26 @@
             <input formControlName="yearsOfExperience" matInput>
           </mat-form-field>
           <br>
+
+
+          <!--          <mat-form-field class="full-width-line">-->
+          <!--            <mat-label class="optional">Location (optional)</mat-label>-->
+          <!--            <input formControlName="location" matInput>-->
+          <!--          </mat-form-field>-->
+
+
+          <mat-form-field class="full-width-line">
+            <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
+            <mat-label class="optional">Location (optional)</mat-label>
+
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+                <img class="example-option-img" aria-hidden [src]="country.flag" height="25" width="35">
+                <span> {{country.name}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <br>
           <mat-form-field class="full-width-line">
             <mat-label class="optional">Education (optional)</mat-label>
             <input formControlName="education" matInput>
@@ -51,11 +71,6 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label class="optional">Location (optional)</mat-label>
-            <input formControlName="location" matInput>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width-line">
             <mat-label class="optional">Gender (optional)</mat-label>
             <mat-select [(value)]="selectedGender" formControlName="gender">
               <mat-option *ngFor="let gender of ['Male', 'Female']"
@@ -67,18 +82,18 @@
             <mat-label class="optional">Comment (optional)</mat-label>
             <textarea style="white-space: pre-wrap;" formControlName="comment" matInput> </textarea>
           </mat-form-field>
+
+
           <br>
           <button mat-raised-button color="primary" (click)="addUser($event)">Share your experience !</button>
           <h3 style="margin-top: 2%;" *ngIf="isUserAdded">User informations added.</h3>
         </form>
-
-
       </div>
     </div>
     <div class="col-xs-10">
       <div job-form-line>
         <h1>Work History</h1>
-<!--        <button mat-raised-button style="margin-left: 1%">See example</button>-->
+        <!--        <button mat-raised-button style="margin-left: 1%">See example</button>-->
       </div>
 
       <div class="job-form-line">

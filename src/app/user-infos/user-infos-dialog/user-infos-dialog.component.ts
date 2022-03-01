@@ -40,7 +40,7 @@ export class UserInfosDialogComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    Object.assign(this, this.dataGraph);
+    // Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
 
@@ -67,13 +67,16 @@ export class UserInfosDialogComponent implements OnInit {
     this.activeEntries = [];
   }
 
+  onSelect($event: any) {
+
+  }
+
   private addSalariesSeriesToDataGraph(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     this.colors = new ColorHelper(this.colorScheme, ScaleType.Ordinal, this.dataGraph, (this.colorScheme));
-
-    this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
-    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0)) this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transportation...)', series: bonusSalariesSeries})
-    if (stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) this.dataGraph.push({name: 'Equity', series: stockSalariesSeries})
-    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) this.dataGraph.push({name: 'Total Salary', series: totalSalariesSeries})
+    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0 || baseSalariesSeries.find(baseSalary => baseSalary.value > 0))) this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
+    if (baseSalariesSeries.find(baseSalary => baseSalary.value > 0) && (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0))) this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
+    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0)) this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transports, rent..)', series: bonusSalariesSeries})
+    if (stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) this.dataGraph.push({name: 'Equity (options, restricted stock, performance shares)', series: stockSalariesSeries})
 
     this.chartNames = this.dataGraph.map((d: any) => d.name);
   }

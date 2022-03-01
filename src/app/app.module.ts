@@ -17,7 +17,7 @@ import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-info
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import { AddUserDialogComponent } from './user-infos/add-user-dialog/add-user-dialog.component';
+import {AddUserDialogComponent} from './user-infos/add-user-dialog/add-user-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
@@ -26,6 +26,10 @@ import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {LocationCellRenderer} from "./salaries/location-cell-renderer";
+import {SafePipe} from "./util/SafePipe";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -45,7 +49,9 @@ const routes: Routes = [
     UserInfosComponent,
     UserInfosDialogComponent,
     AddUserDialogComponent,
-    SalaryCellRenderer
+    SalaryCellRenderer,
+    LocationCellRenderer,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,8 @@ const routes: Routes = [
     MatIconModule,
     MatCardModule,
     FlexLayoutModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

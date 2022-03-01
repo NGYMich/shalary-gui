@@ -8,6 +8,7 @@ export class User {
   mail: string | null;
   mainSector: string | null;
   location: string | null;
+  locationImage: string | null;
   education: string | null;
   age: number | null;
   comment: string | null;

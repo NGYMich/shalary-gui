@@ -3,10 +3,10 @@ import {UserService} from "../services/UserService";
 import {User} from "../model/user";
 import {GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
-import {DeviceDetectorService} from 'ngx-device-detector';
 import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
 import {SalaryCellRenderer} from "./salary-cell-renderer";
+import {LocationCellRenderer} from "./location-cell-renderer";
 
 @Component({
   selector: 'app-salaries',
@@ -27,7 +27,7 @@ export class SalariesComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
 
-  constructor(private userService: UserService, public dialog: MatDialog, private deviceService: DeviceDetectorService) {
+  constructor(private userService: UserService, public dialog: MatDialog) {
   }
 
   totalSalaryValueGetter = function (params) {
@@ -65,7 +65,7 @@ export class SalariesComponent implements OnInit {
 
   desktopColumnDefs = [
     {
-      headerName: 'User Informations',
+      headerName: 'User Information',
       children: [
         // {field: 'id', sortable: true, width: 100, filter: 'agNumberColumnFilter'},
         {field: 'username', sortable: true},
@@ -73,7 +73,10 @@ export class SalariesComponent implements OnInit {
         {field: 'age', sortable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'gender', sortable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'education', sortable: true, filter: 'agTextColumnFilter'},
-        {field: 'location', sortable: true, filter: 'agTextColumnFilter'},
+        {
+          field: 'location', sortable: true, filter: 'agTextColumnFilter',
+          cellRendererFramework: LocationCellRenderer,
+        },
         {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Work Experience', sortable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
       ]
     },
@@ -82,11 +85,38 @@ export class SalariesComponent implements OnInit {
       children: [
         {field: 'salaryHistory.salaryCurrency', hide: true},
         {field: 'salaryHistory.salaryInfos', hide: true},
-        {valueGetter: this.totalSalaryValueGetter, width: 150, headerName: 'Total Salary', sortable: true, filter: 'agNumberColumnFilter', cellRendererFramework: SalaryCellRenderer},
+        {
+          valueGetter: this.totalSalaryValueGetter,
+          width: 150,
+          headerName: 'Total Salary',
+          sortable: true,
+          filter: 'agNumberColumnFilter',
+          cellRendererFramework: SalaryCellRenderer,
+          cellStyle: params => {
+            let salary = params.value;
+            switch (true) {
+              case (salary < 20000):
+                return
+              case (salary < 30000):
+                return {'background-color': '#cde2c4'}
+              case (salary < 40000):
+                return {'background-color': '#c4e0b8'}
+              case (salary < 50000):
+                return {'background-color': '#a8e28e'}
+              case (salary < 60000):
+                return {'background-color': '#9de080'}
+              case (salary < 70000):
+                return {'background-color': '#8ad569'}
+              case (salary >= 70000):
+                return {'background-color': '#79cd54'}
+            }
+            return
+          }
+        },
         {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Equity', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
+        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter',},
       ]
     },
   ];
@@ -105,20 +135,21 @@ export class SalariesComponent implements OnInit {
     })
   }
 
+
   onGridReady(params): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
   }
 
-  autoColumnSizesWithButton(skipHeader): void {
-    const allColumnIds = this.gridColumnApi.getAllColumns().map((column) => column.colId);
-    this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
-  }
+  // autoColumnSizesWithButton(skipHeader): void {
+  //   const allColumnIds = this.gridColumnApi.getAllColumns().map((column) => column.colId);
+  //   this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
+  // }
 
   openUserInfos(event): void {
     const selectedNodes = this.gridApi.getSelectedNodes();
     const selectedUser = selectedNodes.map(node => node.data)[0];
-    const dialogRef = this.dialog.open(UserInfosDialogComponent, {
+    this.dialog.open(UserInfosDialogComponent, {
       width: '100%',
       height: '80%',
       data: {selectedUser: selectedUser},
@@ -128,7 +159,7 @@ export class SalariesComponent implements OnInit {
   }
 
   openSalaryAddingDialog(event): void {
-    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+    this.dialog.open(AddUserDialogComponent, {
       width: '100%',
       height: '90%',
       autoFocus: false,

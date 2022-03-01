@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../services/UserService";
-import {User} from "../../model/user";
-import {Subscription} from "rxjs";
+import {LocationService} from "../../services/LocationService";
+import {Country} from "../../model/country";
+import {map, Observable, startWith} from "rxjs";
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -11,37 +12,60 @@ import {Subscription} from "rxjs";
 })
 export class AddUserDialogComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
-  }
-
+  // user infos
   userInformationsForm: FormGroup;
+
+  //salary infos & history
   salaryInfosForm: FormGroup;
   salaryHistoryForm: FormGroup;
-  jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
+  // countries
+  countriesControl = new FormControl();
+  filteredCountries: Observable<Country[]>;
+  // jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
   currencies = ['€', '$', '£', '¥', 'CHF'];
-  selectedJobLevel;
   selectedGender;
   selectedCurrency;
   isUserAdded: boolean;
-  test: any;
+  allCountriesWithTheirFlags: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private locationService: LocationService
+  ) {
+  }
+
+  // getters & setters
+  get salaryInfos(): FormArray {
+    return this.salaryInfosForm.get('salaryInfos') as FormArray;
+  }
 
   ngOnInit(): void {
     this.initSalaryInfosForm();
     this.initUserInformationsForm();
-  }
+    this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
+      this.allCountriesWithTheirFlags = data;
+      this.filteredCountries = this.countriesControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
+        );
+    })
 
+  }
 
   addUser($event: MouseEvent) {
     console.info("salary infos : ", this.salaryInfos)
     if (this.userInformationsForm.valid && this.salaryInfos.valid) {
       this.userService.addUser({
         id: null,
+        locationImage: null,
         validated: true,
         username: this.userInformationsForm.get('username')!.value,
         password: this.userInformationsForm.get('password')!.value,
         mail: this.userInformationsForm.get('mail')!.value,
         mainSector: this.userInformationsForm.get('mainSector')!.value,
-        location: this.userInformationsForm.get('location')!.value,
+        location: this.countriesControl.value,
         education: this.userInformationsForm.get('education')!.value,
         age: this.userInformationsForm.get('age')!.value,
         gender: this.userInformationsForm.get('gender')!.value,
@@ -79,7 +103,6 @@ export class AddUserDialogComponent implements OnInit {
     this.salaryInfos.removeAt(pointIndex);
   }
 
-
   calculateTotalSalary(pointIndex) {
     let totalSalary: number = 0;
     let currentJob = this.salaryInfos.value[pointIndex]!;
@@ -93,12 +116,12 @@ export class AddUserDialogComponent implements OnInit {
     return totalSalary
   }
 
-  // getters & setters
-  get salaryInfos(): FormArray {
-    return this.salaryInfosForm.get('salaryInfos') as FormArray;
-  }
-
   // form initializers
+
+  private _filterCountries(value: string): Country[] {
+    const filterValue = value.toLowerCase();
+    return this.allCountriesWithTheirFlags.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   private initUserInformationsForm() {
     this.userInformationsForm = this.formBuilder.group({
@@ -108,7 +131,6 @@ export class AddUserDialogComponent implements OnInit {
       currency: new FormControl('', Validators.required),
       yearsOfExperience: new FormControl('', Validators.required),
       mainSector: new FormControl(''),
-      location: new FormControl(''),
       education: new FormControl(''),
       age: new FormControl('', Validators.pattern('^[0-9]*$')),
       gender: new FormControl(''),

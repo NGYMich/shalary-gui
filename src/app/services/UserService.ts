@@ -7,12 +7,11 @@ import {Observable, Subject} from "rxjs";
   providedIn: 'root'
 })
 export class UserService {
+  rootURL = 'http://localhost:2111/api';
 
   constructor(private http: HttpClient) {
   }
 
-  rootURL = 'http://localhost:2111/api';
-  // rootURL = 'http://localhost:8080/api';
   // tslint:disable-next-line:variable-name
   private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
 

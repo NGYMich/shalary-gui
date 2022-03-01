@@ -31,6 +31,7 @@
       [results]="dataGraph"
       (activate)="legendLabelActivate($event)"
       (deactivate)="legendLabelDeactivate($event)"
+      (select)="onSelect($event)"
     >
     </ngx-charts-line-chart>
   </div>
@@ -44,12 +45,13 @@
                        (labelActivate)="legendLabelActivate($event)"
                        (labelDeactivate)="legendLabelDeactivate($event)"
                        [activeEntries]="activeEntries"
+                       (select)="onSelect($event)"
     ></ngx-charts-legend>
   </div>
 </div>
 
 
-<br>
-<div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
-  <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
-</div>
+<!--<br>-->
+<!--<div *ngIf="currentUser.comment" style="white-space:pre-wrap;">-->
+<!--  <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}-->
+<!--</div>-->
