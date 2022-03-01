@@ -1,30 +1,34 @@
 <div class="ag-theme-balham">
-  <div class="row">
-    <div class="col-xs-1"></div>
-    <div class="col-xs-10">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10">
 
-      <div style="text-align: center; font-size: 31px;">
-        <button mat-raised-button color="warn" class="share-your-experience-button"
-                (click)="openSalaryAddingDialog($event)">Share your experience !
-        </button>
+        <div style="text-align: center; font-size: 31px;">
+          <button mat-raised-button color="red" class="share-your-experience-button"
+                  (click)="openSalaryAddingDialog($event)">Share your experience !
+          </button>
+          <br>
+          <mat-form-field floatLabel="never" appearance="legacy" style="font-size: 15px; width: 22%; margin-top:0.3%;">
+            <mat-label style="text-align: center; display: block; width: auto;">Filter by anything (columns are also filterable !)
+            </mat-label>
+            <input matInput style="text-align: center;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+          </mat-form-field>
+        </div>
+
+
+        <ag-grid-angular
+          style="width: 100%; height: 100%;"
+          class="ag-theme-alpine"
+          [rowData]="rowData"
+          [columnDefs]="desktopColumnDefs"
+          [gridOptions]="gridOptions"
+          (gridReady)="onGridReady($event)"
+          (rowClicked)="openUserInfos($event)"
+        >
+        </ag-grid-angular>
       </div>
-      <br>
-      <mat-form-field appearance="outline" style="font-size: 15px; width: 13%;">
-        <mat-label>Filter by anything...</mat-label>
-        <input matInput id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
-      </mat-form-field>
-
-      <ag-grid-angular
-        style="width: 100%; height: 100%;"
-        class="ag-theme-alpine"
-        [rowData]="rowData"
-        [columnDefs]="desktopColumnDefs"
-        [gridOptions]="gridOptions"
-        (gridReady)="onGridReady($event)"
-        (rowClicked)="openUserInfos($event)"
-      >
-      </ag-grid-angular>
+      <div class="col-xs-1"></div>
     </div>
-    <div class="col-xs-1"></div>
   </div>
 </div>

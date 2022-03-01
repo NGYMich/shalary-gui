@@ -1,1 +1,49 @@
-<p>home works!</p>
+<div class="ag-theme-balham">
+  <div class="container-fluid">
+    <div class="row" style="padding-top: 1%; text-align: justify">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-5" style="padding-right:20px; border-right: 1px solid darkgrey;">
+        <div style="text-align: center; ">
+          <h1 style="color: crimson;">
+            Shalary - Share your Salary
+          </h1>
+        </div>
+        <h3>
+          Many people nowadays can't put a price on their head, even after working for several years.
+          Some underestimate their market value, and some overestimate it. It can be very difficult to get accurate data
+          in this vast ocean of information : for example, you want to know how much you can ask what salary increase
+          you can get for a junior commercial job, after two years of experience in the same company.
+          You start to look, but you realize information given is all over the place : salary in different currencies
+          and countries, you don't find people with same skills as yours, or in the same sector as you work in, and in
+          your place, no one wants to share their salary.
+          <br>
+          <br>
+          Shalary is a website where everyone can anonymously share their salary history. From anywhere in the world,
+          you can read data about other users, their story and their progression throughout their careers, in various
+          sectors such as :
+          <mat-list>
+            <mat-list-item *ngFor="let sector of sectors">
+              <mat-icon>arrow_right</mat-icon>
+              {{sector}}</mat-list-item>
+          </mat-list>
+          <br>
+          You will be able to obtain interesting data thanks to the various testimonies of the users of the site. For
+          example, you want to know the average salary of a data scientist after a master and 5 years of experience in
+          Paris in consulting firms?
+          No problem, Shalary is here for you.
+        </h3>
+      </div>
+      <div class="col-lg-5">
+        <h1 style="text-align: center; color: blueviolet;">Example</h1>
+        <h3>Here is an example of what you can get from a simple click :</h3>
+        <mat-card>
+          <img mat-card-image src="https://i.imgur.com/j9HvTaY.png">
+
+        </mat-card>
+      </div>
+      <div class="col-lg-1">
+      </div>
+    </div>
+  </div>
+</div>
