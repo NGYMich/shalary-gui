@@ -36,6 +36,8 @@ export class UserInfosDialogComponent implements OnInit {
   public chartNames: string[];
   public colors: ColorHelper;
   public colorScheme: any = {domain: ['#d6dd00', '#ffb160', '#93c47d', '#bd3d16']}; // base , bonus , equity , total
+  public yAxisTickFormattingFn = this.formatSalary.bind(this);
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     Object.assign(this, this.dataGraph);
@@ -54,7 +56,7 @@ export class UserInfosDialogComponent implements OnInit {
   }
 
   formatSalary(val) {
-   return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.salaryCurrency;
+    return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.salaryCurrency;
   }
 
   public legendLabelActivate(item: any): void {
