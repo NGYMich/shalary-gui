@@ -1,3 +1,7 @@
 .mat-list .mat-list-item {
   height: 35px; /* default is 72px */
 }
+
+.home-text {
+  font-size: 13px;
+}

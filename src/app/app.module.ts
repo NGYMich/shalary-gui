@@ -25,8 +25,10 @@ import {SalaryCellRenderer} from "./salaries/salary-cell-renderer";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'salaries', component: SalariesComponent},
   {path: 'data', component: DataComponent},
@@ -63,7 +65,8 @@ const routes: Routes = [
     MatInputModule,
     MatListModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

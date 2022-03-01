@@ -85,7 +85,7 @@ export class SalariesComponent implements OnInit {
         {valueGetter: this.totalSalaryValueGetter, width: 150, headerName: 'Total Salary', sortable: true, filter: 'agNumberColumnFilter', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Stock Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Equity', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
         {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter'},
       ]
     },

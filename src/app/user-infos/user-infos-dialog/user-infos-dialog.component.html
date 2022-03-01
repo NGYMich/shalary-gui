@@ -14,24 +14,40 @@
 
 <br>
 <br>
+<div fxLayout="row">
+  <div #containerRef fxFlex="70%">
+    <ngx-charts-line-chart
+      [view]="[containerRef.offsetWidth, 400]"
+      [scheme]="colorScheme"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [showGridLines]="showGridLines"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [yAxisTickFormatting]="formatSalary.bind(this)"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [activeEntries]="activeEntries"
+      [results]="dataGraph"
+      (activate)="legendLabelActivate($event)"
+      (deactivate)="legendLabelDeactivate($event)"
+    >
+    </ngx-charts-line-chart>
+  </div>
 
-<ngx-charts-line-chart
-  [view]="view"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [showGridLines]="showGridLines"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="dataGraph"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
->
-</ngx-charts-line-chart>
+  <div fxFlex="30%">
+    <ngx-charts-legend fxFlex="100%"
+                       class="chart-legend"
+                       [data]="chartNames"
+                       [title]="'Graphs'"
+                       [colors]="colors"
+                       (labelActivate)="legendLabelActivate($event)"
+                       (labelDeactivate)="legendLabelDeactivate($event)"
+                       [activeEntries]="activeEntries"
+    ></ngx-charts-legend>
+  </div>
+</div>
+
 
 <br>
 <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">

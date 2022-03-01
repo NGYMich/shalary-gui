@@ -14,7 +14,7 @@ export class SalaryCellRenderer implements ICellRendererAngularComp, OnDestroy {
   agInit(params: any): void {
     let salaryHistory = params.data.salaryHistory;
     let salary = params.value;
-    this.renderedSalaryWithCurrency = salaryHistory.salaryInfos.length > 0 ? salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + salaryHistory.salaryCurrency : null;
+    this.renderedSalaryWithCurrency = params.value == 0 ? null : salaryHistory.salaryInfos.length > 0 ? (salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + salaryHistory.salaryCurrency) : null;
   }
 
   ngOnDestroy() {
