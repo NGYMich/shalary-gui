@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get(this.rootURL + '/users');
   }
 
+  getMostPopularCountriesFromUsers(): any {
+    console.log(this.rootURL + '/mostPopularCountries');
+    return this.http.get(this.rootURL + '/mostPopularCountries');
+  }
   // getUser(user: User): any  {
   //
   // }

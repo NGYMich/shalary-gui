@@ -35,22 +35,15 @@
             <input formControlName="yearsOfExperience" matInput>
           </mat-form-field>
           <br>
-
-
-          <!--          <mat-form-field class="full-width-line">-->
-          <!--            <mat-label class="optional">Location (optional)</mat-label>-->
-          <!--            <input formControlName="location" matInput>-->
-          <!--          </mat-form-field>-->
-
-
           <mat-form-field class="full-width-line">
             <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
             <mat-label class="optional">Location (optional)</mat-label>
 
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
-                <img class="example-option-img" aria-hidden [src]="country.flag" height="25" width="35">
-                <span> {{country.name}}</span>
+                <img aria-hidden [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
+                     onerror="this.onerror=null; this.remove();">
+                <span style="font-size: 14px;"> {{country.name}}</span>
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -127,12 +120,6 @@
                 <mat-label>Prior Years of XP *</mat-label>
                 <input formControlName="yearsOfExperience" matInput/>
               </mat-form-field>
-
-              <!--              <mat-form-field class="full-width-line">-->
-              <!--                <mat-label class="optional">Location (optional)</mat-label>-->
-              <!--                <input formControlName="location" matInput>-->
-              <!--              </mat-form-field>-->
-              <!--              -->
 
               <mat-form-field class="job-form-field with-margin-right-30px">
                 <input formControlName="baseSalary" matInput/>

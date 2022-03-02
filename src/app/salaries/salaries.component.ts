@@ -7,6 +7,7 @@ import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-inf
 import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
 import {SalaryCellRenderer} from "./salary-cell-renderer";
 import {LocationCellRenderer} from "./location-cell-renderer";
+import {Country} from "../model/country";
 
 @Component({
   selector: 'app-salaries',
@@ -16,12 +17,13 @@ import {LocationCellRenderer} from "./location-cell-renderer";
 export class SalariesComponent implements OnInit {
 
   users: User[] = [];
+  mostPopularCountries: Country[] = [];
   @Input() rowData: any;
   @Input() isMobile: boolean;
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
-    paginationPageSize: 100,
+    paginationPageSize: 40,
     domLayout: 'autoHeight',
   };
   private gridApi;
@@ -67,17 +69,17 @@ export class SalariesComponent implements OnInit {
     {
       headerName: 'User Information',
       children: [
-        // {field: 'id', sortable: true, width: 100, filter: 'agNumberColumnFilter'},
-        {field: 'username', sortable: true},
-        {valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, filter: 'agTextColumnFilter'},
-        {field: 'age', sortable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {field: 'gender', sortable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-        {field: 'education', sortable: true, filter: 'agTextColumnFilter'},
+        // {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter'},
+        {field: 'username', sortable: true, resizable: true},
+        {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {
-          field: 'location', sortable: true, filter: 'agTextColumnFilter',
+          field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
           cellRendererFramework: LocationCellRenderer,
         },
-        {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Work Experience', sortable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
+        {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Work experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
       ]
     },
     {
@@ -88,8 +90,8 @@ export class SalariesComponent implements OnInit {
         {
           valueGetter: this.totalSalaryValueGetter,
           width: 150,
-          headerName: 'Total Salary',
-          sortable: true,
+          headerName: 'Total salary',
+          sortable: true, resizable: true,
           filter: 'agNumberColumnFilter',
           cellRendererFramework: SalaryCellRenderer,
           cellStyle: params => {
@@ -113,10 +115,10 @@ export class SalariesComponent implements OnInit {
             return
           }
         },
-        {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus Salary', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Equity', sortable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, filter: 'agTextColumnFilter',},
+        {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter',},
       ]
     },
   ];
@@ -127,12 +129,20 @@ export class SalariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    this.loadMostPopularCountries();
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe((data: User[]) => {
-      this.rowData = data;
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.rowData = users;
     })
+  }
+
+  loadMostPopularCountries() {
+    this.userService.getMostPopularCountriesFromUsers().subscribe((mostPopularCountries: Country[]) => {
+      this.mostPopularCountries = mostPopularCountries;
+      console.log('most popular countries :', this.mostPopularCountries)
+    });
   }
 
 
@@ -170,4 +180,5 @@ export class SalariesComponent implements OnInit {
   onFilterTextBoxChanged() {
     this.gridOptions.api!.setQuickFilter((document.getElementById('filter-text-box') as HTMLInputElement).value);
   }
+
 }
