@@ -8,6 +8,7 @@ import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dia
 import {SalaryCellRenderer} from "./salary-cell-renderer";
 import {LocationCellRenderer} from "./location-cell-renderer";
 import {Country} from "../model/country";
+import {ForexService} from "../services/ForexService";
 
 @Component({
   selector: 'app-salaries',
@@ -27,26 +28,34 @@ export class SalariesComponent implements OnInit {
     paginationPageSize: 40,
     domLayout: 'autoHeight',
   };
+  currencies = ['DEFAULT CURRENCIES', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
+  selectedCurrency = "DEFAULT CURRENCIES";
   private gridApi;
   private gridColumnApi;
+  private forexRates: any;
 
-  constructor(private userService: UserService, public dialog: MatDialog) {
+  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog) {
   }
 
-  totalSalaryValueGetter = function (params) {
-    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
+  totalSalaryValueGetter(params) {
+    let totalSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
+    return this.applyRateToSalary(params, totalSalary);
+
   };
 
-  baseSalaryValueGetter = function (params) {
-    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
+  baseSalaryValueGetter(params) {
+    let baseSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
+    return this.applyRateToSalary(params, baseSalary)
   };
 
-  bonusSalaryValueGetter = function (params) {
-    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
+  bonusSalaryValueGetter(params) {
+    let bonusSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
+    return this.applyRateToSalary(params, bonusSalary)
   };
 
-  stockSalaryValueGetter = function (params) {
-    return params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
+  stockSalaryValueGetter(params) {
+    let stockSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
+    return this.applyRateToSalary(params, stockSalary)
   };
 
   increaseValueGetter = function (params) {
@@ -54,8 +63,8 @@ export class SalariesComponent implements OnInit {
     if (salaryInfos.length > 0) {
       let latestSalary = salaryInfos[salaryInfos.length - 1].totalSalary
       let firstSalary = salaryInfos[0].totalSalary
-      let increasePercent = Number(latestSalary / firstSalary * 100 - 1);
-      return String((increasePercent >= 0 ? "+" : " - ") + increasePercent.toFixed(2)) + "%";
+      let increasePercent = Number(latestSalary / firstSalary * 100 - 100);
+      return String((increasePercent >= 0 ? "+" : "") + increasePercent.toFixed(2)) + "%";
     } else {
       return null;
     }
@@ -70,7 +79,7 @@ export class SalariesComponent implements OnInit {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
     let latestCompany = salaryInfos[salaryInfos.length - 1].company;
     if (salaryInfos.length > 0 && latestCompany != null) {
-      if (latestCompany.sector != null) {
+      if (latestCompany.sector != null && latestCompany.sector != "") {
         return latestCompany.name + " (" + latestCompany.sector + ")";
       } else {
         return latestCompany.name
@@ -105,12 +114,17 @@ export class SalariesComponent implements OnInit {
         {field: 'salaryHistory.salaryInfos', hide: true},
         {field: 'salaryHistory', hide: true},
         {
-          valueGetter: this.totalSalaryValueGetter,
+          value: 'totalSalary',
+          valueGetter: this.totalSalaryValueGetter.bind(this),
           width: 150,
+          editable: true,
           headerName: 'Total salary',
           sortable: true, resizable: true,
           filter: 'agNumberColumnFilter',
           cellRendererFramework: SalaryCellRenderer,
+          cellRendererParams: {
+            selectedCurrency: this.selectedCurrency
+          },
           cellStyle: params => {
             let salary = params.value;
             switch (true) {
@@ -132,10 +146,10 @@ export class SalariesComponent implements OnInit {
             return
           }
         },
-        {valueGetter: this.baseSalaryValueGetter, width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.bonusSalaryValueGetter, width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.stockSalaryValueGetter, width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.increaseValueGetter, width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter',},
+        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter',},
       ]
     },
   ];
@@ -145,13 +159,22 @@ export class SalariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
     this.loadUsers();
+    this.loadForexes();
   }
 
   loadUsers() {
     this.userService.getUsers().subscribe((users: User[]) => {
       this.rowData = users;
+    })
+  }
+
+  loadForexes() {
+    this.forexService.getTopForexRates().subscribe((forexes: any) => {
+      this.forexRates = forexes;
+      console.log("forexes : ", this.forexRates);
     })
   }
 
@@ -174,11 +197,6 @@ export class SalariesComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
   }
-
-  // autoColumnSizesWithButton(skipHeader): void {
-  //   const allColumnIds = this.gridColumnApi.getAllColumns().map((column) => column.colId);
-  //   this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
-  // }
 
   openUserInfos(event): void {
     const selectedNodes = this.gridApi.getSelectedNodes();
@@ -214,5 +232,21 @@ export class SalariesComponent implements OnInit {
       this.isFilteredByPopularCountry = true;
     }
     this.gridApi!.onFilterChanged();
+  }
+
+  applyNewCurrencySelected(currency: string) {
+    this.selectedCurrency = currency;
+    this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
+    this.gridApi.refreshCells(this.gridApi.columns);
+  }
+
+  private applyRateToSalary(params, totalSalary: number | null) {
+    if (params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT CURRENCIES') {
+      let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
+      let rate = this.forexRates[pair] != null ? this.forexRates[pair] : 1
+      return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;
+    } else {
+      return totalSalary
+    }
   }
 }

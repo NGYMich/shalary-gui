@@ -40,7 +40,7 @@ body {
   border-radius: 30px;
 }
 .ag-row-selected {
-  background-color:lightcyan !important;
+  background-color:lightblue !important;
 }
 /* no cell select*/
 .ag-cell-focus,.ag-cell-no-focus{

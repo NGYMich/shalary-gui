@@ -6,7 +6,7 @@
   </div>
   <div id="alignedToTheRight">
     {{this.currentUser.gender != null ? this.currentUser.gender : ""}}
-    {{this.currentUser.age != null ? " - " + this.currentUser.age : ""}} years old
+    {{this.currentUser.age != null && this.currentUser.gender != "" && this.currentUser.gender != null ? " - " + this.currentUser.age + " years old" : ""}}
     {{this.currentUser.location != null && this.currentUser.location != '' ? " - " + this.currentUser.location : ""}}
     {{this.currentUser.education != null && this.currentUser.education != '' ? " - " + this.currentUser.education : ""}}
   </div>
@@ -33,10 +33,6 @@
       (deactivate)="legendLabelDeactivate($event)"
       (select)="onSelect($event)"
     >
-      <!--            <ng-template #seriesTooltipTemplate let-model="model">-->
-      <!--              This is vertical line tooltip template-->
-      <!--              <pre>{{model | json}}</pre>-->
-      <!--            </ng-template>-->
       <ng-template #seriesTooltipTemplate let-model="model">
         <div>
           <h3 style="text-align: center; margin-bottom: 0; color:azure">
@@ -47,13 +43,17 @@
           <!--          <h4 style="text-align: center; margin-bottom: 0; margin-top: 0; color:azure">{{model[0].jobName}}</h4>-->
           <div
             style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
-            Base Salary : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{model[0].salaryCurrency}}
+            Base Salary
+            : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
             <br>
-            Bonus Salary : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{model[0].salaryCurrency}}
+            Bonus Salary
+            : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
             <br>
-            Equity : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{model[0].salaryCurrency}}
+            Equity
+            : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
             <br>
-            Total Salary : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{model[0].salaryCurrency}}
+            Total Salary
+            : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
           </div>
         </div>
 
@@ -78,5 +78,5 @@
 
 <br>
 <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
-  <h2 style="text-align: left; font-weight: bolder">Story</h2>{{currentUser.comment}}
+  <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
 </div>

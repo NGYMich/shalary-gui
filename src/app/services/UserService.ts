@@ -28,7 +28,7 @@ export class UserService {
     const body = JSON.stringify(user);
     const headers = {'content-type': 'application/json'};
     return this.http.post<User>(this.rootURL + '/user', body, {'headers': headers}).subscribe(
-      data => console.log('added user', data),
+      data => console.log('added user', JSON.stringify(data)),
       error => console.log('oops', error)
     );
   }

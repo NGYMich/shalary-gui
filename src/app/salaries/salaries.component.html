@@ -21,11 +21,25 @@
           </mat-form-field>
         </div>
         <div fxLayout="row">
-          <div *ngFor="let popularCountry of mostPopularCountries">
-            <img aria-hidden [src]="popularCountry.flag | safe:'resourceUrl'" height="25" width="35"
-                 onerror="this.onerror=null; this.remove();" (click)="filterByCountry(popularCountry.name)" style="cursor: pointer; margin-bottom: 10%; margin-right: 10px; border-width: 1px; border-style: solid;">
+
+          <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="30">
+            <div *ngFor="let popularCountry of mostPopularCountries">
+              <img [src]="popularCountry.flag | safe:'resourceUrl'" height="25" width="35"
+                   onerror="this.onerror=null; this.remove();" (click)="filterByCountry(popularCountry.name)"
+                   style="cursor: pointer; margin-bottom: 10%; border-width: 1px; border-style: solid;">
+            </div>
+          </div>
+
+
+          <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="40"></div>
+
+          <div fxLayoutAlign="end center" fxLayoutGap="5px" fxFlex="40">
+            <div  [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency" *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
+              {{currency}}
+            </div>
           </div>
         </div>
+
 
 
         <ag-grid-angular

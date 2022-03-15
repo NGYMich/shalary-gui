@@ -51,13 +51,15 @@ export class UserInfosDialogComponent implements OnInit {
     if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
       this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
       let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
+
+      console.log(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries)
       this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
       this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
     }
   }
 
   formatSalary(val) {
-    return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.salaryCurrency;
+    return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
   }
 
   public legendLabelActivate(item: any): void {
@@ -83,7 +85,8 @@ export class UserInfosDialogComponent implements OnInit {
 
   private computeSalariesSeries() {
     let salaryInfos = this.currentUser.salaryHistory.salaryInfos;
-    let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.currentUser.salaryHistory.salaryCurrency : "";
+    let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
+    console.log(salaryInfos)
     let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
     let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
     let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
@@ -95,7 +98,7 @@ export class UserInfosDialogComponent implements OnInit {
     let salaryHistory = this.currentUser.salaryHistory;
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
     let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
-    let salaryCurrency = salaryHistory.salaryCurrency != null ? this.currentUser.salaryHistory.salaryCurrency : "";
+    let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
     let latestJobName = lastSalaryInfo.jobName
     baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName));
     bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName));

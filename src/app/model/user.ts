@@ -12,10 +12,7 @@ export class User {
   education: string | null;
   age: number | null;
   comment: string | null;
-  gender: Gender;
+  gender: string;
   salaryHistory: SalaryHistory;
 }
 
-enum Gender {
-  Male, Female, Unknown
-}

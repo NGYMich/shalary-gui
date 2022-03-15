@@ -9,7 +9,7 @@
         <form [formGroup]="userInformationsForm">
           <mat-form-field class="full-width-line">
             <mat-label>Username</mat-label>
-            <input formControlName="username" matInput>
+            <input maxLength="25" formControlName="username" matInput>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
@@ -70,11 +70,6 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label class="optional">Main working sector (optional)</mat-label>
-            <input formControlName="mainSector" matInput>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width-line">
             <mat-label class="optional">Gender (optional)</mat-label>
             <mat-select [(value)]="selectedGender" formControlName="gender">
               <mat-option *ngFor="let gender of ['Male', 'Female']"
@@ -116,7 +111,7 @@
 
               <div formGroupName="company">
                 <mat-form-field style="float: left; width: 6%;" class="job-form-field with-margin-right-30px italic">
-                  <input formControlName="name" matInput/>
+                  <input maxLength="30" formControlName="name" matInput/>
                   <mat-label>Company</mat-label>
                 </mat-form-field>
               </div>
