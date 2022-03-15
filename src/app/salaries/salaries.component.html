@@ -1,19 +1,30 @@
 <div class="ag-theme-balham">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-1"></div>
+      <div class="col-xs-1">
+
+
+      </div>
       <div class="col-xs-10">
+
 
         <div style="text-align: center; font-size: 31px;">
           <button mat-raised-button color="red" class="share-your-experience-button"
                   (click)="openSalaryAddingDialog($event)">Share your experience !
           </button>
           <br>
-          <mat-form-field floatLabel="never" appearance="legacy" style="font-size: 15px; width: 22%; margin-top:0.3%;">
-            <mat-label style="text-align: center; display: block; width: auto;">Filter by anything (columns are also filterable !)
+          <mat-form-field floatLabel="never" appearance="legacy" style="font-size: 15px; width: 42%; margin-top:0.3%;">
+            <mat-label style="text-align: center; display: block; width: auto;">Filter by anything (columns are also
+              filterable by using the button next to the columns' names!)
             </mat-label>
             <input matInput style="text-align: center;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
           </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <div *ngFor="let popularCountry of mostPopularCountries">
+            <img aria-hidden [src]="popularCountry.flag | safe:'resourceUrl'" height="25" width="35"
+                 onerror="this.onerror=null; this.remove();" (click)="filterByCountry(popularCountry.name)" style="cursor: pointer; margin-bottom: 10%; margin-right: 10px; border-width: 1px; border-style: solid;">
+          </div>
         </div>
 
 
@@ -25,10 +36,13 @@
           [gridOptions]="gridOptions"
           (gridReady)="onGridReady($event)"
           (rowClicked)="openUserInfos($event)"
+          (rowDataChanged)="autoSizeAll()"
         >
         </ag-grid-angular>
       </div>
       <div class="col-xs-1"></div>
     </div>
   </div>
+
+
 </div>

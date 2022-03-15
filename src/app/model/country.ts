@@ -1,4 +1,5 @@
 export class Country {
-  name: String;
-  flag: String;
+  name: string;
+  flag: string;
+  states: string[];
 }

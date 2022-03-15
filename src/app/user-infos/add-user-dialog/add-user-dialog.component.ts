@@ -19,14 +19,18 @@ export class AddUserDialogComponent implements OnInit {
   salaryInfosForm: FormGroup;
   salaryHistoryForm: FormGroup;
   // countries
-  countriesControl = new FormControl();
+  countriesControl = new FormControl('', (Validators.required));
   filteredCountries: Observable<Country[]>;
   // jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
   currencies = ['€', '$', '£', '¥', 'CHF'];
+  educationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
   selectedGender;
   selectedCurrency;
   isUserAdded: boolean;
+  userInformationError: boolean = false;
+  salaryInformationsError: boolean = false;
   allCountriesWithTheirFlags: any;
+  countriesOptions: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,41 +47,58 @@ export class AddUserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.initSalaryInfosForm();
     this.initUserInformationsForm();
+    this.initWorkHistory();
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
-      this.allCountriesWithTheirFlags = data;
+      this.allCountriesWithTheirFlags = data
+      // console.log("countries :", this.allCountriesWithTheirFlags);
+      // console.log(this.allCountriesWithTheirFlags.slice())
+      // this.countriesOptions = this.allCountriesWithTheirFlags.map(country => country.states.map(state => state + ", " + country.name)).unique
       this.filteredCountries = this.countriesControl.valueChanges
         .pipe(
           startWith(''),
           map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
         );
     })
-
   }
 
   addUser($event: MouseEvent) {
     console.info("salary infos : ", this.salaryInfos)
-    if (this.userInformationsForm.valid && this.salaryInfos.valid) {
-      this.userService.addUser({
-        id: null,
-        locationImage: null,
-        validated: true,
-        username: this.userInformationsForm.get('username')!.value,
-        password: this.userInformationsForm.get('password')!.value,
-        mail: this.userInformationsForm.get('mail')!.value,
-        mainSector: this.userInformationsForm.get('mainSector')!.value,
-        location: this.countriesControl.value,
-        education: this.userInformationsForm.get('education')!.value,
-        age: this.userInformationsForm.get('age')!.value,
-        gender: this.userInformationsForm.get('gender')!.value,
-        comment: this.userInformationsForm.get('comment')!.value,
-        salaryHistory: {
+    if (this.userInformationsForm.valid) {
+      if (this.salaryInfos.valid) {
+        this.userService.addUser({
           id: null,
-          salaryCurrency: this.userInformationsForm.get('currency')!.value,
-          totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
-          salaryInfos: this.salaryInfos.value
-        }
-      });
-      this.isUserAdded = true;
+          locationImage: null,
+          validated: true,
+          username: this.userInformationsForm.get('username')!.value,
+          password: this.userInformationsForm.get('password')!.value,
+          mail: this.userInformationsForm.get('mail')!.value,
+          mainSector: this.userInformationsForm.get('mainSector')!.value,
+          location: this.countriesControl.value,
+          education: this.userInformationsForm.get('education')!.value,
+          age: this.userInformationsForm.get('age')!.value,
+          gender: this.userInformationsForm.get('gender')!.value,
+          comment: this.userInformationsForm.get('comment')!.value,
+          salaryHistory: {
+            id: null,
+            salaryCurrency: this.userInformationsForm.get('currency')!.value,
+            totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
+            salaryInfos: this.salaryInfos.value
+          }
+        });
+        this.isUserAdded = true;
+        this.salaryInformationsError = false;
+        this.userInformationError = false;
+      } else {
+        this.isUserAdded = false;
+        this.salaryInformationsError = true;
+        this.userInformationError = false;
+        console.log(this.salaryInfosForm)
+      }
+    } else {
+      this.isUserAdded = false;
+      this.salaryInformationsError = false;
+      this.userInformationError = true;
+      console.log(this.userInformationsForm)
     }
 
   }
@@ -116,11 +137,16 @@ export class AddUserDialogComponent implements OnInit {
     return totalSalary
   }
 
+  private initWorkHistory() {
+    this.addNewJobFormLine();
+    this.addNewJobFormLine();
+  }
+
   // form initializers
 
   private _filterCountries(value: string): Country[] {
     const filterValue = value.toLowerCase();
-    return this.allCountriesWithTheirFlags.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.allCountriesWithTheirFlags.filter(country => country.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private initUserInformationsForm() {
@@ -129,7 +155,7 @@ export class AddUserDialogComponent implements OnInit {
       password: new FormControl('', Validators.required),
       mail: new FormControl('', Validators.required),
       currency: new FormControl('', Validators.required),
-      yearsOfExperience: new FormControl('', Validators.required),
+      yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
       mainSector: new FormControl(''),
       education: new FormControl(''),
       age: new FormControl('', Validators.pattern('^[0-9]*$')),
@@ -152,22 +178,4 @@ export class AddUserDialogComponent implements OnInit {
       salaryInfos: this.formBuilder.array([])
     });
   }
-
-  // private initSalaryInfosForm() {
-  //   this.salaryInfosForm = this.formBuilder.group({
-  //     salaryInfos: this.formBuilder.array([
-  //       {
-  //         yearsOfExperience: new FormControl('', Validators.required),
-  //         jobLevel: new FormControl('', Validators.required),
-  //         jobName: new FormControl('', Validators.required),
-  //         baseSalary: new FormControl('', Validators.required),
-  //         stockSalary: new FormControl('', Validators.required),
-  //         bonusSalary: new FormControl('', Validators.required),
-  //         totalSalary: new FormControl('', Validators.required),
-  //         company: new FormControl('', Validators.required),
-  //       },
-  //     ])
-  //   });
-  // }
-
 }

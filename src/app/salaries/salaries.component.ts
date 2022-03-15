@@ -20,6 +20,7 @@ export class SalariesComponent implements OnInit {
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;
   @Input() isMobile: boolean;
+  isFilteredByPopularCountry: boolean = false;
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
@@ -65,6 +66,20 @@ export class SalariesComponent implements OnInit {
     return salaryInfos.length > 0 ? salaryInfos[salaryInfos.length - 1].jobName : null
   }
 
+  currentCompanyGetter = function (params) {
+    let salaryInfos = params.getValue('salaryHistory.salaryInfos');
+    let latestCompany = salaryInfos[salaryInfos.length - 1].company;
+    if (salaryInfos.length > 0 && latestCompany != null) {
+      if (latestCompany.sector != null) {
+        return latestCompany.name + " (" + latestCompany.sector + ")";
+      } else {
+        return latestCompany.name
+      }
+    } else {
+      return null
+    }
+  }
+
   desktopColumnDefs = [
     {
       headerName: 'User Information',
@@ -72,8 +87,9 @@ export class SalariesComponent implements OnInit {
         // {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter'},
         {field: 'username', sortable: true, resizable: true},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'closed'},
+        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {
           field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
@@ -87,6 +103,7 @@ export class SalariesComponent implements OnInit {
       children: [
         {field: 'salaryHistory.salaryCurrency', hide: true},
         {field: 'salaryHistory.salaryInfos', hide: true},
+        {field: 'salaryHistory', hide: true},
         {
           valueGetter: this.totalSalaryValueGetter,
           width: 150,
@@ -128,8 +145,8 @@ export class SalariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUsers();
     this.loadMostPopularCountries();
+    this.loadUsers();
   }
 
   loadUsers() {
@@ -145,6 +162,13 @@ export class SalariesComponent implements OnInit {
     });
   }
 
+  autoSizeAll() {
+    const allColumnsIds: string[] = [];
+    this.gridOptions.columnApi?.getAllColumns()?.forEach((column) => {
+      allColumnsIds.push(column.getId());
+    })
+    this.gridOptions.columnApi?.autoSizeColumns(allColumnsIds, false)
+  }
 
   onGridReady(params): void {
     this.gridApi = params.api;
@@ -181,4 +205,14 @@ export class SalariesComponent implements OnInit {
     this.gridOptions.api!.setQuickFilter((document.getElementById('filter-text-box') as HTMLInputElement).value);
   }
 
+  filterByCountry(name: string) {
+    if (this.isFilteredByPopularCountry && this.gridApi.getFilterInstance('location').appliedModel.filter == name) {
+      this.gridApi.destroyFilter('location');
+      this.isFilteredByPopularCountry = false;
+    } else {
+      this.gridApi.getFilterInstance('location').setModel({type: "equals", filter: name});
+      this.isFilteredByPopularCountry = true;
+    }
+    this.gridApi!.onFilterChanged();
+  }
 }

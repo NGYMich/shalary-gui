@@ -1,32 +1,28 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {User} from "../model/user";
-import {Observable, Subject} from "rxjs";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   rootURL = 'http://localhost:2111/api';
+  // tslint:disable-next-line:variable-name
+  private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
 
   constructor(private http: HttpClient) {
   }
 
-  // tslint:disable-next-line:variable-name
-  private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
-
   getUsers(): any {
-    console.log(this.rootURL + '/users');
+    console.log('called', this.rootURL + '/users');
     return this.http.get(this.rootURL + '/users');
   }
 
   getMostPopularCountriesFromUsers(): any {
-    console.log(this.rootURL + '/mostPopularCountries');
+    console.log('called', this.rootURL + '/mostPopularCountries');
     return this.http.get(this.rootURL + '/mostPopularCountries');
   }
-  // getUser(user: User): any  {
-  //
-  // }
 
   addUser(user: User): any {
     const body = JSON.stringify(user);

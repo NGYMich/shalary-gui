@@ -11,7 +11,7 @@ export class SalaryInfo {
 }
 
 export class Company {
-  name: string;
+  name: string = "";
   sector: string;
   size: string;
 }

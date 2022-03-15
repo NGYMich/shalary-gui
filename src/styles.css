@@ -20,7 +20,7 @@
 
 html, body {
   /*height: 100%;*/
-  background-color: whitesmoke;
+  background-color: white;
   /*!*background-image: url('https://i.pinimg.com/originals/79/a9/1e/79a91ec14d50973bc199f38190485269.jpg');*!*/
   /*background-repeat: no-repeat;*/
   /*color: black;*/
@@ -40,7 +40,7 @@ body {
   border-radius: 30px;
 }
 .ag-row-selected {
-  background-color:aliceblue !important;
+  background-color:lightcyan !important;
 }
 /* no cell select*/
 .ag-cell-focus,.ag-cell-no-focus{

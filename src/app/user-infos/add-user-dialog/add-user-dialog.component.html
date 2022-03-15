@@ -31,13 +31,8 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label>Total Years of Experience</mat-label>
-            <input formControlName="yearsOfExperience" matInput>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width-line">
             <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
-            <mat-label class="optional">Location (optional)</mat-label>
+            <mat-label>Location</mat-label>
 
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
@@ -47,11 +42,27 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
           <br>
           <mat-form-field class="full-width-line">
-            <mat-label class="optional">Education (optional)</mat-label>
-            <input formControlName="education" matInput>
+            <mat-label>Total Years of Experience</mat-label>
+            <input formControlName="yearsOfExperience" matInput>
           </mat-form-field>
+          <br>
+
+
+          <mat-form-field class="full-width-line">
+            <mat-label>Education (optional)</mat-label>
+            <mat-select [(value)]="selectedCurrency" formControlName="education">
+              <mat-option *ngFor="let educationLevel of educationLevels"
+                          [value]="educationLevel">{{educationLevel}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+
+
           <br>
           <mat-form-field class="full-width-line">
             <mat-label class="optional">Age (optional)</mat-label>
@@ -80,6 +91,8 @@
           <br>
           <button mat-raised-button color="primary" (click)="addUser($event)">Share your experience !</button>
           <h3 style="margin-top: 2%;" *ngIf="isUserAdded">User informations added.</h3>
+          <h3 style="margin-top: 2%; color: red" *ngIf="salaryInformationsError">Salary informations error.</h3>
+          <h3 style="margin-top: 2%; color: red" *ngIf="userInformationError">User informations error.</h3>
         </form>
       </div>
     </div>

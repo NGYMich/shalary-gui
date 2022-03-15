@@ -11,7 +11,13 @@ export class LocationService {
   }
 
   getCountriesWithFlags(): any {
-    return this.http.get(this.rootURL + '/locations');
+    console.log('called', this.rootURL + '/locations/countriesWithFlags');
+    return this.http.get(this.rootURL + '/locations/countriesWithFlags');
+  }
+
+  getCountriesWithFlagsAndStates(): any {
+    console.log('called', this.rootURL + '/locations/countriesWithFlagsAndStates');
+    return this.http.get(this.rootURL + '/locations/countriesWithFlagsAndStates');
   }
 
 

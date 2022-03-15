@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {User} from "../../model/user";
 import {Serie} from "../../model/serie";
 import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
+import {NumberService} from "../../services/NumberService";
 
 @Component({
   selector: 'app-user-infos-dialog',
@@ -39,8 +40,8 @@ export class UserInfosDialogComponent implements OnInit {
   public yAxisTickFormattingFn = this.formatSalary.bind(this);
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    // Object.assign(this, this.dataGraph);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService) {
+    Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
 
@@ -73,28 +74,32 @@ export class UserInfosDialogComponent implements OnInit {
 
   private addSalariesSeriesToDataGraph(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     this.colors = new ColorHelper(this.colorScheme, ScaleType.Ordinal, this.dataGraph, (this.colorScheme));
-    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0 || baseSalariesSeries.find(baseSalary => baseSalary.value > 0))) this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
-    if (baseSalariesSeries.find(baseSalary => baseSalary.value > 0) && (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0) || stockSalariesSeries.find(stockSalary => stockSalary.value > 0))) this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
-    if (bonusSalariesSeries.find(bonusSalary => bonusSalary.value > 0)) this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transports, rent..)', series: bonusSalariesSeries})
-    if (stockSalariesSeries.find(stockSalary => stockSalary.value > 0)) this.dataGraph.push({name: 'Equity (options, restricted stock, performance shares)', series: stockSalariesSeries})
-
+    this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
+    this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
+    this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transports, rent..)', series: bonusSalariesSeries})
+    this.dataGraph.push({name: 'Equity (options, restricted stock, performance shares)', series: stockSalariesSeries})
     this.chartNames = this.dataGraph.map((d: any) => d.name);
   }
 
   private computeSalariesSeries() {
     let salaryInfos = this.currentUser.salaryHistory.salaryInfos;
-    let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.baseSalary))
-    let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.bonusSalary))
-    let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.stockSalary))
-    let totalSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.totalSalary))
-
+    let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.currentUser.salaryHistory.salaryCurrency : "";
+    let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
+    let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
+    let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
+    let totalSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
   }
 
   private addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
-    baseSalariesSeries.push(new Serie(String(this.currentUser.salaryHistory.totalYearsOfExperience), this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1].baseSalary));
-    bonusSalariesSeries.push(new Serie(String(this.currentUser.salaryHistory.totalYearsOfExperience), this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1].bonusSalary));
-    stockSalariesSeries.push(new Serie(String(this.currentUser.salaryHistory.totalYearsOfExperience), this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1].stockSalary));
-    totalSalariesSeries.push(new Serie(String(this.currentUser.salaryHistory.totalYearsOfExperience), this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1].totalSalary));
+    let salaryHistory = this.currentUser.salaryHistory;
+    let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
+    let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
+    let salaryCurrency = salaryHistory.salaryCurrency != null ? this.currentUser.salaryHistory.salaryCurrency : "";
+    let latestJobName = lastSalaryInfo.jobName
+    baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName));
+    bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName));
+    stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName));
+    totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName));
   }
 }
