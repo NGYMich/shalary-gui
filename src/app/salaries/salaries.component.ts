@@ -38,55 +38,73 @@ export class SalariesComponent implements OnInit {
   }
 
   totalSalaryValueGetter(params) {
-    let totalSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
-    return this.applyRateToSalary(params, totalSalary);
-
+    if (params.salaryHistory !== null) {
+      let totalSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
+      return this.applyRateToSalary(params, totalSalary);
+    } else {
+      return ''
+    }
   };
 
   baseSalaryValueGetter(params) {
-    let baseSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
-    return this.applyRateToSalary(params, baseSalary)
+    if (params.salaryHistory != null) {
+      let baseSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
+      return this.applyRateToSalary(params, baseSalary)
+    } else return ''
   };
 
   bonusSalaryValueGetter(params) {
-    let bonusSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
-    return this.applyRateToSalary(params, bonusSalary)
+    if (params.salaryHistory !== null) {
+      let bonusSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
+      return this.applyRateToSalary(params, bonusSalary)
+    } else return ''
   };
 
   stockSalaryValueGetter(params) {
-    let stockSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
-    return this.applyRateToSalary(params, stockSalary)
+    if (params.salaryHistory !== null) {
+      let stockSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
+      return this.applyRateToSalary(params, stockSalary)
+    } else return ''
   };
 
   increaseValueGetter = function (params) {
-    let salaryInfos = params.getValue('salaryHistory.salaryInfos');
-    if (salaryInfos.length > 0) {
-      let latestSalary = salaryInfos[salaryInfos.length - 1].totalSalary
-      let firstSalary = salaryInfos[0].totalSalary
-      let increasePercent = Number(latestSalary / firstSalary * 100 - 100);
-      return String((increasePercent >= 0 ? "+" : "") + increasePercent.toFixed(2)) + "%";
+    if (params.salaryHistory !== null) {
+      let salaryInfos = params.getValue('salaryHistory.salaryInfos');
+      if (salaryInfos.length > 0) {
+        let latestSalary = salaryInfos[salaryInfos.length - 1].totalSalary
+        let firstSalary = salaryInfos[0].totalSalary
+        let increasePercent = Number(latestSalary / firstSalary * 100 - 100);
+        return String((increasePercent >= 0 ? "+" : "") + increasePercent.toFixed(2)) + "%";
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
+
+
   };
 
   currentJobGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
-    return salaryInfos.length > 0 ? salaryInfos[salaryInfos.length - 1].jobName : null
+    return salaryInfos?.length > 0 ? salaryInfos[salaryInfos.length - 1].jobName : null
   }
 
   currentCompanyGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
-    let latestCompany = salaryInfos[salaryInfos.length - 1].company;
-    if (salaryInfos.length > 0 && latestCompany != null) {
-      if (latestCompany.sector != null && latestCompany.sector != "") {
-        return latestCompany.name + " (" + latestCompany.sector + ")";
+    if (salaryInfos != null) {
+      let latestCompany = salaryInfos[salaryInfos.length - 1].company;
+      if (salaryInfos.length > 0 && latestCompany != null) {
+        if (latestCompany.sector != null && latestCompany.sector != "") {
+          return latestCompany.name + " (" + latestCompany.sector + ")";
+        } else {
+          return latestCompany.name
+        }
       } else {
-        return latestCompany.name
+        return null
       }
-    } else {
-      return null
     }
+
   }
 
   desktopColumnDefs = [
@@ -235,7 +253,7 @@ export class SalariesComponent implements OnInit {
   }
 
   applyNewCurrencySelected(currency: string) {
-    this.selectedCurrency = currency;
+    this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT CURRENCIES";
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.gridApi.refreshCells(this.gridApi.columns);
   }

@@ -33,8 +33,25 @@ export class UserService {
     );
   }
 
-  deleteUser(user: User): any {
-    return this.http.delete(this.rootURL + '/user/' + user.id).subscribe(data => {
+  retrieveUserWithIdAndPassword(userId: number, password: string): any {
+    const body = JSON.stringify({id: userId, password: password});
+    const headers = {'content-type': 'application/json'};
+    return this.http.post<User>(this.rootURL + '/retrieveUserWithPassword', body, {'headers': headers})
+  }
+
+  modifyUser(user: User): any {
+    console.log('modifying user', user.username + ' with id', user.id)
+    const body = JSON.stringify(user);
+    const headers = {'content-type': 'application/json'};
+    return this.http.patch<User>(this.rootURL + '/user', body, {'headers': headers}).subscribe(
+      data => console.log('added user', JSON.stringify(data)),
+      error => console.log('oops', error)
+    );
+  }
+
+  deleteUser(username: string, userId: number,): any {
+    console.log('deleting user', username + ' with id', userId)
+    return this.http.delete(this.rootURL + '/user/' + userId).subscribe(data => {
       console.log(data);
       this._deleteOperationSuccessfulEvent$.next(true);
     });

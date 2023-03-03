@@ -1,4 +1,5 @@
 export class SalaryInfo {
+  id: number;
   yearsOfExperience: number;
   jobLevel: string;
   jobName: string;
@@ -11,6 +12,7 @@ export class SalaryInfo {
 }
 
 export class Company {
+  id: number;
   name: string = "";
   sector: string;
   size: string;

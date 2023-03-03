@@ -30,6 +30,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {LocationCellRenderer} from "./salaries/location-cell-renderer";
 import {SafePipe} from "./util/SafePipe";
+import {EditUserInfosComponent} from './edit-user-infos/edit-user-infos.component';
+import {FilterPipe} from "./edit-user-infos/FilterPipe";
+import {HighlightDirective} from "./edit-user-infos/HighlightDirective";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -37,6 +40,7 @@ const routes: Routes = [
   {path: 'salaries', component: SalariesComponent},
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'edit-user-infos', component: EditUserInfosComponent},
 ];
 
 @NgModule({
@@ -51,7 +55,10 @@ const routes: Routes = [
     AddUserDialogComponent,
     SalaryCellRenderer,
     LocationCellRenderer,
-    SafePipe
+    SafePipe,
+    EditUserInfosComponent,
+    FilterPipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
