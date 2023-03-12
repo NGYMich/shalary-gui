@@ -2,12 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from "../model/user";
 import {Subject} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  rootURL = 'http://localhost:2111/api';
+  // rootURL = 'http://localhost:2111/api';
+  rootURL = environment.baseUrl
+
   // tslint:disable-next-line:variable-name
   private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
 
