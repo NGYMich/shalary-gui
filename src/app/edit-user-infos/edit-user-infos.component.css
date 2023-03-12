@@ -1,0 +1,72 @@
+.share-your-experience-button {
+  width: auto;
+  height: auto;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  margin-top: 1%;
+  background-color: darkorange;
+  color: white;
+  font-size: 15px;
+  border-radius: 0px !important;
+}
+.remove-experience-button {
+  width: auto;
+  height: 35px;
+  /*padding-top: 0.5%;*/
+  /*padding-bottom: 0.5%;*/
+  background-color: crimson;
+  color: white;
+  font-size: 15px;
+}
+.example-full-width {
+  width: 20%;
+}
+
+.mat-form-field {
+
+}
+
+/** {*/
+/*  background-color: aliceblue !important;*/
+/*}*/
+
+.optional {
+  font-style: italic;
+}
+
+.mat-raised-button.mat-remove-job {
+  background-color: darkgrey;
+  color: white;
+}
+
+.mat-raised-button.mat-add-job {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.job-form-line {
+  float: left;
+}
+
+.full-width-line {
+  width: 100%;
+}
+
+.job-form-field {
+  width: 9%;
+}
+
+.job-form-field.with-margin-right-30px {
+  margin-right: 30px;
+}
+
+.job-form-field.with-margin-right-30px.italic {
+  font-style: italic;
+}
+
+
+.col-xs-2 {
+  background-color: white;
+  padding: 20px 40px 30px;
+  border-radius: 30px;
+}
