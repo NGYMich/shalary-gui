@@ -3,7 +3,8 @@
   "version": "1.7.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "http-server-spa dist/angular-ui index.html $PORT",
+    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
