@@ -3,7 +3,7 @@
   "version": "1.7.1",
   "scripts": {
     "ng": "ng",
-    "start": "http-server-spa dist/angular-ui index.html $PORT",
+    "start": "http-server-spa dist/shalary-gui index.html $PORT",
     "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
