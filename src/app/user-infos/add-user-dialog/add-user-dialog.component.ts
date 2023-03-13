@@ -20,7 +20,7 @@ export class AddUserDialogComponent implements OnInit {
   salaryInfosForm: FormGroup;
   salaryHistoryForm: FormGroup;
   // countries
-  countriesControl = new FormControl('Vietnam', (Validators.required));
+  countriesControl = new FormControl('France', (Validators.required));
   filteredCountries: Observable<Country[]>;
   // jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
   currencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)', 'CHF (₣)', 'AUD (AU$)', 'CAD (C$)'];
@@ -138,15 +138,15 @@ export class AddUserDialogComponent implements OnInit {
       }
     } else {
       controlsConfig = {
-        yearsOfExperience: new FormControl('8', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-        jobName: new FormControl('Tester', Validators.required),
-        baseSalary: new FormControl('20000.5', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+        yearsOfExperience: new FormControl('2', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+        jobName: new FormControl('DevOps Engineer', Validators.required),
+        baseSalary: new FormControl('20000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
         stockSalary: new FormControl(''),
         bonusSalary: new FormControl(''),
         totalSalary: new FormControl(''),
         company: this.formBuilder.group({
-          name: 'DataDog',
-          sector: 'IT'
+          name: 'Capgemini',
+          sector: 'IT Consulting'
         }),
       }
     }

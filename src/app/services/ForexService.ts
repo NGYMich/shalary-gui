@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ForexService {
-  // rootURL = 'http://localhost:2111/api';
   rootURL = environment.baseUrl
   constructor(private http: HttpClient) {
   }
