@@ -86,11 +86,37 @@ export class UserInfosDialogComponent implements OnInit {
   private computeSalariesSeries() {
     let salaryInfos = this.currentUser.salaryHistory.salaryInfos;
     let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
+
     console.log(salaryInfos)
-    let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
-    let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
-    let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
-    let totalSalariesSeries = salaryInfos.map(salaryInfo => new Serie(String(salaryInfo.yearsOfExperience), salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0, (salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : "", salaryCurrency, salaryInfo.jobName))
+    let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      String(salaryInfo.yearsOfExperience),
+      salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0,
+      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      salaryCurrency,
+      salaryInfo.jobName,
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
+
+    let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      String(salaryInfo.yearsOfExperience),
+      salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0,
+      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      salaryCurrency,
+      salaryInfo.jobName,
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
+    let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      String(salaryInfo.yearsOfExperience),
+      salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0,
+      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      salaryCurrency,
+      salaryInfo.jobName,
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
+    let totalSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      String(salaryInfo.yearsOfExperience),
+      salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0,
+      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      salaryCurrency,
+      salaryInfo.jobName,
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
   }
 
@@ -98,11 +124,13 @@ export class UserInfosDialogComponent implements OnInit {
     let salaryHistory = this.currentUser.salaryHistory;
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
     let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
+    let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null) ? "(" + lastSalaryInfo.company.sector + ")" : "";
+
     let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
     let latestJobName = lastSalaryInfo.jobName
-    baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName));
-    bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName));
-    stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName));
-    totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName));
+    baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName, companySector));
+    bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName, companySector));
+    stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName, companySector));
+    totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName, companySector));
   }
 }
