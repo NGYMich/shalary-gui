@@ -93,18 +93,22 @@ export class SalariesComponent implements OnInit {
 
   currentCompanyGetter = function (params) {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
+    let company;
+
     if (salaryInfos != null) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
       if (salaryInfos.length > 0 && latestCompany != null) {
         if (latestCompany.sector != null && latestCompany.sector != "") {
-          return latestCompany.name + " (" + latestCompany.sector + ")";
+          company = latestCompany.name + " (" + latestCompany.sector + ")";
         } else {
-          return latestCompany.name
+          company = latestCompany.name
         }
       } else {
-        return null
+        company = null
       }
     }
+
+    return company;
 
   }
 
@@ -115,8 +119,7 @@ export class SalariesComponent implements OnInit {
         // {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter'},
         {field: 'username', sortable: true, resizable: true},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-        // {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
-        {field: 'company', headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
+        {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
@@ -142,9 +145,7 @@ export class SalariesComponent implements OnInit {
           sortable: true, resizable: true,
           filter: 'agNumberColumnFilter',
           cellRendererFramework: SalaryCellRenderer,
-          cellRendererParams: {
-            selectedCurrency: this.selectedCurrency
-          },
+          cellRendererParams: {selectedCurrency: this.selectedCurrency},
           cellStyle: params => {
             let salary = params.value;
             switch (true) {
