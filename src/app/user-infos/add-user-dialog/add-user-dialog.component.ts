@@ -100,6 +100,7 @@ export class AddUserDialogComponent implements OnInit {
             this.isUserAdded = true;
             this.salaryInformationsError = false;
             this.userInformationError = false;
+            location.reload()
           } else {
             this.isUserAdded = false;
             this.salaryInformationsError = true;

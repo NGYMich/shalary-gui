@@ -5,7 +5,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {map, Observable, startWith} from "rxjs";
 import {LocationService} from "../services/LocationService";
 import {Country} from "../model/country";
-import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../user-infos/delete-user-dialog/delete-user-dialog.component";
 
@@ -263,6 +262,7 @@ export class EditUserInfosComponent implements OnInit {
     })
 
     dialogRef.afterClosed()
-      .subscribe(() => {})
+      .subscribe(() => {
+      })
   }
 }
