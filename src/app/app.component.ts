@@ -10,4 +10,5 @@ export class AppComponent {
   title = 'shalary-gui';
   shalaryGuiVersion = packageInfo
 
+
 }

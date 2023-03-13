@@ -28,8 +28,8 @@ export class SalariesComponent implements OnInit {
     paginationPageSize: 40,
     domLayout: 'autoHeight',
   };
-  currencies = ['DEFAULT CURRENCIES', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
-  selectedCurrency = "DEFAULT CURRENCIES";
+  currencies = ['DEFAULT', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
+  selectedCurrency = "DEFAULT";
   private gridApi;
   private gridColumnApi;
   private forexRates: any;
@@ -255,13 +255,13 @@ export class SalariesComponent implements OnInit {
   }
 
   applyNewCurrencySelected(currency: string) {
-    this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT CURRENCIES";
+    this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.gridApi.refreshCells(this.gridApi.columns);
   }
 
   private applyRateToSalary(params, totalSalary: number | null) {
-    if (params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT CURRENCIES') {
+    if (params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
       let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
       let rate = this.forexRates[pair] != null ? this.forexRates[pair] : 1
       return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;

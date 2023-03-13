@@ -35,7 +35,7 @@ export class SalaryCellRenderer implements ICellRendererAngularComp {
       'CAD': 'C$'
     }
 
-    if (params.context.selectedCurrency == '' || params.context.selectedCurrency == 'DEFAULT CURRENCIES' ) {
+    if (params.context.selectedCurrency == '' || params.context.selectedCurrency == 'DEFAULT' ) {
       this.renderedSalaryWithCurrency = salaryAmount == 0 ? null : this.data.salaryHistory.salaryInfos.length > 0 ?
         (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + this.numberService.formatCurrency(salaryCurrency))
         : null;
