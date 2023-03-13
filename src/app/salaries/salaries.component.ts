@@ -115,9 +115,9 @@ export class SalariesComponent implements OnInit {
         {field: 'username', sortable: true, resizable: true},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'closed'},
-        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
-        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {
           field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
           cellRendererFramework: LocationCellRenderer,
