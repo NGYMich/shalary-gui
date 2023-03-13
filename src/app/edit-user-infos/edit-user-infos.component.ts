@@ -15,8 +15,10 @@ export class EditUserInfosComponent implements OnInit {
 
   users: any;
   searchText = '';
-  userSearchControl = new FormControl();
+  usernameSearchControl = new FormControl();
+  username = new FormControl()
   password = new FormControl();
+
   options: string[] = [];
   filteredOptions: Observable<string[]>;
 
@@ -50,13 +52,14 @@ export class EditUserInfosComponent implements OnInit {
   }
 
   // getters & setters
+  showPasswordError: boolean;
   get salaryInfos(): FormArray {
     return this.salaryInfosForm.get('salaryInfos') as FormArray;
   }
 
   ngOnInit() {
     this.loadUsers()
-    this.filteredOptions = this.userSearchControl.valueChanges.pipe(
+    this.filteredOptions = this.usernameSearchControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
@@ -70,11 +73,12 @@ export class EditUserInfosComponent implements OnInit {
     })
   }
 
-  sendPassword($event: any) {
-    let selectedUser = this.users.filter(user => user.username == this.userSearchControl.value)[0]
-    this.userToModify = this.userService.retrieveUserWithIdAndPassword(selectedUser.id, this.password.value).subscribe(
+  retrieveUserWithIdAndPassword($event: any) {
+    let selectedUser = this.users.filter(user => user.username == this.usernameSearchControl.value)[0]
+
+    this.userToModify = this.userService.retrieveUserWithUsernameAndPassword(this.usernameSearchControl.value, this.password.value).subscribe(
       data => {
-        console.log('retrieved user with password', JSON.stringify(data))
+        console.log('retrieved user ' + this.usernameSearchControl.value + ' with password. User :', JSON.stringify(data))
         this.userToModify = data;
         this.initSalaryInfosForm();
         this.initUserInformationsForm();
@@ -90,11 +94,20 @@ export class EditUserInfosComponent implements OnInit {
               startWith(''),
               map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
             );
+          if (this.userToModify != null) {
+            console.log("user to modify not null")
+            this.isUserLoaded = true;
+            this.showPasswordError = false;
+          } else {
+            console.log("user to modify null")
+            this.isUserLoaded = false;
+            this.showPasswordError = true;
+          }
         })
-        this.isUserLoaded = true;
       },
-      error => console.log('oops', error)
+      error => console.log('failed to retrieve user with password', error)
     );
+
 
   }
 

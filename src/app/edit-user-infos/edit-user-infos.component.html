@@ -19,7 +19,7 @@
                      placeholder="Username"
                      aria-label="Username"
                      matInput
-                     [formControl]="userSearchControl"
+                     [formControl]="usernameSearchControl"
                      [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptions | async | slice : 0 : 20" [value]="option"
@@ -36,17 +36,15 @@
                      aria-label="Password"
                      matInput
                      [formControl]="password"
-                     (keydown.enter)="sendPassword($event)"
+                     (keydown.enter)="retrieveUserWithIdAndPassword($event)"
               >
             </mat-form-field>
-
-
           </form>
-
           <button mat-raised-button class="share-your-experience-button"
-                  (click)="sendPassword($event)">Edit your experience !
+                  (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !
           </button>
         </div>
+        <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or password are not correct</mat-error>
 
 
       </div>

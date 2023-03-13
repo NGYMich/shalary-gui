@@ -36,8 +36,8 @@ export class UserService {
     );
   }
 
-  retrieveUserWithIdAndPassword(userId: number, password: string): any {
-    const body = JSON.stringify({id: userId, password: password});
+  retrieveUserWithUsernameAndPassword(username: string, password: string): any {
+    const body = JSON.stringify({username: username, password: password});
     const headers = {'content-type': 'application/json'};
     return this.http.post<User>(this.rootURL + '/retrieveUserWithPassword', body, {'headers': headers})
   }
