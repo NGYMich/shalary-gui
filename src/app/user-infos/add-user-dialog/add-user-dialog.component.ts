@@ -4,6 +4,7 @@ import {UserService} from "../../services/UserService";
 import {LocationService} from "../../services/LocationService";
 import {Country} from "../../model/country";
 import {map, Observable, startWith} from "rxjs";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -29,7 +30,9 @@ export class AddUserDialogComponent implements OnInit {
   isUserAdded: boolean;
   userInformationError: boolean = false;
   salaryInformationsError: boolean = false;
-  allCountriesWithTheirFlags: any;
+  allCountriesWithTheirFlags: any
+  usernameAlreadyExist: boolean;
+
   countriesOptions: any;
 
   constructor(
@@ -62,41 +65,54 @@ export class AddUserDialogComponent implements OnInit {
   }
 
   addUser($event: MouseEvent) {
-    if (this.userInformationsForm.valid) {
-      if (this.salaryInfos.valid) {
-        this.userService.addUser({
-          id: null,
-          locationImage: null,
-          validated: true,
-          username: this.userInformationsForm.get('username')!.value,
-          password: this.userInformationsForm.get('password')!.value,
-          mail: this.userInformationsForm.get('mail')!.value,
-          mainSector: null,
-          location: this.countriesControl.value,
-          education: this.userInformationsForm.get('education')!.value,
-          age: this.userInformationsForm.get('age')!.value,
-          gender: this.userInformationsForm.get('gender')!.value,
-          comment: this.userInformationsForm.get('comment')!.value,
-          salaryHistory: {
-            id: null,
-            salaryCurrency: this.userInformationsForm.get('currency')!.value,
-            totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
-            salaryInfos: this.salaryInfos.value
-          }
-        });
-        this.isUserAdded = true;
-        this.salaryInformationsError = false;
-        this.userInformationError = false;
+    this.userService.getUsers().subscribe((users: User[]) => {
+      let usernames: User[] = users.filter(user =>
+        user.username == this.userInformationsForm.get('username')!.value
+      );
+
+      if (usernames.length != 0) {
+        this.usernameAlreadyExist = true
+        console.log("Username [" + this.userInformationsForm.get('username')!.value + "] is already taken")
       } else {
-        this.isUserAdded = false;
-        this.salaryInformationsError = true;
-        this.userInformationError = false;
+        this.usernameAlreadyExist = false
+        if (this.userInformationsForm.valid) {
+          if (this.salaryInfos.valid) {
+            this.userService.addUser({
+              id: null,
+              locationImage: null,
+              validated: true,
+              username: this.userInformationsForm.get('username')!.value,
+              password: this.userInformationsForm.get('password')!.value,
+              mail: this.userInformationsForm.get('mail')!.value,
+              mainSector: null,
+              location: this.countriesControl.value,
+              education: this.userInformationsForm.get('education')!.value,
+              age: this.userInformationsForm.get('age')!.value,
+              gender: this.userInformationsForm.get('gender')!.value,
+              comment: this.userInformationsForm.get('comment')!.value,
+              salaryHistory: {
+                id: null,
+                salaryCurrency: this.userInformationsForm.get('currency')!.value,
+                totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
+                salaryInfos: this.salaryInfos.value
+              }
+            });
+            this.isUserAdded = true;
+            this.salaryInformationsError = false;
+            this.userInformationError = false;
+          } else {
+            this.isUserAdded = false;
+            this.salaryInformationsError = true;
+            this.userInformationError = false;
+          }
+        } else {
+          this.isUserAdded = false;
+          this.salaryInformationsError = false;
+          this.userInformationError = true;
+        }
       }
-    } else {
-      this.isUserAdded = false;
-      this.salaryInformationsError = false;
-      this.userInformationError = true;
-    }
+    })
+
 
   }
 
