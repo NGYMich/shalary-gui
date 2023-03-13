@@ -14,10 +14,8 @@ export class CompanyCellRenderer {
   agInit(params: any) {
     this.params = params;
     let salaryInfos = params.data.salaryHistory.salaryInfos;
-    console.log(params.data.salaryHistory.salaryInfos)
     if (salaryInfos != null) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
-      console.log(latestCompany)
       if (salaryInfos.length > 0 && latestCompany != null) {
         this.companyName = latestCompany.name
         this.sector = latestCompany.sector

@@ -193,9 +193,7 @@ export class SalariesComponent implements OnInit {
 
   loadForexes() {
     this.forexService.getTopForexRates().subscribe((forexes: any) => {
-      if (forexes != null) {
-        this.forexRates = forexes;
-      }
+      this.forexRates = forexes != null ? forexes : new Map();
       console.log("forexes : ", this.forexRates);
     })
   }
@@ -265,7 +263,8 @@ export class SalariesComponent implements OnInit {
   private applyRateToSalary(params, totalSalary: number | null) {
     if (params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
       let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
-      let rate = this.forexRates[pair] != null ? this.forexRates[pair] : 1
+      // console.log(this.forexRates[pair])
+      let rate = (pair in this.forexRates) ? this.forexRates[pair] : 1
       return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;
     } else {
       return totalSalary
