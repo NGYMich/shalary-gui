@@ -117,21 +117,40 @@ export class AddUserDialogComponent implements OnInit {
 
   }
 
-  addNewJobFormLine() {
-    this.salaryInfos.push(this.formBuilder.group({
-          yearsOfExperience: new FormControl('3', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-          jobName: new FormControl('Tester', Validators.required),
-          baseSalary: new FormControl('20000.5', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-          stockSalary: new FormControl(''),
-          bonusSalary: new FormControl(''),
-          totalSalary: new FormControl(''),
-          company: this.formBuilder.group({
-            name: 'DataDog',
-            sector: 'IT'
-          }),
-        }
-      )
-    );
+  addNewJobFormLine(copyPastLine: boolean = false) {
+
+    let controlsConfig;
+
+    if (copyPastLine) {
+      let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
+      console.log(lastSalaryInfo)
+      controlsConfig = {
+        yearsOfExperience: new FormControl(lastSalaryInfo.get('yearsOfExperience')?.value, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+        jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, Validators.required),
+        baseSalary: new FormControl(lastSalaryInfo.get('baseSalary')?.value, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+        stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
+        bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
+        totalSalary: new FormControl(''),
+        company: this.formBuilder.group({
+          name: lastSalaryInfo.get('company')?.value.name,
+          sector: lastSalaryInfo.get('company')?.value.sector
+        }),
+      }
+    } else {
+      controlsConfig = {
+        yearsOfExperience: new FormControl('8', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+        jobName: new FormControl('Tester', Validators.required),
+        baseSalary: new FormControl('20000.5', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+        stockSalary: new FormControl(''),
+        bonusSalary: new FormControl(''),
+        totalSalary: new FormControl(''),
+        company: this.formBuilder.group({
+          name: 'DataDog',
+          sector: 'IT'
+        }),
+      }
+    }
+    this.salaryInfos.push(this.formBuilder.group(controlsConfig))
   }
 
   removeJobFormLine(pointIndex) {
@@ -171,10 +190,10 @@ export class AddUserDialogComponent implements OnInit {
       mail: new FormControl('test@gmail.com', Validators.required),
       currency: new FormControl('EUR (€)', Validators.required),
       yearsOfExperience: new FormControl('8.0', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-      education: new FormControl('Bachelor\'s Degree'),
-      age: new FormControl('36', Validators.pattern('^[0-9]*$')),
-      gender: new FormControl('Male'),
-      comment: new FormControl('No particular comment'),
+      education: new FormControl(''),
+      age: new FormControl('', Validators.pattern('^[0-9]*$')),
+      gender: new FormControl(''),
+      comment: new FormControl(''),
     });
   }
 

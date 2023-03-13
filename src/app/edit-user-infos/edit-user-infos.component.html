@@ -127,7 +127,7 @@
             <mat-form-field class="full-width-line">
               <mat-label class="optional">Gender (optional)</mat-label>
               <mat-select [(value)]="selectedGender" formControlName="gender">
-                <mat-option *ngFor="let gender of ['Male', 'Female']"
+                <mat-option *ngFor="let gender of ['', 'Male', 'Female']"
                             [value]="gender">{{gender}}</mat-option>
               </mat-select>
             </mat-form-field>

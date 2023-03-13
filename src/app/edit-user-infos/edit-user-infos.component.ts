@@ -117,20 +117,21 @@ export class EditUserInfosComponent implements OnInit {
   }
 
   addNewJobFormLine() {
-    this.salaryInfos.push(this.formBuilder.group({
-          yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-          jobName: new FormControl('', Validators.required),
-          baseSalary: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-          stockSalary: new FormControl(''),
-          bonusSalary: new FormControl(''),
-          totalSalary: new FormControl(''),
-          company: this.formBuilder.group({
-            name: '',
-            sector: ''
-          }),
-        }
-      )
-    )
+    let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
+    console.log(lastSalaryInfo)
+    let controlsConfig = {
+      yearsOfExperience: new FormControl(lastSalaryInfo.get('yearsOfExperience')?.value, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+      jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, Validators.required),
+      baseSalary: new FormControl(lastSalaryInfo.get('baseSalary')?.value, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+      stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
+      bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
+      totalSalary: new FormControl(''),
+      company: this.formBuilder.group({
+        name: lastSalaryInfo.get('company')?.value.name,
+        sector: lastSalaryInfo.get('company')?.value.sector
+      }),
+    }
+    this.salaryInfos.push(this.formBuilder.group(controlsConfig))
   }
 
   removeJobFormLine(pointIndex) {

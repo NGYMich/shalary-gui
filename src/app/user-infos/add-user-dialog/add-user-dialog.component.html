@@ -72,7 +72,7 @@
           <mat-form-field class="full-width-line">
             <mat-label class="optional">Gender (optional)</mat-label>
             <mat-select [(value)]="selectedGender" formControlName="gender">
-              <mat-option *ngFor="let gender of ['Male', 'Female']"
+              <mat-option *ngFor="let gender of ['', 'Male', 'Female']"
                           [value]="gender">{{gender}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -100,7 +100,7 @@
 
       <div class="job-form-line">
         <form [formGroup]="salaryInfosForm">
-          <button (click)="addNewJobFormLine()" color="add-job" style="margin-bottom: 10px;" mat-raised-button>
+          <button (click)="addNewJobFormLine(true)" color="add-job" style="margin-bottom: 10px;" mat-raised-button>
             Add an experience
           </button>
           <div formArrayName="salaryInfos">
