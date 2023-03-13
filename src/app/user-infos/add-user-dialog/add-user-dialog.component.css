@@ -12,6 +12,7 @@
 
 .mat-raised-button.mat-remove-job{
   background-color: darkgrey;
+  margin-bottom: 1.5%;
   color: white;
 }
 .mat-raised-button.mat-add-job{
