@@ -1,0 +1,19 @@
+.remove-experience-button {
+  width: auto;
+  height: 35px;
+  /*padding-top: 0.5%;*/
+  /*padding-bottom: 0.5%;*/
+  background-color: crimson;
+  color: white;
+  font-size: 15px;
+}
+
+.cancel-delete-button {
+  width: auto;
+  height: 35px;
+  /*padding-top: 0.5%;*/
+  /*padding-bottom: 0.5%;*/
+  background-color: whitesmoke;
+  color: black;
+  font-size: 15px;
+}

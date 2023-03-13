@@ -5,6 +5,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {map, Observable, startWith} from "rxjs";
 import {LocationService} from "../services/LocationService";
 import {Country} from "../model/country";
+import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteUserDialogComponent} from "../user-infos/delete-user-dialog/delete-user-dialog.component";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -47,12 +50,15 @@ export class EditUserInfosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    public dialog: MatDialog
   ) {
   }
 
   // getters & setters
   showPasswordError: boolean;
+  private shouldDelete: boolean;
+
   get salaryInfos(): FormArray {
     return this.salaryInfosForm.get('salaryInfos') as FormArray;
   }
@@ -184,7 +190,7 @@ export class EditUserInfosComponent implements OnInit {
     }
   }
 
-  deleteUser($event: MouseEvent) {
+  deleteUser() {
     this.userService.deleteUser(this.userInformationsForm.get('username')!.value, this.userToModify!.id!);
   }
 
@@ -237,5 +243,26 @@ export class EditUserInfosComponent implements OnInit {
     this.salaryInfosForm = this.formBuilder.group({
       salaryInfos: this.formBuilder.array([])
     });
+  }
+
+  openDeleteUserDialog($event: MouseEvent) {
+    let dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+      width: 'auto',
+      height: 'auto',
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    });
+    dialogRef.componentInstance.onDeleteUser.subscribe(() => {
+      this.deleteUser()
+      dialogRef.close()
+      location.reload()
+    });// subscription on close
+
+    dialogRef.componentInstance.cancelUserDeleteEvent.subscribe(() => {
+      dialogRef.close()
+    })
+
+    dialogRef.afterClosed()
+      .subscribe(() => {})
   }
 }

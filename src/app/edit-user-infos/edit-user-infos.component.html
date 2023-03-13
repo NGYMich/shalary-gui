@@ -134,7 +134,7 @@
             <br>
             <mat-form-field class="full-width-line">
               <mat-label class="optional">Comment (optional)</mat-label>
-              <textarea style="white-space: pre-wrap; height: 100px;" formControlName="comment" matInput> </textarea>
+              <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
             </mat-form-field>
 
 
@@ -153,8 +153,11 @@
         <div job-form-line>
           <h1 style="float: left;">Work History</h1>
           <!--        <button mat-raised-button style="margin-left: 1%">See example</button>-->
+<!--          <button mat-raised-button class="remove-experience-button" style="float: right;"-->
+<!--                  (click)="deleteUser($event)">Remove experience !-->
+<!--          </button>-->
           <button mat-raised-button class="remove-experience-button" style="float: right;"
-                  (click)="deleteUser($event)">Remove experience !
+                  (click)="openDeleteUserDialog($event)">Remove experience !
           </button>
         </div>
 

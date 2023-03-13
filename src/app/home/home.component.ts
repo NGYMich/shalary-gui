@@ -6,7 +6,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  sectors = ['Banking & Finance', 'Economics', 'Politics', 'Energy', 'Consulting', 'Healthcare', 'Manual Working', 'Real Estate'];
+  sectors = ['Banking & Finance', 'Economics', 'Politics', 'Energy', 'Consulting', 'Healthcare', 'Manual Working', 'Real Estate', 'Catering'];
 
   constructor() { }
 

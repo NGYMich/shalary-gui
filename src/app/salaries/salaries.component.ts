@@ -191,7 +191,9 @@ export class SalariesComponent implements OnInit {
 
   loadForexes() {
     this.forexService.getTopForexRates().subscribe((forexes: any) => {
-      this.forexRates = forexes;
+      if (forexes != null) {
+        this.forexRates = forexes;
+      }
       console.log("forexes : ", this.forexRates);
     })
   }
