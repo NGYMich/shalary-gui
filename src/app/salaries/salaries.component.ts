@@ -9,6 +9,7 @@ import {SalaryCellRenderer} from "./salary-cell-renderer";
 import {LocationCellRenderer} from "./location-cell-renderer";
 import {Country} from "../model/country";
 import {ForexService} from "../services/ForexService";
+import {CompanyCellRenderer} from "./company-cell-renderer";
 
 @Component({
   selector: 'app-salaries',
@@ -114,7 +115,8 @@ export class SalariesComponent implements OnInit {
         // {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter'},
         {field: 'username', sortable: true, resizable: true},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-        {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+        // {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
+        {field: 'company', headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},

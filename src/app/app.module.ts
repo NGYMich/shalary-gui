@@ -34,6 +34,7 @@ import {EditUserInfosComponent} from './edit-user-infos/edit-user-infos.componen
 import {FilterPipe} from "./edit-user-infos/FilterPipe";
 import {HighlightDirective} from "./edit-user-infos/HighlightDirective";
 import { DeleteUserDialogComponent } from './user-infos/delete-user-dialog/delete-user-dialog.component';
+import {CompanyCellRenderer} from "./salaries/company-cell-renderer";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -56,6 +57,7 @@ const routes: Routes = [
     AddUserDialogComponent,
     SalaryCellRenderer,
     LocationCellRenderer,
+    CompanyCellRenderer,
     SafePipe,
     EditUserInfosComponent,
     FilterPipe,
