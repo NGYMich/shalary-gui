@@ -95,7 +95,8 @@ export class AddUserDialogComponent implements OnInit {
                 salaryCurrency: this.userInformationsForm.get('currency')!.value,
                 totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
                 salaryInfos: this.salaryInfos.value
-              }
+              },
+              lastUpdate: null
             });
             this.isUserAdded = true;
             this.salaryInformationsError = false;

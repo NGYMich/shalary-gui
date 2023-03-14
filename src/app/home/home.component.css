@@ -24,7 +24,10 @@
   color: slategray;
   font-size: 30px;
   /*padding-bottom: 20px;*/
-
+}
+.three-card-component material-icons {
+  text-align: center;
+  /*padding-bottom: 20px;*/
 }
 
 
@@ -35,7 +38,7 @@
   height: 100%;
 }
 
-.share-your-experience-button {
+.view-experiences-and-salaries-button {
   width: auto;
   height: auto;
   padding-top: 0.5%;

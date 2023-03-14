@@ -36,6 +36,7 @@ import {HighlightDirective} from "./edit-user-infos/HighlightDirective";
 import { DeleteUserDialogComponent } from './user-infos/delete-user-dialog/delete-user-dialog.component';
 import {CompanyCellRenderer} from "./salaries/company-cell-renderer";
 import { TestComponent } from './test/test.component';
+import {ActionsButtonsCellRenderer} from "./salaries/action-buttons-cell-renderer";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -60,6 +61,7 @@ const routes: Routes = [
     SalaryCellRenderer,
     LocationCellRenderer,
     CompanyCellRenderer,
+    ActionsButtonsCellRenderer,
     SafePipe,
     EditUserInfosComponent,
     FilterPipe,

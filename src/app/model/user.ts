@@ -14,5 +14,6 @@ export class User {
   comment: string | null;
   gender: string;
   salaryHistory: SalaryHistory;
+  lastUpdate: string | null;
 }
 
