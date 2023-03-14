@@ -18,12 +18,20 @@ body {
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
-.test-button {
+.router-pages-button {
+  margin-right: 0.4%;
+  background-color: whitesmoke;
+  color: #001524;
+  font-size: 15px;
+  border-radius: 5px !important;
+  border-color: white !important;
+}
+
+.router-pages-button-before-with-stroked-button {
   margin-right: 0.4%;
   background-color: darkgray;
   color: aliceblue;
   font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
-  border-width: 0.3px;
 }

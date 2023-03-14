@@ -11,12 +11,28 @@
 
 .three-card-component {
   background-color: white;
-  padding: 40px;
+  padding: 20px;
   border-width: 15px;
   border-radius: 40px;
   border-color: black;
   /*margin: 2px;*/
   margin-top: 10px;
+  /*height: 80*/
+}
+
+.three-card-component h1 {
+  color: slategray;
+  font-size: 30px;
+  /*padding-bottom: 20px;*/
+
+}
+
+
+.three-card-component img {
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
 }
 
 .share-your-experience-button {
