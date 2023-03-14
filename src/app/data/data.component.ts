@@ -28,7 +28,6 @@ export class DataComponent implements OnInit {
     this.userService.getUsers().subscribe((users: User[]) => {
       this.users = users;
       this.userCountries = this.users.map(user => user.location)
-
       console.log(this.users)
     })
   }

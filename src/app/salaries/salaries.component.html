@@ -13,11 +13,12 @@
                   (click)="openSalaryAddingDialog($event)">Share your experience !
           </button>
           <br>
-          <mat-form-field floatLabel="never" appearance="legacy" style="font-size: 15px; width: 50%; margin-top:0.3%;">
-            <mat-label style="text-align: center; display: block; width: auto;">Filter by anything (columns are also
-              filterable by using the button next to the columns' names!)
+          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 45%; margin-top:0.3%;">
+            <mat-label style="text-align: left; display: block; width: auto;">
+              <mat-icon>search</mat-icon>
+              Filter by anything (columns are also filterable by using the button next to the columns' names!)
             </mat-label>
-            <input matInput style="text-align: center;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+            <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
           </mat-form-field>
         </div>
         <div fxLayout="row">

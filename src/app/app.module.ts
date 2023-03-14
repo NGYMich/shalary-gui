@@ -35,6 +35,7 @@ import {FilterPipe} from "./edit-user-infos/FilterPipe";
 import {HighlightDirective} from "./edit-user-infos/HighlightDirective";
 import { DeleteUserDialogComponent } from './user-infos/delete-user-dialog/delete-user-dialog.component';
 import {CompanyCellRenderer} from "./salaries/company-cell-renderer";
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
+  {path: 'test', component: TestComponent},
 ];
 
 @NgModule({
@@ -62,7 +64,8 @@ const routes: Routes = [
     EditUserInfosComponent,
     FilterPipe,
     HighlightDirective,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

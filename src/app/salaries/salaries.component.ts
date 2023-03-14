@@ -28,6 +28,7 @@ export class SalariesComponent implements OnInit {
     pagination: true,
     paginationPageSize: 40,
     domLayout: 'autoHeight',
+    suppressMenuHide: true
   };
   currencies = ['DEFAULT', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
   selectedCurrency = "DEFAULT";
@@ -117,7 +118,7 @@ export class SalariesComponent implements OnInit {
       headerName: 'User Information',
       children: [
         // {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter'},
-        {field: 'username', sortable: true, resizable: true},
+        {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},

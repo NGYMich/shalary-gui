@@ -1,24 +1,29 @@
 
 .header {
-  /*min-width: 1024px;*/
   width: 100%;
   flex-shrink: 0;
   flex-grow: 0;
 }
 
-/*.mat-toolbar {*/
-/*  background-color:transparent;*/
-/*}*/
 body {
   background-color: black;
 }
 
 .mat-toolbar.mat-primary {
-  background: #3285A9;
-  color: whitesmoke;
-  height: 50px;
+  background-color: darkgray;
+  height: 60px;
   position: sticky;
   position: -webkit-sticky; /* For macOS/iOS Safari */
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.test-button {
+  margin-right: 0.4%;
+  background-color: darkgray;
+  color: aliceblue;
+  font-size: 15px;
+  border-radius: 5px !important;
+  border-color: white !important;
+  border-width: 0.3px;
 }
