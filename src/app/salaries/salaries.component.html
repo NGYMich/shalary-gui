@@ -21,6 +21,23 @@
             <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
           </mat-form-field>
         </div>
+
+
+        <div fxLayout="row">
+
+          <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="30" class="flag-and-currency-title">
+            Filter by countries with most data
+          </div>
+
+
+          <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="40"></div>
+
+          <div fxLayoutAlign="end center" fxLayoutGap="5px" fxFlex="40" class="flag-and-currency-title">
+            Convert salaries to chosen currency
+          </div>
+        </div>
+
+
         <div fxLayout="row">
 
           <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="30">
@@ -35,12 +52,12 @@
           <div fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex="40"></div>
 
           <div fxLayoutAlign="end center" fxLayoutGap="5px" fxFlex="40">
-            <div  [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency" *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
+            <div [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency"
+                 *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
               {{currency}}
             </div>
           </div>
         </div>
-
 
 
         <ag-grid-angular
@@ -51,7 +68,7 @@
           [gridOptions]="gridOptions"
           (gridReady)="onGridReady($event)"
           (rowClicked)="openUserInfos($event)"
-          (rowDataChanged)="autoSizeAll()"
+
         >
         </ag-grid-angular>
       </div>

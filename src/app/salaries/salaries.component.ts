@@ -124,11 +124,11 @@ export class SalariesComponent implements OnInit {
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {
           field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
           cellRendererFramework: LocationCellRenderer,
         },
-        {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Work experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter'},
       ]
     },

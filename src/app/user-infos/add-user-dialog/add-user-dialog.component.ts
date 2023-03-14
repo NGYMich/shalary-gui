@@ -186,7 +186,7 @@ export class AddUserDialogComponent implements OnInit {
 
   private initUserInformationsForm() {
     this.userInformationsForm = this.formBuilder.group({
-      username: new FormControl('UsernamExample', Validators.required),
+      username: new FormControl('UsernameExample', Validators.required),
       password: new FormControl('test', Validators.required),
       mail: new FormControl('test@gmail.com', Validators.required),
       currency: new FormControl('EUR (€)', Validators.required),

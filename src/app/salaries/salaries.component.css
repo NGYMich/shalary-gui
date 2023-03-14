@@ -10,6 +10,12 @@
   border-radius: 0 !important;
 }
 
+.flag-and-currency-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
+
 .currency {
   font-size: 14px;
   font-weight: bold;

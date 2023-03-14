@@ -86,37 +86,44 @@ export class UserInfosDialogComponent implements OnInit {
   private computeSalariesSeries() {
     let salaryInfos = this.currentUser.salaryHistory.salaryInfos;
     let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
+    let baseSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
+    let bonusSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
+    let stockSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
+    let totalSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
 
-    console.log(salaryInfos)
-    let baseSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+
+    baseSalariesSeries = baseSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0,
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
 
-    let bonusSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+    bonusSalariesSeries = bonusSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0,
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
-    let stockSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+
+    stockSalariesSeries = stockSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0,
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
-    let totalSalariesSeries = salaryInfos.map(salaryInfo => new Serie(
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+
+    totalSalariesSeries = totalSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0,
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : ""))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
   }
 
