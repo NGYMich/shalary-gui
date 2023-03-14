@@ -1,24 +1,31 @@
 <div style="font-size: 70px; text-align: center; margin-top: 3%;">Page under construction !</div>
-<div style="font-size: 20px; text-align: center; margin-top: 5%;">
-  <div style="color: crimson; font-size: 30px;">TODO List :</div>
-  <br/>
-  <br/>- Graphical improvement
-  <br/>
-  <br/>- Add data : by location, age, min/max/means, recommendations
-  <br/>
-  <br/>- Telephone usage ?
-  <br/>
-  <br/>- Add interns / apprentices salaries in a different page ?
-  <br/>
-  <br/>- Must add experiences in order to unlock all salaries
-  <br/>
-  <br/>- User authentification ?
-  <br/>
-  <br/>- Think about limiting to only one or few countries ? FR/UK/USA/GER ? Translation ?
-<!--  <br/>-->
-<!--  <br/>- -->
-<!--  <br/>-->
-<!--  <br/>- -->
-<!--  <br/>-->
-<!--  <br/>- -->
+<div style="font-size: 20px; text-align: center; margin-top: 2.5%;">
+  <div style="color: darkblue; font-size: 30px;">
+    TODO LIST - ALGORITHM / BACKEND
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let algorithmSuggestion of algorithmSuggestions">
+      <div mat-line>-> {{algorithmSuggestion}}</div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <div style="color: darkgreen; font-size: 30px; margin-top: 2%; margin-bottom: 1%;">
+      TODO LIST - GRAPHICAL / FRONTEND
+    </div>
+    <mat-list-item *ngFor="let graphicalSuggestion of graphicalSuggestions">
+      <div mat-line>- {{graphicalSuggestion}}</div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <div style="color: black; font-size: 30px; margin-top: 2%; margin-bottom: 1%;">
+      THINGS TO THINK ABOUT
+    </div>
+    <mat-list-item *ngFor="let otherSuggestion of otherSuggestions">
+      <div mat-line>- {{otherSuggestion}}</div>
+    </mat-list-item>
+
+  </mat-list>
+
 </div>

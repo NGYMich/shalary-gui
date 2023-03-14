@@ -27,6 +27,7 @@ export class AddUserDialogComponent implements OnInit {
   educationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
   selectedGender;
   selectedCurrency;
+  selectedEducation;
   isUserAdded: boolean;
   userInformationError: boolean = false;
   salaryInformationsError: boolean = false;
