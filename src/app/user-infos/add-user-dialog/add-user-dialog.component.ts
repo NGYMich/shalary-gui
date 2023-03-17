@@ -131,7 +131,6 @@ export class AddUserDialogComponent implements OnInit {
         baseSalary: new FormControl(lastSalaryInfo.get('baseSalary')?.value, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
         stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
         bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
-        totalSalary: new FormControl(''),
         company: this.formBuilder.group({
           name: lastSalaryInfo.get('company')?.value.name,
           sector: lastSalaryInfo.get('company')?.value.sector
@@ -144,7 +143,6 @@ export class AddUserDialogComponent implements OnInit {
         baseSalary: new FormControl('20000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
         stockSalary: new FormControl(''),
         bonusSalary: new FormControl(''),
-        totalSalary: new FormControl(''),
         company: this.formBuilder.group({
           name: 'Capgemini',
           sector: 'IT Consulting'
@@ -158,18 +156,7 @@ export class AddUserDialogComponent implements OnInit {
     this.salaryInfos.removeAt(pointIndex);
   }
 
-  calculateTotalSalary(pointIndex) {
-    let totalSalary: number = 0;
-    let currentJob = this.salaryInfos.value[pointIndex]!;
-    if (currentJob.baseSalary == '' && currentJob.bonusSalary == '' && currentJob.bonusSalary == '') {
-      return 'Total Salary'
-    } else {
-      if (currentJob.baseSalary !== '') totalSalary += parseFloat(currentJob.baseSalary);
-      if (currentJob.bonusSalary !== '') totalSalary += parseFloat(currentJob.bonusSalary);
-      if (currentJob.stockSalary !== '') totalSalary += parseFloat(currentJob.stockSalary);
-    }
-    return totalSalary
-  }
+
 
 
   // form initializers
