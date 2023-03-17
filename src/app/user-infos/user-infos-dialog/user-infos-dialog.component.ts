@@ -4,7 +4,7 @@ import {User} from "../../model/user";
 import {Serie} from "../../model/serie";
 import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
 import {NumberService} from "../../services/NumberService";
-import {EditUserInfosComponent} from "../../edit-user-infos/edit-user-infos.component";
+import {EditUserInfosComponent} from "../../routes/edit-user-infos/edit-user-infos.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -43,7 +43,7 @@ export class UserInfosDialogComponent implements OnInit {
   userInfosString: string[] = [];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router,public dialogRef: MatDialogRef<UserInfosDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>) {
     Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
@@ -64,9 +64,16 @@ export class UserInfosDialogComponent implements OnInit {
 
 
   private constructUserInfosString() {
+    let location;
+    if (this.currentUser.location != null) {
+      location = this.currentUser.location
+      if (this.currentUser.city != null) {
+        location += (" (" + this.currentUser.city + ")")
+      }
+    }
     if (this.currentUser.gender != null && this.currentUser.gender != "") this.userInfosString.push(this.currentUser.gender)
     if (this.currentUser.age != null) this.userInfosString.push(this.currentUser.age.toString() + " years old")
-    if (this.currentUser.location != null && this.currentUser.location != "") this.userInfosString.push(this.currentUser.location)
+    if (this.currentUser.location != null && this.currentUser.location != "") this.userInfosString.push(location)
     if (this.currentUser.education != null && this.currentUser.education != "") this.userInfosString.push(this.currentUser.education)
   }
 
@@ -162,7 +169,7 @@ export class UserInfosDialogComponent implements OnInit {
     //   panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     // });
     this.dialogRef.close()
-    this.router.navigate(['/edit-user-infos'], { state: { chosenUsernameToEdit: this.currentUser.username } });
+    this.router.navigate(['/edit-user-infos'], {state: {chosenUsernameToEdit: this.currentUser.username}});
   }
 
 

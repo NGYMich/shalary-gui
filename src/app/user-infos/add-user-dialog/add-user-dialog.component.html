@@ -32,8 +32,7 @@
           <br>
           <mat-form-field class="full-width-line">
             <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
-            <mat-label>Location</mat-label>
-
+            <mat-label>Country</mat-label>
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
                 <img aria-hidden [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
@@ -43,6 +42,12 @@
             </mat-autocomplete>
           </mat-form-field>
 
+
+          <br>
+          <mat-form-field class="full-width-line">
+            <mat-label class="optional">City (optional)</mat-label>
+            <input maxLength="50" formControlName="city" matInput>
+          </mat-form-field>
           <br>
           <mat-form-field class="full-width-line">
             <mat-label>Total Years of Experience</mat-label>
@@ -52,15 +57,12 @@
 
 
           <mat-form-field class="full-width-line">
-            <mat-label>Education (optional)</mat-label>
+            <mat-label class="optional">Education (optional)</mat-label>
             <mat-select [(value)]="selectedEducation" formControlName="education">
               <mat-option *ngFor="let educationLevel of educationLevels"
                           [value]="educationLevel">{{educationLevel}}</mat-option>
             </mat-select>
           </mat-form-field>
-
-
-
 
 
           <br>
@@ -72,7 +74,7 @@
           <mat-form-field class="full-width-line">
             <mat-label class="optional">Gender (optional)</mat-label>
             <mat-select [(value)]="selectedGender" formControlName="gender">
-              <mat-option *ngFor="let gender of ['', 'Male', 'Female']"
+              <mat-option *ngFor="let gender of genders"
                           [value]="gender">{{gender}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -104,7 +106,8 @@
             Add an experience
           </button>
           <div formArrayName="salaryInfos">
-            <div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index" [formGroupName]="pointIndex">
+            <div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
+                 [formGroupName]="pointIndex">
               <mat-form-field style="float: left; width: 10%;" class="job-form-field with-margin-right-30px">
                 <input formControlName="jobName" matInput/>
                 <mat-label class="optional">Job Name</mat-label>
@@ -125,10 +128,17 @@
                 </mat-form-field>
               </div>
 
+              <mat-form-field style="margin-right: 30px; width: 8%;">
+                <mat-label>Contract</mat-label>
+                <mat-select formControlName="contractType">
+                  <mat-option *ngFor="let contractType of contractTypes"
+                              [value]="contractType">{{contractType}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
               <mat-form-field style="margin-right: 30px; width: 9%;">
                 <mat-label>Years of XP *</mat-label>
                 <input formControlName="yearsOfExperience" matInput/>
-<!--                <mat-hint align="start"># Years before this job</mat-hint>-->
               </mat-form-field>
 
               <mat-form-field class="job-form-field with-margin-right-30px">
@@ -140,6 +150,7 @@
               <mat-form-field class="job-form-field with-margin-right-30px italic">
                 <input formControlName="bonusSalary" matInput/>
                 <mat-label>Bonus Salary</mat-label>
+                <mat-hint align="start">Avg/Year</mat-hint>
               </mat-form-field>
 
               <mat-form-field class="job-form-field with-margin-right-30px italic" style="width: 5%;">

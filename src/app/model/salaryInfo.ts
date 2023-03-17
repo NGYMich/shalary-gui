@@ -9,6 +9,8 @@ export class SalaryInfo {
   totalSalary: number;
   netTotalSalary: number;
   company: Company;
+
+  contractType: string;
 }
 
 export class Company {

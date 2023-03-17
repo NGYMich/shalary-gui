@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../services/UserService";
-import {User} from "../model/user";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../services/UserService";
+import {User} from "../../model/user";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
-import {LocationService} from "../services/LocationService";
-import {Country} from "../model/country";
+import {LocationService} from "../../services/LocationService";
+import {Country} from "../../model/country";
 import {MatDialog} from "@angular/material/dialog";
-import {DeleteUserDialogComponent} from "../user-infos/delete-user-dialog/delete-user-dialog.component";
+import {DeleteUserDialogComponent} from "../../user-infos/delete-user-dialog/delete-user-dialog.component";
 import {Router} from "@angular/router";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders} from "../common/common-variables";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -25,6 +26,10 @@ export class EditUserInfosComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
 
+  educationLevels = commonEducationLevels;
+  genders = commonGenders
+  currencies = commonCurrencies
+  contractTypes = commonContractTypes
   // user infos
   userInformationsForm: FormGroup;
 
@@ -35,8 +40,6 @@ export class EditUserInfosComponent implements OnInit {
   countriesControl = new FormControl("", (Validators.required))
   filteredCountries: Observable<Country[]>;
   // jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
-  currencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)', 'CHF (₣)', 'AUD (AU$)', 'CAD (C$)'];
-  educationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
   selectedGender;
   selectedCurrency;
   selectedEducation;
@@ -47,7 +50,9 @@ export class EditUserInfosComponent implements OnInit {
   countriesOptions: any;
   userToModify: User | null = null;
   isUserLoaded: boolean = false;
-  chosenUsernameToEdit: string = "";
+  showPasswordError: boolean;
+  private shouldDelete: boolean;
+  selectedContractType: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,12 +62,10 @@ export class EditUserInfosComponent implements OnInit {
     private router: Router,
   ) {
     if (this.router.getCurrentNavigation()!.extras!.state != null) this.usernameSearchControl.setValue(this.router.getCurrentNavigation()!.extras!.state!['chosenUsernameToEdit'])
-
   }
 
   // getters & setters
-  showPasswordError: boolean;
-  private shouldDelete: boolean;
+
 
   get salaryInfos(): FormArray {
     return this.salaryInfosForm.get('salaryInfos') as FormArray;
@@ -124,7 +127,12 @@ export class EditUserInfosComponent implements OnInit {
   addNewJobFormLine() {
     let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
     console.log(lastSalaryInfo)
-    let controlsConfig = {
+    let controlsConfig = this.buildSalaryInfo(lastSalaryInfo)
+    this.salaryInfos.push(this.formBuilder.group(controlsConfig))
+  }
+
+  private buildSalaryInfo(lastSalaryInfo: AbstractControl) {
+    return {
       yearsOfExperience: new FormControl(lastSalaryInfo.get('yearsOfExperience')?.value, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
       jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, Validators.required),
       baseSalary: new FormControl(lastSalaryInfo.get('baseSalary')?.value, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
@@ -134,15 +142,15 @@ export class EditUserInfosComponent implements OnInit {
         name: lastSalaryInfo.get('company')?.value.name,
         sector: lastSalaryInfo.get('company')?.value.sector
       }),
-    }
-    this.salaryInfos.push(this.formBuilder.group(controlsConfig))
+      contractType: new FormControl(lastSalaryInfo.get('contractType')?.value),
+    };
   }
 
   removeJobFormLine(pointIndex) {
     this.salaryInfos.removeAt(pointIndex);
   }
 
-  addUser($event: MouseEvent) {
+  modifyUser($event: MouseEvent) {
     if (this.userInformationsForm.valid) {
       if (this.salaryInfos.valid) {
         this.userService.modifyUser({
@@ -154,6 +162,7 @@ export class EditUserInfosComponent implements OnInit {
           mail: this.userInformationsForm.get('mail')!.value,
           mainSector: null,
           location: this.countriesControl.value,
+          city: this.userInformationsForm.get('city')!.value,
           education: this.userInformationsForm.get('education')!.value,
           age: this.userInformationsForm.get('age')!.value,
           gender: this.userInformationsForm.get('gender')!.value,
@@ -205,6 +214,7 @@ export class EditUserInfosComponent implements OnInit {
               name: salaryInfo.company.name,
               sector: salaryInfo.company.sector
             }),
+            contractType: new FormControl(salaryInfo.contractType)
           }
         )
       )
@@ -227,6 +237,7 @@ export class EditUserInfosComponent implements OnInit {
       age: new FormControl(this.userToModify?.age, Validators.pattern('^[0-9]*$')),
       gender: new FormControl(this.userToModify?.gender),
       comment: new FormControl(this.userToModify?.comment),
+      city: new FormControl(this.userToModify?.city),
     });
   }
 

@@ -3,7 +3,7 @@
     <h1>{{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
       {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
       {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h1>
-    <h5 mat-subheader style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h5>
+    <h4 mat-subheader style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
   </div>
   <!--  <div id="alignedToTheRight">-->
   <!--    {{this.currentUser.gender != null ? this.currentUser.gender : ""}}-->

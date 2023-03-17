@@ -2,14 +2,14 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
+import {HomeComponent} from './routes/home/home.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import {MatButtonModule} from "@angular/material/button";
-import {SalariesComponent} from './salaries/salaries.component';
-import {DataComponent} from './data/data.component';
-import {AboutComponent} from './about/about.component';
+import {SalariesComponent} from './routes/salaries/salaries.component';
+import {DataComponent} from './routes/data/data.component';
+import {AboutComponent} from './routes/about/about.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AgGridModule} from "ag-grid-angular";
 import {UserInfosComponent} from './user-infos/user-infos.component';
@@ -21,22 +21,22 @@ import {AddUserDialogComponent} from './user-infos/add-user-dialog/add-user-dial
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
-import {SalaryCellRenderer} from "./salaries/salary-cell-renderer";
+import {SalaryCellRenderer} from "./routes/salaries/salary-cell-renderer";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {LocationCellRenderer} from "./salaries/location-cell-renderer";
+import {LocationCellRenderer} from "./routes/salaries/location-cell-renderer";
 import {SafePipe} from "./util/SafePipe";
-import {EditUserInfosComponent} from './edit-user-infos/edit-user-infos.component';
-import {FilterPipe} from "./edit-user-infos/FilterPipe";
-import {HighlightDirective} from "./edit-user-infos/HighlightDirective";
+import {EditUserInfosComponent} from './routes/edit-user-infos/edit-user-infos.component';
+import {FilterPipe} from "./routes/edit-user-infos/FilterPipe";
+import {HighlightDirective} from "./routes/edit-user-infos/HighlightDirective";
 import { DeleteUserDialogComponent } from './user-infos/delete-user-dialog/delete-user-dialog.component';
-import {CompanyCellRenderer} from "./salaries/company-cell-renderer";
-import { TestComponent } from './test/test.component';
-import {ActionsButtonsCellRenderer} from "./salaries/action-buttons-cell-renderer";
+import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
+import { TestComponent } from './routes/test/test.component';
+import {ActionsButtonsCellRenderer} from "./routes/salaries/action-buttons-cell-renderer";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

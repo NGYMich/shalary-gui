@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../model/user";
-import {UserService} from "../services/UserService";
-import {LocationService} from "../services/LocationService";
-import {Country} from "../model/country";
+import {User} from "../../model/user";
+import {UserService} from "../../services/UserService";
+import {LocationService} from "../../services/LocationService";
+import {Country} from "../../model/country";
 import {map, Observable, startWith} from "rxjs";
 
 @Component({

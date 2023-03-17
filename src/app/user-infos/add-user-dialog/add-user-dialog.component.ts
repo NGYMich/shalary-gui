@@ -5,6 +5,7 @@ import {LocationService} from "../../services/LocationService";
 import {Country} from "../../model/country";
 import {map, Observable, startWith} from "rxjs";
 import {User} from "../../model/user";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders} from "../../routes/common/common-variables";
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -23,8 +24,11 @@ export class AddUserDialogComponent implements OnInit {
   countriesControl = new FormControl('France', (Validators.required));
   filteredCountries: Observable<Country[]>;
   // jobLevels = ['Intern', 'Apprentice', 'Junior', 'Intermediate', 'Senior'];
-  currencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)', 'CHF (₣)', 'AUD (AU$)', 'CAD (C$)'];
-  educationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
+  currencies = commonCurrencies
+  genders = commonGenders
+  educationLevels = commonEducationLevels
+  contractTypes = commonContractTypes
+
   selectedGender;
   selectedCurrency;
   selectedEducation;
@@ -104,6 +108,7 @@ export class AddUserDialogComponent implements OnInit {
       mail: this.userInformationsForm.get('mail')!.value,
       mainSector: null,
       location: this.countriesControl.value,
+      city: this.userInformationsForm.get('city')!.value,
       education: this.userInformationsForm.get('education')!.value,
       age: this.userInformationsForm.get('age')!.value,
       gender: this.userInformationsForm.get('gender')!.value,
@@ -135,6 +140,7 @@ export class AddUserDialogComponent implements OnInit {
           name: lastSalaryInfo.get('company')?.value.name,
           sector: lastSalaryInfo.get('company')?.value.sector
         }),
+        contractType: new FormControl(lastSalaryInfo.get('contractType')?.value)
       }
     } else {
       controlsConfig = {
@@ -147,6 +153,8 @@ export class AddUserDialogComponent implements OnInit {
           name: 'Capgemini',
           sector: 'IT Consulting'
         }),
+        contractType: new FormControl('')
+
       }
     }
     this.salaryInfos.push(this.formBuilder.group(controlsConfig))
@@ -155,8 +163,6 @@ export class AddUserDialogComponent implements OnInit {
   removeJobFormLine(pointIndex) {
     this.salaryInfos.removeAt(pointIndex);
   }
-
-
 
 
   // form initializers
@@ -177,6 +183,7 @@ export class AddUserDialogComponent implements OnInit {
       password: new FormControl('test', Validators.required),
       mail: new FormControl('test@gmail.com', Validators.required),
       currency: new FormControl('EUR (€)', Validators.required),
+      city: new FormControl(''),
       yearsOfExperience: new FormControl('8.0', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
       education: new FormControl(''),
       age: new FormControl('', Validators.pattern('^[0-9]*$')),

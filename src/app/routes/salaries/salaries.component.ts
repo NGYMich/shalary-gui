@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "../services/UserService";
-import {User} from "../model/user";
+import {UserService} from "../../services/UserService";
+import {User} from "../../model/user";
 import {GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
-import {UserInfosDialogComponent} from "../user-infos/user-infos-dialog/user-infos-dialog.component";
-import {AddUserDialogComponent} from "../user-infos/add-user-dialog/add-user-dialog.component";
+import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
+import {AddUserDialogComponent} from "../../user-infos/add-user-dialog/add-user-dialog.component";
 import {SalaryCellRenderer} from "./salary-cell-renderer";
 import {LocationCellRenderer} from "./location-cell-renderer";
-import {Country} from "../model/country";
-import {ForexService} from "../services/ForexService";
+import {Country} from "../../model/country";
+import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
 
 @Component({
