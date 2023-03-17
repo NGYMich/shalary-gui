@@ -67,10 +67,7 @@ export class AddUserDialogComponent implements OnInit {
 
   addUser($event: MouseEvent) {
     this.userService.getUsers().subscribe((users: User[]) => {
-      let usernames: User[] = users.filter(user =>
-        user.username == this.userInformationsForm.get('username')!.value
-      );
-
+      let usernames: User[] = users.filter(user => user.username == this.userInformationsForm.get('username')!.value);
       if (usernames.length != 0) {
         this.usernameAlreadyExist = true
         console.log("Username [" + this.userInformationsForm.get('username')!.value + "] is already taken")
@@ -78,45 +75,47 @@ export class AddUserDialogComponent implements OnInit {
         this.usernameAlreadyExist = false
         if (this.userInformationsForm.valid) {
           if (this.salaryInfos.valid) {
-            this.userService.addUser({
-              id: null,
-              locationImage: null,
-              validated: true,
-              username: this.userInformationsForm.get('username')!.value,
-              password: this.userInformationsForm.get('password')!.value,
-              mail: this.userInformationsForm.get('mail')!.value,
-              mainSector: null,
-              location: this.countriesControl.value,
-              education: this.userInformationsForm.get('education')!.value,
-              age: this.userInformationsForm.get('age')!.value,
-              gender: this.userInformationsForm.get('gender')!.value,
-              comment: this.userInformationsForm.get('comment')!.value,
-              salaryHistory: {
-                id: null,
-                salaryCurrency: this.userInformationsForm.get('currency')!.value,
-                totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
-                salaryInfos: this.salaryInfos.value
-              },
-              lastUpdate: null
-            });
-            this.isUserAdded = true;
-            this.salaryInformationsError = false;
-            this.userInformationError = false;
+            let user = this.buildUser();
+            console.log('user: ', user)
+            this.userService.addUser(user);
+            this.setErrorMessages(true, false, false);
             location.reload()
-          } else {
-            this.isUserAdded = false;
-            this.salaryInformationsError = true;
-            this.userInformationError = false;
-          }
-        } else {
-          this.isUserAdded = false;
-          this.salaryInformationsError = false;
-          this.userInformationError = true;
-        }
+          } else this.setErrorMessages(false, true, false);
+        } else this.setErrorMessages(false, false, true);
       }
     })
 
 
+  }
+
+  private setErrorMessages(isUserAdded, salaryInformationsError, userInformationError) {
+    this.isUserAdded = isUserAdded;
+    this.salaryInformationsError = salaryInformationsError;
+    this.userInformationError = userInformationError;
+  }
+
+  private buildUser() {
+    return {
+      id: null,
+      locationImage: null,
+      validated: true,
+      username: this.userInformationsForm.get('username')!.value,
+      password: this.userInformationsForm.get('password')!.value,
+      mail: this.userInformationsForm.get('mail')!.value,
+      mainSector: null,
+      location: this.countriesControl.value,
+      education: this.userInformationsForm.get('education')!.value,
+      age: this.userInformationsForm.get('age')!.value,
+      gender: this.userInformationsForm.get('gender')!.value,
+      comment: this.userInformationsForm.get('comment')!.value,
+      salaryHistory: {
+        id: null,
+        salaryCurrency: this.userInformationsForm.get('currency')!.value,
+        totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
+        salaryInfos: this.salaryInfos.value
+      },
+      lastUpdate: null
+    };
   }
 
   addNewJobFormLine(copyPastLine: boolean = false) {

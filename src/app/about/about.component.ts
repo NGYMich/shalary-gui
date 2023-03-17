@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
   algorithmSuggestions: string[] = [
+    'Use jointostring for user infos',
+    'Add multithreading for forex calls',
+    'For save user => do it in another page or keep it as it is ?',
     'Add categories / filters',
     'Add contract type : internship, apprenticeship, freelance, full time, part time',
     'Add data : by location, age, min/max/means, recommendations',
@@ -16,6 +19,7 @@ export class AboutComponent implements OnInit {
     'Think about limiting to only one or few countries ? FR/UK/USA/GER ? Translation ?',
   ];
   graphicalSuggestions: string[] = [
+    'In user dialogs, put user infos under title/username instead of on the right',
     'Fix homepage',
     'Add contract type : internship, apprenticeship, freelance, full time, part time',
     'Add animations',

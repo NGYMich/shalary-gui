@@ -1,9 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../model/user";
 import {Serie} from "../../model/serie";
 import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
 import {NumberService} from "../../services/NumberService";
+import {EditUserInfosComponent} from "../../edit-user-infos/edit-user-infos.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-infos-dialog',
@@ -38,9 +40,10 @@ export class UserInfosDialogComponent implements OnInit {
   public colors: ColorHelper;
   public colorScheme: any = {domain: ['#d6dd00', '#ffb160', '#93c47d', '#bd3d16']}; // base , bonus , equity , total
   public yAxisTickFormattingFn = this.formatSalary.bind(this);
+  userInfosString: string[] = [];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router,public dialogRef: MatDialogRef<UserInfosDialogComponent>) {
     Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
@@ -56,6 +59,15 @@ export class UserInfosDialogComponent implements OnInit {
       this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
       this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
     }
+    this.constructUserInfosString();
+  }
+
+
+  private constructUserInfosString() {
+    if (this.currentUser.gender != null && this.currentUser.gender != "") this.userInfosString.push(this.currentUser.gender)
+    if (this.currentUser.age != null) this.userInfosString.push(this.currentUser.age.toString() + " years old")
+    if (this.currentUser.location != null && this.currentUser.location != "") this.userInfosString.push(this.currentUser.location)
+    if (this.currentUser.education != null && this.currentUser.education != "") this.userInfosString.push(this.currentUser.education)
   }
 
   formatSalary(val) {
@@ -140,4 +152,18 @@ export class UserInfosDialogComponent implements OnInit {
     stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName, companySector));
     totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName, companySector));
   }
+
+  editOrRemoveExperience() {
+    // this.dialog.open(EditUserInfosComponent, {
+    //   width: '120%',
+    //   height: '100%',
+    //   // data: {selectedUser: selectedUser},
+    //   autoFocus: false,
+    //   panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    // });
+    this.dialogRef.close()
+    this.router.navigate(['/edit-user-infos'], { state: { chosenUsernameToEdit: this.currentUser.username } });
+  }
+
+
 }

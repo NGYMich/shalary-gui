@@ -7,6 +7,7 @@ import {LocationService} from "../services/LocationService";
 import {Country} from "../model/country";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../user-infos/delete-user-dialog/delete-user-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -39,7 +40,6 @@ export class EditUserInfosComponent implements OnInit {
   selectedGender;
   selectedCurrency;
   selectedEducation;
-
   isUserAdded: boolean;
   userInformationError: boolean = false;
   salaryInformationsError: boolean = false;
@@ -47,13 +47,17 @@ export class EditUserInfosComponent implements OnInit {
   countriesOptions: any;
   userToModify: User | null = null;
   isUserLoaded: boolean = false;
+  chosenUsernameToEdit: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private locationService: LocationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
   ) {
+    if (this.router.getCurrentNavigation()!.extras!.state != null) this.usernameSearchControl.setValue(this.router.getCurrentNavigation()!.extras!.state!['chosenUsernameToEdit'])
+
   }
 
   // getters & setters
@@ -70,7 +74,6 @@ export class EditUserInfosComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
-
   }
 
   loadUsers() {

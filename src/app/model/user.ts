@@ -12,7 +12,7 @@ export class User {
   education: string | null;
   age: number | null;
   comment: string | null;
-  gender: string;
+  gender: string | null;
   salaryHistory: SalaryHistory;
   lastUpdate: string | null;
 }

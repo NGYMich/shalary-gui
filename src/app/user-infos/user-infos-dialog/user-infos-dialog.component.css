@@ -1,14 +1,23 @@
-h1 {
+.user-infos {
+  font-family: Trebuchet MS, serif;
+  width: 100%;
   display: flex;
-  flex-flow: row wrap;
+  align-items: center;
+  margin-top: 0;
 }
 
-#alignedToTheLeft{
-  width:50%;
-  text-align:left;
+.user-infos h1 {
+  margin-bottom: 0;
 }
 
-#alignedToTheRight{
-  width:50%;
-  text-align:right;
+.user-infos button:first-of-type {
+  margin: 0 10px 0 auto
 }
+
+
+.edit-your-experience-button {
+  background-color: crimson;
+  color: white;
+  font-size: 15px;
+}
+
