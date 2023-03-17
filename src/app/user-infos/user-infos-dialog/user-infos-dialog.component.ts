@@ -105,10 +105,17 @@ export class UserInfosDialogComponent implements OnInit {
   private computeSalariesSeries() {
     let salaryInfos = this.currentUser.salaryHistory.salaryInfos;
     let salaryCurrency = this.currentUser.salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
-    let baseSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
-    let bonusSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
-    let stockSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
-    let totalSalariesSeries: Serie[] = [new Serie(0.0.toString(), 0, "", "", "", "")]
+    let baseSalariesSeries: Serie[] = []
+    let bonusSalariesSeries: Serie[] = []
+    let stockSalariesSeries: Serie[] = []
+    let totalSalariesSeries: Serie[] = []
+
+    if (salaryInfos[0].yearsOfExperience != 0.0) {
+      baseSalariesSeries = [new Serie(0.0.toString(), 0, "", "", "", "", "")]
+      bonusSalariesSeries = [new Serie(0.0.toString(), 0, "", "", "", "", "")]
+      stockSalariesSeries = [new Serie(0.0.toString(), 0, "", "", "", "", "")]
+      totalSalariesSeries = [new Serie(0.0.toString(), 0, "", "", "", "", "")]
+    }
 
 
     baseSalariesSeries = baseSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
@@ -117,7 +124,8 @@ export class UserInfosDialogComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      salaryInfo.contractType)))
 
     bonusSalariesSeries = bonusSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
@@ -125,7 +133,8 @@ export class UserInfosDialogComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      salaryInfo.contractType)))
 
     stockSalariesSeries = stockSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
@@ -133,7 +142,8 @@ export class UserInfosDialogComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      salaryInfo.contractType)))
 
     totalSalariesSeries = totalSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
@@ -141,7 +151,8 @@ export class UserInfosDialogComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "")))
+      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      salaryInfo.contractType)))
 
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
   }
@@ -151,13 +162,14 @@ export class UserInfosDialogComponent implements OnInit {
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
     let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
     let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null) ? "(" + lastSalaryInfo.company.sector + ")" : "";
+    let contractType = (lastSalaryInfo.contractType != null) ? lastSalaryInfo.contractType : ""
 
     let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
     let latestJobName = lastSalaryInfo.jobName
-    baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName, companySector));
-    bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName, companySector));
-    stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName, companySector));
-    totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName, companySector));
+    baseSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.baseSalary, companyName, salaryCurrency, latestJobName, companySector, contractType));
+    bonusSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.bonusSalary, companyName, salaryCurrency, latestJobName, companySector, contractType));
+    stockSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.stockSalary, companyName, salaryCurrency, latestJobName, companySector, contractType));
+    totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName, companySector, contractType));
   }
 
   editOrRemoveExperience() {

@@ -12,7 +12,6 @@ import {DataComponent} from './routes/data/data.component';
 import {AboutComponent} from './routes/about/about.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AgGridModule} from "ag-grid-angular";
-import {UserInfosComponent} from './user-infos/user-infos.component';
 import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-infos-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -33,9 +32,9 @@ import {SafePipe} from "./util/SafePipe";
 import {EditUserInfosComponent} from './routes/edit-user-infos/edit-user-infos.component';
 import {FilterPipe} from "./routes/edit-user-infos/FilterPipe";
 import {HighlightDirective} from "./routes/edit-user-infos/HighlightDirective";
-import { DeleteUserDialogComponent } from './user-infos/delete-user-dialog/delete-user-dialog.component';
+import {DeleteUserDialogComponent} from './user-infos/delete-user-dialog/delete-user-dialog.component';
 import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
-import { TestComponent } from './routes/test/test.component';
+import {TestComponent} from './routes/test/test.component';
 import {ActionsButtonsCellRenderer} from "./routes/salaries/action-buttons-cell-renderer";
 
 const routes: Routes = [
@@ -55,7 +54,6 @@ const routes: Routes = [
     SalariesComponent,
     DataComponent,
     AboutComponent,
-    UserInfosComponent,
     UserInfosDialogComponent,
     AddUserDialogComponent,
     SalaryCellRenderer,
