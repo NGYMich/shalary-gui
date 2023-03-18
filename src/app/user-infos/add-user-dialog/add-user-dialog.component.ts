@@ -5,7 +5,7 @@ import {LocationService} from "../../services/LocationService";
 import {Country} from "../../model/country";
 import {map, Observable, startWith} from "rxjs";
 import {User} from "../../model/user";
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders} from "../../routes/common/common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../../routes/common/common-variables";
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -28,17 +28,18 @@ export class AddUserDialogComponent implements OnInit {
   genders = commonGenders
   educationLevels = commonEducationLevels
   contractTypes = commonContractTypes
+  sectors = commonSectors
 
   selectedGender;
   selectedCurrency;
   selectedEducation;
+  selectedSector: any;
   isUserAdded: boolean;
   userInformationError: boolean = false;
   salaryInformationsError: boolean = false;
   allCountriesWithTheirFlags: any
   usernameAlreadyExist: boolean;
 
-  countriesOptions: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,9 +59,6 @@ export class AddUserDialogComponent implements OnInit {
     this.initWorkHistory();
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
-      // console.log("countries :", this.allCountriesWithTheirFlags);
-      // console.log(this.allCountriesWithTheirFlags.slice())
-      // this.countriesOptions = this.allCountriesWithTheirFlags.map(country => country.states.map(state => state + ", " + country.name)).unique
       this.filteredCountries = this.countriesControl.valueChanges
         .pipe(
           startWith(''),
@@ -137,8 +135,8 @@ export class AddUserDialogComponent implements OnInit {
         stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
         bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
         company: this.formBuilder.group({
-          name: lastSalaryInfo.get('company')?.value.name,
-          sector: lastSalaryInfo.get('company')?.value.sector
+          name: new FormControl(lastSalaryInfo.get('company')?.value.name),
+          sector: new FormControl(lastSalaryInfo.get('company')?.value.sector)
         }),
         contractType: new FormControl(lastSalaryInfo.get('contractType')?.value)
       }
@@ -151,7 +149,7 @@ export class AddUserDialogComponent implements OnInit {
         bonusSalary: new FormControl(''),
         company: this.formBuilder.group({
           name: 'Capgemini',
-          sector: 'IT Consulting'
+          sector: 'Information Technology'
         }),
         contractType: new FormControl('')
 

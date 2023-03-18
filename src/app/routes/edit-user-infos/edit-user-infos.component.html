@@ -185,9 +185,12 @@
                 </div>
 
                 <div formGroupName="company">
-                  <mat-form-field style="float: left; width: 6%;"
-                                  class="job-form-field with-margin-right-30px italic">
-                    <input formControlName="sector" matInput/>
+                  <mat-form-field style="float: left; width: 10%;" class="job-form-field with-margin-right-30px italic">
+                    <!--                  <input formControlName="sector" matInput/>-->
+                    <mat-select formControlName="sector">
+                      <mat-option *ngFor="let sector of sectors"
+                                  [value]="sector">{{sector}}</mat-option>
+                    </mat-select>
                     <mat-label>Sector</mat-label>
                   </mat-form-field>
                 </div>

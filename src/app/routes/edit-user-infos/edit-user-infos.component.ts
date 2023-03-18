@@ -8,7 +8,7 @@ import {Country} from "../../model/country";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../../user-infos/delete-user-dialog/delete-user-dialog.component";
 import {Router} from "@angular/router";
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders} from "../common/common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../common/common-variables";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -30,6 +30,7 @@ export class EditUserInfosComponent implements OnInit {
   genders = commonGenders
   currencies = commonCurrencies
   contractTypes = commonContractTypes
+  sectors = commonSectors
   // user infos
   userInformationsForm: FormGroup;
 
@@ -47,7 +48,6 @@ export class EditUserInfosComponent implements OnInit {
   userInformationError: boolean = false;
   salaryInformationsError: boolean = false;
   allCountriesWithTheirFlags: any;
-  countriesOptions: any;
   userToModify: User | null = null;
   isUserLoaded: boolean = false;
   showPasswordError: boolean;
@@ -99,9 +99,6 @@ export class EditUserInfosComponent implements OnInit {
         this.countriesControl = new FormControl(this.userToModify?.location, (Validators.required))
         this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
           this.allCountriesWithTheirFlags = data
-          // console.log("countries :", this.allCountriesWithTheirFlags);
-          // console.log(this.allCountriesWithTheirFlags.slice())
-          // this.countriesOptions = this.allCountriesWithTheirFlags.map(country => country.states.map(state => state + ", " + country.name)).unique
           this.filteredCountries = this.countriesControl.valueChanges
             .pipe(
               startWith(''),
@@ -127,11 +124,11 @@ export class EditUserInfosComponent implements OnInit {
   addNewJobFormLine() {
     let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
     console.log(lastSalaryInfo)
-    let controlsConfig = this.buildSalaryInfo(lastSalaryInfo)
+    let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo)
     this.salaryInfos.push(this.formBuilder.group(controlsConfig))
   }
 
-  private buildSalaryInfo(lastSalaryInfo: AbstractControl) {
+  private copyLastSalaryInfoForNewJobLine(lastSalaryInfo: AbstractControl) {
     return {
       yearsOfExperience: new FormControl(lastSalaryInfo.get('yearsOfExperience')?.value, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
       jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, Validators.required),
@@ -139,8 +136,8 @@ export class EditUserInfosComponent implements OnInit {
       stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
       bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
       company: this.formBuilder.group({
-        name: lastSalaryInfo.get('company')?.value.name,
-        sector: lastSalaryInfo.get('company')?.value.sector
+        name: new FormControl(lastSalaryInfo.get('company')?.value.name),
+        sector: new FormControl(lastSalaryInfo.get('company')?.value.sector)
       }),
       contractType: new FormControl(lastSalaryInfo.get('contractType')?.value),
     };

@@ -9,7 +9,6 @@ export class AboutComponent implements OnInit {
   algorithmSuggestions: string[] = [
     'For save user => do it in another page or keep it as it is ?',
     'Add categories / filters',
-    'Add contract type : internship, apprenticeship, freelance, full time, part time',
     'Add data : by location, age, min/max/means, recommendations',
     'Telephone usage ?',
     'Must add experiences in order to unlock all salaries',
@@ -18,11 +17,7 @@ export class AboutComponent implements OnInit {
   ];
   graphicalSuggestions: string[] = [
     'Fix homepage',
-    'Add contract type : internship, apprenticeship, freelance, full time, part time',
-    'Add city or region',
     'Add animations',
-    'Change fonts',
-    'Add background',
     'Add banner'
   ];
 
