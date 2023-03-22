@@ -35,3 +35,7 @@ body {
   border-radius: 5px !important;
   border-color: white !important;
 }
+
+.white-smoke {
+  background-color: whitesmoke;
+}

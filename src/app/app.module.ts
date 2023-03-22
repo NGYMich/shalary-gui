@@ -36,6 +36,7 @@ import {DeleteUserDialogComponent} from './user-infos/delete-user-dialog/delete-
 import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
 import {TestComponent} from './routes/test/test.component';
 import {ActionsButtonsCellRenderer} from "./routes/salaries/action-buttons-cell-renderer";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -67,29 +68,30 @@ const routes: Routes = [
     DeleteUserDialogComponent,
     TestComponent
   ],
-  imports: [
-    BrowserModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
-    MatButtonModule,
-    HttpClientModule,
-    MatDialogModule,
-    AgGridModule.withComponents([]),
-    FormsModule,
-    NgxChartsModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
-    FlexLayoutModule,
-    MatAutocompleteModule,
-    MatSlideToggleModule,
-  ],
+    imports: [
+        BrowserModule,
+        MatToolbarModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(routes),
+        MatButtonModule,
+        HttpClientModule,
+        MatDialogModule,
+        AgGridModule.withComponents([]),
+        FormsModule,
+        NgxChartsModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatListModule,
+        MatIconModule,
+        MatCardModule,
+        FlexLayoutModule,
+        MatAutocompleteModule,
+        MatSlideToggleModule,
+        MatSidenavModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

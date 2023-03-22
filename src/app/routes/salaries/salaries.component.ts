@@ -10,6 +10,7 @@ import {LocationCellRenderer} from "./location-cell-renderer";
 import {Country} from "../../model/country";
 import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Component({
   selector: 'app-salaries',
@@ -36,7 +37,7 @@ export class SalariesComponent implements OnInit {
   private gridColumnApi;
   private forexRates: any;
 
-  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog) {
+  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private deviceService: DeviceDetectorService) {
   }
 
   totalSalaryValueGetter(params) {
@@ -117,7 +118,7 @@ export class SalariesComponent implements OnInit {
     {
       headerName: 'User',
       children: [
-        {field: 'id',sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+        {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
@@ -177,12 +178,69 @@ export class SalariesComponent implements OnInit {
       ]
     },
   ];
+  mobileColumnDefs = [
+    // {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+    // {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+    {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+    // {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
+    // {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
+    // {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+    // {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+    // {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+    // {
+    //   field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+    //   cellRendererFramework: LocationCellRenderer,
+    // },
+    // {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150},
+    //
+
+    {field: 'salaryHistory.salaryCurrency', hide: true},
+    {field: 'salaryHistory.salaryInfos', hide: true},
+    {field: 'salaryHistory', hide: true},
+    {
+      value: 'totalSalary',
+      valueGetter: this.totalSalaryValueGetter.bind(this),
+      width: 150,
+      editable: true,
+      headerName: 'Total salary',
+      sortable: true, resizable: true,
+      filter: 'agNumberColumnFilter',
+      cellRendererFramework: SalaryCellRenderer,
+      cellRendererParams: {selectedCurrency: this.selectedCurrency},
+      cellStyle: params => {
+        let salary = params.value;
+        switch (true) {
+          case (salary < 20000):
+            return
+          case (salary < 30000):
+            return {'background-color': '#cde2c4'}
+          case (salary < 40000):
+            return {'background-color': '#c4e0b8'}
+          case (salary < 50000):
+            return {'background-color': '#a8e28e'}
+          case (salary < 60000):
+            return {'background-color': '#9de080'}
+          case (salary < 70000):
+            return {'background-color': '#8ad569'}
+          case (salary >= 70000):
+            return {'background-color': '#79cd54'}
+        }
+        return
+      }
+    },
+    {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+    {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+    {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
+    {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+
+  ];
 
   experienceFormatter(params) {
     return params.value + ' years'
   }
 
   ngOnInit(): void {
+    this.isMobile = this.deviceService.isMobile();
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
     this.loadUsers();

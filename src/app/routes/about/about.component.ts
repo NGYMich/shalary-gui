@@ -14,6 +14,8 @@ export class AboutComponent implements OnInit {
     'Must add experiences in order to unlock all salaries',
     'User authentification ?',
     'Think about limiting to only one or few countries ? FR/UK/USA/GER ? Translation ?',
+    'Compare two users',
+    'Graph Legend : modify on click interaction to not show details in parenthesis, and maybe modify its position'
   ];
   graphicalSuggestions: string[] = [
     'Fix homepage',

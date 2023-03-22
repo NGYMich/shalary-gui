@@ -1,8 +1,7 @@
-<div style="font-size: 70px; text-align: center; margin-top: 3%;">Page under construction !</div>
-<div style="font-size: 20px; text-align: center; margin-top: 2.5%;">
-  <div style="color: darkblue; font-size: 30px;">
+<div style="text-align: center; margin-top: 1%">
+  <h2 style="color: darkblue;">
     TODO LIST - ALGORITHM / BACKEND
-  </div>
+  </h2>
   <mat-list>
     <mat-list-item *ngFor="let algorithmSuggestion of algorithmSuggestions">
       <div mat-line>-> {{algorithmSuggestion}}</div>
@@ -10,18 +9,18 @@
 
     <mat-divider></mat-divider>
 
-    <div style="color: darkgreen; font-size: 30px; margin-top: 2%; margin-bottom: 1%;">
+    <h2 style="color: darkgreen; margin-top: 1%; margin-bottom: 1%;">
       TODO LIST - GRAPHICAL / FRONTEND
-    </div>
+    </h2>
     <mat-list-item *ngFor="let graphicalSuggestion of graphicalSuggestions">
       <div mat-line>- {{graphicalSuggestion}}</div>
     </mat-list-item>
 
     <mat-divider></mat-divider>
 
-    <div style="color: black; font-size: 30px; margin-top: 2%; margin-bottom: 1%;">
+    <h2 style="color: black; margin-top: 1%; margin-bottom: 1%;">
       THINGS TO THINK ABOUT
-    </div>
+    </h2>
     <mat-list-item *ngFor="let otherSuggestion of otherSuggestions">
       <div mat-line>- {{otherSuggestion}}</div>
     </mat-list-item>
