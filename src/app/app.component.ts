@@ -11,13 +11,5 @@ import {RouterOutlet} from "@angular/router";
 export class AppComponent {
   title = 'shalary-gui';
   shalaryGuiVersion = packageInfo
-  isMobile: boolean;
   temporaryDisabled = false;
-
-  constructor(private deviceService: DeviceDetectorService) {
-  }
-
-  ngOnInit(): void {
-    this.isMobile = this.deviceService.isMobile();
-  }
 }

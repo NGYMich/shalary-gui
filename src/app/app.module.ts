@@ -37,6 +37,8 @@ import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
 import {TestComponent} from './routes/test/test.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
+import {IsMobileDirective} from "./routes/common/is-mobile-directive";
+import {IsNotMobileDirective} from "./routes/common/is-not-mobile-directive";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -66,7 +68,9 @@ const routes: Routes = [
     FilterPipe,
     HighlightDirective,
     DeleteUserDialogComponent,
-    TestComponent
+    TestComponent,
+    IsMobileDirective,
+    IsNotMobileDirective
   ],
     imports: [
         BrowserModule,

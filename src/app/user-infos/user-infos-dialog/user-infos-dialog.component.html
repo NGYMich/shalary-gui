@@ -1,4 +1,4 @@
-<div *ngIf="!isMobile">
+<div *isNotMobile>
   <div class="user-infos">
     <div>
       <h1>{{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
@@ -85,7 +85,7 @@
 </div>
 
 
-<div *ngIf="isMobile">
+<div *isMobile>
   <div class="col-xs-12">
     <div style="line-height: 6px;">
       <h3 style="margin-bottom: 0; font-weight: bold">

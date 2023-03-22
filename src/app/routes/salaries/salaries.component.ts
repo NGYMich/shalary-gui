@@ -23,7 +23,6 @@ export class SalariesComponent implements OnInit {
   users: User[] = [];
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;
-  @Input() isMobile: boolean;
   isFilteredByPopularCountry: boolean = false;
   gridOptions: GridOptions = {
     rowSelection: 'single',
@@ -38,7 +37,7 @@ export class SalariesComponent implements OnInit {
   private gridColumnApi;
   private forexRates: any;
 
-  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private deviceService: DeviceDetectorService) {
+  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog) {
   }
 
   totalSalaryValueGetter(params) {
@@ -182,7 +181,7 @@ export class SalariesComponent implements OnInit {
   mobileColumnDefs = [
     // {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
     // {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-    {valueGetter: this.currentJobGetter, headerName: 'Current job (click line for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+    {valueGetter: this.currentJobGetter, headerName: 'Job (click cell for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRendererFramework: JobCellRenderer,
       cellStyle: { "white-space": "normal"},
         autoHeight: true,
@@ -246,7 +245,6 @@ export class SalariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isMobile = this.deviceService.isMobile();
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
     this.loadUsers();
