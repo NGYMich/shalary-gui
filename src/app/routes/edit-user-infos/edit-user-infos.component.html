@@ -303,19 +303,23 @@
       <div class="row">
         <div class="col-xs-12">
           <div>
+
             <h1 style="float: left;">
               Informations
             </h1>
-            <button mat-raised-button class="remove-experience-button" style="float: right; margin-right: 2%;"
+            <button mat-raised-button class="remove-experience-button"
+                    style="float: right; margin-right: 2%; margin-left: 5%;"
                     (click)="openDeleteUserDialog($event)">Remove experience !
             </button>
+            <br style="clear:both"/>
+
+
             <form [formGroup]="userInformationsForm">
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; margin-right: 10px; float: left;">
                 <mat-label>Username</mat-label>
                 <input maxLength="25" formControlName="username" matInput>
               </mat-form-field>
-              <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left;">
                 <mat-label>Password</mat-label>
                 <input type="password" formControlName="password" matInput>
               </mat-form-field>
@@ -325,15 +329,7 @@
                 <input formControlName="mail" matInput>
               </mat-form-field>
               <br>
-              <mat-form-field class="full-width-line">
-                <mat-label>Salary Currency</mat-label>
-                <mat-select [(value)]="selectedCurrency" formControlName="currency">
-                  <mat-option *ngFor="let currency of currencies"
-                              [value]="currency">{{currency}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left; margin-right: 10px;">
                 <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
                 <mat-label>Country</mat-label>
                 <mat-autocomplete #auto="matAutocomplete">
@@ -344,36 +340,37 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
-
-              <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left;">
                 <mat-label class="optional">City (optional)</mat-label>
                 <input maxLength="50" formControlName="city" matInput>
               </mat-form-field>
               <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left; margin-right: 10px;">
+                <mat-label>Salary Currency</mat-label>
+                <mat-select [(value)]="selectedCurrency" formControlName="currency">
+                  <mat-option *ngFor="let currency of currencies"
+                              [value]="currency">{{currency}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="width: 45%; ; float: left;">
                 <mat-label>Total Years of Experience</mat-label>
                 <input formControlName="yearsOfExperience" matInput>
               </mat-form-field>
               <br>
 
 
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left; margin-right: 10px;">
                 <mat-label class="optional">Education (optional)</mat-label>
                 <mat-select [(value)]="selectedEducation" formControlName="education">
                   <mat-option *ngFor="let educationLevel of educationLevels"
                               [value]="educationLevel">{{educationLevel}}</mat-option>
                 </mat-select>
               </mat-form-field>
-
-
-              <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 45%; ; float: left; margin-right: 10px;">
                 <mat-label class="optional">Age (optional)</mat-label>
                 <input formControlName="age" matInput>
               </mat-form-field>
-              <br>
-              <mat-form-field class="full-width-line">
+              <mat-form-field style="width: 35%; ; float: left;">
                 <mat-label class="optional">Gender (optional)</mat-label>
                 <mat-select [(value)]="selectedGender" formControlName="gender">
                   <mat-option *ngFor="let gender of genders"
@@ -477,7 +474,8 @@
 
 
         <br>
-        <button mat-raised-button style="margin-top: 5%; margin-bottom: 5%; float: right; margin-right: 5%;"(click)="modifyUser($event)">Edit your
+        <button mat-raised-button style="margin-top: 5%; margin-bottom: 5%; float: right; margin-right: 5%;"
+                (click)="modifyUser($event)">Edit your
           experience !
         </button>
       </div>
