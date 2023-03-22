@@ -251,7 +251,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-12">
-          <div style="text-align: center;" class="div-user-to-modify">
+          <div style="text-align: center; margin-top: 8vh;">
             <h1>Select user to modify</h1>
             <form class="example-form">
               <mat-form-field class="example-full-width">
@@ -286,7 +286,8 @@
                     (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !
             </button>
           </div>
-          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or
+          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username
+            or
             password are not correct
           </mat-error>
 
@@ -300,13 +301,14 @@
   <div #userFormToModify *ngIf="this.isUserLoaded" style="margin-top: 1%;">
     <div class="colored">
       <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-2">
+        <div class="col-xs-12">
           <div>
-            <h1>
+            <h1 style="float: left;">
               Informations
             </h1>
-
+            <button mat-raised-button class="remove-experience-button" style="float: right; margin-right: 2%;"
+                    (click)="openDeleteUserDialog($event)">Remove experience !
+            </button>
             <form [formGroup]="userInformationsForm">
               <mat-form-field class="full-width-line">
                 <mat-label>Username</mat-label>
@@ -384,55 +386,48 @@
                 <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
               </mat-form-field>
 
-
-              <br>
-              <button mat-raised-button class="share-your-experience-button" (click)="modifyUser($event)">Edit your
-                experience !
-              </button>
               <h3 style="margin-top: 2%;" *ngIf="isUserAdded">User informations added.</h3>
               <h3 style="margin-top: 2%; color: red" *ngIf="salaryInformationsError">Salary informations error.</h3>
               <h3 style="margin-top: 2%; color: red" *ngIf="userInformationError">User informations error.</h3>
             </form>
           </div>
         </div>
-        <div class="col-xs-8"
-             style="margin-left: 2%; background-color: white; padding-top: 20px; padding-left: 40px; padding-right: 20px;   border-radius: 30px;">
+        <br><br>
+        <div class="col-xs-12">
           <div job-form-line>
-            <h1 style="float: left;">Work History</h1>
-            <!--        <button mat-raised-button style="margin-left: 1%">See example</button>-->
-            <!--          <button mat-raised-button class="remove-experience-button" style="float: right;"-->
-            <!--                  (click)="deleteUser($event)">Remove experience !-->
-            <!--          </button>-->
-            <button mat-raised-button class="remove-experience-button" style="float: right;"
-                    (click)="openDeleteUserDialog($event)">Remove experience !
-            </button>
+            <h1>Work History</h1>
+
           </div>
-          <button (click)="addNewJobFormLine()" color="add-job"
-                  style="margin-left: 20px; margin-bottom: 10px; margin-top: 5px;"
-                  mat-raised-button>
-            Add an experience
-          </button>
+
+
           <div class="job-form-line">
             <form [formGroup]="salaryInfosForm">
               <br>
 
               <div formArrayName="salaryInfos">
-                <div div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
+                <div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
                      [formGroupName]="pointIndex">
-                  <mat-form-field style="float: left;" class="job-form-field with-margin-right-30px">
+
+                  <mat-form-field style="float: left; width: 65%; margin-right: 10px;">
                     <input formControlName="jobName" matInput/>
                     <mat-label class="optional">Job Name</mat-label>
                   </mat-form-field>
 
+                  <mat-form-field style="float: left; width: 25%;">
+                    <mat-label>Years of XP *</mat-label>
+                    <input formControlName="yearsOfExperience" matInput/>
+                  </mat-form-field>
+
+
                   <div formGroupName="company">
-                    <mat-form-field style="float: left; width: 6%;" class="job-form-field with-margin-right-30px italic">
+                    <mat-form-field style="float: left; width: 35%; margin-right: 10px;" class="italic">
                       <input maxLength="30" formControlName="name" matInput/>
                       <mat-label>Company</mat-label>
                     </mat-form-field>
                   </div>
 
                   <div formGroupName="company">
-                    <mat-form-field style="float: left; width: 10%;" class="job-form-field with-margin-right-30px italic">
+                    <mat-form-field style="float: left; width: 30%; margin-right: 10px;" class="italic">
                       <!--                  <input formControlName="sector" matInput/>-->
                       <mat-select formControlName="sector">
                         <mat-option *ngFor="let sector of sectors"
@@ -442,7 +437,7 @@
                     </mat-form-field>
                   </div>
 
-                  <mat-form-field style="margin-right: 30px; width: 8%;">
+                  <mat-form-field style="float: left;width: 22%;">
                     <mat-label>Contract</mat-label>
                     <mat-select formControlName="contractType">
                       <mat-option *ngFor="let contractType of contractTypes"
@@ -450,38 +445,41 @@
                     </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field style="margin-right: 30px; width: 9%;">
-                    <mat-label>Years of XP *</mat-label>
-                    <input formControlName="yearsOfExperience" matInput/>
-                  </mat-form-field>
 
-                  <mat-form-field class="job-form-field with-margin-right-30px">
+                  <!--                  <mat-form-field class="mobile-job-form-field with-margin-right-30px">-->
+                  <mat-form-field style="width: 30%; margin-right: 10px;">
                     <input formControlName="baseSalary" matInput/>
                     <mat-label>Base Salary</mat-label>
-                    <mat-hint align="start">Gross annual</mat-hint>
                   </mat-form-field>
 
-                  <mat-form-field class="job-form-field with-margin-right-30px italic">
+                  <mat-form-field style="width: 30%; margin-right: 10px;">
                     <input formControlName="bonusSalary" matInput/>
                     <mat-label>Bonus Salary</mat-label>
-                    <mat-hint align="start">Avg/Year</mat-hint>
                   </mat-form-field>
 
-                  <mat-form-field class="job-form-field with-margin-right-30px italic">
+                  <mat-form-field style="width: 30%; margin-right: 10px;">
                     <input formControlName="stockSalary" matInput/>
                     <mat-label>Equity</mat-label>
-                    <mat-hint align="start">Avg/Year</mat-hint>
                   </mat-form-field>
 
                   <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-raised-button type="button">
-                    Remove
+                    Remove job experience
                   </button>
                 </div>
               </div>
             </form>
           </div>
+          <button (click)="addNewJobFormLine()" color="add-job" mat-raised-button>
+            Add a job experience
+          </button>
         </div>
         <!--      <div class="col-xs-1">-->
+
+
+        <br>
+        <button mat-raised-button style="margin-top: 5%; margin-bottom: 5%; float: right; margin-right: 5%;"(click)="modifyUser($event)">Edit your
+          experience !
+        </button>
       </div>
     </div>
 

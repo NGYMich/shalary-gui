@@ -12,8 +12,6 @@
 .remove-experience-button {
   width: auto;
   height: 35px;
-  /*padding-top: 0.5%;*/
-  /*padding-bottom: 0.5%;*/
   background-color: crimson;
   color: white;
   font-size: 15px;
@@ -51,6 +49,10 @@
 
 .job-form-field {
   width: 9%;
+}
+
+.mobile-job-form-field-100-width {
+  width: 100%;
 }
 
 .job-form-field.with-margin-right-30px {
