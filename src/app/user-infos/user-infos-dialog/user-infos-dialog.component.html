@@ -1,86 +1,172 @@
-<div class="user-infos">
-  <div>
-    <h1>{{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
-      {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
-      {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h1>
-    <h4 mat-subheader style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
+<div *ngIf="!isMobile">
+  <div class="user-infos">
+    <div>
+      <h1>{{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
+        {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
+        {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h1>
+      <h4 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
+    </div>
+    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this
+      experience
+    </button>
   </div>
-  <!--  <div id="alignedToTheRight">-->
-  <!--    {{this.currentUser.gender != null ? this.currentUser.gender : ""}}-->
-  <!--    {{this.currentUser.age != null && this.currentUser.gender != "" && this.currentUser.gender != null ? " - " + this.currentUser.age + " years old" : ""}}-->
-  <!--    {{this.currentUser.location != null && this.currentUser.location != '' ? " - " + this.currentUser.location : ""}}-->
-  <!--    {{this.currentUser.education != null && this.currentUser.education != '' ? " - " + this.currentUser.education : ""}}-->
-  <!--  </div>-->
-  <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this experience</button>
+
+  <br>
+  <br>
+  <div fxLayout="row">
+    <div #containerRef fxFlex="70%">
+      <ngx-charts-line-chart
+        [view]="[containerRef.offsetWidth, 400]"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [showGridLines]="showGridLines"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [yAxisTickFormatting]="yAxisTickFormattingFn"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [activeEntries]="activeEntries"
+        [results]="dataGraph"
+        (activate)="legendLabelActivate($event)"
+        (deactivate)="legendLabelDeactivate($event)"
+        (select)="onSelect($event)"
+      >
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div>
+            <h3 style="text-align: center; margin-bottom: 0; color:azure">
+              {{model[0].jobName}}
+              {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
+              {{model[0].companyName}}
+              {{model[0].companySector}}
+
+            </h3>
+            <h4
+              style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">{{model[0].contractType}}</h4>
+            <div
+              style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
+              Base Salary
+              : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Bonus Salary
+              : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Equity
+              : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Total Salary
+              : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+            </div>
+          </div>
+
+        </ng-template>
+      </ngx-charts-line-chart>
+    </div>
+
+    <div fxFlex="30%">
+      <ngx-charts-legend fxFlex="100%"
+                         class="chart-legend"
+                         [data]="chartNames"
+                         [title]="'Salary Graphs'"
+                         [colors]="colors"
+                         (labelActivate)="legendLabelActivate($event)"
+                         (labelDeactivate)="legendLabelDeactivate($event)"
+                         [activeEntries]="activeEntries"
+                         (select)="onSelect($event)"
+      ></ngx-charts-legend>
+    </div>
+  </div>
+
+
+  <br>
+  <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
+    <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
+  </div>
 </div>
 
-<br>
-<br>
-<div fxLayout="row">
-  <div #containerRef fxFlex="70%">
-    <ngx-charts-line-chart
-      [view]="[containerRef.offsetWidth, 400]"
-      [scheme]="colorScheme"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [showGridLines]="showGridLines"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-      [yAxisTickFormatting]="yAxisTickFormattingFn"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      [activeEntries]="activeEntries"
-      [results]="dataGraph"
-      (activate)="legendLabelActivate($event)"
-      (deactivate)="legendLabelDeactivate($event)"
-      (select)="onSelect($event)"
-    >
-      <ng-template #seriesTooltipTemplate let-model="model">
-        <div>
-          <h3 style="text-align: center; margin-bottom: 0; color:azure">
-            {{model[0].jobName}}
-            {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
-            {{model[0].companyName}}
-            {{model[0].companySector}}
 
-          </h3>
-          <h4 style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">{{model[0].contractType}}</h4>
-          <div
-            style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
-            Base Salary
-            : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-            <br>
-            Bonus Salary
-            : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-            <br>
-            Equity
-            : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-            <br>
-            Total Salary
-            : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+<div *ngIf="isMobile">
+  <div class="col-xs-12">
+    <div style="line-height: 6px;">
+      <h3 style="margin-bottom: 0; font-weight: bold">
+        {{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
+        {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
+        {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h3>
+      <h5 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h5>
+    </div>
+
+    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this
+      experience
+    </button>
+  </div>
+  <div class="col-xs-12">
+    <div #containerRef>
+      <ngx-charts-line-chart
+        [view]="[containerRef.offsetWidth, 350]"
+        [scheme]="colorScheme"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [showGridLines]="showGridLines"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [yAxisTickFormatting]="yAxisTickFormattingFn"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [activeEntries]="activeEntries"
+        [results]="dataGraph"
+        (activate)="legendLabelActivate($event)"
+        (deactivate)="legendLabelDeactivate($event)"
+        (select)="onSelect($event)"
+      >
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div style="text-align: left; ">
+            <h5 style="margin-bottom: 0; color:bisque; font-size: 15px;">
+              {{model[0].jobName}}</h5>
+            <!--              {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}-->
+            <h5 style="margin-bottom: 0; color: azure">
+              {{model[0].companyName}}
+              {{model[0].companySector}}
+
+            </h5>
+            <h6
+              style="text-align: left; margin-bottom: 0; margin-top: 0; color:azure; font-style: italic">{{model[0].contractType}}</h6>
+            <div
+              style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
+              Base Salary
+              : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Bonus Salary
+              : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Equity
+              : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+              <br>
+              Total Salary
+              : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+            </div>
           </div>
-        </div>
 
-      </ng-template>
-    </ngx-charts-line-chart>
+        </ng-template>
+      </ngx-charts-line-chart>
+    </div>
+
   </div>
 
-  <div fxFlex="30%">
-    <ngx-charts-legend fxFlex="100%"
-                       class="chart-legend"
-                       [data]="chartNames"
-                       [title]="'Graphs'"
-                       [colors]="colors"
-                       (labelActivate)="legendLabelActivate($event)"
-                       (labelDeactivate)="legendLabelDeactivate($event)"
-                       [activeEntries]="activeEntries"
-                       (select)="onSelect($event)"
+  <div class="col-xs-12">
+    <ngx-charts-legend
+      class="chart-legend"
+      [data]="chartNames"
+      [title]="'Salary Graphs'"
+      [colors]="colors"
+      (labelActivate)="legendLabelActivate($event)"
+      (labelDeactivate)="legendLabelDeactivate($event)"
+      [activeEntries]="activeEntries"
+      (select)="onSelect($event)"
     ></ngx-charts-legend>
   </div>
-</div>
 
-
-<br>
-<div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
-  <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
+  <br>
+  <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
+    <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
+  </div>
 </div>

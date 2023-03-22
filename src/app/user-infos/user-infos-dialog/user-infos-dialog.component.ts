@@ -6,6 +6,7 @@ import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
 import {NumberService} from "../../services/NumberService";
 import {EditUserInfosComponent} from "../../routes/edit-user-infos/edit-user-infos.component";
 import {Router} from "@angular/router";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Component({
   selector: 'app-user-infos-dialog',
@@ -24,15 +25,17 @@ export class UserInfosDialogComponent implements OnInit {
   animations: boolean = true;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
+  showYAxisLabel: boolean = false;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Years of experience';
   yAxisLabel: string = 'Salary';
   timeline: boolean = true;
   showGridLines: boolean = true;
   mostRecentJobName: string;
-  legendPosition: LegendPosition = LegendPosition.Below;
+  below = LegendPosition.Below;
   salaryCurrency;
+  isMobile: boolean;
+
 
   public activeEntries: any[] = [];
   public chartData: { name: string, series: { name: string, value?: string | number }[] }[];
@@ -43,7 +46,7 @@ export class UserInfosDialogComponent implements OnInit {
   userInfosString: string[] = [];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>,private deviceService: DeviceDetectorService) {
     Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
@@ -51,6 +54,8 @@ export class UserInfosDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.data.selectedUser;
+    this.isMobile = this.deviceService.isMobile();
+
     if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
       this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
       let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
@@ -95,10 +100,18 @@ export class UserInfosDialogComponent implements OnInit {
 
   private addSalariesSeriesToDataGraph(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     this.colors = new ColorHelper(this.colorScheme, ScaleType.Ordinal, this.dataGraph, (this.colorScheme));
-    this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
-    this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
-    this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transports, rent..)', series: bonusSalariesSeries})
-    this.dataGraph.push({name: 'Equity (options, restricted stock, performance shares)', series: stockSalariesSeries})
+    if (this.isMobile) {
+      this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
+      this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
+      this.dataGraph.push({name: 'Bonus Salary', series: bonusSalariesSeries})
+      this.dataGraph.push({name: 'Equity', series: stockSalariesSeries})
+    } else {
+      this.dataGraph.push({name: 'Total Salary (base + bonus + equity)', series: totalSalariesSeries})
+      this.dataGraph.push({name: 'Base Salary', series: baseSalariesSeries})
+      this.dataGraph.push({name: 'Bonus Salary (signing, performance, gym, insurance, transports, rent..)', series: bonusSalariesSeries})
+      this.dataGraph.push({name: 'Equity (options, restricted stock, performance shares)', series: stockSalariesSeries})
+    }
+
     this.chartNames = this.dataGraph.map((d: any) => d.name);
   }
 

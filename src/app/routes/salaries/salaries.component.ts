@@ -11,6 +11,7 @@ import {Country} from "../../model/country";
 import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {JobCellRenderer} from "./job-cell-renderer";
 
 @Component({
   selector: 'app-salaries',
@@ -181,18 +182,23 @@ export class SalariesComponent implements OnInit {
   mobileColumnDefs = [
     // {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
     // {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-    {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-    // {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
-    // {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-    // {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-    // {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-    // {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-    // {
-    //   field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-    //   cellRendererFramework: LocationCellRenderer,
-    // },
-    // {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150},
-    //
+    {valueGetter: this.currentJobGetter, headerName: 'Current job (click line for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+      cellRendererFramework: JobCellRenderer,
+      cellStyle: { "white-space": "normal"},
+        autoHeight: true,
+      width: 245
+    },
+    {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer, hide: true},
+    {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', hide: true},
+    {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
+    {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
+    {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
+    {
+      field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+      cellRendererFramework: LocationCellRenderer, hide: true
+    },
+    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, hide: true},
+
 
     {field: 'salaryHistory.salaryCurrency', hide: true},
     {field: 'salaryHistory.salaryInfos', hide: true},
@@ -200,9 +206,9 @@ export class SalariesComponent implements OnInit {
     {
       value: 'totalSalary',
       valueGetter: this.totalSalaryValueGetter.bind(this),
-      width: 150,
+      width: 100,
       editable: true,
-      headerName: 'Total salary',
+      headerName: 'Salary',
       sortable: true, resizable: true,
       filter: 'agNumberColumnFilter',
       cellRendererFramework: SalaryCellRenderer,

@@ -35,8 +35,8 @@ import {HighlightDirective} from "./routes/edit-user-infos/HighlightDirective";
 import {DeleteUserDialogComponent} from './user-infos/delete-user-dialog/delete-user-dialog.component';
 import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
 import {TestComponent} from './routes/test/test.component';
-import {ActionsButtonsCellRenderer} from "./routes/salaries/action-buttons-cell-renderer";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -58,9 +58,9 @@ const routes: Routes = [
     UserInfosDialogComponent,
     AddUserDialogComponent,
     SalaryCellRenderer,
+    JobCellRenderer,
     LocationCellRenderer,
     CompanyCellRenderer,
-    ActionsButtonsCellRenderer,
     SafePipe,
     EditUserInfosComponent,
     FilterPipe,
