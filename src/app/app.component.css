@@ -10,8 +10,10 @@ body {
 }
 
 .mat-toolbar.mat-primary {
-  background-color: darkgray;
-  height: 60px;
+  /*background-color: darkgray;*/
+  /*background-color: gray;*/
+  background-color: #34343c;
+  height: 55px;
   position: sticky;
   position: -webkit-sticky; /* For macOS/iOS Safari */
   top: 0; /* Sets the sticky toolbar to be on top */
@@ -19,10 +21,11 @@ body {
 }
 
 .router-pages-button {
-  margin-right: 0.4%;
-  background-color: whitesmoke;
-  color: #001524;
-  font-size: 15px;
+  /*background-color: whitesmoke;*/
+  /*color: #001524;*/
+  /*background-color: darkgray;*/
+  color: white;
+  font-size: 14px;
   border-radius: 5px !important;
   border-color: white !important;
 }
@@ -36,6 +39,12 @@ body {
   border-color: white !important;
 }
 
-.white-smoke {
-  background-color: whitesmoke;
+.website-background-color {
+  background-color: white;
+}
+
+.active_route {
+  /*text-decoration: underline;*/
+  background-color: white;
+  color: black;
 }

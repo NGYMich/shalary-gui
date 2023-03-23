@@ -20,33 +20,45 @@
     <button (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-<!--    <h6 style='color: whitesmoke; font-size: 15px; margin-right: 10px;'>Shalary - Share your Salary !</h6>-->
-<!--    <img src='https://uxwing.com/wp-content/themes/uxwing/download/business-professional-services/career-icon.png' width="20" height="20">-->
+    <!--    <h6 style='color: whitesmoke; font-size: 15px; margin-right: 10px;'>Shalary - Share your Salary !</h6>-->
+    <!--    <img src='https://uxwing.com/wp-content/themes/uxwing/download/business-professional-services/career-icon.png' width="20" height="20">-->
 
-    <div fxHide.lt-md fxShow="true">
+    <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-      <button class="router-pages-button" mat-button routerLink="/home">Shalary - Share your experience</button>
-      <button class="router-pages-button" mat-button routerLink="/salaries" style="margin-left: 5%;">Careers and Salaries</button>
-      <button class="router-pages-button" mat-button routerLink="/edit-user-infos">Update user experiences</button>
-      <button class="router-pages-button" mat-button routerLink="/data">Data Analytics</button>
-      <button class="router-pages-button" mat-button routerLink="/about">TODO List</button>
-      <button class="router-pages-button" mat-button routerLink="/test">Test Page</button>
+      <div fxFlex>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/home">Shalary - Share your experience</button>
+      </div>
+      <div fxFlex fxLayoutAlign="center center">
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/salaries" >Careers and Salaries</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">Update user experiences</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/data">Data Analytics</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/about">User Feedback</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/test">Test Page</button>
+      </div>
+
+      <div fxFlex fxLayoutAlign="flex-end center">
+            <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>
+
+      </div>
+      <!--    &lt;!&ndash; This fills the remaining space of the current row &ndash;&gt;-->
+      <!--    <span style="flex: 1 1 auto"></span>-->
+      <!--    <span style="font-size: 14px;">GUI Version - [{{shalaryGuiVersion.version}}]</span>-->
     </div>
   </mat-toolbar>
 
 
-  <mat-sidenav-container fxFlexFill class="white-smoke">
-    <mat-sidenav #sidenav class="white-smoke" [autoFocus]="false">
-      <mat-nav-list fxLayout="column" class="white-smoke">
+  <mat-sidenav-container fxFlexFill class="website-background-color">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false">
+      <mat-nav-list fxLayout="column" class="website-background-color">
         <a mat-button routerLink="/home">Shalary - Homepage</a>
         <a mat-button routerLink="/salaries" style="margin-left: 5%;">Careers and Salaries</a>
         <a mat-button routerLink="/edit-user-infos">Update user experiences</a>
         <a mat-button routerLink="/data">Data Analytics</a>
-        <a mat-button routerLink="/about">TODO List</a>
+        <a mat-button routerLink="/about">User Feedback</a>
         <a mat-button routerLink="/test">Test Page</a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="white-smoke">
+    <mat-sidenav-content class="website-background-color">
       <router-outlet style="background-color: whitesmoke" #outlet="outlet"></router-outlet>
     </mat-sidenav-content>
     Test
