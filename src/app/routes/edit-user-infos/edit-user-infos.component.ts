@@ -29,7 +29,6 @@ export class EditUserInfosComponent implements OnInit {
   filteredUsernames: Observable<string[]>;
 
   // Error messages
-  isUserAdded: boolean;
   isUserLoaded: boolean = false;
   showPasswordError: boolean;
   userInformationError: boolean = false;
@@ -70,8 +69,9 @@ export class EditUserInfosComponent implements OnInit {
     await this.userService.retrieveUserWithUsernameAndPassword(this.usernameSearchControl.value, this.password.value).subscribe(
       data => {
         console.log('retrieved user ' + this.usernameSearchControl.value + ' with password. User :', JSON.stringify(data))
-        this.userToModify = data;
-        this.isUserLoaded = true;
+        // this.isUserLoaded = true;
+        this.isUserLoaded = data != null
+        this.userToModify = data
         this.showPasswordError = false;
 
       },
@@ -81,12 +81,11 @@ export class EditUserInfosComponent implements OnInit {
   }
 
 
-  async modifyUser($event: MouseEvent) {
+  modifyUser($event: MouseEvent) {
     console.log(this.userInformationsFormComponent)
     let allFormsAreValid = this.userInformationsForm.valid && this.userInformationsFormComponent.countriesControl.valid && this.salaryInfosForm.valid;
     if (allFormsAreValid) {
-      await this.userService.modifyUser(this.buildModifiedUser());
-      this.redirectToSalariesPage()
+      this.userService.modifyUser(this.buildModifiedUser()).subscribe((response) => this.redirectToSalariesPage());
     } else {
       this.openUserInputErrorDialog(
         !this.salaryInfosForm.valid,
@@ -125,7 +124,6 @@ export class EditUserInfosComponent implements OnInit {
   redirectToSalariesPage() {
     this.router.navigate(['/salaries'])
   }
-
 
 
   deleteUser() {

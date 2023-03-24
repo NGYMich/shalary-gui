@@ -7,7 +7,7 @@ import {Country} from "../../../../model/country";
 import {LocationService} from "../../../../services/LocationService";
 
 @Component({
-  selector: 'app-user-informations-form-component',
+  selector: 'user-informations-form',
   templateUrl: './user-informations-form-component.html',
   styleUrls: ['./user-informations-form.component.css']
 })

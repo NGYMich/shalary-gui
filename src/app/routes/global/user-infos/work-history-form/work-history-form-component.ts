@@ -4,7 +4,7 @@ import {commonContractTypes, commonSectors} from "../../common-variables";
 import {User} from "../../../../model/user";
 
 @Component({
-  selector: 'app-work-history-form-component',
+  selector: 'work-history-form',
   templateUrl: './work-history-form-component.html',
   styleUrls: ['./work-history-form-component.css']
 })
