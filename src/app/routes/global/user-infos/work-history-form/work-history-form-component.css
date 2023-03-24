@@ -1,35 +1,24 @@
-.mat-form-field {
-
-}
-
-/** {*/
-/*  background-color: aliceblue !important;*/
-/*}*/
-
 .optional {
   font-style: italic;
 }
 
-.mat-raised-button.mat-remove-job{
+.mat-raised-button.mat-remove-job {
   background-color: darkgrey;
-  margin-bottom: 1.5%;
   color: white;
 }
-.mat-raised-button.mat-add-job{
+
+.mat-raised-button.mat-add-job {
   background-color: cornflowerblue;
   color: white;
 }
 
-.job-form-line {
-  float: left;
-}
-
-.full-width-line {
-  width: 100%;
-}
 
 .job-form-field {
   width: 9%;
+}
+
+.full-width-line {
+  width: 95%;
 }
 
 .job-form-field.with-margin-right-30px {
@@ -41,3 +30,12 @@
 }
 
 
+.col-xs-2, .col-xs-8 {
+  background-color: whitesmoke;
+  padding: 20px 40px 30px;
+  border-radius: 30px;
+}
+
+h1 {
+  color: black;
+}

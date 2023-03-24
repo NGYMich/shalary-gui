@@ -1,0 +1,6 @@
+
+<h2>Some errors were found while saving experience :</h2>
+<h3 style="margin-top: 0; width: 100%; color: red" *ngIf="usernameAlreadyExists">Username is already taken.</h3>
+<h3 style="margin-top: 0; width: 100%; color: red" *ngIf="salaryInformationsError">Salary informations error.</h3>
+<h3 style="margin-top: 0; width: 100%; color: red" *ngIf="userInformationError">User informations error.</h3>
+{{errors}}

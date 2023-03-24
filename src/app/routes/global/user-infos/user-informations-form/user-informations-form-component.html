@@ -1,0 +1,86 @@
+<div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
+  <div>
+    <h1>
+      Informations
+    </h1>
+
+    <form [formGroup]="userInformationsForm">
+      <mat-form-field class="full-width-line">
+        <mat-label>Username</mat-label>
+        <input maxLength="25" formControlName="username" matInput>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label>Mail</mat-label>
+        <input formControlName="mail" matInput>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label>Salary Currency</mat-label>
+        <mat-select [(value)]="selectedCurrency" formControlName="currency">
+          <mat-option *ngFor="let currency of currencies"
+                      [value]="currency">{{currency}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
+        <mat-label>Country</mat-label>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+            <img aria-hidden [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
+                 onerror="this.onerror=null; this.remove();">
+            <span style="font-size: 14px;"> {{country.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label class="optional">City (optional)</mat-label>
+        <input maxLength="50" formControlName="city" matInput>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label>Total Years of Experience</mat-label>
+        <input formControlName="yearsOfExperience" matInput>
+      </mat-form-field>
+      <br>
+
+
+      <mat-form-field class="full-width-line">
+        <mat-label class="optional">Education (optional)</mat-label>
+        <mat-select [(value)]="selectedEducation" formControlName="education">
+          <mat-option *ngFor="let educationLevel of educationLevels"
+                      [value]="educationLevel">{{educationLevel}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label class="optional">Age (optional)</mat-label>
+        <input formControlName="age" matInput>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label class="optional">Gender (optional)</mat-label>
+        <mat-select [(value)]="selectedGender" formControlName="gender">
+          <mat-option *ngFor="let gender of genders"
+                      [value]="gender">{{gender}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width-line">
+        <mat-label class="optional">Comment (optional)</mat-label>
+        <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
+      </mat-form-field>
+      <!--    <h3 style="margin-top: 2%; color: red" *ngIf="userInformationError">User informations error.</h3>-->
+    </form>
+  </div>
+</div>

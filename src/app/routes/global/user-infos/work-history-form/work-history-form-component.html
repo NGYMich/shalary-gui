@@ -1,0 +1,81 @@
+<div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
+
+  <div job-form-line>
+    <h1 style="float: left;">Work History</h1>
+  </div>
+  <button (click)="addNewJobFormLine(true)" color="add-job"
+          style="margin-left: 20px; margin-bottom: 10px; margin-top: 5px;"
+          mat-raised-button>
+    Add an experience
+  </button>
+  <div class="job-form-line">
+    <form [formGroup]="salaryInfosForm">
+      <br>
+
+      <div formArrayName="salaryInfos">
+        <div div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
+             [formGroupName]="pointIndex">
+          <mat-form-field style="float: left;" class="job-form-field with-margin-right-30px">
+            <input formControlName="jobName" matInput/>
+            <mat-label class="optional">Job Name</mat-label>
+          </mat-form-field>
+
+          <div formGroupName="company">
+            <mat-form-field style="float: left; width: 6%;"
+                            class="job-form-field with-margin-right-30px italic">
+              <input maxLength="30" formControlName="name" matInput/>
+              <mat-label>Company</mat-label>
+            </mat-form-field>
+          </div>
+
+          <div formGroupName="company">
+            <mat-form-field style="float: left; width: 10%;"
+                            class="job-form-field with-margin-right-30px italic">
+              <!--                  <input formControlName="sector" matInput/>-->
+              <mat-select formControlName="sector">
+                <mat-option *ngFor="let sector of sectors"
+                            [value]="sector">{{sector}}</mat-option>
+              </mat-select>
+              <mat-label>Sector</mat-label>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field style="margin-right: 30px; width: 8%;">
+            <mat-label>Contract</mat-label>
+            <mat-select formControlName="contractType">
+              <mat-option *ngFor="let contractType of contractTypes"
+                          [value]="contractType">{{contractType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="margin-right: 30px; width: 9%;">
+            <mat-label>Years of XP *</mat-label>
+            <input formControlName="yearsOfExperience" matInput/>
+          </mat-form-field>
+
+          <mat-form-field class="job-form-field with-margin-right-30px">
+            <input formControlName="baseSalary" matInput/>
+            <mat-label>Base Salary</mat-label>
+            <mat-hint align="start">Gross annual</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="job-form-field with-margin-right-30px italic">
+            <input formControlName="bonusSalary" matInput/>
+            <mat-label>Bonus Salary</mat-label>
+            <mat-hint align="start">Avg/Year</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="job-form-field with-margin-right-30px italic">
+            <input formControlName="stockSalary" matInput/>
+            <mat-label>Equity</mat-label>
+            <mat-hint align="start">Avg/Year</mat-hint>
+          </mat-form-field>
+
+          <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-raised-button type="button">
+            Remove
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

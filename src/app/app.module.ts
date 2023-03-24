@@ -16,7 +16,6 @@ import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-info
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {AddUserDialogComponent} from './user-infos/add-user-dialog/add-user-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
@@ -41,6 +40,10 @@ import {IsMobileDirective} from "./routes/global/is-mobile-directive";
 import {IsNotMobileDirective} from "./routes/global/is-not-mobile-directive";
 import {CustomTooltip} from "./routes/salaries/custom-tooltip.component";
 import { AddUserInfosComponent } from './routes/add-user-infos/add-user-infos.component';
+import { WorkHistoryFormComponent } from './routes/global/user-infos/work-history-form/work-history-form-component';
+import { UserInformationsFormComponent } from './routes/global/user-infos/user-informations-form/user-informations-form-component';
+import { UserInputErrorDialogComponent } from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
+import { GlobalUserInfosComponent } from './routes/global/user-infos/global-user-infos/global-user-infos.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -61,7 +64,6 @@ const routes: Routes = [
     DataComponent,
     AboutComponent,
     UserInfosDialogComponent,
-    AddUserDialogComponent,
     SalaryCellRenderer,
     JobCellRenderer,
     LocationCellRenderer,
@@ -75,7 +77,11 @@ const routes: Routes = [
     IsMobileDirective,
     IsNotMobileDirective,
     CustomTooltip,
-    AddUserInfosComponent
+    AddUserInfosComponent,
+    WorkHistoryFormComponent,
+    UserInformationsFormComponent,
+    UserInputErrorDialogComponent,
+    GlobalUserInfosComponent
   ],
     imports: [
         BrowserModule,

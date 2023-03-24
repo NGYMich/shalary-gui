@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserDialogComponent } from './add-user-dialog.component';
+import { WorkHistoryFormComponent } from './work-history-form-component';
 
-describe('AddUserDialogComponent', () => {
-  let component: AddUserDialogComponent;
-  let fixture: ComponentFixture<AddUserDialogComponent>;
+describe('WorkHistoryFormComponent', () => {
+  let component: WorkHistoryFormComponent;
+  let fixture: ComponentFixture<WorkHistoryFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddUserDialogComponent ]
+      declarations: [ WorkHistoryFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserDialogComponent);
+    fixture = TestBed.createComponent(WorkHistoryFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

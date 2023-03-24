@@ -8,9 +8,18 @@
   color: white;
 }
 .mat-raised-button.mat-add-job{
+  /*background-color: cornflowerblue;*/
   background-color: cornflowerblue;
   color: white;
 }
+
+.mat-raised-button.mat-add-user-infos {
+  /*background-color: cornflowerblue;*/
+  background-color: seagreen;
+  color: white;
+  font-size: 18px;
+}
+
 
 .job-form-line {
   float: left;
@@ -40,5 +49,5 @@
 }
 
 h1 {
-  color: slategray;
+  color: black;
 }

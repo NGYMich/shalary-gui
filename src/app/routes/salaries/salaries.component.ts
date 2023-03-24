@@ -4,15 +4,12 @@ import {User} from "../../model/user";
 import {ColDef, GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
 import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
-import {AddUserDialogComponent} from "../../user-infos/add-user-dialog/add-user-dialog.component";
 import {SalaryCellRenderer} from "./salary-cell-renderer";
 import {LocationCellRenderer} from "./location-cell-renderer";
 import {Country} from "../../model/country";
 import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
-import {DeviceDetectorService} from "ngx-device-detector";
 import {JobCellRenderer} from "./job-cell-renderer";
-import {CustomTooltip} from "./custom-tooltip.component";
 import {Router} from "@angular/router";
 
 @Component({
