@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {Country} from "../../model/country";
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../common/common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../global/common-variables";
 import {UserService} from "../../services/UserService";
 import {LocationService} from "../../services/LocationService";
 import {User} from "../../model/user";
 import {Router} from "@angular/router";
+import {GlobalService} from "../global/global.service";
 
 @Component({
   selector: 'app-add-user-infos',
   templateUrl: './add-user-infos.component.html',
   styleUrls: ['./add-user-infos.component.css']
 })
-export class AddUserInfosComponent  implements OnInit {
+export class AddUserInfosComponent implements OnInit, OnDestroy {
 
   // user infos
   userInformationsForm: FormGroup;
@@ -46,7 +47,8 @@ export class AddUserInfosComponent  implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private locationService: LocationService,
-    private router: Router
+    private router: Router,
+    private globalService: GlobalService,
   ) {
   }
 
@@ -59,6 +61,12 @@ export class AddUserInfosComponent  implements OnInit {
     this.initSalaryInfosForm();
     this.initUserInformationsForm();
     this.initWorkHistory();
+    if (this.globalService.addUser_UserInformationsForm) {
+      this.userInformationsForm = this.globalService.addUser_UserInformationsForm;
+    }
+    if (this.globalService.addUser_SalaryInfosForm) {
+      this.salaryInfosForm = this.globalService.addUser_SalaryInfosForm;
+    }
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
       this.filteredCountries = this.countriesControl.valueChanges
@@ -67,6 +75,11 @@ export class AddUserInfosComponent  implements OnInit {
           map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
         );
     })
+  }
+
+  ngOnDestroy() {
+    this.globalService.addUser_UserInformationsForm = this.userInformationsForm;
+    this.globalService.addUser_SalaryInfosForm = this.salaryInfosForm;
   }
 
   addUser($event: MouseEvent) {
@@ -89,6 +102,7 @@ export class AddUserInfosComponent  implements OnInit {
       }
     })
   }
+
   redirectToSalariesPage() {
     this.router.navigate(['/salaries'])
   }

@@ -8,7 +8,7 @@ import {Country} from "../../model/country";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../../user-infos/delete-user-dialog/delete-user-dialog.component";
 import {Router} from "@angular/router";
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../common/common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../global/common-variables";
 
 @Component({
   selector: 'app-edit-user-infos',

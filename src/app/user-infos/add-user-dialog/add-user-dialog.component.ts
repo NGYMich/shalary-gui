@@ -5,7 +5,7 @@ import {LocationService} from "../../services/LocationService";
 import {Country} from "../../model/country";
 import {map, Observable, startWith} from "rxjs";
 import {User} from "../../model/user";
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../../routes/common/common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../../routes/global/common-variables";
 
 @Component({
   selector: 'app-add-user-dialog',
