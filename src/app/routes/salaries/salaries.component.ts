@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../services/UserService";
 import {User} from "../../model/user";
-import {GridOptions} from "ag-grid-community";
+import {ColDef, GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
 import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {AddUserDialogComponent} from "../../user-infos/add-user-dialog/add-user-dialog.component";
@@ -12,6 +12,7 @@ import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {JobCellRenderer} from "./job-cell-renderer";
+import {CustomTooltip} from "./custom-tooltip.component";
 
 @Component({
   selector: 'app-salaries',
@@ -24,6 +25,13 @@ export class SalariesComponent implements OnInit {
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;
   isFilteredByPopularCountry: boolean = false;
+
+  currencies = ['DEFAULT', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
+  selectedCurrency = "DEFAULT";
+  gridApi;
+  gridColumnApi;
+  forexRates: any;
+
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
@@ -31,11 +39,11 @@ export class SalariesComponent implements OnInit {
     domLayout: 'autoHeight',
     suppressMenuHide: true
   };
-  currencies = ['DEFAULT', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
-  selectedCurrency = "DEFAULT";
-  private gridApi;
-  private gridColumnApi;
-  private forexRates: any;
+  defaultColDef: ColDef = {
+    tooltipValueGetter: (params) => {
+      return "Click to get career graph and more information !";
+    }
+  };
 
   constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog) {
   }
@@ -119,7 +127,7 @@ export class SalariesComponent implements OnInit {
       headerName: 'User',
       children: [
         {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+        {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter',},
         {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
         {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
@@ -127,10 +135,32 @@ export class SalariesComponent implements OnInit {
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {
+          field: 'salaryHistory.totalYearsOfExperience',
+          headerName: 'Experience',
+          sortable: true,
+          resizable: true,
+          valueFormatter: this.experienceFormatter,
+          filter: 'agTextColumnFilter', width: 150,
+          cellStyle: params => {
+            let experience = params.value;
+            switch (true) {
+              case (experience < 3):
+                return {'background-color': '#FFFFFF'}
+              case (experience < 6):
+                return {'background-color': '#DCDCDC'}
+              case (experience < 9):
+                return {'background-color': '#C0C0C0'}
+              case (experience >= 9):
+                return {'background-color': '#A9A9A9'}
+            }
+            return
+          }
+        },
+        {
           field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
           cellRendererFramework: LocationCellRenderer,
         },
-        {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150},
+
       ]
     },
     {
@@ -181,10 +211,11 @@ export class SalariesComponent implements OnInit {
   mobileColumnDefs = [
     // {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
     // {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-    {valueGetter: this.currentJobGetter, headerName: 'Job (click cell for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+    {
+      valueGetter: this.currentJobGetter, headerName: 'Job (click cell for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRendererFramework: JobCellRenderer,
-      cellStyle: { "white-space": "normal"},
-        autoHeight: true,
+      cellStyle: {"white-space": "normal"},
+      autoHeight: true,
       width: 245
     },
     {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer, hide: true},
@@ -192,12 +223,12 @@ export class SalariesComponent implements OnInit {
     {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
     {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
     {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
+
+    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, hide: true},
     {
       field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRendererFramework: LocationCellRenderer, hide: true
     },
-    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, hide: true},
-
 
     {field: 'salaryHistory.salaryCurrency', hide: true},
     {field: 'salaryHistory.salaryInfos', hide: true},
@@ -239,6 +270,9 @@ export class SalariesComponent implements OnInit {
     {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
 
   ];
+
+  public tooltipShowDelay = 0;
+  public tooltipHideDelay = 2000;
 
   experienceFormatter(params) {
     return params.value + ' years'

@@ -39,6 +39,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
 import {IsMobileDirective} from "./routes/common/is-mobile-directive";
 import {IsNotMobileDirective} from "./routes/common/is-not-mobile-directive";
+import {CustomTooltip} from "./routes/salaries/custom-tooltip.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -70,7 +71,8 @@ const routes: Routes = [
     DeleteUserDialogComponent,
     TestComponent,
     IsMobileDirective,
-    IsNotMobileDirective
+    IsNotMobileDirective,
+    CustomTooltip
   ],
     imports: [
         BrowserModule,

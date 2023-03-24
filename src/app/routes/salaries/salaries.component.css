@@ -7,7 +7,7 @@
   margin-top: 1%;
   background-color: green;
   color: white;
-  border-radius: 0 !important;
+  border-radius: 15px !important;
 }
 
 .flag-and-currency-title {
@@ -32,8 +32,6 @@
   /*display: flex;*/
   /*justify-content: center;*/
 }
-
-
 
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {

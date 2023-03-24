@@ -1,11 +1,11 @@
-<div class="ag-theme-balham" *isNotMobile>
+<div class="ag-theme-alpine" *isNotMobile>
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-1">
 
 
       </div>
-      <div class="col-xs-10">
+      <div class="col-xs-10" style="height: 100%; vertical-align: center">
 
 
         <div style="text-align: center; font-size: 31px;">
@@ -61,14 +61,16 @@
 
 
         <ag-grid-angular
-          style="width: 100%; height: 100%;"
+          style="width: 100%;"
           class="ag-theme-alpine"
           [rowData]="rowData"
           [columnDefs]="desktopColumnDefs"
+          [defaultColDef]="defaultColDef"
           [gridOptions]="gridOptions"
           (gridReady)="onGridReady($event)"
           (rowClicked)="openUserInfos($event)"
-
+          [tooltipShowDelay]="tooltipShowDelay"
+          [tooltipHideDelay]="tooltipHideDelay"
         >
         </ag-grid-angular>
       </div>
