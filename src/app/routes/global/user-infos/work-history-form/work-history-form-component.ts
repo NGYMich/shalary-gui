@@ -31,13 +31,13 @@ export class WorkHistoryFormComponent {
   }
 
 
-  addNewJobFormLine(copyPastLine: boolean = true) {
+  addNewJobFormLine(copyPastLine: boolean = true, second: boolean = false) {
     let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
-    let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine)
+    let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
     this.salaryInfos.push(this.formBuilder.group(controlsConfig))
   }
 
-  private copyLastSalaryInfoForNewJobLine(lastSalaryInfo: AbstractControl, copyPastLine: boolean) {
+  private copyLastSalaryInfoForNewJobLine(lastSalaryInfo: AbstractControl, copyPastLine: boolean, second: boolean) {
 
     if (copyPastLine) {
       return {
@@ -53,19 +53,38 @@ export class WorkHistoryFormComponent {
         contractType: new FormControl(lastSalaryInfo.get('contractType')?.value)
       }
     }
-    return {
-      yearsOfExperience: new FormControl('2', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-      jobName: new FormControl('DevOps Engineer', Validators.required),
-      baseSalary: new FormControl('20000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-      stockSalary: new FormControl(''),
-      bonusSalary: new FormControl(''),
-      company: this.formBuilder.group({
-        name: 'Capgemini',
-        sector: 'Information Technology'
-      }),
-      contractType: new FormControl('')
 
-    };
+    if (!second) {
+      return {
+        yearsOfExperience: new FormControl('2', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+        jobName: new FormControl('DevOps Engineer', Validators.required),
+        baseSalary: new FormControl('40000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+        stockSalary: new FormControl(''),
+        bonusSalary: new FormControl(''),
+        company: this.formBuilder.group({
+          name: 'Capgemini',
+          sector: 'Information Technology'
+        }),
+        contractType: new FormControl('Full-time')
+
+      };
+    }
+      return {
+        yearsOfExperience: new FormControl('5', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+        jobName: new FormControl('Intermediate DevOps Engineer', Validators.required),
+        baseSalary: new FormControl('55000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+        stockSalary: new FormControl('2000'),
+        bonusSalary: new FormControl('2000'),
+        company: this.formBuilder.group({
+          name: 'BNP Paribas',
+          sector: 'Finance / Banking'
+        }),
+        contractType: new FormControl('Full-time')
+
+      };
+
+
+
   }
 
   removeJobFormLine(pointIndex) {
@@ -76,7 +95,7 @@ export class WorkHistoryFormComponent {
     if (!this.isEditUserPage) {
       console.log('added new job form line')
       this.addNewJobFormLine(false);
-      this.addNewJobFormLine(false);
+      this.addNewJobFormLine(false, true);
       console.log(this.salaryInfos)
     } else  {
       console.log('init work history')

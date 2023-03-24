@@ -6,6 +6,16 @@
   color: white;
   font-size: 18px;
 }
+
+.mobile-edit-your-experience-button {
+  margin-top: 0.5%;
+  width: 75%;
+  height: 38px;
+  background-color: darkorange;
+  color: white;
+  font-size: 14px;
+}
+
 .remove-experience-button {
   margin-top: 0.25%;
   width: 100%;
@@ -65,7 +75,8 @@
 }
 
 .div-user-to-modify {
-  margin-top: 10vh;
+  margin-top: 2vh;
+
   background-color: white;
   border-radius: 50px;
   height: auto;
