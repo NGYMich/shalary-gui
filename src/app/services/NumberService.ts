@@ -6,8 +6,7 @@ import {Injectable} from '@angular/core';
 export class NumberService {
   formatBigNumberWithSpaces(salary: number) {
 
-    return salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ").replace("000", "k")
-  // return this.nFormatter(salary, 1).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ").replace("000", "k")
+    return salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")
   }
 
   formatCurrency(currency: string) {

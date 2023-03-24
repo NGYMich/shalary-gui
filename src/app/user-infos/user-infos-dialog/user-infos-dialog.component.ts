@@ -42,11 +42,12 @@ export class UserInfosDialogComponent implements OnInit {
   public chartNames: string[];
   public colors: ColorHelper;
   public colorScheme: any = {domain: ['#d6dd00', '#ffb160', '#93c47d', '#bd3d16']}; // base , bonus , equity , total
-  public yAxisTickFormattingFn = this.formatSalary.bind(this);
+  public yAxisTickFormattingDesktop = this.formatSalary.bind(this);
+  public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>,private deviceService: DeviceDetectorService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>, private deviceService: DeviceDetectorService) {
     Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
   }
@@ -83,6 +84,10 @@ export class UserInfosDialogComponent implements OnInit {
   }
 
   formatSalary(val) {
+    return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
+  }
+
+  formatSalaryMobile(val) {
     return this.numberService.nFormatter(val, 2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
   }
 
