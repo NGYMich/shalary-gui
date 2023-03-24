@@ -6,9 +6,7 @@
         {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h1>
       <h4 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
     </div>
-    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this
-      experience
-    </button>
+    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this experience</button>
   </div>
 
   <br>
@@ -95,14 +93,10 @@
       <h5 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h5>
     </div>
 
-    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this
-      experience
-    </button>
   </div>
-  <div class="col-xs-12">
     <div #containerRef>
       <ngx-charts-line-chart
-        [view]="[containerRef.offsetWidth, 350]"
+        [view]="[containerRef.offsetWidth+10, 350]"
         [scheme]="colorScheme"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -145,13 +139,9 @@
               : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
             </div>
           </div>
-
         </ng-template>
       </ngx-charts-line-chart>
     </div>
-
-  </div>
-
   <div class="col-xs-12">
     <ngx-charts-legend
       class="chart-legend"
@@ -169,4 +159,6 @@
   <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
     <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
   </div>
+  <button mat-raised-button class="mobile-edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this experience</button>
+
 </div>

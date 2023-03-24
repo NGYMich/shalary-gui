@@ -21,3 +21,9 @@
   font-size: 15px;
 }
 
+.mobile-edit-your-experience-button {
+  background-color: crimson;
+  color: white;
+  font-size: 12px;
+  margin-top: 10px;
+}

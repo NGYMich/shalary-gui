@@ -83,7 +83,7 @@ export class UserInfosDialogComponent implements OnInit {
   }
 
   formatSalary(val) {
-    return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
+    return this.numberService.nFormatter(val, 2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
   }
 
   public legendLabelActivate(item: any): void {

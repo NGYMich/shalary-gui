@@ -1,11 +1,8 @@
 <div height="100vh" [@.disabled]="temporaryDisabled">
-
   <mat-toolbar color="primary">
     <button (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-    <!--    <h6 style='color: whitesmoke; font-size: 15px; margin-right: 10px;'>Shalary - Share your Salary !</h6>-->
-    <!--    <img src='https://uxwing.com/wp-content/themes/uxwing/download/business-professional-services/career-icon.png' width="20" height="20">-->
 
     <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -23,18 +20,15 @@
 
       <div fxFlex fxLayoutAlign="flex-end center">
             <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>
-
       </div>
-      <!--    &lt;!&ndash; This fills the remaining space of the current row &ndash;&gt;-->
-      <!--    <span style="flex: 1 1 auto"></span>-->
-      <!--    <span style="font-size: 14px;">GUI Version - [{{shalaryGuiVersion.version}}]</span>-->
+
     </div>
   </mat-toolbar>
 
 
-  <mat-sidenav-container fxFlexFill class="website-background-color">
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false">
-      <mat-nav-list fxLayout="column" class="website-background-color">
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; background-color: #34343c">
+      <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 58px; background-color: #34343c; color: whitesmoke;">
         <a mat-button routerLink="/home">Shalary - Homepage</a>
         <a mat-button routerLink="/salaries" style="margin-left: 5%;">Careers and Salaries</a>
         <a mat-button routerLink="/add-user-infos">Add user experience</a>
