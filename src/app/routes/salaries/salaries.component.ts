@@ -31,6 +31,8 @@ export class SalariesComponent implements OnInit {
   gridApi;
   gridColumnApi;
   forexRates: any;
+  tooltipShowDelay = 0;
+  tooltipHideDelay = 5000;
 
   gridOptions: GridOptions = {
     rowSelection: 'single',
@@ -41,7 +43,8 @@ export class SalariesComponent implements OnInit {
   };
   defaultColDef: ColDef = {
     tooltipValueGetter: (params) => {
-      return "Click to get career graph and more information !";
+      return params.value;
+      // return "Click to get career graph and more information !";
     }
   };
 
@@ -145,13 +148,13 @@ export class SalariesComponent implements OnInit {
             let experience = params.value;
             switch (true) {
               case (experience < 3):
-                return {'background-color': '#FFFFFF'}
+                return {}
               case (experience < 6):
-                return {'background-color': '#DCDCDC'}
+                return {'background-color': '#BCD2E8'}
               case (experience < 9):
-                return {'background-color': '#C0C0C0'}
+                return {'background-color': '#91BAD6'}
               case (experience >= 9):
-                return {'background-color': '#A9A9A9'}
+                return {'background-color': '#73A5C6'}
             }
             return
           }
@@ -271,8 +274,6 @@ export class SalariesComponent implements OnInit {
 
   ];
 
-  public tooltipShowDelay = 0;
-  public tooltipHideDelay = 2000;
 
   experienceFormatter(params) {
     return params.value + ' years'
