@@ -35,16 +35,9 @@
                 >
               </mat-form-field>
             </form>
-            <button mat-raised-button class="edit-your-experience-button"
-                    (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !
-            </button>
+            <button mat-raised-button class="edit-your-experience-button" (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !</button>
           </div>
-          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username
-            or
-            password are not correct
-          </mat-error>
-
-
+          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or password are not correct</mat-error>
         </div>
         <div class="col-xs-4"></div>
       </div>
@@ -56,18 +49,10 @@
     <div class="row" style="padding:0; margin-top: 1%; width: 100%;">
       <div class="col-xs-1"></div>
       <div class="col-xs-2">
-        <user-informations-form
-          [userToModify]="userToModify"
-          [isEditUserPage]="true"
-        >
-        </user-informations-form>
+        <user-informations-form [userToModify]="userToModify" [isEditUserPage]="true"></user-informations-form>
       </div>
       <div class="col-xs-8" style="margin-left: 2%;">
-        <work-history-form
-          [userToModify]="userToModify"
-          [isEditUserPage]="true"
-        >
-        </work-history-form>
+        <work-history-form [userToModify]="userToModify" [isEditUserPage]="true"></work-history-form>
       </div>
       <div class="col-xs-1">
       </div>
@@ -78,13 +63,8 @@
       <div class="col-xs-1"></div>
       <div class="col-xs-10">
         <div class="col-xs-12">
-
-          <button mat-raised-button class="edit-your-experience-button" (click)="modifyUser($event)">Edit your
-            experience !
-          </button>
-          <button mat-raised-button class="remove-experience-button" (click)="openDeleteUserDialog($event)">Remove
-            experience !
-          </button>
+          <button mat-raised-button class="edit-your-experience-button" (click)="modifyUser($event)">Edit your experience !</button>
+          <button mat-raised-button class="remove-experience-button" (click)="openDeleteUserDialog($event)">Remove experience !</button>
         </div>
       </div>
       <div class="col-xs-1"></div>
@@ -129,42 +109,21 @@
                 >
               </mat-form-field>
             </form>
-            <button mat-raised-button class="edit-your-experience-button"
-                    (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !
-            </button>
+            <button mat-raised-button class="edit-your-experience-button" style="width: 75%;" (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !</button>
           </div>
-          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username
-            or
-            password are not correct
-          </mat-error>
-
-
+          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or password are not correct</mat-error>
         </div>
       </div>
     </div>
 
   </div>
   <div *ngIf="this.isUserLoaded">
-    <user-informations-form
-      [userToModify]="userToModify"
-      [isEditUserPage]="true"
-    >
-    </user-informations-form>
-    <work-history-form
-      [userToModify]="userToModify"
-      [isEditUserPage]="true"
-    >
-    </work-history-form>
+    <user-informations-form [userToModify]="userToModify" [isEditUserPage]="true"></user-informations-form>
+    <work-history-form [userToModify]="userToModify" [isEditUserPage]="true"></work-history-form>
     <div class="row" style="padding:0; width: 100%;">
-
       <div class="col-xs-12" style="padding:0; margin-top: 4%; width: 100%;">
-
-        <button mat-raised-button class="edit-your-experience-button" (click)="modifyUser($event)">Edit your
-          experience !
-        </button>
-        <button mat-raised-button class="remove-experience-button" (click)="openDeleteUserDialog($event)">Remove
-          experience !
-        </button>
+        <button mat-raised-button class="edit-your-experience-button" (click)="modifyUser($event)">Edit your experience !</button>
+        <button mat-raised-button class="remove-experience-button" (click)="openDeleteUserDialog($event)">Remove experience !</button>
       </div>
     </div>
     <div class="col-xs-1"></div>

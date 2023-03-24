@@ -1,41 +1,30 @@
-.mat-list .mat-list-item {
-  height: 35px; /* default is 72px */
-  color: dimgray;
-  font-size: 15px;
-}
-
 .home-text {
   font-size: 13px;
   color: dimgray;
 }
 
-.three-card-component {
+p {
+  margin-top: 10px;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-component {
   background-color: white;
   padding: 20px;
-  border-width: 15px;
-  border-radius: 40px;
-  border-color: black;
-  /*margin: 2px;*/
   margin-top: 10px;
-  /*height: 80*/
 }
 
-.three-card-component h1 {
-  color: slategray;
-  font-size: 30px;
-  /*padding-bottom: 20px;*/
+.mobile-card-component {
+  padding: 30px;
+  margin-top: 0;
 }
-.three-card-component material-icons {
+
+.card-component material-icons {
   text-align: center;
-  /*padding-bottom: 20px;*/
-}
-
-
-.three-card-component img {
-  border: 1px solid gray;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
 }
 
 .view-experiences-and-salaries-button {

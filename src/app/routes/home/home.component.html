@@ -1,66 +1,31 @@
-<div class="ag-theme-balham, home-text">
+<div class="ag-theme-balham, home-text" *isNotMobile>
   <div class="container-fluid">
     <div class="row" style="padding-top: 1%; text-align: justify;">
       <div class="col-lg-12" style="text-align: center">
         <h1 style="text-align: center; font-size: 30px; margin: 10px">Shalary - Share your experience !</h1>
-        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">View
-          careers and salaries
+        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">
+          View careers and salaries
         </button>
       </div>
       <div class="col-lg-2"></div>
       <div class="col-lg-8" style="margin-top: 1.5%">
         <mat-divider></mat-divider>
         <div class="col-lg-6">
-
-          <div class="three-card-component">
+          <div class="card-component">
             <div style="text-align: center; ">
-              <h1>
-                Career History
-              </h1>
+              <h1> Career History </h1>
               <div class="material-icons" style="font-size: 120px; color: rgb(0, 0, 0);"> auto_graph</div>
-
             </div>
-            <h4>
-              Many people nowadays can't put a price on their head, even after working for several years.
-              Some underestimate their market value, and some overestimate it : it can be very difficult to get accurate
-              data in this vast ocean of information.
-              <br><br>
-              Let's say that you want to know what salary increase you can get for a junior commercial job, after two
-              years of experience in the same company.
-              <br><br>
-              You start to look, but you realize information given is all over the place : salary in different
-              currencies
-              and countries, you don't find people with same skills as yours, or in the same sector as you work in, and
-              in
-              your place, no one wants to share their salary. Shalary is here to save you !
-            </h4>
+            <p [innerHTML]="introductionMessage"></p>
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="three-card-component">
+          <div class="card-component">
             <div style="text-align: center; ">
-              <h1>
-                Salaries
-              </h1>
+              <h1>Salaries</h1>
               <div class="material-icons-outlined" style="font-size: 120px; color: rgb(0, 0, 0);"> auto_stories</div>
-
             </div>
-            <h4>
-              Shalary is a website where everyone can anonymously share their salary history.
-              <br><br>
-              From anywhere in the world,
-              you can read data about other users, their story and their progression throughout their careers, in
-              various
-              sectors such as Banking, Finance, IT, Sales, Trading, Healthcare, etc.
-              <br>
-              <br>
-              You will be able to obtain interesting data thanks to the various testimonies of the users of the site.
-              For
-              example, you want to know the average salary of a data scientist after a master and 5 years of experience
-              in
-              Paris in consulting firms?
-              No problem, Shalary is here for you.
-            </h4>
+            <p [innerHTML]="introductionMessage2"></p>
           </div>
         </div>
       </div>
@@ -68,8 +33,46 @@
     </div>
     <div class="row" style="padding-top: 1%; text-align: justify;">
       <div class="col-lg-2"></div>
-      <div class="col-lg-8"><mat-divider></mat-divider>      </div>
+      <div class="col-lg-8">
+        <mat-divider></mat-divider>
+      </div>
       <div class="col-lg-2"></div>
+    </div>
+  </div>
+</div>
+<div class="ag-theme-balham, home-text" *isMobile>
+  <div class="container-fluid">
+    <div class="row" style="padding-top: 1%; padding-bottom: 7%;text-align: justify; background-color: whitesmoke; color:black;">
+      <div class="col-lg-12" style="text-align: center">
+        <h2 style="text-align: center; margin: 10px">Shalary - Share your experience !</h2>
+        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">
+          View careers and salaries
+        </button>
+      </div>
+    </div>
+
+    <div class="row" style="text-align: justify;">
+        <div class="col-lg-4">
+          <div class="mobile-card-component">
+            <div style="text-align: center; ">
+              <h3>Career History</h3>
+              <div class="material-icons" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_graph</div>
+
+            </div>
+            <p [innerHTML]="introductionMessage"></p>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <mat-divider></mat-divider>
+          <div class="mobile-card-component">
+            <div style="text-align: center; ">
+              <h3>Salaries</h3>
+              <div class="material-icons-outlined" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_stories</div>
+            </div>
+            <p [innerHTML]="introductionMessage2"></p>
+          </div>
+        </div>
     </div>
   </div>
 </div>

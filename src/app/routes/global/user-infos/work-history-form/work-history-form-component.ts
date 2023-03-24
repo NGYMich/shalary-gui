@@ -31,7 +31,7 @@ export class WorkHistoryFormComponent {
   }
 
 
-  addNewJobFormLine(copyPastLine: boolean = false) {
+  addNewJobFormLine(copyPastLine: boolean = true) {
     let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
     let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine)
     this.salaryInfos.push(this.formBuilder.group(controlsConfig))
@@ -75,8 +75,8 @@ export class WorkHistoryFormComponent {
   async initWorkHistory() {
     if (!this.isEditUserPage) {
       console.log('added new job form line')
-      this.addNewJobFormLine();
-      this.addNewJobFormLine();
+      this.addNewJobFormLine(false);
+      this.addNewJobFormLine(false);
       console.log(this.salaryInfos)
     } else  {
       console.log('init work history')
