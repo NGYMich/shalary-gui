@@ -330,12 +330,6 @@ export class SalariesComponent implements OnInit {
   }
 
   redirectToAddUserExperienceRoute(event): void {
-    // this.dialog.open(AddUserDialogComponent, {
-    //   width: '100%',
-    //   height: '90%',
-    //   autoFocus: false,
-    //   panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
-    // });
     this.router.navigate(['/add-user-infos'])
   }
 

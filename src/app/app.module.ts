@@ -43,7 +43,6 @@ import { AddUserInfosComponent } from './routes/add-user-infos/add-user-infos.co
 import { WorkHistoryFormComponent } from './routes/global/user-infos/work-history-form/work-history-form-component';
 import { UserInformationsFormComponent } from './routes/global/user-infos/user-informations-form/user-informations-form-component';
 import { UserInputErrorDialogComponent } from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
-import { GlobalUserInfosComponent } from './routes/global/user-infos/global-user-infos/global-user-infos.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -81,7 +80,6 @@ const routes: Routes = [
     WorkHistoryFormComponent,
     UserInformationsFormComponent,
     UserInputErrorDialogComponent,
-    GlobalUserInfosComponent
   ],
     imports: [
         BrowserModule,

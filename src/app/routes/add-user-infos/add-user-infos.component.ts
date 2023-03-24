@@ -50,17 +50,19 @@ export class AddUserInfosComponent implements OnInit, OnDestroy {
     // this.globalService.addUser_SalaryInfosForm = this.salaryInfosForm;
   }
 
-  addUser($event: MouseEvent) {
+  async addUser($event: MouseEvent) {
     this.userService.getUsers().subscribe(async (users: User[]) => {
       this.usernameAlreadyExists = users.filter(user => user.username == this.userInformationsForm.get('username')!.value).length != 0;
       let allFormsAreValid = this.userInformationsForm.valid && this.userInformationsFormComponent.countriesControl.valid && this.salaryInfosForm.valid && !this.usernameAlreadyExists;
       if (allFormsAreValid) {
-        await this.userService.addUser(this.buildUser());
-        this.setErrorMessages(true, false, false);
-        this.redirectToSalariesPage()
+        await this.userService.addUser(this.buildUser()).subscribe((response) => {
+          this.setErrorMessages(true, false, false);
+          this.redirectToSalariesPage()
+        });
+
       } else {
-        this.userInformationsForm.markAsTouched()
-        this.salaryInfosForm.markAsTouched()
+        // this.userInformationsForm.markAsTouched()
+        // this.salaryInfosForm.markAsTouched()
         this.openUserInputErrorDialog()
       }
     })
