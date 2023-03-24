@@ -40,6 +40,7 @@ import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
 import {IsMobileDirective} from "./routes/common/is-mobile-directive";
 import {IsNotMobileDirective} from "./routes/common/is-not-mobile-directive";
 import {CustomTooltip} from "./routes/salaries/custom-tooltip.component";
+import { AddUserInfosComponent } from './routes/add-user-infos/add-user-infos.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
+  {path: 'add-user-infos', component: AddUserInfosComponent},
   {path: 'test', component: TestComponent},
 ];
 
@@ -72,7 +74,8 @@ const routes: Routes = [
     TestComponent,
     IsMobileDirective,
     IsNotMobileDirective,
-    CustomTooltip
+    CustomTooltip,
+    AddUserInfosComponent
   ],
     imports: [
         BrowserModule,

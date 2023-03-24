@@ -251,8 +251,8 @@ export class EditUserInfosComponent implements OnInit {
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
-    dialogRef.componentInstance.onDeleteUser.subscribe(() => {
-      this.deleteUser()
+    dialogRef.componentInstance.onDeleteUser.subscribe(async () => {
+      await this.deleteUser()
       dialogRef.close()
       location.reload()
     });// subscription on close

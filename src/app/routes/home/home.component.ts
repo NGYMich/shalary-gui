@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   redirectToSalariesPage() {
     this.router.navigate(['/salaries'])
-
   }
 
 }

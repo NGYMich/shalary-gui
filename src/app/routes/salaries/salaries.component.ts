@@ -13,6 +13,7 @@ import {CompanyCellRenderer} from "./company-cell-renderer";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {JobCellRenderer} from "./job-cell-renderer";
 import {CustomTooltip} from "./custom-tooltip.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-salaries',
@@ -48,7 +49,7 @@ export class SalariesComponent implements OnInit {
     }
   };
 
-  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog) {
+  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router) {
   }
 
   totalSalaryValueGetter(params) {
@@ -331,13 +332,14 @@ export class SalariesComponent implements OnInit {
     });
   }
 
-  openSalaryAddingDialog(event): void {
-    this.dialog.open(AddUserDialogComponent, {
-      width: '100%',
-      height: '90%',
-      autoFocus: false,
-      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
-    });
+  redirectToAddUserExperienceRoute(event): void {
+    // this.dialog.open(AddUserDialogComponent, {
+    //   width: '100%',
+    //   height: '90%',
+    //   autoFocus: false,
+    //   panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    // });
+    this.router.navigate(['/add-user-infos'])
   }
 
   onFilterTextBoxChanged() {
