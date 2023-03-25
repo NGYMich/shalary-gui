@@ -202,16 +202,16 @@ export class SalariesComponent implements OnInit {
             return
           }
         },
-        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer},
-        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
+        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
       ]
     },
   ];
   mobileColumnDefs = [
-    // {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-    // {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
+    {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true},
+    {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', hide: true},
     {
       valueGetter: this.currentJobGetter, headerName: 'Job (click cell for more)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRendererFramework: JobCellRenderer,
@@ -325,7 +325,7 @@ export class SalariesComponent implements OnInit {
       height: '80%',
       data: {selectedUser: selectedUser},
       autoFocus: false,
-      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
     });
   }
 

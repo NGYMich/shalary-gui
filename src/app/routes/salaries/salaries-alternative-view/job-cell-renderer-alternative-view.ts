@@ -1,26 +1,27 @@
 import {Component} from "@angular/core";
 
 @Component({
-  selector: 'job-cell-renderer',
+  selector: 'job-cell-renderer-alternative-view',
   template: `
-      <div>
+      <div style="line-height: 30px">
         <span style="font-weight: bold; margin-bottom: 100px;">
           <img [src]="params.data.locationImage | safe:'resourceUrl'" height="18" width="28"
                style="border-width: 1px; border-style: solid; margin-right: 3px;">
-            {{this.jobName}} ({{this.params.data.salaryHistory.totalYearsOfExperience}}
-            {{this.params.data.salaryHistory.totalYearsOfExperience <= 1 ? "year" : "years"}})
+            {{this.jobName}}
+<!--          ({{this.params.data.salaryHistory.totalYearsOfExperience}}-->
+<!--            {{this.params.data.salaryHistory.totalYearsOfExperience <= 1 ? "year" : "years"}})-->
         </span>
 
-          - {{this.companyName}}
-          <span *ngIf="this.sector != null" style="font-style: italic">
-        ({{this.sector}})
-      </span>
+<!--          - {{this.companyName}}-->
+<!--          <span *ngIf="this.sector != null" style="font-style: italic">-->
+<!--        ({{this.sector}})-->
+<!--      </span>-->
       </div>
 
   `
 })
 
-export class JobCellRenderer {
+export class JobCellRendererAlternativeView {
   params: any;
   companyName: any;
   sector: any;
