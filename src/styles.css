@@ -34,6 +34,10 @@ body {
   /*font-family: sans-serif;*/
 }
 
+.custom-dialog-container .mat-dialog-container {
+  margin-top: 0;
+  padding: 0;
+}
 .ag-row-hover {
   cursor: pointer;
 }

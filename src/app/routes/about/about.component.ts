@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -19,20 +19,31 @@ export class AboutComponent implements OnInit {
     'Encrypt passwords'
   ];
   graphicalSuggestions: string[] = [
+    'Responsive : add headers in function of screen size?',
+    "Add more validators for text size / max length / max number of experiences etc",
+    "Fix put on red wrong validators",
     'Fix homepage',
     'Add animations',
-    'Add banner'
+    'Add banner',
+
   ];
 
   otherSuggestions: string[] = [
-    'Check fly.io',
+    'Host back-end / database on AWS',
+    'Host front-end on Netlify / Fly.io',
+    'Buy domain name .net / .io / .fr / .com',
     'Check tailwindcss',
     'Check Build in Public',
-    'Think about SEO/Marketing/Deployment/Resources/Security'
+    'Think about SEO/Marketing/Deployment/Resources/Security',
+    'SEO : Check competitors / what links are the most used',
+    'SEO : https://www.youtube.com/watch?v=fOGF1Sq499g&ab_channel=NeilPatel check at 2:16 maybe idea for homepage',
+    'SEO : Use Google Analytics & Google Search Console',
+    'Reset SQL sequence : ALTER SEQUENCE user_id_seq RESTART WITH 193'
   ]
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

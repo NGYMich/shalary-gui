@@ -85,7 +85,8 @@ export class UserInformationsFormComponent implements OnInit {
 
 
   private loadCountriesWithFlag() {
-    this.countriesControl = new FormControl(this.userToModify?.location, (Validators.required))
+    let country = this.userToModify != null ? this.userToModify?.location : "France";
+    this.countriesControl = new FormControl(country, (Validators.required))
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
       this.filteredCountries = this.countriesControl.valueChanges

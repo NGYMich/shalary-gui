@@ -30,6 +30,41 @@ body {
   border-color: white !important;
 }
 
+.dropdown-router-pages-button {
+  color: white;
+  font-size: 14px;
+  border-radius: 5px !important;
+  border-color: white !important;
+  background-color: #34343c;
+  text-align: left;
+}
+
+.careers-and-salaries {
+  width: 100px;
+  margin: 5px;
+}
+
+.user-experiences {
+  width: 180px;
+  margin: 5px;
+
+}
+
+::ng-deep .router-pages-button-2 {
+  background-color: #34343c;
+}
+
+.router-pages-button-2 {
+  background-color: #34343c;
+  color: white;
+}
+
+.active_route {
+  background-color: white;
+  color: #34343c;
+}
+
+
 .router-pages-button-before-with-stroked-button {
   margin-right: 0.4%;
   background-color: darkgray;
@@ -43,8 +78,3 @@ body {
   background-color: white;
 }
 
-.active_route {
-  /*text-decoration: underline;*/
-  background-color: white;
-  color: black;
-}

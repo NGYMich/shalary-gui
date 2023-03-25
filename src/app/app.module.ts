@@ -43,16 +43,21 @@ import { AddUserInfosComponent } from './routes/add-user-infos/add-user-infos.co
 import { WorkHistoryFormComponent } from './routes/global/user-infos/work-history-form/work-history-form-component';
 import { UserInformationsFormComponent } from './routes/global/user-infos/user-informations-form/user-informations-form-component';
 import { UserInputErrorDialogComponent } from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
+import { SalariesAlternativeViewComponent } from './routes/salaries/salaries-alternative-view/salaries-alternative-view.component';
+import {JobCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/job-cell-renderer-alternative-view";
+import {CompanyCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/company-cell-renderer-alternative-view";
+import {MatMenuModule} from "@angular/material/menu";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'salaries', component: SalariesComponent},
+  {path: 'salaries/view2', component: SalariesComponent},
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
   {path: 'add-user-infos', component: AddUserInfosComponent},
   {path: 'test', component: TestComponent},
+  {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
 ];
 
 @NgModule({
@@ -65,6 +70,8 @@ const routes: Routes = [
     UserInfosDialogComponent,
     SalaryCellRenderer,
     JobCellRenderer,
+    JobCellRendererAlternativeView,
+    CompanyCellRendererAlternativeView,
     LocationCellRenderer,
     CompanyCellRenderer,
     SafePipe,
@@ -80,31 +87,33 @@ const routes: Routes = [
     WorkHistoryFormComponent,
     UserInformationsFormComponent,
     UserInputErrorDialogComponent,
+    SalariesAlternativeViewComponent,
   ],
-    imports: [
-        BrowserModule,
-        MatToolbarModule,
-        BrowserAnimationsModule,
-        RouterModule.forRoot(routes),
-        MatButtonModule,
-        HttpClientModule,
-        MatDialogModule,
-        AgGridModule.withComponents([]),
-        FormsModule,
-        NgxChartsModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        MatListModule,
-        MatIconModule,
-        MatCardModule,
-        FlexLayoutModule,
-        MatAutocompleteModule,
-        MatSlideToggleModule,
-        MatSidenavModule,
-    ],
+  imports: [
+    BrowserModule,
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
+    MatButtonModule,
+    HttpClientModule,
+    MatDialogModule,
+    AgGridModule.withComponents([]),
+    FormsModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatListModule,
+    MatIconModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule,
+    MatSidenavModule,
+    MatMenuModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

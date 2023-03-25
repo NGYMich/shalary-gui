@@ -10,8 +10,7 @@
   </div>
 
   <br>
-  <br>
-  <div fxLayout="row">
+  <div fxLayout="row" style="margin-left: 15px;">
     <div #containerRef fxFlex="70%">
       <ngx-charts-line-chart
         [view]="[containerRef.offsetWidth, 400]"
@@ -77,7 +76,7 @@
 
 
   <br>
-  <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
+  <div *ngIf="currentUser.comment" style="white-space:pre-wrap; margin-left: 15px;">
     <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
   </div>
 </div>
