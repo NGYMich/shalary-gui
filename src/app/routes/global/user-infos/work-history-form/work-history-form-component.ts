@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {commonContractTypes, commonSectors} from "../../common-variables";
 import {User} from "../../../../model/user";
+import {TokenStorageService} from "../../../../services/TokenStorageService";
 
 @Component({
   selector: 'work-history-form',
@@ -15,15 +16,12 @@ export class WorkHistoryFormComponent {
   @Input() userToModify: User | null = null;
   @Input() isEditUserPage: boolean = true;
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initSalaryInfosForm();
     this.initWorkHistory();
   }
 
-  ngOnChanges() {
-  }
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private tokenStorageService: TokenStorageService) {
   }
 
   get salaryInfos(): FormArray {
@@ -92,8 +90,7 @@ export class WorkHistoryFormComponent {
   }
 
   async initWorkHistory() {
-    if (!this.isEditUserPage) {
-      console.log('added new job form line')
+    if (this.userToModify != null && this.userToModify.salaryHistory == null) {
       this.addNewJobFormLine(false);
       this.addNewJobFormLine(false, true);
       console.log(this.salaryInfos)

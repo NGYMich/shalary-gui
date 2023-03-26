@@ -11,6 +11,7 @@ import {ForexService} from "../../services/ForexService";
 import {CompanyCellRenderer} from "./company-cell-renderer";
 import {JobCellRenderer} from "./job-cell-renderer";
 import {Router} from "@angular/router";
+import {TokenStorageService} from "../../services/TokenStorageService";
 
 @Component({
   selector: 'app-salaries',
@@ -39,6 +40,7 @@ export class SalariesComponent implements OnInit {
     domLayout: 'autoHeight',
     suppressMenuHide: true
   };
+
   defaultColDef: ColDef = {
     tooltipValueGetter: (params) => {
       return params.value;
@@ -46,7 +48,8 @@ export class SalariesComponent implements OnInit {
     }
   };
 
-  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router) {
+  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
+              private tokenStorageService: TokenStorageService) {
   }
 
   totalSalaryValueGetter(params) {
@@ -285,7 +288,7 @@ export class SalariesComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
+    this.userService.getUsersWithSalaryHistory().subscribe((users: User[]) => {
       this.rowData = users;
     })
   }

@@ -17,9 +17,20 @@ export class AboutComponent implements OnInit {
     'Think about limiting to only one or few countries ? FR/UK/USA/GER ? Translation ?',
     'Compare two users',
     'Graph Legend : modify on click interaction to not show details in parenthesis, and maybe modify its position',
-    'Encrypt passwords'
+    'Encrypt passwords',
+    'Optimize get location image'
   ];
   graphicalSuggestions: string[] = [
+    'Remove displayname since username already exists',
+    'Update UserDTO',
+    'Replace User experiences with "My Career"',
+    'Workflow : I signup, I login, I update my career, its reflected on careers and salaries.' ,
+    '',
+    '',
+    'Log out button',
+    'Hide .properties passwords',
+    '--------------------------------------------------------------',
+    'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',
     "Add more validators for text size / max length / max number of experiences etc",
     "Fix put on red wrong validators",
@@ -27,6 +38,7 @@ export class AboutComponent implements OnInit {
     'Add animations',
     'Add banner',
     'Mouka suggestion : make one view and collapse with a "hide button"',
+    'Sovi suggestion : thumbs up / thumbs down for trust indicator',
 
   ];
 

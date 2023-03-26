@@ -1,51 +1,5 @@
 <div *isNotMobile>
-  <div class="ag-theme-balham" *ngIf="!isUserLoaded">
-    <div class="container-fluid select-user-to-modify-div">
-      <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4">
-          <div style="text-align: center;" class="div-user-to-modify">
-            <h1>Select user to modify</h1>
-            <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <mat-label>Username</mat-label>
-                <input type="text"
-                       placeholder="Username"
-                       aria-label="Username"
-                       matInput
-                       [formControl]="usernameSearchControl"
-                       [matAutocomplete]="auto"
-                >
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredUsernames | async | slice : 0 : 20" [value]="option"
-                              style="font-size: 13px;">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <br>
-              <mat-form-field class="example-full-width">
-                <mat-label>Password</mat-label>
-                <input type="password"
-                       placeholder="Password"
-                       aria-label="Password"
-                       matInput
-                       [formControl]="password"
-                       (keydown.enter)="retrieveUserWithIdAndPassword($event)"
-                >
-              </mat-form-field>
-            </form>
-            <button mat-raised-button class="edit-your-experience-button" style="margin-top: 2vh;" (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !</button>
-          </div>
-          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or password are not correct</mat-error>
-        </div>
-        <div class="col-xs-4"></div>
-      </div>
-    </div>
-
-
-  </div>
-  <div *ngIf="this.isUserLoaded">
+  <div *isLoggedIn>
     <div class="row" style="padding:0; margin-top: 1%; width: 100%;">
       <div class="col-xs-1"></div>
       <div class="col-xs-2">
@@ -74,49 +28,6 @@
 </div>
 
 <div *isMobile style="margin-top: 3%;">
-  <div class="ag-theme-balham" *ngIf="!isUserLoaded">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12">
-          <div style="text-align: center;">
-            <h1>Select user to modify</h1>
-            <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <mat-label>Username</mat-label>
-                <input type="text"
-                       placeholder="Username"
-                       aria-label="Username"
-                       matInput
-                       [formControl]="usernameSearchControl"
-                       [matAutocomplete]="auto"
-                >
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredUsernames | async | slice : 0 : 20" [value]="option"
-                              style="font-size: 13px;">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <br>
-              <mat-form-field class="example-full-width">
-                <mat-label>Password</mat-label>
-                <input type="password"
-                       placeholder="Password"
-                       aria-label="Password"
-                       matInput
-                       [formControl]="password"
-                       (keydown.enter)="retrieveUserWithIdAndPassword($event)"
-                >
-              </mat-form-field>
-            </form>
-            <button mat-raised-button class="mobile-edit-your-experience-button" (click)="retrieveUserWithIdAndPassword($event)">Edit your experience !</button>
-          </div>
-          <mat-error style="font-size: 20px; text-align: center; margin-top: 10px;" *ngIf="showPasswordError">Username or password are not correct</mat-error>
-        </div>
-      </div>
-    </div>
-
-  </div>
   <div *ngIf="this.isUserLoaded">
     <user-informations-form [userToModify]="userToModify" [isEditUserPage]="true"></user-informations-form>
     <work-history-form [userToModify]="userToModify" [isEditUserPage]="true"></work-history-form>
@@ -129,3 +40,4 @@
     <div class="col-xs-1"></div>
 
   </div>
+</div>

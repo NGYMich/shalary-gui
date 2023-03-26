@@ -30,6 +30,24 @@ body {
   border-color: white !important;
 }
 
+.router-pages-button-login {
+  font-size: 14px;
+  border-radius: 5px !important;
+  border-color: white !important;
+  background-color: green;
+  color: whitesmoke;
+  margin-right: 10px;
+
+}
+
+.router-pages-button-signup {
+  font-size: 14px;
+  border-radius: 5px !important;
+  border-color: white !important;
+  background-color: royalblue;
+  color: whitesmoke;
+}
+
 .dropdown-router-pages-button {
   color: white;
   font-size: 14px;
@@ -37,6 +55,7 @@ body {
   border-color: white !important;
   background-color: #34343c;
   text-align: left;
+
 }
 
 .careers-and-salaries {

@@ -97,13 +97,13 @@ export class AddUserInfosComponent implements OnInit, OnDestroy {
   private buildUser() {
     return {
       id: null,
-      locationImage: null,
-      validated: true,
-      username: this.userInformationsForm.get('username')!.value,
+      email: this.userInformationsForm.get('email')!.value,
       password: this.userInformationsForm.get('password')!.value,
-      mail: this.userInformationsForm.get('mail')!.value,
+      username: this.userInformationsForm.get('username')!.value,
+
       mainSector: null,
       location: this.userInformationsFormComponent.countriesControl.value,
+      locationImage: null,
       city: this.userInformationsForm.get('city')!.value,
       education: this.userInformationsForm.get('education')!.value,
       age: this.userInformationsForm.get('age')!.value,
@@ -115,7 +115,15 @@ export class AddUserInfosComponent implements OnInit, OnDestroy {
         totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
         salaryInfos: this.salaryInfosForm.value
       },
-      lastUpdate: null
+
+      createdDate: null,
+      modifiedDate: null,
+      provider: null,
+      thumbsUp: null,
+      thumbsDown: null,
+
+      validated: true,
+
     };
   }
 

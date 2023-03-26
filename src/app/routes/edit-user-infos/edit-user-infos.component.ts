@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {WorkHistoryFormComponent} from "../global/user-infos/work-history-form/work-history-form-component";
 import {UserInformationsFormComponent} from "../global/user-infos/user-informations-form/user-informations-form-component";
 import {UserInputErrorDialogComponent} from "../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
+import {TokenStorageService} from "../../services/TokenStorageService";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -36,53 +37,29 @@ export class EditUserInfosComponent implements OnInit {
   usernameAlreadyExist: boolean; //TODO
 
   // User
-  userToModify: User | null = null;
+  userToModify: any | null = null;
 
   constructor(
-    private formBuilder: FormBuilder, private userService: UserService,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
     private locationService: LocationService,
     public dialog: MatDialog,
     private router: Router,
+    private tokenStorageService: TokenStorageService,
   ) {
     if (this.router.getCurrentNavigation()!.extras!.state != null)
       this.usernameSearchControl.setValue(this.router.getCurrentNavigation()!.extras!.state!['chosenUsernameToEdit'])
   }
 
 
-  async ngOnInit() {
-    await this.loadUsers()
-    this.filteredUsernames = this.usernameSearchControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
+  ngOnInit() {
+    this.userService.getUserById(this.tokenStorageService.getUser().id).subscribe(user => {
+        this.userToModify = user
+      }
+    )
   }
-
-
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-      this.usernameOptions = users.map(user => user.username != null ? user.username : "")
-    })
-  }
-
-  async retrieveUserWithIdAndPassword($event: any) {
-    await this.userService.retrieveUserWithUsernameAndPassword(this.usernameSearchControl.value, this.password.value).subscribe(
-      data => {
-        console.log('retrieved user ' + this.usernameSearchControl.value + ' with password. User :', JSON.stringify(data))
-        // this.isUserLoaded = true;
-        this.isUserLoaded = data != null
-        this.userToModify = data
-        this.showPasswordError = false;
-
-      },
-      error => console.log('failed to retrieve user with password', error)
-    );
-    await this.workHistoryFormComponent.initWorkHistory()
-  }
-
 
   modifyUser($event: MouseEvent) {
-    console.log(this.userInformationsFormComponent)
     let allFormsAreValid = this.userInformationsForm.valid && this.userInformationsFormComponent.countriesControl.valid && this.salaryInfosForm.valid;
     if (allFormsAreValid) {
       this.userService.modifyUser(this.buildModifiedUser()).subscribe((response) => this.redirectToSalariesPage());
@@ -99,13 +76,13 @@ export class EditUserInfosComponent implements OnInit {
   private buildModifiedUser() {
     return {
       id: this.userToModify!.id,
-      locationImage: null,
-      validated: true,
-      username: this.userInformationsForm.get('username')!.value,
+      email: this.userInformationsForm.get('email')!.value,
       password: this.userInformationsForm.get('password')!.value,
-      mail: this.userInformationsForm.get('mail')!.value,
+      username: this.userInformationsForm.get('username')!.value,
+
       mainSector: null,
       location: this.userInformationsFormComponent.countriesControl.value,
+      locationImage: null,
       city: this.userInformationsForm.get('city')!.value,
       education: this.userInformationsForm.get('education')!.value,
       age: this.userInformationsForm.get('age')!.value,
@@ -117,7 +94,14 @@ export class EditUserInfosComponent implements OnInit {
         totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
         salaryInfos: this.salaryInfosForm.value
       },
-      lastUpdate: null,
+
+      createdDate: null,
+      modifiedDate: null,
+      provider: null,
+      thumbsUp: null,
+      thumbsDown: null,
+
+      validated: true,
     };
   }
 
@@ -128,12 +112,6 @@ export class EditUserInfosComponent implements OnInit {
 
   deleteUser() {
     this.userService.deleteUser(this.userInformationsForm.get('username')!.value, this.userToModify!.id!);
-  }
-
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.usernameOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm) {

@@ -2,19 +2,27 @@ import {SalaryHistory} from "./salaryHistory";
 
 export class User {
   id: number | null;
-  validated: boolean | null;
-  username: string | null;
+  email: string | null;
   password: string | null;
-  mail: string | null;
+  username: string | null;
+
   mainSector: string | null;
   location: string | null;
   locationImage: string | null;
   city: string | null;
   education: string | null;
   age: number | null;
-  comment: string | null;
   gender: string | null;
+  comment: string | null;
   salaryHistory: SalaryHistory;
-  lastUpdate: string | null;
+
+  createdDate: string | null;
+  modifiedDate: string | null;
+  provider: string | null;
+  thumbsUp: number | null;
+  thumbsDown: number | null;
+
+  validated: boolean | null = true;
+
 }
 

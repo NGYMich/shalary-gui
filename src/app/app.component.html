@@ -24,11 +24,13 @@
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view2">View 2</button>
         </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button" routerLinkActive="active_route">User experiences</button>
-        <mat-menu #menu2="matMenu" class="router-pages-button-2">
-          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/add-user-infos">Add user experience</button>
-          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/edit-user-infos">Update user experience</button>
-        </mat-menu>
+        <!--        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button" routerLinkActive="active_route">User experiences</button>-->
+        <!--        <mat-menu #menu2="matMenu" class="router-pages-button-2">-->
+        <!--          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/add-user-infos">Add user experience</button>-->
+        <!--          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/edit-user-infos">Update user experience</button>-->
+        <!--        </mat-menu>-->
+        <button *isLoggedIn class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
+
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/data">Data Analytics</button>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/about">User Feedback</button>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/test">F.A.Q</button>
@@ -36,9 +38,12 @@
 
       <div fxFlex fxLayoutAlign="flex-end center">
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
-        <button *ngIf="loggedUser == null" class="router-pages-button" mat-button routerLinkActive="active_route" routerLink="/signup">Sign up</button>
-        <button *ngIf="loggedUser == null" class="router-pages-button" mat-button routerLinkActive="active_route" routerLink="/login">Log in</button>
-        <span *ngIf="loggedUser != null" style="font-size: 14px;">Welcome {{loggedUser.displayName}} !</span>
+        <button *isNotLoggedIn class="router-pages-button-login" mat-button (click)="openLoginDialog()">Log in</button>
+        <button *isNotLoggedIn class="router-pages-button-signup" mat-button (click)="openSignupDialog()">Sign up</button>
+
+        <!--        <span *isLoggedIn style="font-size: 14px;">Welcome {{loggedUser.username}} !</span>-->
+        <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
+
       </div>
 
     </div>

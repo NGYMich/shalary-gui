@@ -27,6 +27,17 @@ export class UserService {
     return this.http.get(this.rootURL + '/users');
   }
 
+
+  getUsersWithSalaryHistory(): any {
+    console.log('called', this.rootURL + '/usersWithSalaryHistory');
+    return this.http.get(this.rootURL + '/usersWithSalaryHistory');
+  }
+
+  getUserById(id) {
+    console.log('called', this.rootURL + '/users/' + id);
+    return this.http.get(this.rootURL + '/users/' + id);
+  }
+
   getMostPopularCountriesFromUsers(): any {
     console.log('called', this.rootURL + '/mostPopularCountries');
     return this.http.get(this.rootURL + '/mostPopularCountries');
@@ -59,6 +70,17 @@ export class UserService {
     });
   }
 
+  loggedUserHasSalaryHistory(id): Observable<any> {
+    var subject = new Subject<boolean>();
+
+    this.getUserById(id).subscribe(user => {
+      subject.next(user['salaryHistory'] != null)
+        return
+
+      }
+    )
+    return subject.asObservable()
+  }
   // ALL AUTHENTICATION ENDPOINTS
   //
   getPublicContent(): Observable<any> {

@@ -9,7 +9,7 @@
 
 
         <div style="text-align: center; font-size: 31px;">
-          <button mat-raised-button class="share-your-experience-button"
+          <button mat-raised-button class="share-your-experience-button" *loggedInUserHasNoSalaryHistory
                   (click)="redirectToAddUserExperienceRoute($event)">Share your experience !
           </button>
           <br>

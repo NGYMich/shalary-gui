@@ -469,7 +469,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
+    this.userService.getUsersWithSalaryHistory().subscribe((users: User[]) => {
       this.rowData = users;
       this.currentUser = users[0];
       this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency

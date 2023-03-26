@@ -54,6 +54,10 @@ import { ProfileComponent } from './routes/authentication/profile/profile.compon
 import { BoardUserComponent } from './routes/authentication/board-user/board-user.component';
 import { BoardAdminComponent } from './routes/authentication/board-admin/board-admin.component';
 import { BoardModeratorComponent } from './routes/authentication/board-moderator/board-moderator.component';
+import {IsLoggedInDirective} from "./routes/global/is-logged-in-directive";
+import {IsNotLoggedInDirective} from "./routes/global/is-not-logged-in-directive";
+import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in-user-has-no-salary-history-directive";
+import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -104,6 +108,10 @@ const routes: Routes = [
     BoardUserComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
+    IsLoggedInDirective,
+    IsNotLoggedInDirective,
+    LoggedInUserHasNoSalaryHistoryDirective,
+    LoggedInUserHasSalaryHistoryDirective
   ],
   imports: [
     BrowserModule,

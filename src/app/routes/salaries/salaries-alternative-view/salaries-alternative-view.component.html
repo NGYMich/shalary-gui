@@ -3,27 +3,24 @@
     <!-- Share your experience button-->
     <div class="container-fluid">
       <div class="col-xs-12" style="height: 100%; vertical-align: center;">
-        <div style="text-align: center; font-size: 31px;">
+        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>
           <button mat-raised-button class="share-your-experience-button" (click)="redirectToAddUserExperienceRoute($event)">Share your experience !</button>
         </div>
       </div>
     </div>
 
-
-    <!-- Filter by anything -->
-
-    <!--    <div fxLayout="row">-->
-    <!--      <div class="col-xs-4">-->
-    <!--        <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 100%; margin-top:0.3%;">-->
-    <!--          <mat-label style="text-align: left; display: block; width: auto;">-->
-    <!--            <mat-icon>search</mat-icon>-->
-    <!--            Filter by anything (columns are also filterable by using the button next to the columns' names!)-->
-    <!--          </mat-label>-->
-    <!--          <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>-->
-    <!--        </mat-form-field>-->
-    <!--      </div>-->
-    <!--      <div class="col-xs-8"></div>-->
-    <!--    </div>-->
+        <div fxLayout="row">
+          <div class="col-xs-7">
+            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 100%; margin-top:0.3%;">
+              <mat-label style="text-align: left; display: block; width: auto;">
+                <mat-icon>search</mat-icon>
+                Filter by anything (columns are also filterable by using the button next to the columns' names!)
+              </mat-label>
+              <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+            </mat-form-field>
+          </div>
+<!--          <div class="col-xs-8"></div>-->
+        </div>
 
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row">

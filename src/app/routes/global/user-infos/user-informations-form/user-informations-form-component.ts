@@ -5,13 +5,14 @@ import {User} from "../../../../model/user";
 import {map, Observable, startWith} from "rxjs";
 import {Country} from "../../../../model/country";
 import {LocationService} from "../../../../services/LocationService";
+import {TokenStorageService} from "../../../../services/TokenStorageService";
 
 @Component({
   selector: 'user-informations-form',
   templateUrl: './user-informations-form-component.html',
   styleUrls: ['./user-informations-form.component.css']
 })
-export class UserInformationsFormComponent implements OnInit {
+export class UserInformationsFormComponent {
 
   @Input() userToModify: User | null = null;
   @Input() isEditUserPage: boolean;
@@ -33,54 +34,30 @@ export class UserInformationsFormComponent implements OnInit {
   showPasswordError: boolean;
   allCountriesWithTheirFlags: any;
 
-  ngOnInit() {
-    this.initUserInformationsForm();
-
-  }
 
   ngOnChanges() {
     this.initUserInformationsForm();
   }
 
-  constructor(private formBuilder: FormBuilder, private locationService: LocationService,
+  constructor(private formBuilder: FormBuilder, private locationService: LocationService, private tokenStorageService: TokenStorageService,
   ) {
   }
 
   initUserInformationsForm() {
     this.loadCountriesWithFlag()
-
-    if (!this.isEditUserPage) {
-      this.userInformationsForm = this.formBuilder.group({
-        username: new FormControl('UsernameExample', Validators.required),
-        password: new FormControl('test', Validators.required),
-        mail: new FormControl('test@gmail.com', Validators.required),
-        currency: new FormControl('EUR (€)', Validators.required),
-        city: new FormControl(''),
-        yearsOfExperience: new FormControl('8.0', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-        education: new FormControl(''),
-        age: new FormControl('', Validators.pattern('^[0-9]*$')),
-        gender: new FormControl(''),
-        comment: new FormControl(''),
-      });
-    } else {
-      console.log("init user informations. User :" + this.userToModify)
-      this.userInformationsForm = this.formBuilder.group({
-        username: new FormControl(this.userToModify?.username, Validators.required),
-        password: new FormControl(this.userToModify?.password, Validators.required),
-        mail: new FormControl(this.userToModify?.mail, Validators.required),
-        currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency, Validators.required),
-        yearsOfExperience: new FormControl(this.userToModify?.salaryHistory?.totalYearsOfExperience, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-        education: new FormControl(this.userToModify?.education),
-        age: new FormControl(this.userToModify?.age, Validators.pattern('^[0-9]*$')),
-        gender: new FormControl(this.userToModify?.gender),
-        comment: new FormControl(this.userToModify?.comment),
-        city: new FormControl(this.userToModify?.city),
-      });
-      this.countriesControl = new FormControl(this.userToModify?.location, (Validators.required))
-      console.log(this.userInformationsForm)
-    }
-
-
+    this.userInformationsForm = this.formBuilder.group({
+      username: new FormControl(this.userToModify?.username, Validators.required),
+      password: new FormControl(this.userToModify?.password, Validators.required),
+      email: new FormControl(this.userToModify?.email, Validators.required),
+      currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency, Validators.required),
+      yearsOfExperience: new FormControl(this.userToModify?.salaryHistory?.totalYearsOfExperience, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+      education: new FormControl(this.userToModify?.education),
+      age: new FormControl(this.userToModify?.age, Validators.pattern('^[0-9]*$')),
+      gender: new FormControl(this.userToModify?.gender),
+      comment: new FormControl(this.userToModify?.comment),
+      city: new FormControl(this.userToModify?.city),
+    });
+    this.countriesControl = new FormControl(this.userToModify?.location, (Validators.required))
   }
 
 
@@ -95,11 +72,9 @@ export class UserInformationsFormComponent implements OnInit {
           map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
         );
       if (this.userToModify != null) {
-        console.log("user to modify not null")
         this.isUserLoaded = true;
         this.showPasswordError = false;
       } else {
-        console.log("user to modify null")
         this.isUserLoaded = false;
         this.showPasswordError = true;
       }
