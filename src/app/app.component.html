@@ -12,37 +12,41 @@
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/home">Home</button>
       </div>
 
-
       <div fxFlex fxLayoutAlign="center center">
 
-
-        <!--        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/salaries">Careers and Salaries</button>-->
-
-        <button mat-button [matMenuTriggerFor]="menu" class="router-pages-button" routerLinkActive="active_route">Careers and Salaries</button>
-        <mat-menu #menu="matMenu" class="router-pages-button-2">
+        <button mat-button [matMenuTriggerFor]="menu">Careers and Salaries
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="router-pages-button-2" >
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view1">View 1</button>
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view2">View 2</button>
         </mat-menu>
 
-        <!--        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button" routerLinkActive="active_route">User experiences</button>-->
-        <!--        <mat-menu #menu2="matMenu" class="router-pages-button-2">-->
-        <!--          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/add-user-infos">Add user experience</button>-->
-        <!--          <button mat-menu-item class="dropdown-router-pages-button user-experiences" routerLinkActive="active_route" routerLink="/edit-user-infos">Update user experience</button>-->
-        <!--        </mat-menu>-->
-        <button *isLoggedIn class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
 
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/data">Data Analytics</button>
-        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/about">User Feedback</button>
-        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/test">F.A.Q</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/faq">F.A.Q</button>
+
+        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button">Admin Accesses
+          <mat-icon style="margin-top: 0; padding: 0;">arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu" class="router-pages-button-2">
+          <button mat-menu-item class="dropdown-router-pages-button test-and-user-feedbacks" routerLinkActive="active_route" routerLink="/about">User Feedback</button>
+          <button mat-menu-item class="dropdown-router-pages-button test-and-user-feedbacks" routerLinkActive="active_route" routerLink="/test">Test Page</button>
+
+        </mat-menu>
+
+
       </div>
 
       <div fxFlex fxLayoutAlign="flex-end center">
+        <button *isLoggedIn class="router-pages-button my-career" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
+
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
         <button *isNotLoggedIn class="router-pages-button-login" mat-button (click)="openLoginDialog()">Log in</button>
         <button *isNotLoggedIn class="router-pages-button-signup" mat-button (click)="openSignupDialog()">Sign up</button>
 
         <!--        <span *isLoggedIn style="font-size: 14px;">Welcome {{loggedUser.username}} !</span>-->
-        <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
+        <button *isLoggedIn class="router-pages-button-logout" mat-button (click)="logOut()">Log out</button>
 
       </div>
 

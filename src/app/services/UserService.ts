@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {User} from "../model/user";
 import {Observable, Subject} from "rxjs";
 import {environment} from "../../environments/environment";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppConstants} from "../routes/global/common-variables";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class UserService {
   // rootURL = 'http://localhost:2111/api';
-  rootURL = environment.baseUrl
+  rootURL = environment.baseUrl + 'api'
 
   // tslint:disable-next-line:variable-name
   private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
@@ -49,12 +49,6 @@ export class UserService {
     return this.http.post<User>(this.rootURL + '/user', body, {'headers': headers})
   }
 
-  retrieveUserWithUsernameAndPassword(username: string, password: string): any {
-    const body = JSON.stringify({username: username, password: password});
-    const headers = {'content-type': 'application/json'};
-    return this.http.post<User>(this.rootURL + '/retrieveUserWithPassword', body, {'headers': headers})
-  }
-
   modifyUser(user: User): any {
     console.log('modifying user', user.username + ' with id', user.id)
     const body = JSON.stringify(user);
@@ -74,29 +68,28 @@ export class UserService {
     var subject = new Subject<boolean>();
 
     this.getUserById(id).subscribe(user => {
-      subject.next(user['salaryHistory'] != null)
-        return
-
+        subject.next(user['salaryHistory'] != null)
       }
     )
     return subject.asObservable()
   }
+
   // ALL AUTHENTICATION ENDPOINTS
   //
   getPublicContent(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'all', { responseType: 'text' });
+    return this.http.get(AppConstants.API_URL + 'all', {responseType: 'text'});
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'user', { responseType: 'text' });
+    return this.http.get(AppConstants.API_URL + 'user', {responseType: 'text'});
   }
 
   getModeratorBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'mod', { responseType: 'text' });
+    return this.http.get(AppConstants.API_URL + 'mod', {responseType: 'text'});
   }
 
   getAdminBoard(): Observable<any> {
-    return this.http.get(AppConstants.API_URL + 'admin', { responseType: 'text' });
+    return this.http.get(AppConstants.API_URL + 'admin', {responseType: 'text'});
   }
 
   getCurrentUser(): Observable<any> {

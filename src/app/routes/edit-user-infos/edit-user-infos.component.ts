@@ -21,20 +21,11 @@ export class EditUserInfosComponent implements OnInit {
   @ViewChild(WorkHistoryFormComponent, {static: false}) workHistoryFormComponent: WorkHistoryFormComponent;
   @ViewChild(UserInformationsFormComponent, {static: false}) userInformationsFormComponent: UserInformationsFormComponent;
 
-  // Select User to Modify
-  users: any;
-  usernameSearchControl = new FormControl();
-  username = new FormControl()
-  password = new FormControl();
-  usernameOptions: string[] = [];
-  filteredUsernames: Observable<string[]>;
+
 
   // Error messages
   isUserLoaded: boolean = false;
-  showPasswordError: boolean;
-  userInformationError: boolean = false;
-  salaryInformationsError: boolean = false;
-  usernameAlreadyExist: boolean; //TODO
+
 
   // User
   userToModify: any | null = null;
@@ -47,8 +38,7 @@ export class EditUserInfosComponent implements OnInit {
     private router: Router,
     private tokenStorageService: TokenStorageService,
   ) {
-    if (this.router.getCurrentNavigation()!.extras!.state != null)
-      this.usernameSearchControl.setValue(this.router.getCurrentNavigation()!.extras!.state!['chosenUsernameToEdit'])
+
   }
 
 
@@ -62,7 +52,10 @@ export class EditUserInfosComponent implements OnInit {
   modifyUser($event: MouseEvent) {
     let allFormsAreValid = this.userInformationsForm.valid && this.userInformationsFormComponent.countriesControl.valid && this.salaryInfosForm.valid;
     if (allFormsAreValid) {
-      this.userService.modifyUser(this.buildModifiedUser()).subscribe((response) => this.redirectToSalariesPage());
+      let user = this.buildModifiedUser();
+      console.dir(user)
+
+      this.userService.modifyUser(user).subscribe((response) => this.redirectToSalariesPage());
     } else {
       this.openUserInputErrorDialog(
         !this.salaryInfosForm.valid,
@@ -77,7 +70,7 @@ export class EditUserInfosComponent implements OnInit {
     return {
       id: this.userToModify!.id,
       email: this.userInformationsForm.get('email')!.value,
-      password: this.userInformationsForm.get('password')!.value,
+      password: this.userInformationsForm.get('password') != null ? this.userInformationsForm.get('password')!.value : null,
       username: this.userInformationsForm.get('username')!.value,
 
       mainSector: null,

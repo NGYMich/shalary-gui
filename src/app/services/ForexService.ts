@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ForexService {
-  rootURL = environment.baseUrl
+  rootURL = environment.baseUrl + 'api'
   constructor(private http: HttpClient) {
   }
 

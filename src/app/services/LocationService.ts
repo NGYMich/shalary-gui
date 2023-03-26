@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 })
 export class LocationService {
   // rootURL = 'http://localhost:2111/api';
-  rootURL = environment.baseUrl
+  rootURL = environment.baseUrl + 'api'
   constructor(private http: HttpClient) {
   }
 

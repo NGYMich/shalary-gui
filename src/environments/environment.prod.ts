@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://shalary-back.herokuapp.com/api'
+  baseUrl: 'https://shalary-back.herokuapp.com/'
 };

@@ -16,6 +16,8 @@ import {Serie} from "../../../model/serie";
 import {JobCellRendererAlternativeView} from "./job-cell-renderer-alternative-view";
 import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-alternative-view";
 import {TokenStorageService} from "../../../services/TokenStorageService";
+import {RegisterComponent} from "../../authentication/register/register.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-salaries-alternative-view',
@@ -74,6 +76,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
               private deviceService: DeviceDetectorService,
               private userService: UserService, private forexService: ForexService,
               private tokenStorage: TokenStorageService,
+              public dialog: MatDialog,
   ) {
     Object.assign(this, this.dataGraph);
   }
@@ -517,8 +520,13 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   }
 
-  redirectToAddUserExperienceRoute(event): void {
-    this.router.navigate(['/add-user-infos'])
+  openSignupDialog(event): void {
+    let dialogRef = this.dialog.open(RegisterComponent, {
+      width: '500px',
+      height: '620px',
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    });
   }
 
   onFilterTextBoxChanged() {

@@ -6,7 +6,6 @@
         {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}</h1>
       <h4 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
     </div>
-    <button mat-raised-button class="edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this experience</button>
   </div>
 
   <br>
@@ -148,6 +147,4 @@
   <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
     <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
   </div>
-  <button mat-raised-button class="mobile-edit-your-experience-button" (click)="editOrRemoveExperience()">Edit or remove this experience</button>
-
 </div>

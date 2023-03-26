@@ -58,6 +58,7 @@ import {IsLoggedInDirective} from "./routes/global/is-logged-in-directive";
 import {IsNotLoggedInDirective} from "./routes/global/is-not-logged-in-directive";
 import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in-user-has-no-salary-history-directive";
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
+import { FaqComponent } from './routes/faq/faq.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -66,11 +67,9 @@ const routes: Routes = [
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
-  {path: 'add-user-infos', component: AddUserInfosComponent},
   {path: 'test', component: TestComponent},
+  {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
-  {path: 'signup', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -111,7 +110,8 @@ const routes: Routes = [
     IsLoggedInDirective,
     IsNotLoggedInDirective,
     LoggedInUserHasNoSalaryHistoryDirective,
-    LoggedInUserHasSalaryHistoryDirective
+    LoggedInUserHasSalaryHistoryDirective,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

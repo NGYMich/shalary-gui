@@ -28,6 +28,12 @@ body {
   font-size: 14px;
   border-radius: 5px !important;
   border-color: white !important;
+  margin-left: 5px;
+}
+
+.my-career {
+  background-color: royalblue;
+  color: white; margin-right: 10px;
 }
 
 .router-pages-button-login {
@@ -48,6 +54,15 @@ body {
   color: whitesmoke;
 }
 
+.router-pages-button-logout {
+  font-size: 14px;
+  border-radius: 5px !important;
+  border-color: white !important;
+  background-color: indianred;
+  color: white;
+}
+
+
 .dropdown-router-pages-button {
   color: white;
   font-size: 14px;
@@ -59,7 +74,12 @@ body {
 }
 
 .careers-and-salaries {
-  width: 100px;
+  width: 170px;
+  margin: 5px;
+}
+
+.test-and-user-feedbacks {
+  width: 150px;
   margin: 5px;
 }
 

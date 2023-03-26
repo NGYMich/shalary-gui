@@ -6,6 +6,7 @@ import {UserInputErrorDialogComponent} from "./user-infos/user-input-error-dialo
 import {RegisterComponent} from "./routes/authentication/register/register.component";
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 import {LoginComponent} from "./routes/authentication/login/login.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,7 @@ export class AppComponent {
   temporaryDisabled = false;
   loggedUser: any = null
 
-  constructor(private tokenStorageService: TokenStorageService,
-              public dialog: MatDialog,
-  ) {
+  constructor(private tokenStorageService: TokenStorageService, public dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -30,7 +29,9 @@ export class AppComponent {
 
   logOut() {
     this.tokenStorageService.signOut()
-    window.location.reload()
+    this.router.navigate(['/salaries/view1']).then(() =>
+      window.location.reload()
+    )
   }
 
   openSignupDialog() {

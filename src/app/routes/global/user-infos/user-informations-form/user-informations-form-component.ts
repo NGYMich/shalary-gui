@@ -47,17 +47,23 @@ export class UserInformationsFormComponent {
     this.loadCountriesWithFlag()
     this.userInformationsForm = this.formBuilder.group({
       username: new FormControl(this.userToModify?.username, Validators.required),
-      password: new FormControl(this.userToModify?.password, Validators.required),
+      password: new FormControl(this.userToModify?.password),
       email: new FormControl(this.userToModify?.email, Validators.required),
-      currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency, Validators.required),
-      yearsOfExperience: new FormControl(this.userToModify?.salaryHistory?.totalYearsOfExperience, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+      currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency,
+        // Validators.required
+      ),
+      yearsOfExperience: new FormControl(this.userToModify?.salaryHistory?.totalYearsOfExperience,
+        // Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])
+      ),
       education: new FormControl(this.userToModify?.education),
       age: new FormControl(this.userToModify?.age, Validators.pattern('^[0-9]*$')),
       gender: new FormControl(this.userToModify?.gender),
       comment: new FormControl(this.userToModify?.comment),
       city: new FormControl(this.userToModify?.city),
     });
-    this.countriesControl = new FormControl(this.userToModify?.location, (Validators.required))
+    this.countriesControl = new FormControl(this.userToModify?.location,
+      // (Validators.required)
+    )
   }
 
 

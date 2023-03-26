@@ -1,3 +1,5 @@
+import {environment} from "../../../environments/environment";
+
 export const commonEducationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
 export const commonCurrencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)', 'CHF (₣)', 'AUD (AU$)', 'CAD (C$)'];
 export const commonGenders = ['Male', 'Female']
@@ -19,7 +21,7 @@ export const commonSectors = [
 ]
 
 export class AppConstants {
-  private static API_BASE_URL = "http://localhost:2111/";
+  private static API_BASE_URL = environment.baseUrl;
   private static OAUTH2_URL = AppConstants.API_BASE_URL + "oauth2/authorization/";
   private static REDIRECT_URL = "?redirect_uri=http://localhost:4200/login";
   public static API_URL = AppConstants.API_BASE_URL + "api/";
