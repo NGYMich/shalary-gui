@@ -85,7 +85,7 @@ export class AddUserInfosComponent implements OnInit, OnDestroy {
   }
 
   redirectToSalariesPage() {
-    this.router.navigate(['/salaries'])
+    this.router.navigate(['/salaries/view1'])
   }
 
   private setErrorMessages(isUserAdded, salaryInformationsError, userInformationError) {

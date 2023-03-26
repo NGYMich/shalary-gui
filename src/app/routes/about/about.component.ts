@@ -11,6 +11,7 @@ export class AboutComponent implements OnInit {
     'Add categories / filters',
     'Add data : by location, age, min/max/means, recommendations',
     'Responsive / mobile => see homepage, save user, etc',
+    'Fix back-end and see why SQL is bugged sometimes (check setSalaryInfos etc)',
     'Must add experiences in order to unlock all salaries',
     'User authentification ?',
     'Think about limiting to only one or few countries ? FR/UK/USA/GER ? Translation ?',
@@ -25,6 +26,7 @@ export class AboutComponent implements OnInit {
     'Fix homepage',
     'Add animations',
     'Add banner',
+    'Mouka suggestion : make one view and collapse with a "hide button"',
 
   ];
 

@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import * as packageInfo from '../../package.json';
-import {DeviceDetectorService} from "ngx-device-detector";
-import {RouterOutlet} from "@angular/router";
+import {TokenStorageService} from "./services/TokenStorageService";
 
 @Component({
   selector: 'app-root',
@@ -12,4 +11,16 @@ export class AppComponent {
   title = 'shalary-gui';
   shalaryGuiVersion = packageInfo
   temporaryDisabled = false;
+  loggedUser: any = null
+
+  constructor(private tokenStorageService: TokenStorageService) {
+  }
+
+  ngOnInit() {
+    this.loggedUser = this.tokenStorageService.getUser()
+    console.log(this.loggedUser)
+  }
+
+
+
 }

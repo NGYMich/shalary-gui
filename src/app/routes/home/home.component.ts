@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   redirectToSalariesPage() {
-    this.router.navigate(['/salaries'])
+    this.router.navigate(['/salaries/view1'])
   }
 
 }

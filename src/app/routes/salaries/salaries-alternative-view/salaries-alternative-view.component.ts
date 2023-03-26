@@ -15,6 +15,7 @@ import {DeviceDetectorService} from "ngx-device-detector";
 import {Serie} from "../../../model/serie";
 import {JobCellRendererAlternativeView} from "./job-cell-renderer-alternative-view";
 import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-alternative-view";
+import {TokenStorageService} from "../../../services/TokenStorageService";
 
 @Component({
   selector: 'app-salaries-alternative-view',
@@ -72,6 +73,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
               private router: Router,
               private deviceService: DeviceDetectorService,
               private userService: UserService, private forexService: ForexService,
+              private tokenStorage: TokenStorageService,
   ) {
     Object.assign(this, this.dataGraph);
   }
@@ -82,6 +84,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     this.loadMostPopularCountries();
     this.loadUsers();
     this.loadForexes();
+    console.log(this.tokenStorage.getUser());
   }
 
 

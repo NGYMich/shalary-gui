@@ -47,6 +47,13 @@ import { SalariesAlternativeViewComponent } from './routes/salaries/salaries-alt
 import {JobCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/job-cell-renderer-alternative-view";
 import {CompanyCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/company-cell-renderer-alternative-view";
 import {MatMenuModule} from "@angular/material/menu";
+import { AuthenticationComponent } from './routes/authentication/authentication.component';
+import { LoginComponent } from './routes/authentication/login/login.component';
+import { RegisterComponent } from './routes/authentication/register/register.component';
+import { ProfileComponent } from './routes/authentication/profile/profile.component';
+import { BoardUserComponent } from './routes/authentication/board-user/board-user.component';
+import { BoardAdminComponent } from './routes/authentication/board-admin/board-admin.component';
+import { BoardModeratorComponent } from './routes/authentication/board-moderator/board-moderator.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -58,6 +65,8 @@ const routes: Routes = [
   {path: 'add-user-infos', component: AddUserInfosComponent},
   {path: 'test', component: TestComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+  {path: 'signup', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -88,6 +97,13 @@ const routes: Routes = [
     UserInformationsFormComponent,
     UserInputErrorDialogComponent,
     SalariesAlternativeViewComponent,
+    AuthenticationComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    BoardUserComponent,
+    BoardAdminComponent,
+    BoardModeratorComponent,
   ],
   imports: [
     BrowserModule,

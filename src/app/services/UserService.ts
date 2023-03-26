@@ -1,8 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {User} from "../model/user";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {environment} from "../../environments/environment";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {AppConstants} from "../routes/global/common-variables";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +57,27 @@ export class UserService {
       console.log(data);
       this._deleteOperationSuccessfulEvent$.next(true);
     });
+  }
+
+  // ALL AUTHENTICATION ENDPOINTS
+  //
+  getPublicContent(): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'all', { responseType: 'text' });
+  }
+
+  getUserBoard(): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'user', { responseType: 'text' });
+  }
+
+  getModeratorBoard(): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'mod', { responseType: 'text' });
+  }
+
+  getAdminBoard(): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'admin', { responseType: 'text' });
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'user/me', httpOptions);
   }
 }

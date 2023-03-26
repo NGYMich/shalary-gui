@@ -31,11 +31,14 @@
         </mat-menu>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/data">Data Analytics</button>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/about">User Feedback</button>
-        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/test">Test Page</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/test">F.A.Q</button>
       </div>
 
       <div fxFlex fxLayoutAlign="flex-end center">
-        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>
+        <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
+        <button *ngIf="loggedUser == null" class="router-pages-button" mat-button routerLinkActive="active_route" routerLink="/signup">Sign up</button>
+        <button *ngIf="loggedUser == null" class="router-pages-button" mat-button routerLinkActive="active_route" routerLink="/login">Log in</button>
+        <span *ngIf="loggedUser != null" style="font-size: 14px;">Welcome {{loggedUser.displayName}} !</span>
       </div>
 
     </div>
@@ -52,7 +55,7 @@
         <a mat-button routerLink="/edit-user-infos">Update user experience</a>
         <a mat-button routerLink="/data">Data Analytics</a>
         <a mat-button routerLink="/about">User Feedback</a>
-        <a mat-button routerLink="/test">Test Page</a>
+        <a mat-button routerLink="/test"></a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="website-background-color">
