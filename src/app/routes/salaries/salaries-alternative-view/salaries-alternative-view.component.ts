@@ -85,7 +85,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   ngOnInit(): void {
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
-    this.loadUsers();
+    this.loadUsersWithSalaryHistory();
     this.loadForexes();
     console.log(this.tokenStorage.getUser());
   }
@@ -321,7 +321,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
         {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-        {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
         {
           field: 'salaryHistory.totalYearsOfExperience',
           headerName: 'Experience',
@@ -458,7 +458,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', hide: true},
     {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
     {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: false},
-    {field: 'lastUpdate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
+    {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true},
     {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true},
     {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true},
     {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true},
@@ -471,9 +471,9 @@ export class SalariesAlternativeViewComponent implements OnInit {
     return params.value + ' years'
   }
 
-  loadUsers() {
+  loadUsersWithSalaryHistory() {
     this.userService.getUsersWithSalaryHistory().subscribe((users: User[]) => {
-      this.rowData = users;
+      this.rowData = users.slice(0,500);
       this.currentUser = users[0];
       this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency
       if (this.currentUser.salaryHistory.salaryInfos.length > 0) {

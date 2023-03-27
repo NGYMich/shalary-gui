@@ -24,27 +24,18 @@ export class DataComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-      this.userCountries = this.users.map(user => user.location)
-      console.log(this.users)
-    })
-  }
-
-
   private loadLocations() {
-    this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
-      let flagsToIgnore = ["Afghanistan"];
-      console.log("countries :", data);
-      this.userService.getUsers().subscribe((users: User[]) => {
-        this.users = users;
-        this.userCountries = this.users.map(user => user.location)
-        this.countries = data.filter(flag => flag.flag != null && !flagsToIgnore.includes(flag.name) && this.userCountries.includes(flag.name))
-        console.log("userCountries :", this.userCountries);
-
-      })
-
-    })
+    // this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
+    //   let flagsToIgnore = ["Afghanistan"];
+    //   console.log("countries :", data);
+    //   this.userService.getUsers().subscribe((users: User[]) => {
+    //     this.users = users;
+    //     this.userCountries = this.users.map(user => user.location)
+    //     this.countries = data.filter(flag => flag.flag != null && !flagsToIgnore.includes(flag.name) && this.userCountries.includes(flag.name))
+    //     console.log("userCountries :", this.userCountries);
+    //
+    //   })
+    //
+    // })
   }
 }
