@@ -26,22 +26,26 @@ export class AboutComponent implements OnInit {
   graphicalSuggestions: string[] = [
     '------------------------------ First priority -----------------------------',
     'Make sector writable instead of select ? Or multi select ?',
-    '',
-    'Log out button',
+    'Make multiform? Do we do it after sign up or during ?',
+    'Make sign up / login forms with material ui',
+    'Get salary currency in function of country ?',
     'Hide .properties passwords',
+    'Fix share your experience button',
     'Inspire from CMC log in / register system',
     'Make "tips" button for ag grid',
+    'Make login usable with username OR email',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',
     "Add more validators for text size / max length / max number of experiences etc",
+    'Make search by country on the right of Home button?',
     "Fix put on red wrong validators",
     'Fix homepage',
+    'Set max length / line break before displaying [...] in ag grid',
     'Add animations',
     'Add banner',
     'Mouka suggestion : make one view and collapse with a "hide button"',
     'Sovi suggestion : thumbs up / thumbs down for trust indicator',
-
   ];
 
   otherSuggestions: string[] = [

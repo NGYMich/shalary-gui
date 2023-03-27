@@ -2,25 +2,26 @@
 <div *isNotMobile>
   <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
     <div>
-      <h1> Informations</h1>
+      <h1 style="text-align: center"> Informations</h1>
 
       <form [formGroup]="userInformationsForm">
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Username</mat-label>
           <input maxLength="25" formControlName="username" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Password</mat-label>
-          <input type="password" formControlName="password" matInput>
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput>
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Email</mat-label>
           <input formControlName="email" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Salary Currency</mat-label>
           <mat-select [(value)]="selectedCurrency" formControlName="currency">
             <mat-option *ngFor="let currency of currencies"
@@ -28,7 +29,7 @@
           </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
           <mat-label>Country</mat-label>
           <mat-autocomplete #auto="matAutocomplete">
@@ -41,19 +42,19 @@
         </mat-form-field>
 
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">City (optional)</mat-label>
           <input maxLength="50" formControlName="city" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
-          <mat-label>Total Years of Experience *</mat-label>
+        <mat-form-field appearance="outline" class="full-width-line">
+          <mat-label>Total Years of Experience</mat-label>
           <input formControlName="yearsOfExperience" matInput>
         </mat-form-field>
         <br>
 
 
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">Education (optional)</mat-label>
           <mat-select [(value)]="selectedEducation" formControlName="education">
             <mat-option *ngFor="let educationLevel of educationLevels"
@@ -63,12 +64,12 @@
 
 
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">Age (optional)</mat-label>
           <input formControlName="age" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">Gender (optional)</mat-label>
           <mat-select [(value)]="selectedGender" formControlName="gender">
             <mat-option *ngFor="let gender of genders"
@@ -76,13 +77,14 @@
           </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">Comment (optional)</mat-label>
           <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
         </mat-form-field>
       </form>
     </div>
   </div>
+
 </div>
 
 <div class="col-xs-12" *isMobile>
@@ -92,21 +94,21 @@
       <br style="clear:both"/>
 
       <form [formGroup]="userInformationsForm">
-        <mat-form-field style="width: 45%; margin-right: 5%; float: left;">
+        <mat-form-field appearance="outline" style="width: 45%; margin-right: 5%; float: left;">
           <mat-label>Username</mat-label>
           <input maxLength="25" formControlName="username" matInput>
         </mat-form-field>
-        <mat-form-field style="width: 45%; ; float: left;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left;">
           <mat-label>Password</mat-label>
           <input type="password" formControlName="password" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Email</mat-label>
           <input formControlName="email" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field style="width: 45%; ; float: left; margin-right: 5%;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
           <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
           <mat-label>Country</mat-label>
           <mat-autocomplete #auto="matAutocomplete">
@@ -117,35 +119,35 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <mat-form-field style="width: 45%; ; float: left;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left;">
           <mat-label class="optional">City (optional)</mat-label>
           <input maxLength="50" formControlName="city" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field style="width: 45%; ; float: left; margin-right: 5%;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
           <mat-label>Salary Currency</mat-label>
           <mat-select [(value)]="selectedCurrency" formControlName="currency">
             <mat-option *ngFor="let currency of currencies"
                         [value]="currency">{{currency}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field style="width: 45%; ; float: left;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left;">
           <mat-label>Total Years of Experience</mat-label>
           <input formControlName="yearsOfExperience" matInput>
         </mat-form-field>
         <br>
-        <mat-form-field style="width: 45%; ; float: left; margin-right: 5%;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
           <mat-label class="optional">Education (optional)</mat-label>
           <mat-select [(value)]="selectedEducation" formControlName="education">
             <mat-option *ngFor="let educationLevel of educationLevels"
                         [value]="educationLevel">{{educationLevel}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field style="width: 45%; ; float: left; margin-right: 5%;">
+        <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
           <mat-label class="optional">Age (optional)</mat-label>
           <input formControlName="age" matInput>
         </mat-form-field>
-        <mat-form-field style="width: 35%; ; float: left;">
+        <mat-form-field appearance="outline" style="width: 35%; ; float: left;">
           <mat-label class="optional">Gender (optional)</mat-label>
           <mat-select [(value)]="selectedGender" formControlName="gender">
             <mat-option *ngFor="let gender of genders"
@@ -153,7 +155,7 @@
           </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-line">
+        <mat-form-field appearance="outline" class="full-width-line">
           <mat-label class="optional">Comment (optional)</mat-label>
           <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
         </mat-form-field>

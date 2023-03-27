@@ -33,6 +33,7 @@ export class UserInformationsFormComponent {
   isUserLoaded: boolean = false;
   showPasswordError: boolean;
   allCountriesWithTheirFlags: any;
+  showPassword: boolean = false;
 
 
   ngOnChanges() {
@@ -95,5 +96,9 @@ export class UserInformationsFormComponent {
 
   get userInfos(): FormArray {
     return this.userInformationsForm.get('userInfos') as FormArray;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

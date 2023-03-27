@@ -1,13 +1,6 @@
-.optional {
-  font-style: italic;
-}
 
 .job-form-field {
-  width: 9%;
-}
-
-.full-width-line {
-  width: 95%;
+  width: 8%;
 }
 
 .job-form-field.with-margin-right-30px {
@@ -18,11 +11,13 @@
   font-style: italic;
 }
 
+.full-width-line {
+  width: 95%;
+  height: 62px;
+}
 
-.col-xs-2, .col-xs-8 {
-  background-color: whitesmoke;
-  padding: 20px 40px 30px;
-  border-radius: 30px;
+.optional {
+  font-style: italic;
 }
 
 h1 {

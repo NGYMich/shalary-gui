@@ -52,11 +52,11 @@
 }
 
 
-.col-xs-2, .col-xs-8 {
-  background-color: whitesmoke;
+.col-xs-2, .col-xs-9 {
+  background-color: white;
   padding: 20px 40px 30px;
-  border-radius: 30px;
-  border: 1px solid gray;
+  /*border-radius: 30px;*/
+  border: 1px solid #dddddd;
 }
 
 .div-user-to-modify {
