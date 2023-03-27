@@ -144,7 +144,8 @@ export class SalariesComponent implements OnInit {
           sortable: true,
           resizable: true,
           valueFormatter: this.experienceFormatter,
-          filter: 'agTextColumnFilter', width: 150,
+          filter: 'agTextColumnFilter',
+          width: 150,
           cellStyle: params => {
             let experience = params.value;
             switch (true) {

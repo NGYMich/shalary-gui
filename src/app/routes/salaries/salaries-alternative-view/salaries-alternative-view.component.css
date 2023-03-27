@@ -9,7 +9,14 @@
   color: white;
   border-radius: 15px !important;
 }
-
+.cell-wrap-text {
+  white-space: normal !important;
+}
+.ag-row .ag-cell {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+}
 .flag-and-currency-title {
   font-size: 14px;
   font-weight: bold;
@@ -24,6 +31,7 @@
   border-style: solid;
   padding-left: 5px;
   padding-right: 5px;
+  margin-right: 2px;
   background-color: azure;
   color: black;
   height: 25px;
