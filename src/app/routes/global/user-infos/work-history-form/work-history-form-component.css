@@ -30,5 +30,6 @@ h1 {
 .mat-raised-button.mat-add-job {
   background-color: cornflowerblue;
   color: white;
-  width: 30%;
+  width: 35%;
+  font-size: 16px;
 }

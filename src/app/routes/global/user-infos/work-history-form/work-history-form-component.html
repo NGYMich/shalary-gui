@@ -2,9 +2,10 @@
   <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
 
     <h1 style="text-align: center">Work History</h1>
-    <div style="text-align: center; ">
+    <div style="text-align: center;">
       <button (click)="addNewJobFormLine(true)"
               color="add-job"
+              style=" font-size: 18px;"
               mat-raised-button>
         Add an experience
       </button>
