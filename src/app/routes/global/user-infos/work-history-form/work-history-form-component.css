@@ -22,9 +22,9 @@ h1 {
   font-style: italic;
 }
 
-.mat-raised-button.mat-remove-job {
-  background-color: darkgrey;
-  color: white;
+.mat-flat-button.mat-remove-job {
+  background-color: white;
+  color: black;
 }
 
 .mat-raised-button.mat-add-job {
