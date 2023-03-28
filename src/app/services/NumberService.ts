@@ -11,7 +11,9 @@ export class NumberService {
 
   formatCurrency(currency: string) {
     let regExp = /\(([^)]+)\)/;
-    return (currency.includes("(") && currency.includes(")")) ? regExp.exec(currency)![1] : currency;
+    if (currency != null)
+      return (currency.includes("(") && currency.includes(")")) ? regExp.exec(currency)![1] : currency;
+    return ""
   }
 
   nFormatter(num, digits) {

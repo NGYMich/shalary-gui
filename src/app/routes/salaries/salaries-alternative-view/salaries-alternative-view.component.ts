@@ -640,7 +640,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   private applyRateToSalary(params, totalSalary: number | null) {
-    if (params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
+    if (params.data.salaryHistory && params.data.salaryHistory.salaryCurrency != null && params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
       let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
       let rate = (pair in this.forexRates) ? this.forexRates[pair] : 1
       return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;
