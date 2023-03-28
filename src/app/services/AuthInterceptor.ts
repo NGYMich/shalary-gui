@@ -24,11 +24,12 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe( tap(() => {},
       (err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status !== 401 || window.location.pathname === loginPath) {
+          console.log(err)
+          if (err.status === 401 || window.location.pathname === loginPath) {
             return;
           }
           this.token.signOut();
-          window.location.href = loginPath;
+          // window.location.href = loginPath;
         }
       }
     ));
