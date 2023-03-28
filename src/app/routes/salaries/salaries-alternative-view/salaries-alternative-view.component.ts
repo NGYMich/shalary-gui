@@ -16,6 +16,7 @@ import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-altern
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {RegisterComponent} from "../../authentication/register/register.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AppConstants} from "../../global/common-variables";
 
 @Component({
   selector: 'app-salaries-alternative-view',
@@ -417,7 +418,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
         return copyVerticalAlignColumn;
       },
       autoHeight: true,
-      width: 200
+      width: 250
     },
 
     {
@@ -427,7 +428,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       resizable: true,
       valueFormatter: this.experienceFormatter,
       filter: 'agTextColumnFilter',
-      width: 130,
+      width: 120,
       cellStyle: params => {
         let style = {
           'height': '100%',
@@ -454,7 +455,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
       cellRendererFramework: LocationCellRenderer, hide: true, cellStyle: () => {
         return this.verticalAlignColumn;
       },
-
     },
 
     {
@@ -462,16 +462,8 @@ export class SalariesAlternativeViewComponent implements OnInit {
         return this.verticalAlignColumn;
       },
     },
-    {
-      field: 'salaryHistory.salaryInfos', hide: true, cellStyle: () => {
-        return this.verticalAlignColumn;
-      },
-    },
-    {
-      field: 'salaryHistory', hide: true, cellStyle: () => {
-        return this.verticalAlignColumn;
-      },
-    },
+    {field: 'salaryHistory.salaryInfos', hide: true,},
+    {field: 'salaryHistory', hide: true,},
     {
       value: 'totalSalary',
       valueGetter: this.totalSalaryValueGetter.bind(this),
@@ -498,11 +490,11 @@ export class SalariesAlternativeViewComponent implements OnInit {
           style["background-color"] = '#c4e0b8'
         else if (salary < 40000)
           style["background-color"] = '#a8e28e'
-        else if (salary >= 50000)
+        else if (salary < 60000)
           style["background-color"] = '#9de080'
-        else if (salary >= 60000)
+        else if (salary < 80000)
           style["background-color"] = '#8ad569'
-        else if (salary >= 70000)
+        else if (salary >= 80000)
           style["background-color"] = '#79cd54'
         return style
       }
@@ -611,8 +603,8 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   openSignupDialog(event): void {
     let dialogRef = this.dialog.open(RegisterComponent, {
-      width: '500px',
-      height: '620px',
+      width: AppConstants.SIGN_UP_DIALOG_WIDTH,
+      height: AppConstants.SIGN_UP_DIALOG_HEIGHT,
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });

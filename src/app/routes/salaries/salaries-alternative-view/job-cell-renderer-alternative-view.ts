@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
   template: `
       <div style="line-height: 30px">
         <span style="font-weight: bold; margin-bottom: 100px;">
-          <img [src]="params.data.locationImage | safe:'resourceUrl'" height="18" width="28"
+          <img *ngIf="params.data.locationImage != null" [src]="params.data.locationImage | safe:'resourceUrl'" height="18" width="28"
                style="border-width: 1px; border-style: solid; margin-right: 3px;">
             {{this.jobName}}
 <!--          ({{this.params.data.salaryHistory.totalYearsOfExperience}}-->

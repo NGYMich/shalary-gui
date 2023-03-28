@@ -1,26 +1,51 @@
-<div class="col-xs-12" style="margin-top: 35px;">
+<div class="col-xs-12" style="margin-top: 10px;">
   <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <div style="text-align: center ; margin-bottom: 15px;">
+      <h1>Welcome</h1>
+      <h3>Log in to continue to Shalary</h3>
+    </div>
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="userInformationsForm.valid && onSubmit()" #f="ngForm" novalidate (keyup.enter)="userInformationsForm.valid && onSubmit()" >
+      <form [formGroup]="userInformationsForm">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
-    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <div class="form-group">
-        <label for="username">Email</label> <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel"/>
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">Username is required!</div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label> <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="4²"
-                                                      #password="ngModel"/>
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors != null  && password.errors['minlength']">Password is required</div>
-          <div *ngIf="password.errors != null && password.errors['minlength']">Password must be at least 4 characters</div>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input [type]="showPassword ? 'text' : 'password'"  matInput [formControl]="passwordFormControl" minlength=4>
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="passwordFormControl.hasError('password') && !passwordFormControl.hasError('minlength')">
+            Password must be at least 4 characters
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+        <div class="form-group" style="margin-top: 0; padding-top: 0; color: red">
+          <div role="alert" *ngIf="isLoginFailed">
+            <mat-icon style="vertical-align: bottom">error</mat-icon> Login failed : {{ errorMessage }}</div>
         </div>
+      </form>
+      <div style="font-size: 14px; margin-bottom: 15px;">
+        <a href="">Forgot password ?</a>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Login</button>
+        <button mat-button color="accent" style="width: 100%; height: 40px; background-color: royalblue; color:white;">Login</button>
       </div>
-      <div class="form-group">
-        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
+
+      <div style="font-size: 14px;; margin-bottom: 15px;">
+        Don't have an account? <a href="javascript:void(0);" (click)="redirectToSignup()">Sign up</a>
       </div>
+
       <div class="form-group">
         <p class="content-divider center mt-3">
           <span>or</span>
@@ -44,4 +69,6 @@
     <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.username}} <br>Logged in as {{ currentUser.username }}.</div>
   </div>
 </div>
+
+
 

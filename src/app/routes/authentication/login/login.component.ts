@@ -5,6 +5,8 @@ import {AppConstants} from "../../global/common-variables";
 import {UserService} from "../../../services/UserService";
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {MatDialog} from "@angular/material/dialog";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {RegisterComponent} from "../register/register.component";
 
 
 @Component({
@@ -23,6 +25,13 @@ export class LoginComponent implements OnInit {
   facebookURL = AppConstants.FACEBOOK_AUTH_URL;
   githubURL = AppConstants.GITHUB_AUTH_URL;
   linkedinURL = AppConstants.LINKEDIN_AUTH_URL;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
+  userInformationsForm: FormGroup = new FormGroup({
+    email: this.emailFormControl,
+    password: this.passwordFormControl
+  });
+  showPassword: boolean;
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
@@ -56,13 +65,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.login(this.form).subscribe(
+    console.log(this.userInformationsForm.value)
+    this.authService.login(this.userInformationsForm.value).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.login(data.user);
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error.message.startsWith("Bad credentials") ? "Wrong username or password" : err.error.message;
         this.isLoginFailed = true;
       }
     );
@@ -86,9 +96,19 @@ export class LoginComponent implements OnInit {
     } else {
       window.location.reload()
     }
-
-
-    // setTimeout(() =>), 3000 )
   }
 
+  redirectToSignup() {
+    this.dialog.closeAll()
+    this.dialog.open(RegisterComponent, {
+      width: AppConstants.SIGN_UP_DIALOG_WIDTH,
+      height: AppConstants.SIGN_UP_DIALOG_HEIGHT,
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
+    });
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }

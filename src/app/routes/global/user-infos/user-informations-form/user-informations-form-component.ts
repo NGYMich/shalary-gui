@@ -94,10 +94,6 @@ export class UserInformationsFormComponent {
     return this.allCountriesWithTheirFlags.filter(country => country.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  get userInfos(): FormArray {
-    return this.userInformationsForm.get('userInfos') as FormArray;
-  }
-
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
