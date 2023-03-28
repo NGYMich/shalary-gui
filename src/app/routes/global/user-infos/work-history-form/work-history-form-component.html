@@ -23,6 +23,9 @@
                             class="with-margin-right-30px">
               <input formControlName="jobName" matInput/>
               <mat-label class="optional">Job Name</mat-label>
+              <mat-error>
+                Job Name is required
+              </mat-error>
             </mat-form-field>
 
             <div formGroupName="company">
@@ -57,11 +60,14 @@
             <mat-form-field appearance="outline" style="margin-right: 20px; width: 10%;">
               <mat-label>Years of XP *</mat-label>
               <input formControlName="yearsOfExperience" matInput/>
+              <mat-error>
+                Years of XP is required
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary  with-margin-right-30px">
               <input formControlName="baseSalary" matInput/>
-              <mat-label>Base Salary</mat-label>
+              <mat-label>Base Salary *</mat-label>
               <mat-hint align="start">Gross annual</mat-hint>
             </mat-form-field>
 

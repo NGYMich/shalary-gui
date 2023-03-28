@@ -29,10 +29,31 @@ export class WorkHistoryFormComponent {
   }
 
 
-  addNewJobFormLine(copyPastLine: boolean = true, second: boolean = false) {
-    let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
-    let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
-    this.salaryInfos.push(this.formBuilder.group(controlsConfig))
+  addNewJobFormLine(copyPastLine: boolean = true, second: boolean = false, init: boolean = false) {
+    if (this.salaryInfos.length != 0) {
+      let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
+      let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
+      this.salaryInfos.push(this.formBuilder.group(controlsConfig))
+    } else {
+      this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
+    }
+
+  }
+
+  private createEmptySalaryInfo() {
+    return {
+      yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+      jobName: new FormControl('', Validators.required),
+      baseSalary: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+      stockSalary: new FormControl(''),
+      bonusSalary: new FormControl(''),
+      company: this.formBuilder.group({
+        name: '',
+        sector: ''
+      }),
+      contractType: new FormControl('')
+
+    };
   }
 
   private copyLastSalaryInfoForNewJobLine(lastSalaryInfo: AbstractControl, copyPastLine: boolean, second: boolean) {
@@ -67,20 +88,19 @@ export class WorkHistoryFormComponent {
 
       };
     }
-      return {
-        yearsOfExperience: new FormControl('5', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-        jobName: new FormControl('Intermediate DevOps Engineer', Validators.required),
-        baseSalary: new FormControl('55000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-        stockSalary: new FormControl('2000'),
-        bonusSalary: new FormControl('2000'),
-        company: this.formBuilder.group({
-          name: 'BNP Paribas',
-          sector: 'Finance / Banking'
-        }),
-        contractType: new FormControl('Full-time')
+    return {
+      yearsOfExperience: new FormControl('5', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+      jobName: new FormControl('Intermediate DevOps Engineer', Validators.required),
+      baseSalary: new FormControl('55000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+      stockSalary: new FormControl('2000'),
+      bonusSalary: new FormControl('2000'),
+      company: this.formBuilder.group({
+        name: 'BNP Paribas',
+        sector: 'Finance / Banking'
+      }),
+      contractType: new FormControl('Full-time')
 
-      };
-
+    };
 
 
   }
@@ -91,10 +111,9 @@ export class WorkHistoryFormComponent {
 
   async initWorkHistory() {
     if (this.userToModify != null && this.userToModify.salaryHistory == null) {
-      this.addNewJobFormLine(false);
-      this.addNewJobFormLine(false, true);
+      this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
       console.log(this.salaryInfos)
-    } else  {
+    } else {
       console.log('init work history')
       await this.userToModify
       this.userToModify?.salaryHistory?.salaryInfos?.forEach(

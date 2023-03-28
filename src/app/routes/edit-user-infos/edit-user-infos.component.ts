@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../services/UserService";
-import {User} from "../../model/user";
-import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocationService} from "../../services/LocationService";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../../user-infos/delete-user-dialog/delete-user-dialog.component";
@@ -20,7 +18,6 @@ import {TokenStorageService} from "../../services/TokenStorageService";
 export class EditUserInfosComponent implements OnInit {
   @ViewChild(WorkHistoryFormComponent, {static: false}) workHistoryFormComponent: WorkHistoryFormComponent;
   @ViewChild(UserInformationsFormComponent, {static: false}) userInformationsFormComponent: UserInformationsFormComponent;
-
 
 
   // Error messages
@@ -52,10 +49,10 @@ export class EditUserInfosComponent implements OnInit {
   modifyUser($event: MouseEvent) {
     let allFormsAreValid = this.userInformationsForm.valid && this.userInformationsFormComponent.countriesControl.valid && this.salaryInfosForm.valid;
     if (allFormsAreValid) {
-      let user = this.buildModifiedUser();
-      console.dir(user)
-
-      this.userService.modifyUser(user).subscribe((response) => this.redirectToSalariesPage());
+      this.userService.modifyUser(this.buildModifiedUser()).subscribe(
+        () => this.redirectToSalariesPage(),
+        error => console.log(error.error.message)
+      );
     } else {
       this.openUserInputErrorDialog(
         !this.salaryInfosForm.valid,
