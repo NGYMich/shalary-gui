@@ -51,15 +51,19 @@ export class EditUserInfosComponent implements OnInit {
     if (allFormsAreValid) {
       this.userService.modifyUser(this.buildModifiedUser()).subscribe(
         () => this.redirectToSalariesPage(),
-        error => console.log(error.error.message)
+        error => {
+          console.log(error.error.message)
+          this.openUserInputErrorDialog(
+            !this.salaryInfosForm.valid,
+            !this.userInformationsForm.valid || !this.userInformationsFormComponent.countriesControl.valid,
+            this.userInformationsForm,
+            this.salaryInfosForm,
+            error.error.message
+          )
+        }
       );
     } else {
-      this.openUserInputErrorDialog(
-        !this.salaryInfosForm.valid,
-        !this.userInformationsForm.valid || !this.userInformationsFormComponent.countriesControl.valid,
-        this.userInformationsForm,
-        this.salaryInfosForm
-      )
+      this.openUserInputErrorDialog(!this.salaryInfosForm.valid, !this.userInformationsForm.valid || !this.userInformationsFormComponent.countriesControl.valid, this.userInformationsForm, this.salaryInfosForm, null)
     }
   }
 
@@ -104,15 +108,16 @@ export class EditUserInfosComponent implements OnInit {
     this.userService.deleteUser(this.userInformationsForm.get('username')!.value, this.userToModify!.id!);
   }
 
-  openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm) {
+  openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message) {
     let dialogRef = this.dialog.open(UserInputErrorDialogComponent, {
-      width: '200',
-      height: '200',
+      width: '800px',
+      height: '600px',
       data: {
         userInformationError: userInformationError,
         salaryInformationsError: salaryInformationsError,
         userInformationsForm: userInformationsForm,
         salaryInfosForm: salaryInfosForm,
+        errorMessage: message
       },
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']

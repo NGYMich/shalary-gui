@@ -13,13 +13,16 @@ export class UserInputErrorDialogComponent implements OnInit {
   userInformationsForm: any;
   errors: any
   usernameAlreadyExists: any;
+  errorMessage: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
     this.userInformationError = this.data.userInformationError
     this.salaryInformationsError = this.data.salaryInformationsError
     this.usernameAlreadyExists = this.data.usernameAlreadyExists
     this.salaryInfosForm = this.data.salaryInfosForm
     this.userInformationsForm = this.data.userInformationsForm
+    this.errorMessage = this.data.errorMessage
 
+    console.log(this.errorMessage)
     this.errors = this.findInvalidControls(this.salaryInfosForm)
   }
   public findInvalidControls(form) {

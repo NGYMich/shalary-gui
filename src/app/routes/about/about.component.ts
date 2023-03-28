@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class AboutComponent implements OnInit {
   algorithmSuggestions: string[] = [
     '------------------------------ First priority ------------------------------',
-    '',
+    'Bugfix: create user1, create user2, ',
     '',
     '',
     '',

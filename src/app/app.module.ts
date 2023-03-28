@@ -59,6 +59,7 @@ import {IsNotLoggedInDirective} from "./routes/global/is-not-logged-in-directive
 import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in-user-has-no-salary-history-directive";
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 import {FaqComponent} from './routes/faq/faq.component';
+import {authInterceptorProviders} from "./services/AuthInterceptor";
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
@@ -70,6 +71,7 @@ const routes: Routes = [
   {path: 'test', component: TestComponent},
   {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+  {path: 'login', component: LoginComponent},
   {path: '**', component: SalariesAlternativeViewComponent},
 
 ];
@@ -139,8 +141,9 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSidenavModule,
     MatMenuModule,
+
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

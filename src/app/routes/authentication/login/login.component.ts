@@ -88,18 +88,22 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
-    let hasSalaryHistory = this.currentUser.salaryHistory != null
-    this.tokenStorage.saveHasSalaryHistory(JSON.stringify(hasSalaryHistory))
-    console.log(hasSalaryHistory)
+    this.tokenStorage.saveHasSalaryHistory(JSON.stringify(this.currentUser.hasSalaryHistory || this.currentUser.salaryHistory != null))
 
+    console.log(this.tokenStorage.getUser())
 
-    console.dir(this.tokenStorage.getHasSalaryHistory())
     if (!this.tokenStorage.getHasSalaryHistory()) {
       this.dialog.closeAll()
       this.router.navigate(['/edit-user-infos'])
-        .then(() => window.location.reload())
+        .then(
+          () => {
+            window.location.reload()
+            console.log('has salary history, grats')
+
+          })
     } else {
-      window.location.reload()
+      this.router.navigate(['/salaries/view1'])
+        .then(() => window.location.reload())
     }
   }
 

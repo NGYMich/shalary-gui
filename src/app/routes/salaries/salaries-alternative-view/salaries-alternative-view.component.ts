@@ -89,7 +89,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
     this.loadMostPopularCountries();
     this.loadUsersWithSalaryHistory();
     this.loadForexes();
-    console.log(this.tokenStorage.getUser());
   }
 
 
@@ -112,10 +111,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
   formatSalary(val) {
     return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + " " + this.numberService.formatCurrency(this.salaryCurrency);
     // return val
-  }
-
-  editOrRemoveExperience() {
-    this.router.navigate(['/edit-user-infos'], {state: {chosenUsernameToEdit: this.currentUser.username}});
   }
 
   formatSalaryMobile(val) {
@@ -294,7 +289,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
     let company;
 
-    if (salaryInfos != null) {
+    if (salaryInfos != null && salaryInfos.length > 0) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
       if (salaryInfos.length > 0 && latestCompany != null) {
         if (latestCompany.sector != null && latestCompany.sector != "") {
@@ -318,7 +313,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   //       {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
   //       {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
   //       {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-  //       {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRendererFramework: CompanyCellRenderer},
+  //       {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer},
   //       {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
   //       {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
   //       {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
@@ -348,7 +343,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   //       },
   //       {
   //         field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-  //         cellRendererFramework: LocationCellRenderer,
+  //         cellRenderer: LocationCellRenderer,
   //       },
   //
   //     ]
@@ -361,14 +356,13 @@ export class SalariesAlternativeViewComponent implements OnInit {
   //       {field: 'salaryHistory.salaryInfos', hide: true},
   //       {field: 'salaryHistory', hide: true},
   //       {
-  //         value: 'totalSalary',
   //         valueGetter: this.totalSalaryValueGetter.bind(this),
   //         width: 150,
   //         editable: true,
   //         headerName: 'Total salary',
   //         sortable: true, resizable: true,
   //         filter: 'agNumberColumnFilter',
-  //         cellRendererFramework: SalaryCellRenderer,
+  //         cellRenderer: SalaryCellRenderer,
   //         cellRendererParams: {selectedCurrency: this.selectedCurrency},
   //         cellStyle: params => {
   //           let salary = params.value;
@@ -391,9 +385,9 @@ export class SalariesAlternativeViewComponent implements OnInit {
   //           return
   //         }
   //       },
-  //       {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
-  //       {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
-  //       {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRendererFramework: SalaryCellRenderer},
+  //       {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
+  //       {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
+  //       {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
   //       {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
   //     ]
   //   },
@@ -403,7 +397,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
     {
       valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRendererFramework: JobCellRendererAlternativeView, cellStyle: () => {
+      cellRenderer: JobCellRendererAlternativeView, cellStyle: () => {
         return this.verticalAlignColumn;
       },
       autoHeight: true,
@@ -411,7 +405,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     },
     {
       valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRendererFramework: CompanyCellRendererAlternativeView,
+      cellRenderer: CompanyCellRendererAlternativeView,
       cellStyle: () => {
         let copyVerticalAlignColumn = {...this.verticalAlignColumn};
         copyVerticalAlignColumn["font-weight"] = 'bold'
@@ -452,7 +446,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     },
     {
       field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRendererFramework: LocationCellRenderer, hide: true, cellStyle: () => {
+      cellRenderer: LocationCellRenderer, hide: true, cellStyle: () => {
         return this.verticalAlignColumn;
       },
     },
@@ -465,14 +459,13 @@ export class SalariesAlternativeViewComponent implements OnInit {
     {field: 'salaryHistory.salaryInfos', hide: true,},
     {field: 'salaryHistory', hide: true,},
     {
-      value: 'totalSalary',
       valueGetter: this.totalSalaryValueGetter.bind(this),
       width: 130,
       editable: true,
       headerName: 'Salary',
       sortable: true, resizable: true,
       filter: 'agNumberColumnFilter',
-      cellRendererFramework: SalaryCellRenderer,
+      cellRenderer: SalaryCellRenderer,
       cellRendererParams: {selectedCurrency: this.selectedCurrency},
       cellStyle: params => {
         let style = {
@@ -527,17 +520,17 @@ export class SalariesAlternativeViewComponent implements OnInit {
     {
       valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: () => {
         return this.verticalAlignColumn;
-      }, columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true
+      }, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: true
     },
     {
       valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: () => {
         return this.verticalAlignColumn;
-      }, columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true
+      }, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: true
     },
     {
       valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: () => {
         return this.verticalAlignColumn;
-      }, columnGroupShow: 'open', cellRendererFramework: SalaryCellRenderer, hide: true
+      }, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: true
     },
     {
       valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: () => {

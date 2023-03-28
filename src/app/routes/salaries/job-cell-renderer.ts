@@ -31,7 +31,7 @@ export class JobCellRenderer {
     this.params = params;
     console.log(params.data)
     let salaryInfos = params.data.salaryHistory.salaryInfos;
-    if (salaryInfos != null) {
+    if (salaryInfos != null && salaryInfos.length > 0) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
       let latestJobName = salaryInfos[salaryInfos.length - 1].jobName;
       if (salaryInfos.length > 0) {
