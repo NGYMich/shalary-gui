@@ -39,29 +39,29 @@ import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
 import {IsMobileDirective} from "./routes/global/is-mobile-directive";
 import {IsNotMobileDirective} from "./routes/global/is-not-mobile-directive";
 import {CustomTooltip} from "./routes/salaries/custom-tooltip.component";
-import { AddUserInfosComponent } from './routes/add-user-infos/add-user-infos.component';
-import { WorkHistoryFormComponent } from './routes/global/user-infos/work-history-form/work-history-form-component';
-import { UserInformationsFormComponent } from './routes/global/user-infos/user-informations-form/user-informations-form-component';
-import { UserInputErrorDialogComponent } from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
-import { SalariesAlternativeViewComponent } from './routes/salaries/salaries-alternative-view/salaries-alternative-view.component';
+import {AddUserInfosComponent} from './routes/add-user-infos/add-user-infos.component';
+import {WorkHistoryFormComponent} from './routes/global/user-infos/work-history-form/work-history-form-component';
+import {UserInformationsFormComponent} from './routes/global/user-infos/user-informations-form/user-informations-form-component';
+import {UserInputErrorDialogComponent} from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
+import {SalariesAlternativeViewComponent} from './routes/salaries/salaries-alternative-view/salaries-alternative-view.component';
 import {JobCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/job-cell-renderer-alternative-view";
 import {CompanyCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/company-cell-renderer-alternative-view";
 import {MatMenuModule} from "@angular/material/menu";
-import { AuthenticationComponent } from './routes/authentication/authentication.component';
-import { LoginComponent } from './routes/authentication/login/login.component';
-import { RegisterComponent } from './routes/authentication/register/register.component';
-import { ProfileComponent } from './routes/authentication/profile/profile.component';
-import { BoardUserComponent } from './routes/authentication/board-user/board-user.component';
-import { BoardAdminComponent } from './routes/authentication/board-admin/board-admin.component';
-import { BoardModeratorComponent } from './routes/authentication/board-moderator/board-moderator.component';
+import {AuthenticationComponent} from './routes/authentication/authentication.component';
+import {LoginComponent} from './routes/authentication/login/login.component';
+import {RegisterComponent} from './routes/authentication/register/register.component';
+import {ProfileComponent} from './routes/authentication/profile/profile.component';
+import {BoardUserComponent} from './routes/authentication/board-user/board-user.component';
+import {BoardAdminComponent} from './routes/authentication/board-admin/board-admin.component';
+import {BoardModeratorComponent} from './routes/authentication/board-moderator/board-moderator.component';
 import {IsLoggedInDirective} from "./routes/global/is-logged-in-directive";
 import {IsNotLoggedInDirective} from "./routes/global/is-not-logged-in-directive";
 import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in-user-has-no-salary-history-directive";
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
-import { FaqComponent } from './routes/faq/faq.component';
+import {FaqComponent} from './routes/faq/faq.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  // {path: '', component: SalariesAlternativeViewComponent},
   {path: 'home', component: HomeComponent},
   {path: 'salaries/view2', component: SalariesComponent},
   {path: 'data', component: DataComponent},
@@ -70,6 +70,8 @@ const routes: Routes = [
   {path: 'test', component: TestComponent},
   {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+  {path: '**', component: SalariesAlternativeViewComponent},
+
 ];
 
 @NgModule({
@@ -111,7 +113,7 @@ const routes: Routes = [
     IsNotLoggedInDirective,
     LoggedInUserHasNoSalaryHistoryDirective,
     LoggedInUserHasSalaryHistoryDirective,
-    FaqComponent
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

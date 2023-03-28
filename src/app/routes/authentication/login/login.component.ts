@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../../../services/AuthService";
 import {AppConstants} from "../../global/common-variables";
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     password: this.passwordFormControl
   });
   showPassword: boolean;
+  @ViewChild('email') email: ElementRef;
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
@@ -62,6 +63,10 @@ export class LoginComponent implements OnInit {
       this.errorMessage = error;
       this.isLoginFailed = true;
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.email.nativeElement.focus()
   }
 
   onSubmit(): void {

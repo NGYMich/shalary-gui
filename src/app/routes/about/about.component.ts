@@ -34,6 +34,7 @@ export class AboutComponent implements OnInit {
     'Inspire from CMC log in / register system',
     'Make "tips" button for ag grid',
     'Make login usable with username OR email',
+    'Add forgot password',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',

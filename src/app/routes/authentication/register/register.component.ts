@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/AuthService";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginComponent} from "../login/login.component";
@@ -27,16 +27,20 @@ export class RegisterComponent implements OnInit {
     username: this.usernameFormControl,
     email: this.emailFormControl,
     password: this.passwordFormControl,
-    matchingPassword: this.matchingPasswordFormControl
+    matchingPassword: this.passwordFormControl
   });
+  @ViewChild('username') username: ElementRef;
 
   showPassword: boolean;
-  showMatchingPassword: boolean;
 
   constructor(private authService: AuthService, public dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.username.nativeElement.focus()
   }
 
   onSubmit(): void {
@@ -72,10 +76,6 @@ export class RegisterComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  toggleMatchingPasswordVisibility(): void {
-    console.log(this.matchingPasswordFormControl)
-    this.showMatchingPassword = !this.showMatchingPassword;
-  }
 
   redirectToLogin() {
     this.dialog.closeAll()
@@ -86,4 +86,5 @@ export class RegisterComponent implements OnInit {
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
   }
+
 }

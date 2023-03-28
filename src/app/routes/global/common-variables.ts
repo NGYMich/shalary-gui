@@ -23,7 +23,7 @@ export const commonSectors = [
 export class AppConstants {
   private static API_BASE_URL = environment.baseUrl;
   private static OAUTH2_URL = AppConstants.API_BASE_URL + "oauth2/authorization/";
-  private static REDIRECT_URL = "?redirect_uri=http://localhost:4200/login";
+  private static REDIRECT_URL = "?redirect_uri=http://localhost:4200";
   static API_URL = AppConstants.API_BASE_URL + "api/";
   static AUTH_API = AppConstants.API_URL + "auth/";
   static GOOGLE_AUTH_URL = AppConstants.OAUTH2_URL + "google" + AppConstants.REDIRECT_URL;
@@ -31,7 +31,7 @@ export class AppConstants {
   static GITHUB_AUTH_URL = AppConstants.OAUTH2_URL + "github" + AppConstants.REDIRECT_URL;
   static LINKEDIN_AUTH_URL = AppConstants.OAUTH2_URL + "linkedin" + AppConstants.REDIRECT_URL;
   static SIGN_UP_DIALOG_WIDTH = '500px';
-  static SIGN_UP_DIALOG_HEIGHT = '680px';
+  static SIGN_UP_DIALOG_HEIGHT = '600px';
   static LOGIN_DIALOG_WIDTH = '500px';
   static LOGIN_DIALOG_HEIGHT = '550px';
 
