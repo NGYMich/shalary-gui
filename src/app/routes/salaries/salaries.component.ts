@@ -20,7 +20,6 @@ import {TokenStorageService} from "../../services/TokenStorageService";
 })
 export class SalariesComponent implements OnInit {
 
-  users: User[] = [];
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;
   isFilteredByPopularCountry: boolean = false;
@@ -44,7 +43,6 @@ export class SalariesComponent implements OnInit {
   defaultColDef: ColDef = {
     tooltipValueGetter: (params) => {
       return params.value;
-      // return "Click to get career graph and more information !";
     }
   };
 

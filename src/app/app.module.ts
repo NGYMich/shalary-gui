@@ -60,11 +60,13 @@ import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 import {FaqComponent} from './routes/faq/faq.component';
 import {authInterceptorProviders} from "./services/AuthInterceptor";
+import { ArticlesComponent } from './routes/articles/articles.component';
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
   {path: 'home', component: HomeComponent},
   {path: 'salaries/view2', component: SalariesComponent},
+  {path: 'salaries', component: SalariesComponent},
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
@@ -72,6 +74,7 @@ const routes: Routes = [
   {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'articles', component: ArticlesComponent},
   {path: '**', component: SalariesAlternativeViewComponent},
 
 ];
@@ -116,6 +119,7 @@ const routes: Routes = [
     LoggedInUserHasNoSalaryHistoryDirective,
     LoggedInUserHasSalaryHistoryDirective,
     FaqComponent,
+    ArticlesComponent,
   ],
   imports: [
     BrowserModule,

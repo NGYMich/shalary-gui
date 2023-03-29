@@ -1,0 +1,27 @@
+/*.page-container{*/
+/*  height: 100vh;*/
+/*  background-color: #34343c;*/
+/*}*/
+
+
+
+.example-card {
+  max-width: 397px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.example-header-image {
+  max-width: 400px;
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.like-button {
+  background-color: green;
+  color: white;
+}
+
+.share-button {
+  background-color: whitesmoke;
+}
