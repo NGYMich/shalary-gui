@@ -9,6 +9,8 @@ import {WorkHistoryFormComponent} from "../global/user-infos/work-history-form/w
 import {UserInformationsFormComponent} from "../global/user-infos/user-informations-form/user-informations-form-component";
 import {UserInputErrorDialogComponent} from "../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {TokenStorageService} from "../../services/TokenStorageService";
+import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
+import {SalaryInfo} from "../../model/salaryInfo";
 
 @Component({
   selector: 'app-edit-user-infos',
@@ -73,7 +75,6 @@ export class EditUserInfosComponent implements OnInit {
       email: this.userInformationsForm.get('email')!.value,
       password: this.userInformationsForm.get('password') != null ? this.userInformationsForm.get('password')!.value : null,
       username: this.userInformationsForm.get('username')!.value,
-
       mainSector: null,
       location: this.userInformationsFormComponent.countriesControl.value,
       locationImage: null,
@@ -86,15 +87,22 @@ export class EditUserInfosComponent implements OnInit {
         id: null,
         salaryCurrency: this.userInformationsForm.get('currency')!.value,
         totalYearsOfExperience: this.userInformationsForm.get('yearsOfExperience')!.value,
-        salaryInfos: this.salaryInfosForm.value
+        salaryInfos: this.salaryInfosForm.value.map(salaryInfo => new SalaryInfo(
+          salaryInfo.yearsOfExperience,
+          salaryInfo.jobName,
+          salaryInfo.baseSalary,
+          salaryInfo.stockSalary,
+          salaryInfo.bonusSalary,
+          +salaryInfo.baseSalary + +salaryInfo.bonusSalary + +salaryInfo.stockSalary,
+          salaryInfo.company,
+          salaryInfo.contractType,
+        ))
       },
-
       createdDate: null,
       modifiedDate: null,
       provider: null,
       thumbsUp: null,
       thumbsDown: null,
-
       validated: true,
     };
   }
@@ -156,4 +164,13 @@ export class EditUserInfosComponent implements OnInit {
     return this.userInformationsFormComponent.userInformationsForm;
   }
 
+  openUserInfos(event): void {
+    this.dialog.open(UserInfosDialogComponent, {
+      width: '100%',
+      height: '80%',
+      data: {selectedUser: this.buildModifiedUser()},
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
+    });
+  }
 }

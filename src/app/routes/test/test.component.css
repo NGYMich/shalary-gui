@@ -1,3 +1,38 @@
-body {
-  background-color: red !important;
+img {
+  /*margin-top: 30px;*/
+  width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 450px;
+  /*border: 1px solid gray;*/
+  max-width: 640px;
+  height: auto;
+}
+
+
+.only-row {
+  margin: 0;
+  padding: 50px 0 0 0;
+  text-align: justify;
+  background-color: #34343c;;
+  color: white;
+  width: 100vw;
+  /*height: 100vh;*/
+  height: calc(100vh - 56px); /*check toolbar size*/
+}
+
+/*.card-component {*/
+/*  background-color: white;*/
+/*}*/
+
+h1 {
+  font-size: 34px;
+  padding-top: 50px;
+}
+
+p {
+  /*margin-top: 40px;*/
+  font-size: 13px;
+  font-style: italic;
 }

@@ -1,16 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {UserService} from "../../services/UserService";
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.css'],
+  // encapsulation: ViewEncapsulation.None,
+
 })
 export class TestComponent implements OnInit {
 
+  introductionMessage =
+    `
+        People do not know what their salary expectations should be. Some underestimate their market value, and some overestimate it : it can be very difficult to get accurate
+        data. Well good news, Shalary is here to save you !
+    `
+
+  introductionMessage2 =
+    `
+        Shalary is a website where everyone can anonymously share their salary history.
+        From anywhere in the world,
+        you can read data about other users, their story and their progression throughout their careers, in
+        various
+        sectors such as Banking, Finance, IT, Sales, Trading, Healthcare, etc.
+        You will be able to obtain interesting data thanks to the various testimonies of the users of the site.
+        For
+        example, you want to know the average salary of a data scientist after a master and 5 years of experience
+        in
+        Paris in consulting firms?
+        No problem, Shalary is here for you.
+    `
+
+  introductionMessage3 =
+    `
+        You will be able to obtain interesting data thanks to the various testimonies of the users of the site.
+        For
+        example, you want to know the average salary of a data scientist after a master and 5 years of experience
+        in
+        Paris in consulting firms?
+        No problem, Shalary is here for you.
+    `
   content: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.userService.getPublicContent().subscribe(

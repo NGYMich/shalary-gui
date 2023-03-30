@@ -11,6 +11,19 @@ export class SalaryInfo {
   company: Company;
 
   contractType: string;
+
+  constructor(yearsOfExperience: number, jobName: string, baseSalary: number, stockSalary: number, bonusSalary: number, totalSalary: number, company: Company, contractType: string) {
+    this.yearsOfExperience = yearsOfExperience;
+    this.jobName = jobName;
+    this.baseSalary = baseSalary;
+    this.stockSalary = stockSalary;
+    this.bonusSalary = bonusSalary;
+    this.totalSalary = totalSalary;
+    this.company = company;
+    this.contractType = contractType;
+  }
+
+
 }
 
 export class Company {
