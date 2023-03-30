@@ -416,35 +416,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
     },
 
     {
-      field: 'salaryHistory.totalYearsOfExperience',
-      headerName: 'Experience',
-      sortable: true,
-      resizable: true,
-      valueFormatter: this.experienceFormatter,
-      filter: 'agTextColumnFilter',
-      width: 120,
-      cellStyle: params => {
-        let style = {
-          'height': '100%',
-          'display': 'flex ',
-          'align-items': 'center',
-          'background-color': ''
-        };
-        let experience = params.value;
-        if (experience < 3)
-          style["background-color"] = ''
-        else if (experience < 6)
-          style["background-color"] = '#ADD8E6'
-        else if (experience < 9)
-          style["background-color"] = '#8AC7DB'
-        else if (experience < 20)
-          style["background-color"] = '#67B7D1'
-        else if (experience >= 20)
-          style["background-color"] = '#338BA8'
-        return style;
-      }
-    },
-    {
       field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRenderer: LocationCellRenderer, hide: true, cellStyle: () => {
         return this.verticalAlignColumn;
@@ -492,6 +463,36 @@ export class SalariesAlternativeViewComponent implements OnInit {
         return style
       }
     },
+    {
+      field: 'salaryHistory.totalYearsOfExperience',
+      headerName: 'Experience',
+      sortable: true,
+      resizable: true,
+      valueFormatter: this.experienceFormatter,
+      filter: 'agTextColumnFilter',
+      width: 120,
+      cellStyle: params => {
+        let style = {
+          'height': '100%',
+          'display': 'flex ',
+          'align-items': 'center',
+          'background-color': ''
+        };
+        let experience = params.value;
+        if (experience < 3)
+          style["background-color"] = ''
+        else if (experience < 6)
+          style["background-color"] = '#ADD8E6'
+        else if (experience < 9)
+          style["background-color"] = '#8AC7DB'
+        else if (experience < 20)
+          style["background-color"] = '#67B7D1'
+        else if (experience >= 20)
+          style["background-color"] = '#338BA8'
+        return style;
+      }
+    },
+
     {
       field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: () => {
         return this.verticalAlignColumn;
