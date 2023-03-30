@@ -9,137 +9,136 @@
       </div>
     </div>
 
-    <div fxLayout="row" style="margin-top: 20px;">
-      <div class="col-xs-4">
-      </div>
-      <div class="col-xs-4">
-        <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 100%; margin-top:0.3%;">
-          <mat-label style="text-align: left; display: block; width: auto;">
-            <mat-icon>search</mat-icon>
-            Filter by anything (columns are also filterable by using their buttons)
-          </mat-label>
-          <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
-        </mat-form-field>
-      </div>
-      <div class="col-xs-4">
-      </div>
-    </div>
+    <!--    <div fxLayout="row" style="margin-top: 20px;">-->
+    <!--      <div class="col-xs-4">-->
+    <!--      </div>-->
+    <!--      <div class="col-xs-4">-->
+
+    <!--      </div>-->
+    <!--      <div class="col-xs-4">-->
+    <!--      </div>-->
+    <!--    </div>-->
 
     <!-- Convert salaries to currency & currencies-->
-    <div fxLayout="row">
-      <div class="col-xs-4">
-        <div class="flag-and-currency-title">Convert salaries to chosen currency</div>
-      </div>
-      <div class="col-xs-8"></div>
-    </div>
-    <div fxLayout="row" class="container-fluid">
-      <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency" *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
-        {{currency}}
-      </a>
-    </div>
-
-  </div>
-  <div fxLayout="row" class="container-fluid">
-    <!-- Ag grid -->
-
-    <div class="col-xs-7" style="margin-left: 0; padding-left: 0;">
-      <ag-grid-angular
-        style="width: 100%;"
-        class="ag-theme-alpine"
-        [rowData]="rowData"
-        [columnDefs]="desktopColumnDefs"
-        [gridOptions]="gridOptions"
-        (gridReady)="onGridReady($event)"
-        (rowClicked)="openUserInfos($event)"
-        [tooltipShowDelay]="tooltipShowDelay"
-        [tooltipHideDelay]="tooltipHideDelay"
-      >
-      </ag-grid-angular>
-    </div>
-
-    <!-- Div for user infos / ngx chart-->
-
-    <div class="col-xs-5" *ngIf="currentUser != null" style="background-color:  white;border:1px solid lightgray; margin: 0; padding: 0;">
-      <div class="col-xs-12" style="margin: 0; padding: 0;">
-        <div class="user-infos">
-          <div style="margin-left: 15px; ">
-            <h2 style="margin-top: 15px; ">
-              {{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
-              {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
-              {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}
-            </h2>
-            <h4 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
-          </div>
-
+    <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
+      <div class="col-xs-6">
+        <div class="col-xs-7">
+          <br>
+          <div class="flag-and-currency-title">Convert salaries to chosen currency</div>
+          <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency" *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
+            {{currency}}
+          </a>
         </div>
-        <div fxLayout="row">
-          <div #containerRef fxFlex="100%">
-            <ngx-charts-line-chart
-              [view]="[containerRef.offsetWidth, 400]"
-              [scheme]="colorScheme"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [showGridLines]="showGridLines"
-              [xAxis]="xAxis"
-              [yAxis]="yAxis"
-              [yAxisTickFormatting]="yAxisTickFormattingDesktop"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [activeEntries]="activeEntries"
-              [results]="dataGraph"
-              [legendPosition]="legendPosition"
-              (activate)="legendLabelActivate($event)"
-              (deactivate)="legendLabelDeactivate($event)"
-              (select)="onSelect($event)"
+        <div class="col-xs-5" style="font-size: 10px;">
+          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 100%; margin-top:0.3%;">
+            <mat-label>
+              <mat-icon>search</mat-icon>
+              Filter by anything
+            </mat-label>
+            <input matInput style="text-align: left; height: 10px;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+          </mat-form-field>
+        </div>
 
-            >
-              <ng-template #seriesTooltipTemplate let-model="model">
-                <div>
-                  <h3 style="text-align: center; margin-bottom: 0; color:azure">
-                    {{model[0].jobName}}
-                    {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
-                    {{model[0].companyName}}
-                    {{model[0].companySector}}
+        <!-- ###########################################-->
+        <!-- ################# AG GRID ################# -->
+        <!-- ########################################### -->
+        <div class="col-xs-12" style="margin-left: 0; padding-left: 0;">
+          <ag-grid-angular
+            style="width: 100%;"
+            class="ag-theme-alpine"
+            [rowData]="rowData"
+            [columnDefs]="desktopColumnDefs"
+            [gridOptions]="gridOptions"
+            (gridReady)="onGridReady($event)"
+            (rowClicked)="openUserInfos($event)"
+            [tooltipShowDelay]="tooltipShowDelay"
+            [tooltipHideDelay]="tooltipHideDelay"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+      <div class="col-xs-6" *ngIf="currentUser != null" style="background-color:  white; margin: 0; padding: 0;">
+        <div class="col-xs-12" style="margin: 0; padding: 0;">
+          <div class="user-infos">
+            <div style="margin-left: 15px; ">
+              <h2 style="margin-top: 15px; ">
+                {{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
+                {{this.mostRecentJobName != null && this.mostRecentJobName != '' ? " - " + this.mostRecentJobName : ""}}
+                {{this.currentUser.mainSector != null && this.currentUser.mainSector != '' ? "(" + this.currentUser.mainSector + ")" : ""}}
+              </h2>
+              <h4 style="margin-top: 0; font-style: italic">{{this.userInfosString.join(" - ")}}</h4>
+            </div>
 
-                  </h3>
-                  <h4
-                    style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">{{model[0].contractType}}</h4>
-                  <div
-                    style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
-                    Base Salary : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-                    <br>
-                    Bonus Salary : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-                    <br>
-                    Equity : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
-                    <br>
-                    Total Salary : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+          </div>
+          <div fxLayout="row">
+            <div #containerRef fxFlex="100%">
+              <ngx-charts-line-chart
+                [view]="[containerRef.offsetWidth, 400]"
+                [scheme]="colorScheme"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [showGridLines]="showGridLines"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [yAxisTickFormatting]="yAxisTickFormattingDesktop"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [activeEntries]="activeEntries"
+                [results]="dataGraph"
+                [legendPosition]="legendPosition"
+                (activate)="legendLabelActivate($event)"
+                (deactivate)="legendLabelDeactivate($event)"
+                (select)="onSelect($event)"
+
+              >
+                <ng-template #seriesTooltipTemplate let-model="model">
+                  <div>
+                    <h3 style="text-align: center; margin-bottom: 0; color:azure">
+                      {{model[0].jobName}}
+                      {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
+                      {{model[0].companyName}}
+                      {{model[0].companySector}}
+
+                    </h3>
+                    <h4
+                      style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">{{model[0].contractType}}</h4>
+                    <div
+                      style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
+                      Base Salary : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      <br>
+                      Bonus Salary : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      <br>
+                      Equity : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      <br>
+                      Total Salary : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                    </div>
                   </div>
-                </div>
 
-              </ng-template>
-            </ngx-charts-line-chart>
+                </ng-template>
+              </ngx-charts-line-chart>
+            </div>
           </div>
+          <ngx-charts-legend
+            class="chart-legend"
+            [data]="chartNames"
+            [title]="'Salary Graphs'"
+            [colors]="colors"
+            (labelActivate)="legendLabelActivate($event)"
+            (labelDeactivate)="legendLabelDeactivate($event)"
+            [activeEntries]="activeEntries"
+            (select)="onSelect($event)"
+            style="margin-bottom: 25px;"
+          ></ngx-charts-legend>
         </div>
-        <ngx-charts-legend
-          class="chart-legend"
-          [data]="chartNames"
-          [title]="'Salary Graphs'"
-          [colors]="colors"
-          (labelActivate)="legendLabelActivate($event)"
-          (labelDeactivate)="legendLabelDeactivate($event)"
-          [activeEntries]="activeEntries"
-          (select)="onSelect($event)"
 
-        ></ngx-charts-legend>
-      </div>
-
-
-      <br>
-      <div *ngIf="currentUser.comment" style="white-space:pre-wrap; margin-left: 15px;">
-        <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
+        <div *ngIf="currentUser.comment" style="white-space:pre-wrap; margin-left: 15px;">
+          <h2 style="text-align: left; font-weight: bolder;">
+            Comment
+          </h2>
+          <div style="font-style: italic; font-size: 14px;">{{currentUser.comment}}</div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
 
