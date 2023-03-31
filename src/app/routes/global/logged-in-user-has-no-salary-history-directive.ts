@@ -14,7 +14,7 @@ export class LoggedInUserHasNoSalaryHistoryDirective implements OnInit {
   }
 
   ngOnInit() {
-    if (this.tokenStorageService.getHasSalaryHistory() != null) {
+    if (this.tokenStorageService.getHasSalaryHistory() != null && this.tokenStorageService.getHasSalaryHistory() != '' ) {
       this.viewContainer.clear();
     } else {
       this.viewContainer.createEmbeddedView(this.templateRef);

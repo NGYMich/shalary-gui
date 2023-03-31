@@ -12,7 +12,7 @@ export class IsNotLoggedInDirective implements OnInit {
   }
 
   ngOnInit() {
-    if (this.tokenStorageService.getUser() == null) {
+    if (this.tokenStorageService.getUser() == null || this.tokenStorageService.getUser() == "") {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();

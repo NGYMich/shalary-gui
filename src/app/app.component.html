@@ -9,7 +9,17 @@
     <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
       <div fxFlex>
-        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/home">Home</button>
+        <button style="float: left;" class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/home">Home</button>
+
+
+<!--        <div style="font-size: 8px; color: black; margin-left: 90px; ">-->
+<!--          <mat-form-field appearance="outline" style="font-size:6px; width: 200px; " floatLabel='never'>-->
+<!--            <input matInput style="font-size: 14px; font-style: italic" id="filter-text-box" placeholder="Search by country">-->
+<!--            &lt;!&ndash;            <mat-icon matSuffix style="color: gray;">search</mat-icon>&ndash;&gt;-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+
       </div>
 
       <div fxFlex fxLayoutAlign="center center">
@@ -17,7 +27,7 @@
         <button mat-button [matMenuTriggerFor]="menu">Careers and Salaries
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
-        <mat-menu #menu="matMenu" class="router-pages-button-2" >
+        <mat-menu #menu="matMenu" class="router-pages-button-2">
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view1">View 1</button>
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view2">View 2</button>
         </mat-menu>

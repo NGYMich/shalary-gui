@@ -19,12 +19,28 @@ export class AppComponent {
   shalaryGuiVersion = packageInfo
   temporaryDisabled = false;
   loggedUser: any = null
+  private roles: string[];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username: string;
 
   constructor(private tokenStorageService: TokenStorageService, public dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
     this.loggedUser = this.tokenStorageService.getUser()
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
   }
 
 

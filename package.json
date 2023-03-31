@@ -1,6 +1,6 @@
 {
   "name": "shalary-gui",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "scripts": {
     "ng": "ng",
     "start": "http-server-spa dist/shalary-gui index.html $PORT",
@@ -31,6 +31,7 @@
     "ag-grid-community": "^27.0.1",
     "bootstrap": "^3.4.1",
     "material-components-web": "^13.0.0",
+    "ngx-cookie-service": "^13.0.0",
     "ngx-device-detector": "^3.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

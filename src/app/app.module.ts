@@ -61,16 +61,17 @@ import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-u
 import {FaqComponent} from './routes/faq/faq.component';
 import {authInterceptorProviders} from "./services/AuthInterceptor";
 import { ArticlesComponent } from './routes/articles/articles.component';
+import { CookieService } from 'ngx-cookie-service';
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: TestComponent},
   {path: 'salaries/view2', component: SalariesComponent},
   {path: 'salaries', component: SalariesComponent},
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
-  {path: 'test', component: TestComponent},
+  {path: 'test', component: HomeComponent},
   {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
   {path: 'login', component: LoginComponent},
@@ -147,7 +148,7 @@ const routes: Routes = [
     MatMenuModule,
 
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -18,11 +18,6 @@ export class TestComponent implements OnInit {
 
   introductionMessage2 =
     `
-        Shalary is a website where everyone can anonymously share their salary history.
-        From anywhere in the world,
-        you can read data about other users, their story and their progression throughout their careers, in
-        various
-        sectors such as Banking, Finance, IT, Sales, Trading, Healthcare, etc.
         You will be able to obtain interesting data thanks to the various testimonies of the users of the site.
         For
         example, you want to know the average salary of a data scientist after a master and 5 years of experience

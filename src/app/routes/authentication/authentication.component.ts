@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../services/TokenStorageService";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-authentication',
@@ -13,7 +14,8 @@ export class AuthenticationComponent implements OnInit {
   showModeratorBoard = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService, private cookieService: CookieService) {
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -27,10 +29,5 @@ export class AuthenticationComponent implements OnInit {
 
       this.username = user.username;
     }
-  }
-
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
   }
 }
