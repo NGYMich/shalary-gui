@@ -42,7 +42,8 @@ export class EditUserInfosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userService.getUserById(this.tokenStorageService.getUser().id).subscribe(user => {
+    console.log(JSON.parse(this.tokenStorageService.getUser()).id)
+    this.userService.getUserById(JSON.parse(this.tokenStorageService.getUser()).id).subscribe(user => {
         this.userToModify = user
       }
     )

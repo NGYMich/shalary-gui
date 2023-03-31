@@ -59,7 +59,9 @@ export class AboutComponent implements OnInit {
     'SEO : Check competitors / what links are the most used',
     'SEO : https://www.youtube.com/watch?v=fOGF1Sq499g&ab_channel=NeilPatel check at 2:16 maybe idea for homepage',
     'SEO : Use Google Analytics & Google Search Console',
-    'Reset SQL sequence : ALTER SEQUENCE user_id_seq RESTART WITH 193'
+    'Reset SQL sequence : ALTER SEQUENCE user_id_seq RESTART WITH 193',
+    '------------------------------------------ SOCIAL MEDIA -----------------------------------------',
+    'Create Acc on twitter, follow good companies / celebrities and post the site',
   ]
 
 

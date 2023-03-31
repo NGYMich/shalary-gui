@@ -220,7 +220,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
-    paginationPageSize: 15,
+    paginationPageSize: 13,
     domLayout: 'autoHeight',
     suppressMenuHide: true
   };

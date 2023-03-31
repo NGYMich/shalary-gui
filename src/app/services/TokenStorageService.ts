@@ -46,7 +46,7 @@ export class TokenStorageService {
   // }
 
   signOut(): void {
-    window.sessionStorage.clear();
+    // window.sessionStorage.clear();
     /* for oauth2 cookie */
     this.cookieService.delete(TOKEN_KEY, "/")
     this.cookieService.delete(USER_KEY, "/")
@@ -56,6 +56,9 @@ export class TokenStorageService {
     this.cookieService.delete(TOKEN_KEY)
     this.cookieService.delete(USER_KEY)
     this.cookieService.delete(HAS_SALARY_HISTORY_KEY) //deleteAll() dont work for some reason
+
+
+    this.cookieService.deleteAll()
 
   }
 
@@ -70,12 +73,13 @@ export class TokenStorageService {
 
   public saveUser(user): void {
     this.cookieService.delete(USER_KEY);
-    this.cookieService.set(USER_KEY, JSON.stringify(user));
+    this.cookieService.set(USER_KEY, JSON.stringify(user),);
   }
 
   public getUser(): any {
     let cookieUserKey = this.cookieService.get(USER_KEY);
-    console.log(this.cookieService)
+    // console.log(this.cookieService.get(USER_KEY))
+    // console.log(JSON.parse(this.cookieService.get(USER_KEY)))
     return cookieUserKey;
   }
 

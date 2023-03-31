@@ -1,3 +1,14 @@
+
+.only-row {
+  margin: 0;
+  padding: 0;
+  text-align: justify;
+  background-color: white;
+  color: #767676;
+  width: 100vw;
+  height: calc(100vh - 56px); /*check toolbar size*/
+}
+
 img {
   /*margin-top: 30px;*/
   width: 600px;
@@ -12,30 +23,15 @@ img {
 }
 
 
-.only-row {
-  margin: 0;
-  padding: 0 0 0 0;
-  text-align: justify;
-  background-color: whitesmoke;
-  color: black;
-
-  /*background-color: white;*/
-  /*color: gray;*/
-
-
-
-  width: 100vw;
-  /*height: 100vh;*/
-  height: calc(100vh - 56px); /*check toolbar size*/
-}
 
 .card-component {
   /*background-color: white;*/
-  padding-top: 50px;
+  padding-top: 10px;
   padding-left: 50px;
 }
 
 h1 {
+  color: black;
   font-size: 34px;
   padding-top: 50px;
 }

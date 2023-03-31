@@ -13,9 +13,9 @@ export class IsLoggedInDirective implements OnInit {
 
   ngOnInit() {
 
-    console.log('Token stored user : ', this.tokenStorageService.getUser())
+    // console.log('Token stored user : ', this.tokenStorageService.getUser())
 
-    if (this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != '') {
+    if (this.tokenStorageService.getToken() != null && this.tokenStorageService.getToken() != '') {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();
