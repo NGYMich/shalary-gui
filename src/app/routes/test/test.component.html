@@ -40,7 +40,7 @@
 <div class="row only-row">
 
   <div class="col-xs-1"></div>
-  <div class="col-xs-5" [@openClose]="isOpen ? 'open' : 'closed'">
+  <div class="col-xs-5" [@openClose2]="isOpen ? 'open' : 'closed'">
     <div class="card-component">
       <h1 style="font-size: 38px; text-align: left; line-height: 50px; color: palegoldenrod">
         SHALARY - SHARE YOUR SALARY
@@ -51,19 +51,36 @@
         <br>
         ANONYMOUS CAREERS SHARING SITE
       </h1>
+
+
       <div class="search-by-country-and-buttons-div">
-        <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 350px;">
-          <mat-label style="font-size: 16px;">
-            <mat-icon matSuffix>search</mat-icon>
-            Search by country
-          </mat-label>
-          <input matInput style="text-align: left; height: 10px;" id="filter-text-box"/>
-        </mat-form-field>
+
+
+        <div class="wrapper" style="margin-bottom: 10px;">
+          <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search country.." style=" font-size: 18px; padding-left: 10px; height: 50px; color:black;" value="1">
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+              <img [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
+                   onerror="this.onerror=null; this.remove();">
+              <span style="font-size: 14px; color: black;"> {{country.name}}</span>
+            </mat-option>
+
+          </mat-autocomplete>
+          <button class="search-country-button" (click)="navigateToSalaries()">
+<!--                        <mat-icon style="color: black; padding: 0; margin: 0; height: auto; width: auto;" >today</mat-icon>-->
+            GO
+          </button>
+
+        </div>
+
+
         <br>
         <div style="padding-right: 20px;" [@apparition]="isOpen ? 'open' : 'closed'">
           <button mat-raised-button class="route-buttons" (click)="navigateToSalaries()">CAREERS AND SALARIES</button>
           <button mat-raised-button class="route-buttons" (click)="navigateToDataAnalytics()">DATA ANALYTICS</button>
         </div>
+
 
       </div>
     </div>
@@ -73,7 +90,7 @@
   <!--    <img mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman" >-->
   <!--  </div>-->
 
-  <img mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
+  <img class="salaryman-img" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
   <div class="col-xs-1">
   </div>
 </div>

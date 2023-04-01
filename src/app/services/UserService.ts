@@ -33,6 +33,11 @@ export class UserService {
     return this.http.get(this.rootURL + '/usersWithSalaryHistory');
   }
 
+  getUsersWithSalaryHistoryByCountry(country: string): any {
+    console.log('called', this.rootURL + '/usersFromCountry/' + country);
+    return this.http.get(this.rootURL + '/usersFromCountry/' + country);
+  }
+
   getUserById(id) {
     console.log('called', this.rootURL + '/users/' + id);
     return this.http.get(this.rootURL + '/users/' + id);

@@ -62,9 +62,7 @@ export class UserInformationsFormComponent {
       comment: new FormControl(this.userToModify?.comment),
       city: new FormControl(this.userToModify?.city),
     });
-    this.countriesControl = new FormControl(this.userToModify?.location,
-      // (Validators.required)
-    )
+    this.countriesControl = new FormControl(this.userToModify?.location)
   }
 
 

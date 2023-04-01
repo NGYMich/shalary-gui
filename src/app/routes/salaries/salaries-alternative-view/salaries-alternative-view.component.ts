@@ -17,6 +17,7 @@ import {TokenStorageService} from "../../../services/TokenStorageService";
 import {RegisterComponent} from "../../authentication/register/register.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AppConstants} from "../../global/common-variables";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-salaries-alternative-view',
@@ -64,6 +65,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   legendPosition = LegendPosition.Below;
   salaryCurrency;
   isMobile: boolean;
+  showProgressBar: any = true;
 
   public activeEntries: any[] = [];
   public chartNames: string[];
@@ -72,7 +74,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   public yAxisTickFormattingDesktop = this.formatSalary.bind(this);
   public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];
-
+  chosenCountryFromHomePage: any = null;
 
   constructor(public numberService: NumberService,
               private router: Router,
@@ -80,15 +82,26 @@ export class SalariesAlternativeViewComponent implements OnInit {
               private userService: UserService, private forexService: ForexService,
               private tokenStorage: TokenStorageService,
               public dialog: MatDialog,
+              private location: Location,
   ) {
+
     Object.assign(this, this.dataGraph);
+    console.log(location.getState())
+    Object.entries(location.getState() as Map<any, any>).map(([key, value]) => {
+      if (key == "chosenCountry") this.chosenCountryFromHomePage = value;
+    })
   }
 
 
   ngOnInit(): void {
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
-    this.loadUsersWithSalaryHistory();
+    if (this.chosenCountryFromHomePage != null) {
+      console.log('chosen country : ' + this.chosenCountryFromHomePage)
+      this.loadUsersWithSalaryHistoryFromCountry(this.chosenCountryFromHomePage);
+    } else {
+      this.loadUsersWithSalaryHistory();
+    }
     this.loadForexes();
   }
 
@@ -560,8 +573,32 @@ export class SalariesAlternativeViewComponent implements OnInit {
         this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
         this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
         this.constructUserInfosString();
-
       }
+      this.showProgressBar = false;
+
+    })
+  }
+
+  loadUsersWithSalaryHistoryFromCountry(country: string) {
+    this.userService.getUsersWithSalaryHistoryByCountry(country).subscribe((users: User[]) => {
+      this.rowData = users.slice(0, 500);
+      if (users.length > 0) {
+        this.currentUser = users[0];
+        if (this.currentUser.salaryHistory != null) {
+          this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency
+          if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
+            this.dataGraph = []
+            this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
+            let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
+
+            this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
+            this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
+            this.constructUserInfosString();
+
+          }
+        }
+      }
+      this.showProgressBar = false;
     })
   }
 
