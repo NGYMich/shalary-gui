@@ -2,6 +2,10 @@
   width: 95%;
 }
 
+.mat-form-field-label mat-label {
+  pointer-events: auto;
+}
+
 .with-margin-right-30px {
   margin-right: 15px;
 }
@@ -18,12 +22,13 @@
 h1 {
   color: black;
 }
+
 .optional {
   font-style: italic;
 }
 
 .mat-flat-button.mat-remove-job {
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
 }
 

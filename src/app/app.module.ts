@@ -62,6 +62,9 @@ import {FaqComponent} from './routes/faq/faq.component';
 import {authInterceptorProviders} from "./services/AuthInterceptor";
 import { ArticlesComponent } from './routes/articles/articles.component';
 import { CookieService } from 'ngx-cookie-service';
+import { OpenCloseComponent } from './animations/open-close/open-close.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
@@ -121,6 +124,7 @@ const routes: Routes = [
     LoggedInUserHasSalaryHistoryDirective,
     FaqComponent,
     ArticlesComponent,
+    OpenCloseComponent,
   ],
   imports: [
     BrowserModule,
@@ -146,6 +150,8 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSidenavModule,
     MatMenuModule,
+    MatProgressBarModule,
+    MatTooltipModule,
 
   ],
   providers: [authInterceptorProviders, CookieService],

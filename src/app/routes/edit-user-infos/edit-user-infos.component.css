@@ -1,3 +1,11 @@
+
+.col-xs-2, .col-xs-9 {
+  background-color: whitesmoke;
+  padding: 20px 40px 30px;
+  /*border-radius: 30px;*/
+  border: 1px solid #dddddd;
+}
+
 button {
   font-size: 18px;
   margin-top: 1%;
@@ -11,7 +19,7 @@ button {
 }
 
 .preview-my-career-button {
-  background-color: whitesmoke;
+  background-color: white;
   color: black;
 }
 
@@ -57,14 +65,6 @@ button {
 
 .job-form-field.with-margin-right-30px.italic {
   font-style: italic;
-}
-
-
-.col-xs-2, .col-xs-9 {
-  background-color: white;
-  padding: 20px 40px 30px;
-  /*border-radius: 30px;*/
-  border: 1px solid #dddddd;
 }
 
 .div-user-to-modify {

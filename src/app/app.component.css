@@ -1,3 +1,9 @@
+
+.website-background-color {
+  background-color: whitesmoke;
+}
+
+
 .header {
   width: 100%;
   flex-shrink: 0;
@@ -6,12 +12,14 @@
 
 
 .mat-toolbar.mat-primary {
-  background-color: #34343c;
-  height: 55px;
+  /*background-color: #393f41;*/
+  background-color: black;
+  height: 70px;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid lightgray;
 }
 
 .router-pages-button {
@@ -59,7 +67,7 @@
   font-size: 14px;
   border-radius: 5px !important;
   border-color: white !important;
-  background-color: #34343c;
+  background-color: black;
   text-align: left;
 
 }
@@ -81,17 +89,17 @@
 }
 
 ::ng-deep .router-pages-button-2 {
-  background-color: #34343c;
+  background-color: black;
 }
 
 .router-pages-button-2 {
-  background-color: #34343c;
+  background-color: black;
   color: white;
 }
 
 .active_route {
-  background-color: white;
-  color: #34343c;
+  background-color: palegoldenrod;
+  color: black;
 }
 
 
@@ -104,11 +112,8 @@
   border-color: white !important;
 }
 
-.website-background-color {
-  background-color: white;
-}
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white;
+  background-color: whitesmoke;
   border-radius: 10px;
 }

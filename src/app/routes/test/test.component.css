@@ -1,43 +1,65 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+
+}
 
 .only-row {
   margin: 0;
   padding: 0;
   text-align: justify;
-  background-color: white;
-  color: #767676;
-  width: 100vw;
-  height: calc(100vh - 56px); /*check toolbar size*/
+  /*background-color: white;*/
+  /*color: #767676;*/
+  background-color: black;
+  color: white;
+  width: 100%;
+  min-height: 100%;
+  height: calc(100vh - 70px); /*check toolbar size*/
 }
 
 img {
-  /*margin-top: 30px;*/
-  width: 600px;
+  /*width: 600px;*/
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 50px;
-  border-radius: 50%;
-  /*border: 1px solid gray;*/
-  max-width: 640px;
+  padding-top: 3%;
+
+  border-radius: 0 0 300px 300px;
+  /*border-radius: 400px 400px 0 0;*/
+  /*max-width: 640px;*/
+  max-width: 35%;
   height: auto;
 }
 
 
+h1 {
+  color: white;
+  font-size: 32px;
+  padding-top: 50px;
+  font-weight: bold;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
 
 .card-component {
-  /*background-color: white;*/
   padding-top: 10px;
   padding-left: 50px;
 }
 
-h1 {
-  color: black;
-  font-size: 34px;
-  padding-top: 50px;
+.route-buttons {
+  height: 40px;
+  color: white;
+  background: #1b1e20;
+  margin-right: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
-p {
-  /*margin-top: 40px;*/
-  font-size: 13px;
-  font-style: italic;
+.col-xs-5 {
+  padding-top: 0;
+}
+
+.search-by-country-and-buttons-div {
+  padding-top: 5%;
 }

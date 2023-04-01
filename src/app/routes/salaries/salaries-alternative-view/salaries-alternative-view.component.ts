@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from "../../../model/user";
 import {Country} from "../../../model/country";
 import {GridOptions} from "ag-grid-community";
@@ -21,7 +21,8 @@ import {AppConstants} from "../../global/common-variables";
 @Component({
   selector: 'app-salaries-alternative-view',
   templateUrl: './salaries-alternative-view.component.html',
-  styleUrls: ['./salaries-alternative-view.component.css']
+  styleUrls: ['./salaries-alternative-view.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SalariesAlternativeViewComponent implements OnInit {
 

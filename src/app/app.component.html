@@ -50,14 +50,14 @@
       </div>
 
       <div fxFlex fxLayoutAlign="flex-end center">
-        <button *isLoggedIn class="router-pages-button my-career" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
+        <button *isLoggedIn class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
 
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
-        <button *isNotLoggedIn class="router-pages-button-login" mat-button (click)="openLoginDialog()">Log In</button>
-        <button *isNotLoggedIn class="router-pages-button-signup" mat-button (click)="openSignupDialog()">Create account</button>
+        <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openLoginDialog()">Log In</button>
+        <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openSignupDialog()">Create account</button>
 
         <!--        <span *isLoggedIn style="font-size: 14px;">Welcome {{loggedUser.username}} !</span>-->
-        <button *isLoggedIn class="router-pages-button-logout" mat-button (click)="logOut()">Log out</button>
+        <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
 
       </div>
 
@@ -67,8 +67,8 @@
 
   <!--  Mobile material sidebar navigator-->
   <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; background-color: #34343c">
-      <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 58px; background-color: #34343c; color: whitesmoke;">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed;">
+      <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 58px; background-color: black; color: whitesmoke;">
         <a mat-button routerLink="/home">Shalary - Homepage</a>
         <a mat-button routerLink="/salaries" style="margin-left: 5%;">Careers and Salaries</a>
         <a mat-button routerLink="/add-user-infos">Add user experience</a>
@@ -81,6 +81,5 @@
     <mat-sidenav-content class="website-background-color">
       <router-outlet style="background-color: whitesmoke" #outlet="outlet"></router-outlet>
     </mat-sidenav-content>
-    Test
   </mat-sidenav-container>
 </div>

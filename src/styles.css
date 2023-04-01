@@ -18,10 +18,17 @@
 /*  !*background-repeat: no-repeat;*!*/
 /*}*/
 
+/*/
+  -------------------------- COLORS :
+  COMPONENT => CLASS .website-background-color (toolbar)
+  MAT FORM BUTTONS => ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline
+
+ */
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 .custom-dialog-container .mat-dialog-container {
@@ -47,5 +54,13 @@ body {
   outline: none;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

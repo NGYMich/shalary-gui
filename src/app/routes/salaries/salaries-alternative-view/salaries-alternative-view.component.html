@@ -1,5 +1,7 @@
-<div *isNotMobile>
-  <div class="ag-theme-alpine">
+<div *isNotMobile >
+  <mat-progress-bar mode="indeterminate" class="green-progress"  *ngIf="currentUser == null"></mat-progress-bar>
+
+  <div class="ag-theme-alpine" *ngIf="currentUser != null" >
     <!-- Share your experience button-->
     <div class="container-fluid">
       <div class="col-xs-12" style="height: 100%; vertical-align: center;">
@@ -22,9 +24,9 @@
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
       <div class="col-xs-6">
-        <div class="col-xs-7">
+        <div class="col-xs-7" style="margin-left: 0; padding-left: 0;">
           <br>
-          <div class="flag-and-currency-title">Convert salaries to chosen currency</div>
+          <div class="flag-and-currency-title">Convert salaries to currency</div>
           <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency" *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
             {{currency}}
           </a>
@@ -57,7 +59,7 @@
           </ag-grid-angular>
         </div>
       </div>
-      <div class="col-xs-6" *ngIf="currentUser != null" style="background-color:  white; border:1px solid lightgray; margin: 0; padding: 0;">
+      <div class="col-xs-6 user-infos-and-ngx-graph-div" *ngIf="currentUser != null">
         <div class="col-xs-12" style="margin: 0; padding: 0;">
           <div class="user-infos">
             <div style="margin-left: 15px; ">
@@ -127,7 +129,7 @@
             (labelDeactivate)="legendLabelDeactivate($event)"
             [activeEntries]="activeEntries"
             (select)="onSelect($event)"
-            style="margin-bottom: 25px;"
+            style="margin-bottom: 25px; padding: 0;"
           ></ngx-charts-legend>
         </div>
 

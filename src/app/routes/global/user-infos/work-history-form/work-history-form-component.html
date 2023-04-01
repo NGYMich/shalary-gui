@@ -108,8 +108,9 @@
                  [formGroupName]="pointIndex">
 
               <mat-form-field appearance="outline" style="float: left; width: 65%; margin-right: 5%;">
-                <input formControlName="jobName" matInput/>
-                <mat-label class="optional">Job Name</mat-label>
+                <input formControlName="jobName" matTooltip="'Job Name'" matInput/>
+                <mat-label class="optional"  matTooltip='Job Name'>Job Name</mat-label>
+
               </mat-form-field>
 
               <mat-form-field appearance="outline" style="float: left; width: 25%;">
