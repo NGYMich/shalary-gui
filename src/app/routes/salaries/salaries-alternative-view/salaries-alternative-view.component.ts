@@ -562,44 +562,34 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   loadUsersWithSalaryHistory() {
     this.userService.getUsersWithSalaryHistory().subscribe((users: User[]) => {
-      this.rowData = users.slice(0, 500);
-      this.currentUser = users[0];
-      this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency
-      if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
-        this.dataGraph = []
-        this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
-        let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
-
-        this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
-        this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
-        this.constructUserInfosString();
-      }
-      this.showProgressBar = false;
-
+      this.constructUserInfosGraph(users);
     })
   }
 
   loadUsersWithSalaryHistoryFromCountry(country: string) {
     this.userService.getUsersWithSalaryHistoryByCountry(country).subscribe((users: User[]) => {
-      this.rowData = users.slice(0, 500);
-      if (users.length > 0) {
-        this.currentUser = users[0];
-        if (this.currentUser.salaryHistory != null) {
-          this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency
-          if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
-            this.dataGraph = []
-            this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
-            let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
+      this.constructUserInfosGraph(users);
+    })
+  }
 
-            this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
-            this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
-            this.constructUserInfosString();
-
-          }
+  private constructUserInfosGraph(users: User[]) {
+    this.rowData = users.slice(0, 500);
+    if (users.length > 0) {
+      this.currentUser = users[0];
+      if (this.currentUser.salaryHistory != null) {
+        this.salaryCurrency = this.currentUser.salaryHistory.salaryCurrency
+        if (this.currentUser.salaryHistory.salaryInfos.length > 0) {
+          this.dataGraph = []
+          this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
+          let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
+          this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
+          this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
+          this.constructUserInfosString();
         }
       }
-      this.showProgressBar = false;
-    })
+    }
+    this.showProgressBar = false;
+
   }
 
   loadForexes() {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../services/UserService";
 import {animate, state, style, transition, trigger,} from '@angular/animations';
 import {Router} from "@angular/router";
@@ -11,7 +11,6 @@ import {LocationService} from "../../services/LocationService";
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('openClose', [
       state('in', style({transform: 'translateX(0)'})),
