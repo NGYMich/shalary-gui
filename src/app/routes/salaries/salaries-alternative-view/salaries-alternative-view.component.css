@@ -14,7 +14,7 @@
   white-space: normal !important;
 }
 
-.ngx-charts .gridline-path {
+::ng-deep .ngx-charts .gridline-path {
   stroke: #b4b4b4 !important;
 }
 
