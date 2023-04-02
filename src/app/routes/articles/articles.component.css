@@ -2,6 +2,7 @@
   max-width: 397px;
   margin: 5px;
   display: inline-block;
+  background-color: #dadada;
 }
 
 .example-header-image {
@@ -17,4 +18,8 @@
 
 .share-button {
   background-color: whitesmoke;
+}
+
+.mat-card-text {
+  margin-top: 30px; margin-right: 23px;background-color: #dadada;
 }

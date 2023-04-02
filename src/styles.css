@@ -1,34 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine-dark.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham-dark.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-blue.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-dark.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-material.css";
+@import "../node_modules/ag-grid-community/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/styles/ag-theme-balham.css";
+@import "../node_modules/ag-grid-community/styles/ag-theme-alpine.css";
+@import "../node_modules/ag-grid-community/styles/ag-theme-balham.css";
+@import "../node_modules/ag-grid-community/styles/ag-theme-material.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-/*html, body {*/
-/*  background-color: white;*/
-/*  !*!*background-image: url('https://i.pinimg.com/originals/79/a9/1e/79a91ec14d50973bc199f38190485269.jpg');*!*!*/
-/*  !*background-repeat: no-repeat;*!*/
-/*}*/
 
 /*/
   -------------------------- COLORS :
   COMPONENT => CLASS .website-background-color (toolbar)
   MAT FORM BUTTONS => ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline
-
+  WHOLE WEBSITE : check body {} in this file
  */
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: whitesmoke;
+  background-color: #121212;
 }
 
 .custom-dialog-container .mat-dialog-container {
@@ -38,6 +27,8 @@ body {
 
 .ag-row-hover {
   cursor: pointer;
+  background-color: palegoldenrod;
+  color: black;
 }
 
 .my-panel .mat-dialog-container {
@@ -45,7 +36,8 @@ body {
 }
 
 .ag-row-selected {
-  background-color: lightblue !important;
+  background-color: palegoldenrod;
+  color: black;
 }
 
 /* no cell select*/

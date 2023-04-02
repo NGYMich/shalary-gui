@@ -15,7 +15,7 @@
 }
 
 .ngx-charts .gridline-path {
-  /*stroke: #dddddd !important;*/
+  stroke: #b4b4b4 !important;
 }
 
 .ag-row .ag-cell {
@@ -28,7 +28,7 @@
   font-size: 14px;
   font-weight: bold;
   /*font-style: italic;*/
-  color: black;
+  color: white;
 }
 
 .currency {
@@ -41,7 +41,7 @@
   padding-right: 5px;
   margin-right: 2px;
   background-color: azure;
-  color: black;
+  color: #121212;
   height: 25px;
   cursor: pointer;
   margin-bottom: 4px;
@@ -55,8 +55,11 @@
   align-items: center;
   margin-top: 0;
   padding: 0;
-  background-color: darkred;
-  color: whitesmoke;
+  /*background-color: darkred;*/
+  /*color: whitesmoke;*/
+
+  background-color: palegoldenrod;
+  color: black;
   margin-bottom: 15px;
 }
 
@@ -76,7 +79,7 @@
 
 .edit-your-experience-button {
   background-color: whitesmoke;
-  color: black;
+  color: #121212;
   /*font-size: 15px;*/
   /*max-width: 100% !important;*/
   word-break: break-all !important;
@@ -94,6 +97,7 @@
 
 .chart-legend {
   margin-left: 15px;
+  color: white;
 }
 
 .green-progress .mat-progress-bar-fill::after {
@@ -101,8 +105,14 @@
 }
 
 .user-infos-and-ngx-graph-div {
-  background-color: whitesmoke;
-  border: 1px solid lightgray;
+  background-color: #dbd8d8;
+  color: black;
+  border: 1px solid #1b1e20;
   margin: 0;
   padding: 0;
 }
+
+.legend-label-text {
+  color: #111111 !important;
+}
+

@@ -12,7 +12,7 @@ body, html {
   text-align: justify;
   /*background-color: white;*/
   /*color: #767676;*/
-  background-color: black;
+  background-color: #121212;
   color: white;
   width: 100%;
   min-height: 100%;
@@ -81,6 +81,6 @@ input {
   height: 50px;
   font-size: 18px;
   background-color: palegoldenrod;
-  color: black;
+  color: #121212;
   border: 2px solid palegoldenrod;
 }

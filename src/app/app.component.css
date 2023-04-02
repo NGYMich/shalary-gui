@@ -1,6 +1,6 @@
 
 .website-background-color {
-  background-color: whitesmoke;
+  background-color: #121212;
 }
 
 
@@ -13,7 +13,7 @@
 
 .mat-toolbar.mat-primary {
   /*background-color: #393f41;*/
-  background-color: black;
+  background-color: #121212;
   height: 70px;
   position: sticky;
   position: -webkit-sticky;
@@ -67,7 +67,7 @@
   font-size: 14px;
   border-radius: 5px !important;
   border-color: white !important;
-  background-color: black;
+  background-color: #121212;
   text-align: left;
 
 }
@@ -89,17 +89,17 @@
 }
 
 ::ng-deep .router-pages-button-2 {
-  background-color: black;
+  background-color: #121212;
 }
 
 .router-pages-button-2 {
-  background-color: black;
+  background-color: #121212;
   color: white;
 }
 
 .active_route {
   background-color: palegoldenrod;
-  color: black;
+  color: #121212;
 }
 
 

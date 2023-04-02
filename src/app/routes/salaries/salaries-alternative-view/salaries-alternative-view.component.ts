@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from "../../../model/user";
 import {Country} from "../../../model/country";
-import {GridOptions} from "ag-grid-community";
+import {ColDef, ColGroupDef, GridOptions} from "ag-grid-community";
 import {UserService} from "../../../services/UserService";
 import {ForexService} from "../../../services/ForexService";
 import {Router} from "@angular/router";
@@ -40,9 +40,10 @@ export class SalariesAlternativeViewComponent implements OnInit {
   tooltipHideDelay = 5000;
   verticalAlignColumn = {
     'white-space': 'normal',
-    'height': '100%',
-    'display': 'flex ',
+    height: '100%',
+    display: 'flex ',
     'align-items': 'center',
+    // color: 'white'
   };
   salaryHistory: any;
   currentUser: User;
@@ -406,7 +407,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   //     ]
   //   },
   // ];
-  desktopColumnDefs = [
+  desktopColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true},
 
     {
@@ -454,26 +455,42 @@ export class SalariesAlternativeViewComponent implements OnInit {
       cellRendererParams: {selectedCurrency: this.selectedCurrency},
       cellStyle: params => {
         let style = {
-          'height': '100%',
-          'display': 'flex ',
+          height: '100%',
+          display: 'flex ',
           'align-items': 'center',
-          'background-color': ''
+          'background-color': '',
+          'color': 'black'
         };
         let salary = params.value;
+        // if (salary < 3)
+        //   style["background-color"] = ''
+        // else if (salary < 20000)
+        //   style["background-color"] = '#cde2c4'
+        // else if (salary < 30000)
+        //   style["background-color"] = '#c4e0b8'
+        // else if (salary < 40000)
+        //   style["background-color"] = '#a8e28e'
+        // else if (salary < 60000)
+        //   style["background-color"] = '#9de080'
+        // else if (salary < 80000)
+        //   style["background-color"] = '#8ad569'
+        // else if (salary >= 80000)
+        //   style["background-color"] = '#79cd54'
+
         if (salary < 3)
           style["background-color"] = ''
         else if (salary < 20000)
-          style["background-color"] = '#cde2c4'
+          style["background-color"] = '#f8f8e7'
         else if (salary < 30000)
-          style["background-color"] = '#c4e0b8'
+          style["background-color"] = '#f3f3d3'
         else if (salary < 40000)
-          style["background-color"] = '#a8e28e'
+          style["background-color"] = '#f0f0cb'
         else if (salary < 60000)
-          style["background-color"] = '#9de080'
+          style["background-color"] = '#eeeec3'
         else if (salary < 80000)
-          style["background-color"] = '#8ad569'
+          style["background-color"] = '#eaeab3'
         else if (salary >= 80000)
-          style["background-color"] = '#79cd54'
+          style["background-color"] = '#d5d56c'
         return style
       }
     },
@@ -486,23 +503,31 @@ export class SalariesAlternativeViewComponent implements OnInit {
       filter: 'agTextColumnFilter',
       width: 120,
       cellStyle: params => {
-        let style = {
-          'height': '100%',
-          'display': 'flex ',
-          'align-items': 'center',
-          'background-color': ''
-        };
+        let style = {height: '100%', display: 'flex ', 'align-items': 'center', 'background-color': '', color: 'black',};
         let experience = params.value;
+        // if (experience < 3)
+        //   style["background-color"] = ''
+        // else if (experience < 6)
+        //   style["background-color"] = '#ADD8E6'
+        // else if (experience < 9)
+        //   style["background-color"] = '#8AC7DB'
+        // else if (experience < 20)
+        //   style["background-color"] = '#67B7D1'
+        // else if (experience >= 20)
+        //   style["background-color"] = '#338BA8'
+
         if (experience < 3)
-          style["background-color"] = ''
+          style["background-color"] = '#dadada'
         else if (experience < 6)
-          style["background-color"] = '#ADD8E6'
+          style["background-color"] = '#cdcdcd'
         else if (experience < 9)
-          style["background-color"] = '#8AC7DB'
+          style["background-color"] = '#c0c0c0'
         else if (experience < 20)
-          style["background-color"] = '#67B7D1'
+          style["background-color"] = '#b4b4b4'
         else if (experience >= 20)
-          style["background-color"] = '#338BA8'
+          style["background-color"] = '#a7a7a7'
+
+
         return style;
       }
     },

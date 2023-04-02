@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../services/UserService";
 import {User} from "../../model/user";
-import {ColDef, GridOptions} from "ag-grid-community";
+import {ColDef, ColGroupDef, GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
 import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {SalaryCellRenderer} from "./salary-cell-renderer";
@@ -124,7 +124,7 @@ export class SalariesComponent implements OnInit {
 
   }
 
-  desktopColumnDefs = [
+  desktopColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {
       headerName: 'User',
       children: [
@@ -145,18 +145,24 @@ export class SalariesComponent implements OnInit {
           filter: 'agTextColumnFilter',
           width: 150,
           cellStyle: params => {
+            let style = {
+              'height': '100%',
+              'display': 'flex ',
+              'align-items': 'center',
+              'background-color': ''
+            };
             let experience = params.value;
-            switch (true) {
-              case (experience < 3):
-                return {}
-              case (experience < 6):
-                return {'background-color': '#BCD2E8'}
-              case (experience < 9):
-                return {'background-color': '#91BAD6'}
-              case (experience >= 9):
-                return {'background-color': '#73A5C6'}
-            }
-            return
+            if (experience < 3)
+              style["background-color"] = ''
+            else if (experience < 6)
+              style["background-color"] = '#ADD8E6'
+            else if (experience < 9)
+              style["background-color"] = '#8AC7DB'
+            else if (experience < 20)
+              style["background-color"] = '#67B7D1'
+            else if (experience >= 20)
+              style["background-color"] = '#338BA8'
+            return style;
           }
         },
         {
@@ -210,7 +216,7 @@ export class SalariesComponent implements OnInit {
       ]
     },
   ];
-  mobileColumnDefs = [
+  mobileColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true},
     {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', hide: true},
     {

@@ -11,7 +11,7 @@ import {SalariesComponent} from './routes/salaries/salaries.component';
 import {DataComponent} from './routes/data/data.component';
 import {AboutComponent} from './routes/about/about.component';
 import {HttpClientModule} from "@angular/common/http";
-import {AgGridModule} from "ag-grid-angular";
+
 import {UserInfosDialogComponent} from './user-infos/user-infos-dialog/user-infos-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -65,6 +65,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { OpenCloseComponent } from './animations/open-close/open-close.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AgGridModule} from "ag-grid-angular";
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
@@ -134,7 +135,7 @@ const routes: Routes = [
     MatButtonModule,
     HttpClientModule,
     MatDialogModule,
-    AgGridModule.withComponents([]),
+    AgGridModule,
     FormsModule,
     NgxChartsModule,
     BrowserAnimationsModule,

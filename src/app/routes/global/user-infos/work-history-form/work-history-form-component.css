@@ -20,7 +20,7 @@
 }
 
 h1 {
-  color: black;
+  color: #121212;
 }
 
 .optional {
@@ -29,7 +29,7 @@ h1 {
 
 .mat-flat-button.mat-remove-job {
   background-color: whitesmoke;
-  color: black;
+  color: #121212;
 }
 
 .mat-raised-button.mat-add-job {

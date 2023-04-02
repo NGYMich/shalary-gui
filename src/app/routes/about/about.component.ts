@@ -8,10 +8,6 @@ import {Component, OnInit} from '@angular/core';
 export class AboutComponent implements OnInit {
   algorithmSuggestions: string[] = [
     '------------------------------ First priority ------------------------------',
-    'Bugfix: create user1, create user2, ',
-    '',
-    '',
-    '',
     'When user clicks on next page, call API to load next page data. Example : User sees page 1 with 50 rows, Front-end asks API to load 100 rows for 2 pages. User navigate to page 2, front-end asks API to loads additional 50 rows.',
     'Add categories / filters',
     'Add data : by location, age, min/max/means, recommendations',
