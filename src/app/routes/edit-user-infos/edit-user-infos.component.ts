@@ -5,8 +5,8 @@ import {LocationService} from "../../services/LocationService";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteUserDialogComponent} from "../../user-infos/delete-user-dialog/delete-user-dialog.component";
 import {Router} from "@angular/router";
-import {WorkHistoryFormComponent} from "../global/user-infos/work-history-form/work-history-form-component";
-import {UserInformationsFormComponent} from "../global/user-infos/user-informations-form/user-informations-form-component";
+import {WorkHistoryFormComponent} from "./work-history-form/work-history-form-component";
+import {UserInformationsFormComponent} from "./user-informations-form/user-informations-form-component";
 import {UserInputErrorDialogComponent} from "../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {TokenStorageService} from "../../services/TokenStorageService";
 import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
@@ -42,11 +42,12 @@ export class EditUserInfosComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(JSON.parse(this.tokenStorageService.getUser()).id)
     this.userService.getUserById(JSON.parse(this.tokenStorageService.getUser()).id).subscribe(user => {
         this.userToModify = user
       }
     )
+
+    this.workHistoryFormComponent.salaryInfosForm.markAsTouched()
   }
 
   modifyUser($event: MouseEvent) {
@@ -66,6 +67,12 @@ export class EditUserInfosComponent implements OnInit {
         }
       );
     } else {
+      this.salaryInfosForm.markAllAsTouched()
+      this.userInformationsForm.markAllAsTouched()
+      this.userInformationsFormComponent.countriesControl.markAllAsTouched()
+      console.log('All forms are not valid : [userInformationsForm : ' + this.userInformationsForm.valid + '] | ' +
+        '[countriesControl : ' + this.userInformationsFormComponent.countriesControl.valid + '] | ' +
+        '[salaryInfosForm : '+ this.salaryInfosForm.valid + "]")
       this.openUserInputErrorDialog(!this.salaryInfosForm.valid, !this.userInformationsForm.valid || !this.userInformationsFormComponent.countriesControl.valid, this.userInformationsForm, this.salaryInfosForm, null)
     }
   }
@@ -118,7 +125,7 @@ export class EditUserInfosComponent implements OnInit {
   }
 
   openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message) {
-    let dialogRef = this.dialog.open(UserInputErrorDialogComponent, {
+    this.dialog.open(UserInputErrorDialogComponent, {
       width: '800px',
       height: '600px',
       data: {

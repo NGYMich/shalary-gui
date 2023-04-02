@@ -51,9 +51,11 @@ h1 {
   height: 40px;
   color: white;
   background: #1b1e20;
-  margin-right: 2%;
+  margin-right: 4%;
   margin-top: 1%;
   margin-bottom: 1%;
+  border-color: #9ecaed;
+  box-shadow: 0 0 15px palegoldenrod;
 }
 
 .col-xs-5 {
@@ -61,7 +63,7 @@ h1 {
 }
 
 .search-by-country-and-buttons-div {
-  /*padding-top: 5%;*/
+  padding-top: 7%;
   /*display: block;*/
 }
 

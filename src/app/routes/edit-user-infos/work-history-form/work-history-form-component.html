@@ -16,12 +16,12 @@
         <br>
 
         <div formArrayName="salaryInfos">
-          <div div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
+          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
                [formGroupName]="pointIndex">
             <mat-form-field appearance="outline"
                             style="float: left; width:10%;"
                             class="with-margin-right-30px">
-              <input formControlName="jobName" matInput/>
+              <input matTooltip="Job Name" formControlName="jobName" matInput maxLength="50"/>
               <mat-label class="optional">Job Name</mat-label>
               <mat-error>
                 Job Name is required
@@ -32,7 +32,7 @@
               <mat-form-field appearance="outline"
                               style="float: left; width: 10%;"
                               class="with-margin-right-30px italic">
-                <input maxLength="30" formControlName="name" matInput/>
+                <input matTooltip="Company" formControlName="name" matInput maxLength="50" />
                 <mat-label>Company</mat-label>
               </mat-form-field>
             </div>
@@ -41,7 +41,7 @@
               <mat-form-field appearance="outline"
                               style="float: left; width: 10%;"
                               class="with-margin-right-30px italic">
-                <mat-select formControlName="sector">
+                <mat-select formControlName="sector" matTooltip="Sector" >
                   <mat-option *ngFor="let sector of sectors"
                               [value]="sector">{{sector}}</mat-option>
                 </mat-select>
@@ -51,7 +51,7 @@
 
             <mat-form-field appearance="outline" style="margin-right: 20px; width: 10%;">
               <mat-label>Contract</mat-label>
-              <mat-select formControlName="contractType">
+              <mat-select formControlName="contractType" matTooltip="Contract">
                 <mat-option *ngFor="let contractType of contractTypes"
                             [value]="contractType">{{contractType}}</mat-option>
               </mat-select>
@@ -59,26 +59,27 @@
 
             <mat-form-field appearance="outline" style="margin-right: 20px; width: 10%;">
               <mat-label>Years of XP *</mat-label>
-              <input formControlName="yearsOfExperience" matInput/>
+              <input matTooltip="Years of XP"  formControlName="yearsOfExperience" matInput maxLength="2" />
               <mat-error>
                 Years of XP is required
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary  with-margin-right-30px">
-              <input formControlName="baseSalary" matInput/>
+              <input matTooltip="Base Salary"  formControlName="baseSalary" maxLength="10" matInput/>
               <mat-label>Base Salary *</mat-label>
-              <mat-hint align="start">Gross annual</mat-hint>
+              <mat-hint align="start">Gross/Year {{this.userToModify?.salaryHistory?.salaryCurrency}}</mat-hint>
+              <mat-error>Base Salary is required</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary with-margin-right-30px italic">
-              <input formControlName="bonusSalary" matInput/>
+              <input matTooltip="Bonus Salary"  formControlName="bonusSalary" maxLength="10"  matInput/>
               <mat-label>Bonus Salary</mat-label>
               <mat-hint align="start">Avg/Year</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary with-margin-right-30px italic">
-              <input formControlName="stockSalary" matInput/>
+              <input matTooltip="Equity"  formControlName="stockSalary" maxLength="10"  matInput/>
               <mat-label>Equity</mat-label>
               <mat-hint align="start">Avg/Year</mat-hint>
             </mat-form-field>
@@ -109,7 +110,7 @@
 
               <mat-form-field appearance="outline" style="float: left; width: 65%; margin-right: 5%;">
                 <input formControlName="jobName" matTooltip="'Job Name'" matInput/>
-                <mat-label class="optional"  matTooltip='Job Name'>Job Name</mat-label>
+                <mat-label class="optional" matTooltip='Job Name'>Job Name</mat-label>
 
               </mat-form-field>
 
@@ -121,7 +122,7 @@
 
               <div formGroupName="company">
                 <mat-form-field appearance="outline" style="float: left; width: 35%; margin-right: 5%;" class="italic">
-                  <input maxLength="30" formControlName="name" matInput/>
+                  <input formControlName="name" matInput maxLength="30" />
                   <mat-label>Company</mat-label>
                 </mat-form-field>
               </div>

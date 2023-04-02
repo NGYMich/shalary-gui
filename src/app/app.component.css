@@ -114,6 +114,6 @@
 
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: whitesmoke;
+  background-color: #dadada;
   border-radius: 10px;
 }

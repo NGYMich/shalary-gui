@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../../common-variables";
+import {commonContractTypes, commonCurrencies, commonEducationLevels, commonGenders, commonSectors} from "../../global/common-variables";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {User} from "../../../../model/user";
+import {User} from "../../../model/user";
 import {map, Observable, startWith} from "rxjs";
-import {Country} from "../../../../model/country";
-import {LocationService} from "../../../../services/LocationService";
-import {TokenStorageService} from "../../../../services/TokenStorageService";
+import {Country} from "../../../model/country";
+import {LocationService} from "../../../services/LocationService";
+import {TokenStorageService} from "../../../services/TokenStorageService";
 
 @Component({
   selector: 'user-informations-form',
@@ -51,10 +51,10 @@ export class UserInformationsFormComponent {
       password: new FormControl(this.userToModify?.password),
       email: new FormControl(this.userToModify?.email, Validators.required),
       currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency,
-        // Validators.required
+        Validators.required
       ),
       yearsOfExperience: new FormControl(this.userToModify?.salaryHistory?.totalYearsOfExperience,
-        // Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])
+        Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])
       ),
       education: new FormControl(this.userToModify?.education),
       age: new FormControl(this.userToModify?.age, Validators.pattern('^[0-9]*$')),
@@ -62,12 +62,12 @@ export class UserInformationsFormComponent {
       comment: new FormControl(this.userToModify?.comment),
       city: new FormControl(this.userToModify?.city),
     });
-    this.countriesControl = new FormControl(this.userToModify?.location)
+    this.countriesControl = new FormControl(this.userToModify?.location, Validators.required)
   }
 
 
   private loadCountriesWithFlag() {
-    let country = this.userToModify != null ? this.userToModify?.location : "France";
+    let country = this.userToModify?.location;
     this.countriesControl = new FormControl(country, (Validators.required))
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
@@ -76,13 +76,6 @@ export class UserInformationsFormComponent {
           startWith(''),
           map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
         );
-      if (this.userToModify != null) {
-        this.isUserLoaded = true;
-        this.showPasswordError = false;
-      } else {
-        this.isUserLoaded = false;
-        this.showPasswordError = true;
-      }
     })
   }
 

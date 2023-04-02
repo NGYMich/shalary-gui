@@ -27,18 +27,20 @@ body {
 
 .ag-row-hover {
   cursor: pointer;
-  background-color: palegoldenrod;
-  color: black;
+  background-color: black;
+  color: white;
 }
+
+.ag-row-selected {
+  background-color: black;
+  color: white;
+}
+
 
 .my-panel .mat-dialog-container {
   border-radius: 30px;
 }
 
-.ag-row-selected {
-  background-color: palegoldenrod;
-  color: black;
-}
 
 /* no cell select*/
 .ag-cell-focus, .ag-cell-no-focus {
@@ -55,4 +57,35 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-tooltip {
+  font-size: 12px !important;
+  font-style: italic;
+  position: relative;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }

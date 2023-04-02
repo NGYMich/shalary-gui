@@ -48,32 +48,9 @@
 }
 
 
-.user-infos {
-  font-family: Trebuchet MS, serif;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-  padding: 0;
-  /*background-color: darkred;*/
-  /*color: whitesmoke;*/
-
-  background-color: palegoldenrod;
-  color: black;
-  margin-bottom: 15px;
-}
-
 .custom-dialog-container .mat-dialog-container {
   margin-top: 0;
   padding: 0;
-}
-
-.user-infos h2 {
-  margin-bottom: 0;
-}
-
-.user-infos button:first-of-type {
-  margin: 0 10px 0 auto
 }
 
 
@@ -107,9 +84,32 @@
 .user-infos-and-ngx-graph-div {
   background-color: #dbd8d8;
   color: black;
-  border: 1px solid #1b1e20;
-  margin: 0;
+  /*border: 1px solid #1b1e20;*/
+  /*margin: 0;*/
   padding: 0;
+  outline: none;
+}
+
+
+.user-infos {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding: 0;
+
+  background-color: #444444;
+  color: white;
+  /*border: 1px solid #1b1e20;*/
+  /*box-shadow: 0 0 10px darkblue;*/
+}
+
+.user-infos h2 {
+  margin-bottom: 0;
+}
+
+.user-infos button:first-of-type {
+  margin: 0 10px 0 auto
 }
 
 .legend-label-text {

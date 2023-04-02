@@ -71,7 +71,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   public activeEntries: any[] = [];
   public chartNames: string[];
   public colors: ColorHelper;
-  public colorScheme: any = {domain: ['#d6dd00', '#ffb160', '#93c47d', '#bd3d16']}; // base , bonus , equity , total
+  public colorScheme: any = {domain: ['crimson', 'orange', 'darkgreen', 'darkblue']}; // total, base, bonus, equity
   public yAxisTickFormattingDesktop = this.formatSalary.bind(this);
   public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];

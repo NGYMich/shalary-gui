@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {commonContractTypes, commonSectors} from "../../common-variables";
-import {User} from "../../../../model/user";
-import {TokenStorageService} from "../../../../services/TokenStorageService";
+import {commonContractTypes, commonSectors} from "../../global/common-variables";
+import {User} from "../../../model/user";
+import {TokenStorageService} from "../../../services/TokenStorageService";
 
 @Component({
   selector: 'work-history-form',

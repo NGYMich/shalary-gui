@@ -7,30 +7,31 @@
       <form [formGroup]="userInformationsForm">
         <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Username</mat-label>
-          <input maxLength="25" formControlName="username" matInput>
+          <input matTooltip="Username" formControlName="username" matInput maxLength="25">
+          <mat-error>Too long</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Password</mat-label>
-          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput>
+          <input matTooltip="Password" [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput>
           <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Email</mat-label>
-          <input formControlName="email" matInput>
+          <input matTooltip="Email" formControlName="email" matInput maxLength="100">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Salary Currency</mat-label>
-          <mat-select [(value)]="selectedCurrency" formControlName="currency">
+          <mat-select [(value)]="selectedCurrency" formControlName="currency" matTooltip="Salary Currency">
             <mat-option *ngFor="let currency of currencies"
                         [value]="currency">{{currency}}</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <input matInput [matAutocomplete]="auto" [formControl]="countriesControl">
+          <input matTooltip="Country" matInput [matAutocomplete]="auto" [formControl]="countriesControl" maxLength="50">
           <mat-label>Country</mat-label>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
@@ -43,20 +44,20 @@
 
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">City (optional)</mat-label>
-          <input maxLength="50" formControlName="city" matInput>
+          <mat-label class="optional">City</mat-label>
+          <input matTooltip="City" formControlName="city" matInput maxLength="75">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
           <mat-label>Total Years of Experience</mat-label>
-          <input formControlName="yearsOfExperience" matInput>
+          <input matTooltip="Total Years of Experience" formControlName="yearsOfExperience" matInput   maxLength="2">
         </mat-form-field>
         <br>
 
 
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">Education (optional)</mat-label>
-          <mat-select [(value)]="selectedEducation" formControlName="education">
+          <mat-label class="optional">Education</mat-label>
+          <mat-select [(value)]="selectedEducation" formControlName="education" matTooltip="Education" >
             <mat-option *ngFor="let educationLevel of educationLevels"
                         [value]="educationLevel">{{educationLevel}}</mat-option>
           </mat-select>
@@ -65,21 +66,21 @@
 
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">Age (optional)</mat-label>
-          <input formControlName="age" matInput>
+          <mat-label class="optional">Age</mat-label>
+          <input matTooltip="Age" formControlName="age" matInput   maxLength="3">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">Gender (optional)</mat-label>
-          <mat-select [(value)]="selectedGender" formControlName="gender">
+          <mat-label class="optional">Gender</mat-label>
+          <mat-select [(value)]="selectedGender" formControlName="gender" matTooltip="Gender">
             <mat-option *ngFor="let gender of genders"
                         [value]="gender">{{gender}}</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">Comment (optional)</mat-label>
-          <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
+          <mat-label class="optional">Comment</mat-label>
+          <textarea matTooltip="Comment" style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput   maxLength="5000"> </textarea>
         </mat-form-field>
       </form>
     </div>
@@ -120,7 +121,7 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field appearance="outline" style="width: 45%; ; float: left;">
-          <mat-label class="optional">City (optional)</mat-label>
+          <mat-label class="optional">City</mat-label>
           <input maxLength="50" formControlName="city" matInput>
         </mat-form-field>
         <br>
@@ -137,18 +138,18 @@
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
-          <mat-label class="optional">Education (optional)</mat-label>
+          <mat-label class="optional">Education</mat-label>
           <mat-select [(value)]="selectedEducation" formControlName="education">
             <mat-option *ngFor="let educationLevel of educationLevels"
                         [value]="educationLevel">{{educationLevel}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" style="width: 45%; ; float: left; margin-right: 5%;">
-          <mat-label class="optional">Age (optional)</mat-label>
+          <mat-label class="optional">Age</mat-label>
           <input formControlName="age" matInput>
         </mat-form-field>
         <mat-form-field appearance="outline" style="width: 35%; ; float: left;">
-          <mat-label class="optional">Gender (optional)</mat-label>
+          <mat-label class="optional">Gender</mat-label>
           <mat-select [(value)]="selectedGender" formControlName="gender">
             <mat-option *ngFor="let gender of genders"
                         [value]="gender">{{gender}}</mat-option>
@@ -156,7 +157,7 @@
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="full-width-line">
-          <mat-label class="optional">Comment (optional)</mat-label>
+          <mat-label class="optional">Comment</mat-label>
           <textarea style="white-space: pre-wrap; height: auto;" formControlName="comment" matInput> </textarea>
         </mat-form-field>
       </form>

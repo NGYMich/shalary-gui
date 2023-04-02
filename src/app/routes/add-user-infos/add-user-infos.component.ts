@@ -5,8 +5,8 @@ import {LocationService} from "../../services/LocationService";
 import {User} from "../../model/user";
 import {Router} from "@angular/router";
 import {GlobalService} from "../global/global.service";
-import {WorkHistoryFormComponent} from "../global/user-infos/work-history-form/work-history-form-component";
-import {UserInformationsFormComponent} from "../global/user-infos/user-informations-form/user-informations-form-component";
+import {WorkHistoryFormComponent} from "../edit-user-infos/work-history-form/work-history-form-component";
+import {UserInformationsFormComponent} from "../edit-user-infos/user-informations-form/user-informations-form-component";
 import {UserInputErrorDialogComponent} from "../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
