@@ -8,8 +8,10 @@ button {
   font-size: 18px;
   /*margin-top: 1%;*/
   width: 100%;
-  height: 50px;
-  margin-bottom: 26px;
+  height: 40px;
+  /*margin-bottom: 26px;*/
+  margin-top: 18px;
+  margin-bottom: 20px;
 
 }
 
@@ -26,7 +28,7 @@ button {
 .mobile-edit-your-experience-button {
   margin-top: 0.5%;
   width: 75%;
-  height: 38px;
+  height: 20px;
   background-color: darkorange;
   color: white;
   font-size: 14px;
