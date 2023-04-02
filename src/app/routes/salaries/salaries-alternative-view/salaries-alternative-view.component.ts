@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../../model/user";
 import {Country} from "../../../model/country";
 import {ColDef, ColGroupDef, GridOptions} from "ag-grid-community";
@@ -16,14 +16,14 @@ import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-altern
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {RegisterComponent} from "../../authentication/register/register.component";
 import {MatDialog} from "@angular/material/dialog";
-import {AppConstants} from "../../global/common-variables";
+import {AppConstants, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/common-variables";
 import {Location} from "@angular/common";
+
 
 @Component({
   selector: 'app-salaries-alternative-view',
   templateUrl: './salaries-alternative-view.component.html',
   styleUrls: ['./salaries-alternative-view.component.css'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SalariesAlternativeViewComponent implements OnInit {
 
@@ -321,92 +321,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   }
 
-  // desktopColumnDefs = [
-  //   {
-  //     headerName: 'User',
-  //     children: [
-  //       {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-  //       {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-  //       {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-  //       {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer},
-  //       {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-  //       {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-  //       {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-  //       {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-  //       {
-  //         field: 'salaryHistory.totalYearsOfExperience',
-  //         headerName: 'Experience',
-  //         sortable: true,
-  //         resizable: true,
-  //         valueFormatter: this.experienceFormatter,
-  //         filter: 'agTextColumnFilter', width: 150,
-  //         cellStyle: params => {
-  //           let experience = params.value;
-  //           console.log(experience)
-  //           switch (true) {
-  //             case (experience < 3):
-  //               return {'background-color': '#BCD2E8'}
-  //             case (experience < 6):
-  //               return {'background-color': '#BCD2E8'}
-  //             case (experience < 9):
-  //               return {'background-color': '#91BAD6'}
-  //             case (experience >= 9):
-  //               return {'background-color': '#73A5C6'}
-  //           }
-  //           return {'background-color': '#BCD2E8'}
-  //         }
-  //       },
-  //       {
-  //         field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-  //         cellRenderer: LocationCellRenderer,
-  //       },
-  //
-  //     ]
-  //   },
-  //   {
-  //     headerName: 'Salary',
-  //
-  //     children: [
-  //       {field: 'salaryHistory.salaryCurrency', hide: true},
-  //       {field: 'salaryHistory.salaryInfos', hide: true},
-  //       {field: 'salaryHistory', hide: true},
-  //       {
-  //         valueGetter: this.totalSalaryValueGetter.bind(this),
-  //         width: 150,
-  //         editable: true,
-  //         headerName: 'Total salary',
-  //         sortable: true, resizable: true,
-  //         filter: 'agNumberColumnFilter',
-  //         cellRenderer: SalaryCellRenderer,
-  //         cellRendererParams: {selectedCurrency: this.selectedCurrency},
-  //         cellStyle: params => {
-  //           let salary = params.value;
-  //           switch (true) {
-  //             case (salary < 20000):
-  //               return
-  //             case (salary < 30000):
-  //               return {'background-color': '#cde2c4'}
-  //             case (salary < 40000):
-  //               return {'background-color': '#c4e0b8'}
-  //             case (salary < 50000):
-  //               return {'background-color': '#a8e28e'}
-  //             case (salary < 60000):
-  //               return {'background-color': '#9de080'}
-  //             case (salary < 70000):
-  //               return {'background-color': '#8ad569'}
-  //             case (salary >= 70000):
-  //               return {'background-color': '#79cd54'}
-  //           }
-  //           return
-  //         }
-  //       },
-  //       {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-  //       {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-  //       {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-  //       {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
-  //     ]
-  //   },
-  // ];
   desktopColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true},
 
@@ -453,46 +367,8 @@ export class SalariesAlternativeViewComponent implements OnInit {
       filter: 'agNumberColumnFilter',
       cellRenderer: SalaryCellRenderer,
       cellRendererParams: {selectedCurrency: this.selectedCurrency},
-      cellStyle: params => {
-        let style = {
-          height: '100%',
-          display: 'flex ',
-          'align-items': 'center',
-          'background-color': '',
-          'color': 'black'
-        };
-        let salary = params.value;
-        // if (salary < 3)
-        //   style["background-color"] = ''
-        // else if (salary < 20000)
-        //   style["background-color"] = '#cde2c4'
-        // else if (salary < 30000)
-        //   style["background-color"] = '#c4e0b8'
-        // else if (salary < 40000)
-        //   style["background-color"] = '#a8e28e'
-        // else if (salary < 60000)
-        //   style["background-color"] = '#9de080'
-        // else if (salary < 80000)
-        //   style["background-color"] = '#8ad569'
-        // else if (salary >= 80000)
-        //   style["background-color"] = '#79cd54'
+      cellStyle: params => totalSalaryCellStyle(params)
 
-        if (salary < 3)
-          style["background-color"] = ''
-        else if (salary < 20000)
-          style["background-color"] = '#f8f8e7'
-        else if (salary < 30000)
-          style["background-color"] = '#f3f3d3'
-        else if (salary < 40000)
-          style["background-color"] = '#f0f0cb'
-        else if (salary < 60000)
-          style["background-color"] = '#eeeec3'
-        else if (salary < 80000)
-          style["background-color"] = '#eaeab3'
-        else if (salary >= 80000)
-          style["background-color"] = '#d5d56c'
-        return style
-      }
     },
     {
       field: 'salaryHistory.totalYearsOfExperience',
@@ -502,34 +378,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       valueFormatter: this.experienceFormatter,
       filter: 'agTextColumnFilter',
       width: 120,
-      cellStyle: params => {
-        let style = {height: '100%', display: 'flex ', 'align-items': 'center', 'background-color': '', color: 'black',};
-        let experience = params.value;
-        // if (experience < 3)
-        //   style["background-color"] = ''
-        // else if (experience < 6)
-        //   style["background-color"] = '#ADD8E6'
-        // else if (experience < 9)
-        //   style["background-color"] = '#8AC7DB'
-        // else if (experience < 20)
-        //   style["background-color"] = '#67B7D1'
-        // else if (experience >= 20)
-        //   style["background-color"] = '#338BA8'
-
-        if (experience < 3)
-          style["background-color"] = '#dadada'
-        else if (experience < 6)
-          style["background-color"] = '#cdcdcd'
-        else if (experience < 9)
-          style["background-color"] = '#c0c0c0'
-        else if (experience < 20)
-          style["background-color"] = '#b4b4b4'
-        else if (experience >= 20)
-          style["background-color"] = '#a7a7a7'
-
-
-        return style;
-      }
+      cellStyle: params => totalYearsOfExperienceCellStyle(params),
     },
 
     {

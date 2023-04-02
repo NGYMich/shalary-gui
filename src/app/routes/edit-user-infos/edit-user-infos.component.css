@@ -79,3 +79,7 @@ button {
 h1 {
   color: #121212;
 }
+/*::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {*/
+/*  background-color: #dadada;*/
+/*  border-radius: 10px;*/
+/*}*/

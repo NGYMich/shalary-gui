@@ -93,7 +93,7 @@
 }
 
 .router-pages-button-2 {
-  background-color: #121212;
+  /*background-color: #121212;*/
   color: white;
 }
 
@@ -113,7 +113,3 @@
 }
 
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: #dadada;
-  border-radius: 10px;
-}

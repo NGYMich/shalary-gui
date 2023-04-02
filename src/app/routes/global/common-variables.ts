@@ -1,4 +1,5 @@
 import {environment} from "../../../environments/environment";
+import {CellClassParams} from "ag-grid-community";
 
 export const commonEducationLevels = ['Bootcamp', 'High School Graduate', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate Degree', 'Other']
 export const commonCurrencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)', 'CHF (₣)', 'AUD (AU$)', 'CAD (C$)'];
@@ -35,4 +36,50 @@ export class AppConstants {
   static LOGIN_DIALOG_WIDTH = '500px';
   static LOGIN_DIALOG_HEIGHT = '550px';
 
+}
+
+export function totalSalaryCellStyle(params: CellClassParams) {
+  let style = {
+    height: '100%',
+    display: 'flex ',
+    'align-items': 'center',
+    'background-color': '',
+    'color': 'black'
+  };
+  let salary = params.value;
+  if (salary < 3)
+    style["background-color"] = ''
+  else if (salary < 20000)
+    style["background-color"] = '#f8f8e7'
+  else if (salary < 30000)
+    style["background-color"] = '#f3f3d3'
+  else if (salary < 40000)
+    style["background-color"] = '#f0f0cb'
+  else if (salary < 60000)
+    style["background-color"] = '#eeeec3'
+  else if (salary < 80000)
+    style["background-color"] = '#eaeab3'
+  else if (salary >= 80000)
+    style["background-color"] = '#d5d56c'
+  return style
+}
+
+
+export function totalYearsOfExperienceCellStyle(params: CellClassParams) {
+  let style = {height: '100%', display: 'flex ', 'align-items': 'center', 'background-color': '', color: 'black',};
+  let experience = params.value;
+
+  if (experience < 3)
+    style["background-color"] = '#dadada'
+  else if (experience < 6)
+    style["background-color"] = '#cdcdcd'
+  else if (experience < 9)
+    style["background-color"] = '#c0c0c0'
+  else if (experience < 20)
+    style["background-color"] = '#b4b4b4'
+  else if (experience >= 20)
+    style["background-color"] = '#a7a7a7'
+
+
+  return style;
 }

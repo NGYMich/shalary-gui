@@ -1,5 +1,6 @@
-.form-field {
+.mat-form-field {
   width: 100%;
+  background-color: white;
 }
 
 .content-divider {

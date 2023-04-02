@@ -77,7 +77,7 @@
   color: white;
 }
 
-.green-progress .mat-progress-bar-fill::after {
+::ng-deep .green-progress .mat-progress-bar-fill::after {
   background-color: black !important;
 }
 
@@ -115,4 +115,3 @@
 .legend-label-text {
   color: #111111 !important;
 }
-

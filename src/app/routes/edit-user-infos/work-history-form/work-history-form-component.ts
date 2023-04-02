@@ -3,6 +3,8 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 import {commonContractTypes, commonSectors} from "../../global/common-variables";
 import {User} from "../../../model/user";
 import {TokenStorageService} from "../../../services/TokenStorageService";
+import {UserInputErrorDialogComponent} from "../../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'work-history-form',
@@ -21,7 +23,7 @@ export class WorkHistoryFormComponent {
     this.initWorkHistory();
   }
 
-  constructor(private formBuilder: FormBuilder, private tokenStorageService: TokenStorageService) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
   }
 
   get salaryInfos(): FormArray {
@@ -29,8 +31,10 @@ export class WorkHistoryFormComponent {
   }
 
 
-  addNewJobFormLine(copyPastLine: boolean = true, second: boolean = false, init: boolean = false) {
-    if (this.salaryInfos.length != 0) {
+  addNewJobFormLine(copyPastLine: boolean = true, second: boolean = false) {
+    if (this.salaryInfos.length >= 20) {
+      this.openUserInputErrorDialog(null, null, null, null, "You can't add anymore experiences at the moment. The max is 20 experiences.")
+    } else if (this.salaryInfos.length != 0) {
       let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
       let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
       this.salaryInfos.push(this.formBuilder.group(controlsConfig))
@@ -42,11 +46,11 @@ export class WorkHistoryFormComponent {
 
   private createEmptySalaryInfo() {
     return {
-      yearsOfExperience: new FormControl('', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-      jobName: new FormControl('', Validators.required),
+      yearsOfExperience: new FormControl('', [Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required]),
+      jobName: new FormControl('', [Validators.required, Validators.minLength(2)]),
       baseSalary: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-      stockSalary: new FormControl(''),
-      bonusSalary: new FormControl(''),
+      stockSalary: new FormControl('', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+      bonusSalary: new FormControl('', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
       company: this.formBuilder.group({
         name: '',
         sector: ''
@@ -61,7 +65,7 @@ export class WorkHistoryFormComponent {
     if (copyPastLine) {
       return {
         yearsOfExperience: new FormControl(lastSalaryInfo.get('yearsOfExperience')?.value, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-        jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, Validators.required),
+        jobName: new FormControl(lastSalaryInfo.get('jobName')?.value, [Validators.required, Validators.minLength(2)]),
         baseSalary: new FormControl(lastSalaryInfo.get('baseSalary')?.value, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
         stockSalary: new FormControl(lastSalaryInfo.get('stockSalary')?.value),
         bonusSalary: new FormControl(lastSalaryInfo.get('bonusSalary')?.value),
@@ -78,8 +82,8 @@ export class WorkHistoryFormComponent {
         yearsOfExperience: new FormControl('2', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
         jobName: new FormControl('DevOps Engineer', Validators.required),
         baseSalary: new FormControl('40000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-        stockSalary: new FormControl(''),
-        bonusSalary: new FormControl(''),
+        stockSalary: new FormControl('', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+        bonusSalary: new FormControl('', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
         company: this.formBuilder.group({
           name: 'Capgemini',
           sector: 'Information Technology'
@@ -92,8 +96,8 @@ export class WorkHistoryFormComponent {
       yearsOfExperience: new FormControl('5', Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
       jobName: new FormControl('Intermediate DevOps Engineer', Validators.required),
       baseSalary: new FormControl('55000', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-      stockSalary: new FormControl('2000'),
-      bonusSalary: new FormControl('2000'),
+      stockSalary: new FormControl('2000', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+      bonusSalary: new FormControl('2000', Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
       company: this.formBuilder.group({
         name: 'BNP Paribas',
         sector: 'Finance / Banking'
@@ -120,10 +124,10 @@ export class WorkHistoryFormComponent {
         salaryInfo => this.salaryInfos.push(this.formBuilder.group({
               // id: new FormControl(salaryInfo.id),
               yearsOfExperience: new FormControl(salaryInfo.yearsOfExperience, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-              jobName: new FormControl(salaryInfo.jobName, Validators.required),
+              jobName: new FormControl(salaryInfo.jobName, [Validators.required, Validators.minLength(2)]),
               baseSalary: new FormControl(salaryInfo.baseSalary, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-              stockSalary: new FormControl(salaryInfo.stockSalary),
-              bonusSalary: new FormControl(salaryInfo.bonusSalary),
+              stockSalary: new FormControl(salaryInfo.stockSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+              bonusSalary: new FormControl(salaryInfo.bonusSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
               company: this.formBuilder.group({
                 // id: new FormControl(salaryInfo.company.id),
                 name: salaryInfo.company.name,
@@ -141,6 +145,22 @@ export class WorkHistoryFormComponent {
   private initSalaryInfosForm() {
     this.salaryInfosForm = this.formBuilder.group({
       salaryInfos: this.formBuilder.array([])
+    });
+  }
+
+  openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message) {
+    this.dialog.open(UserInputErrorDialogComponent, {
+      width: '800px',
+      height: '600px',
+      data: {
+        userInformationError: userInformationError,
+        salaryInformationsError: salaryInformationsError,
+        userInformationsForm: userInformationsForm,
+        salaryInfosForm: salaryInfosForm,
+        errorMessage: message
+      },
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
   }
 }

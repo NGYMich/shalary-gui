@@ -21,10 +21,10 @@
             <mat-form-field appearance="outline"
                             style="float: left; width:10%;"
                             class="with-margin-right-30px">
-              <input matTooltip="Job Name" formControlName="jobName" matInput maxLength="50"/>
+              <input matTooltip="Job Name | Max Length 50" formControlName="jobName" matInput maxLength="50"/>
               <mat-label class="optional">Job Name</mat-label>
               <mat-error>
-                Job Name is required
+                Job Name is required | Min Length 2
               </mat-error>
             </mat-form-field>
 
@@ -32,7 +32,7 @@
               <mat-form-field appearance="outline"
                               style="float: left; width: 10%;"
                               class="with-margin-right-30px italic">
-                <input matTooltip="Company" formControlName="name" matInput maxLength="50" />
+                <input matTooltip="Company | Max Length 50" formControlName="name" matInput maxLength="50" />
                 <mat-label>Company</mat-label>
               </mat-form-field>
             </div>
@@ -59,9 +59,9 @@
 
             <mat-form-field appearance="outline" style="margin-right: 20px; width: 10%;">
               <mat-label>Years of XP *</mat-label>
-              <input matTooltip="Years of XP"  formControlName="yearsOfExperience" matInput maxLength="2" />
+              <input matTooltip="Years of XP | Numeric Value < 100"  formControlName="yearsOfExperience" matInput maxLength="2" />
               <mat-error>
-                Years of XP is required
+                Years of XP is required | Numeric Value < 100
               </mat-error>
             </mat-form-field>
 
@@ -69,19 +69,21 @@
               <input matTooltip="Base Salary"  formControlName="baseSalary" maxLength="10" matInput/>
               <mat-label>Base Salary *</mat-label>
               <mat-hint align="start">Gross/Year {{this.userToModify?.salaryHistory?.salaryCurrency}}</mat-hint>
-              <mat-error>Base Salary is required</mat-error>
+              <mat-error>Base Salary is required | Numeric Value</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary with-margin-right-30px italic">
               <input matTooltip="Bonus Salary"  formControlName="bonusSalary" maxLength="10"  matInput/>
               <mat-label>Bonus Salary</mat-label>
               <mat-hint align="start">Avg/Year</mat-hint>
+              <mat-error>Numeric Value</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="job-form-field-salary with-margin-right-30px italic">
               <input matTooltip="Equity"  formControlName="stockSalary" maxLength="10"  matInput/>
               <mat-label>Equity</mat-label>
               <mat-hint align="start">Avg/Year</mat-hint>
+              <mat-error>Numeric Value</mat-error>
             </mat-form-field>
 
             <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button">

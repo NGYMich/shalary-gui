@@ -62,7 +62,8 @@ export class EditUserInfosComponent implements OnInit {
             !this.userInformationsForm.valid || !this.userInformationsFormComponent.countriesControl.valid,
             this.userInformationsForm,
             this.salaryInfosForm,
-            error.error.message
+            error.error.message,
+            true
           )
         }
       );
@@ -124,7 +125,7 @@ export class EditUserInfosComponent implements OnInit {
     this.userService.deleteUser(this.userInformationsForm.get('username')!.value, this.userToModify!.id!);
   }
 
-  openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message) {
+  openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message, isApiErrorMessage = false) {
     this.dialog.open(UserInputErrorDialogComponent, {
       width: '800px',
       height: '600px',
@@ -133,7 +134,8 @@ export class EditUserInfosComponent implements OnInit {
         salaryInformationsError: salaryInformationsError,
         userInformationsForm: userInformationsForm,
         salaryInfosForm: salaryInfosForm,
-        errorMessage: message
+        errorMessage: message,
+        isApiErrorMessage: isApiErrorMessage,
       },
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']

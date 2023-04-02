@@ -47,9 +47,9 @@ export class UserInformationsFormComponent {
   initUserInformationsForm() {
     this.loadCountriesWithFlag()
     this.userInformationsForm = this.formBuilder.group({
-      username: new FormControl(this.userToModify?.username, Validators.required),
+      username: new FormControl(this.userToModify?.username, [Validators.required, Validators.minLength(3)]),
       password: new FormControl(this.userToModify?.password),
-      email: new FormControl(this.userToModify?.email, Validators.required),
+      email: new FormControl(this.userToModify?.email, [Validators.required, Validators.email]),
       currency: new FormControl(this.userToModify?.salaryHistory?.salaryCurrency,
         Validators.required
       ),

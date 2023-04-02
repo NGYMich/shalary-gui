@@ -14,6 +14,7 @@ export class UserInputErrorDialogComponent implements OnInit {
   errors: any
   usernameAlreadyExists: any;
   errorMessage: any;
+  isApiErrorMessage: any = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
     this.userInformationError = this.data.userInformationError
     this.salaryInformationsError = this.data.salaryInformationsError
@@ -21,6 +22,7 @@ export class UserInputErrorDialogComponent implements OnInit {
     this.salaryInfosForm = this.data.salaryInfosForm
     this.userInformationsForm = this.data.userInformationsForm
     this.errorMessage = this.data.errorMessage
+    this.isApiErrorMessage = this.data.isApiErrorMessage
 
     console.log(this.errorMessage)
     this.errors = this.findInvalidControls(this.salaryInfosForm)

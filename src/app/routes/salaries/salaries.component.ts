@@ -12,6 +12,7 @@ import {CompanyCellRenderer} from "./company-cell-renderer";
 import {JobCellRenderer} from "./job-cell-renderer";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../services/TokenStorageService";
+import {totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/common-variables";
 
 @Component({
   selector: 'app-salaries',
@@ -144,26 +145,8 @@ export class SalariesComponent implements OnInit {
           valueFormatter: this.experienceFormatter,
           filter: 'agTextColumnFilter',
           width: 150,
-          cellStyle: params => {
-            let style = {
-              'height': '100%',
-              'display': 'flex ',
-              'align-items': 'center',
-              'background-color': ''
-            };
-            let experience = params.value;
-            if (experience < 3)
-              style["background-color"] = ''
-            else if (experience < 6)
-              style["background-color"] = '#ADD8E6'
-            else if (experience < 9)
-              style["background-color"] = '#8AC7DB'
-            else if (experience < 20)
-              style["background-color"] = '#67B7D1'
-            else if (experience >= 20)
-              style["background-color"] = '#338BA8'
-            return style;
-          }
+          cellStyle: params => totalYearsOfExperienceCellStyle(params)
+
         },
         {
           field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
@@ -188,26 +171,7 @@ export class SalariesComponent implements OnInit {
           filter: 'agNumberColumnFilter',
           cellRenderer: SalaryCellRenderer,
           cellRendererParams: {selectedCurrency: this.selectedCurrency},
-          cellStyle: params => {
-            let salary = params.value;
-            switch (true) {
-              case (salary < 20000):
-                return
-              case (salary < 30000):
-                return {'background-color': '#cde2c4'}
-              case (salary < 40000):
-                return {'background-color': '#c4e0b8'}
-              case (salary < 50000):
-                return {'background-color': '#a8e28e'}
-              case (salary < 60000):
-                return {'background-color': '#9de080'}
-              case (salary < 70000):
-                return {'background-color': '#8ad569'}
-              case (salary >= 70000):
-                return {'background-color': '#79cd54'}
-            }
-            return
-          }
+          cellStyle: params => totalSalaryCellStyle(params),
         },
         {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
         {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
