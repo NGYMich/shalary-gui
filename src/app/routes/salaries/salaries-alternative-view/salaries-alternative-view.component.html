@@ -19,9 +19,7 @@
           <div class="flag-and-currency-title">Convert salaries to currency</div>
           <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'palegoldenrod'"
              class="currency" *ngFor="let currency of currencies"
-             (click)="applyNewCurrencySelected(currency)">
-            {{currency}}
-          </a>
+             (click)="applyNewCurrencySelected(currency)">{{currency}}</a>
         </div>
         <div class="col-xs-5" style="font-size: 10px;">
           <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 100%; margin-top:0.3%;">
@@ -83,7 +81,7 @@
                 (activate)="legendLabelActivate($event)"
                 (deactivate)="legendLabelDeactivate($event)"
                 (select)="onSelect($event)"
-            >
+              >
                 <ng-template #seriesTooltipTemplate let-model="model">
                   <div>
                     <h3 style="text-align: center; margin-bottom: 0; color:azure">

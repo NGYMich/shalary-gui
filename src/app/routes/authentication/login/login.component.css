@@ -1,6 +1,7 @@
 content-divider.center {
   text-align: center;
 }
+
 .form-field {
   width: 100%;
 }
@@ -10,7 +11,12 @@ content-divider.center {
   z-index: 1;
 }
 
-.content-divider>span, .content-divider>a {
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white !important;
+  border-radius: 10px;
+}
+
+.content-divider > span, .content-divider > a {
   background-color: #fff;
   color: #000;
   display: inline-block;
@@ -20,7 +26,7 @@ content-divider.center {
   font-weight: 500;
 }
 
-.content-divider>span:before, .content-divider>a:before {
+.content-divider > span:before, .content-divider > a:before {
   content: "";
   position: absolute;
   top: 50%;

@@ -119,3 +119,8 @@
 .ag-center-cols-container {
   min-height: 300px !important;
 }
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white !important;
+  border-radius: 10px;
+}

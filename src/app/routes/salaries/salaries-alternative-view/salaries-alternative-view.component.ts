@@ -18,6 +18,7 @@ import {RegisterComponent} from "../../authentication/register/register.componen
 import {MatDialog} from "@angular/material/dialog";
 import {AppConstants, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/common-variables";
 import {Location} from "@angular/common";
+import {SalaryInfo} from "../../../model/salaryInfo";
 
 
 @Component({
@@ -183,7 +184,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      this.getCompanySector(salaryInfo),
       salaryInfo.contractType)))
 
     bonusSalariesSeries = bonusSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
@@ -192,7 +193,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      this.getCompanySector(salaryInfo),
       salaryInfo.contractType)))
 
     stockSalariesSeries = stockSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
@@ -201,7 +202,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      this.getCompanySector(salaryInfo),
       salaryInfo.contractType)))
 
     totalSalariesSeries = totalSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
@@ -210,17 +211,21 @@ export class SalariesAlternativeViewComponent implements OnInit {
       ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      this.getCompanySector(salaryInfo),
       salaryInfo.contractType)))
 
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
+  }
+
+  private getCompanySector(salaryInfo: SalaryInfo) {
+    return (salaryInfo.company != null && salaryInfo.company.sector != null && salaryInfo.company.sector.length > 0) ? ("(" + salaryInfo.company.sector + ")") : "";
   }
 
   private addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     let salaryHistory = this.currentUser.salaryHistory;
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
     let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
-    let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null) ? "(" + lastSalaryInfo.company.sector + ")" : "";
+    let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null && lastSalaryInfo.company.sector.length > 0) ? "(" + lastSalaryInfo.company.sector + ")" : "";
     let contractType = (lastSalaryInfo.contractType != null) ? lastSalaryInfo.contractType : ""
 
     let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
@@ -515,7 +520,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   applyNewCurrencySelected(currency: string) {
-    this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
+    this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency.trim() : "DEFAULT";
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.gridApi.refreshCells(this.gridApi.columns);
   }

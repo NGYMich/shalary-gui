@@ -10,6 +10,13 @@
 mat-label {
   font-size: 15px;
 }
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white !important;
+  border-radius: 10px;
+}
+
+
 .content-divider>span, .content-divider>a {
   background-color: #fff;
   color: #000;
