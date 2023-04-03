@@ -71,7 +71,7 @@ const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
   {path: 'home', component: TestComponent},
   {path: 'salaries/view2', component: SalariesComponent},
-  {path: 'salaries', component: SalariesComponent},
+  {path: 'salaries', component: SalariesAlternativeViewComponent},
   {path: 'data', component: DataComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},

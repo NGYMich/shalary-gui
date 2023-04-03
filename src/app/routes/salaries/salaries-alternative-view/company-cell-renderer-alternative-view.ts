@@ -4,7 +4,7 @@ import {Component} from "@angular/core";
   selector: 'company-cell-renderer',
   template: `
     <div style="line-height: 25px;">
-      {{this.companyName}} <span *ngIf="this.sector != null"><i> ({{this.sector}})</i></span>
+      {{this.companyName}} <span *ngIf="this.sector != null && this.sector != ''"><i> ({{this.sector}})</i></span>
     </div>
 
   `

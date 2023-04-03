@@ -88,6 +88,8 @@
   /*margin: 0;*/
   padding: 0;
   outline: none;
+  position: sticky;
+
 }
 
 
@@ -114,4 +116,9 @@
 
 .legend-label-text {
   color: #111111 !important;
+}
+
+.ag-center-cols-clipper,
+.ag-center-cols-container {
+  min-height: 300px !important;
 }

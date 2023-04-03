@@ -31,6 +31,7 @@ export class AboutComponent implements OnInit {
     'Make "tips" button for ag grid',
     'Make login usable with username OR email',
     'Add forgot password',
+    'Add sticky right div in alternative salaries view',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',

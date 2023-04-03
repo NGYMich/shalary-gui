@@ -6,6 +6,7 @@ export const commonCurrencies = ['EUR (€)', 'USD ($)', 'GBP (£)', 'JPY (¥)',
 export const commonGenders = ['Male', 'Female']
 export const commonContractTypes = ['Full-time', 'Part-time', 'Freelance', 'Internship', 'Apprenticeship']
 export const commonSectors = [
+  '',
   'Information Technology (IT)',
   'Health Care',
   'Business',
