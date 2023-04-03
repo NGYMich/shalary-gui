@@ -14,9 +14,6 @@
   white-space: normal !important;
 }
 
-::ng-deep .ngx-charts .gridline-path {
-  stroke: #b4b4b4 !important;
-}
 
 .ag-row .ag-cell {
   display: flex;
@@ -74,7 +71,6 @@
 
 .chart-legend {
   margin-left: 15px;
-  color: white;
 }
 
 ::ng-deep .green-progress .mat-progress-bar-fill::after {
@@ -83,13 +79,20 @@
 
 .user-infos-and-ngx-graph-div {
   background-color: #dbd8d8;
-  color: black;
   /*border: 1px solid #1b1e20;*/
   /*margin: 0;*/
   padding: 0;
   outline: none;
   position: sticky;
 
+}
+
+::ng-deep .ngx-charts .gridline-path {
+  stroke: #b4b4b4 !important;
+}
+
+::ng-deep .legend-label-text {
+  color: #111111 !important;
 }
 
 
@@ -102,8 +105,6 @@
 
   background-color: #444444;
   color: white;
-  /*border: 1px solid #1b1e20;*/
-  /*box-shadow: 0 0 10px darkblue;*/
 }
 
 .user-infos h2 {
@@ -112,10 +113,6 @@
 
 .user-infos button:first-of-type {
   margin: 0 10px 0 auto
-}
-
-.legend-label-text {
-  color: #111111 !important;
 }
 
 .ag-center-cols-clipper,
