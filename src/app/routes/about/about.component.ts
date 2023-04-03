@@ -32,6 +32,7 @@ export class AboutComponent implements OnInit {
     'Make login usable with username OR email',
     'Add forgot password',
     'Add sticky right div in alternative salaries view',
+    'Add salary / month view',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',
@@ -44,6 +45,7 @@ export class AboutComponent implements OnInit {
     'Add banner',
     'Mouka suggestion : make one view and collapse with a "hide button"',
     'Sovi suggestion : thumbs up / thumbs down for trust indicator',
+    'Sovi suggestion : forum to talk about salaries'
   ];
 
   otherSuggestions: string[] = [

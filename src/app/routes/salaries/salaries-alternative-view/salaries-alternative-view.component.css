@@ -1,15 +1,25 @@
-.share-your-experience-button {
-  width: auto;
-  height: auto;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  font-size: 70%;
-  margin-top: 1%;
-  background-color: whitesmoke;
-  color: #111111;
-  border-radius: 15px !important;
+
+.user-infos-and-ngx-graph-div {
+  background-color: #dbd8d8;
+  /*border: 1px solid #1b1e20;*/
+  /*margin: 0;*/
+  padding: 0;
+  outline: none;
+  position: sticky;
+
 }
 
+.user-infos {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding: 0;
+
+  background-color: #444444;
+  color: white;
+}
+nb
 .cell-wrap-text {
   white-space: normal !important;
 }
@@ -54,12 +64,20 @@
 .edit-your-experience-button {
   background-color: whitesmoke;
   color: #121212;
-  /*font-size: 15px;*/
-  /*max-width: 100% !important;*/
   word-break: break-all !important;
   overflow: hidden !important;
-  /*text-align: center;*/
+}
 
+.share-your-experience-button {
+  width: auto;
+  height: auto;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  font-size: 70%;
+  margin-top: 1%;
+  background-color: whitesmoke;
+  color: #111111;
+  border-radius: 15px !important;
 }
 
 .mobile-edit-your-experience-button {
@@ -73,47 +91,19 @@
   margin-left: 15px;
 }
 
-::ng-deep .green-progress .mat-progress-bar-fill::after {
+:host ::ng-deep .green-progress .mat-progress-bar-fill::after {
   background-color: black !important;
 }
 
-.user-infos-and-ngx-graph-div {
-  background-color: #dbd8d8;
-  /*border: 1px solid #1b1e20;*/
-  /*margin: 0;*/
-  padding: 0;
-  outline: none;
-  position: sticky;
 
-}
-
-::ng-deep .ngx-charts .gridline-path {
+:host ::ng-deep .ngx-charts .gridline-path {
   stroke: #b4b4b4 !important;
 }
 
-::ng-deep .legend-label-text {
+:host ::ng-deep .legend-label-text {
   color: #111111 !important;
 }
 
-
-.user-infos {
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-  margin-bottom: 15px;
-  padding: 0;
-
-  background-color: #444444;
-  color: white;
-}
-
-.user-infos h2 {
-  margin-bottom: 0;
-}
-
-.user-infos button:first-of-type {
-  margin: 0 10px 0 auto
-}
 
 .ag-center-cols-clipper,
 .ag-center-cols-container {
