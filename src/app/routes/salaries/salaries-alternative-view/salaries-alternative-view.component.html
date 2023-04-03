@@ -1,7 +1,7 @@
 <div *isNotMobile>
   <mat-progress-bar mode="indeterminate" class="green-progress" *ngIf="showProgressBar"></mat-progress-bar>
 
-  <div class="ag-theme-alpine" *ngIf="currentUser != null || chosenCountryFromHomePage != null">
+  <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && isUserInfoDivOpen">
     <!-- Share your experience button-->
     <div class="container-fluid">
       <div class="col-xs-12" style="height: 100%; vertical-align: center;">
@@ -14,21 +14,33 @@
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
       <div class="col-xs-7">
-        <div class="col-xs-7" style="margin-left: 0; padding-left: 0;">
+        <div class="col-xs-5" style="margin-left: 0; padding-left: 0;">
           <br>
           <div class="flag-and-currency-title">Convert salaries to currency</div>
           <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'palegoldenrod'"
              class="currency" *ngFor="let currency of currencies"
              (click)="applyNewCurrencySelected(currency)">{{currency}}</a>
         </div>
-        <div class="col-xs-5" style="font-size: 10px;">
-          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 100%; margin-top:0.3%;">
-            <mat-label>
-              <mat-icon>search</mat-icon>
-              Filter by anything
-            </mat-label>
-            <input matInput style="text-align: left; height: 10px;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
-          </mat-form-field>
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2">
+          <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS AND TRICKS</button>
+        </div>
+
+        <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
+          <div class="col-xs-5" style="font-size: 10px;padding: 0;">
+            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 250px; margin-top:0.3%;">
+              <mat-label>
+                <mat-icon>search</mat-icon>
+                Filter by anything
+              </mat-label>
+              <input matInput style="text-align: left; height: 10px;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-5">
+          </div>
+          <div class="col-xs-2" style="font-size: 10px;">
+            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">EXPAND GRID AND HIDE GRAPH</button>
+          </div>
         </div>
 
         <!-- ###########################################-->
@@ -131,5 +143,72 @@
       </div>
     </div>
   </div>
+
+
+  <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && !isUserInfoDivOpen">
+    <!-- Share your experience button-->
+    <div class="container-fluid">
+      <div class="col-xs-12" style="height: 100%; vertical-align: center;">
+        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>
+          <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Share your experience !</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Convert salaries to currency & currencies-->
+    <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
+      <div class="col-xs-12">
+        <div class="col-xs-5" style="margin-left: 0; padding-left: 0;">
+          <br>
+          <div class="flag-and-currency-title">Convert salaries to currency</div>
+          <a [style.background-color]="currency !== selectedCurrency ? 'white' : 'palegoldenrod'"
+             class="currency" *ngFor="let currency of currencies"
+             (click)="applyNewCurrencySelected(currency)">{{currency}}</a>
+        </div>
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2">
+          <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS AND TRICKS</button>
+        </div>
+
+        <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
+          <div class="col-xs-5" style="font-size: 10px;padding: 0;">
+            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 250px; margin-top:0.3%;">
+              <mat-label>
+                <mat-icon>search</mat-icon>
+                Filter by anything
+              </mat-label>
+              <input matInput style="text-align: left; height: 10px;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-5">
+          </div>
+          <div class="col-xs-2" style="font-size: 10px;">
+            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">SHRINK GRID AND SHOW GRAPH</button>
+          </div>
+        </div>
+
+
+        <!-- ###########################################-->
+        <!-- ################# AG GRID ################# -->
+        <!-- ########################################### -->
+        <div class="col-xs-12" style="margin-left: 0; padding-left: 0;" *ngIf="currentUser != null || chosenCountryFromHomePage != null">
+          <ag-grid-angular
+            style="width: 100%;"
+            class="ag-theme-alpine-dark"
+            [rowData]="rowData"
+            [columnDefs]="desktopColumnDefs"
+            [gridOptions]="gridOptions"
+            (gridReady)="onGridReady($event)"
+            (rowClicked)="openUserInfosDialog($event)"
+            [tooltipShowDelay]="tooltipShowDelay"
+            [tooltipHideDelay]="tooltipHideDelay"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 

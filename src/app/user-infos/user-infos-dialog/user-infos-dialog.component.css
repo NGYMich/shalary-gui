@@ -1,12 +1,17 @@
+body, html {
+  background-color: #dbd8d8;
+}
+
 .user-infos {
   font-family: Trebuchet MS, serif;
   width: 100%;
   display: flex;
   align-items: center;
   padding: 20px 20px 5px 20px;
-  background-color: darkred;
-  color: whitesmoke;
+  background-color: #444444;
+  color: white;
 }
+
 
 .user-infos h1 {
   margin-bottom: 0;
@@ -16,12 +21,6 @@
   margin: 0 10px 0 auto
 }
 
-
-.edit-your-experience-button {
-  background-color: crimson;
-  color: white;
-  font-size: 15px;
-}
 
 .mobile-edit-your-experience-button {
   background-color: crimson;

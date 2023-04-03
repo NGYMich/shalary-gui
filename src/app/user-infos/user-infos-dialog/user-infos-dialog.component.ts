@@ -7,6 +7,7 @@ import {NumberService} from "../../services/NumberService";
 import {EditUserInfosComponent} from "../../routes/edit-user-infos/edit-user-infos.component";
 import {Router} from "@angular/router";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {commonNgxGraphColorScheme} from "../../routes/global/common-variables";
 
 @Component({
   selector: 'app-user-infos-dialog',
@@ -41,7 +42,7 @@ export class UserInfosDialogComponent implements OnInit {
   public chartData: { name: string, series: { name: string, value?: string | number }[] }[];
   public chartNames: string[];
   public colors: ColorHelper;
-  public colorScheme: any = {domain: ['#d6dd00', '#ffb160', '#93c47d', '#bd3d16']}; // base , bonus , equity , total
+  public colorScheme: any = commonNgxGraphColorScheme;
   public yAxisTickFormattingDesktop = this.formatSalary.bind(this);
   public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];

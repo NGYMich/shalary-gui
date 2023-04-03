@@ -19,6 +19,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {AppConstants, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/common-variables";
 import {Location} from "@angular/common";
 import {SalaryInfo} from "../../../model/salaryInfo";
+import {UserInfosDialogComponent} from "../../../user-infos/user-infos-dialog/user-infos-dialog.component";
+import {TipsAndTricksDialogComponent} from "../../../user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component";
 
 
 @Component({
@@ -68,6 +70,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   salaryCurrency;
   isMobile: boolean;
   showProgressBar: any = true;
+  isUserInfoDivOpen: boolean = true;
 
   public activeEntries: any[] = [];
   public chartNames: string[];
@@ -552,6 +555,33 @@ export class SalariesAlternativeViewComponent implements OnInit {
       this.constructUserInfosString();
 
     }
+  }
+
+  openOrCloseUserInfosDiv() {
+    this.isUserInfoDivOpen = !this.isUserInfoDivOpen
+  }
+
+  openUserInfosDialog(event): void {
+    const selectedNodes = this.gridApi.getSelectedNodes();
+    const selectedUser = selectedNodes.map(node => node.data)[0];
+    this.dialog.open(UserInfosDialogComponent, {
+      width: '100%',
+      height: '80%',
+      data: {selectedUser: selectedUser},
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
+    });
+  }
+
+  openTipsAndTricksDialog() {
+    this.dialog.open(TipsAndTricksDialogComponent, {
+      width: '100%',
+      height: '82%',
+      data: {isUserInfoDivOpen: this.isUserInfoDivOpen},
+      autoFocus: false,
+      panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
+    });
+
   }
 }
 

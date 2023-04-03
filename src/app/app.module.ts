@@ -66,6 +66,7 @@ import { OpenCloseComponent } from './animations/open-close/open-close.component
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AgGridModule} from "ag-grid-angular";
+import { TipsAndTricksDialogComponent } from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
@@ -126,6 +127,7 @@ const routes: Routes = [
     FaqComponent,
     ArticlesComponent,
     OpenCloseComponent,
+    TipsAndTricksDialogComponent,
   ],
   imports: [
     BrowserModule,

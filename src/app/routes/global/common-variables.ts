@@ -21,6 +21,8 @@ export const commonSectors = [
   'Culture and sports',
   'Other'
 ]
+export const commonNgxGraphColorScheme = {domain: ['crimson', 'orange', 'darkgreen', 'darkblue']}
+
 
 export class AppConstants {
   private static API_BASE_URL = environment.baseUrl;
