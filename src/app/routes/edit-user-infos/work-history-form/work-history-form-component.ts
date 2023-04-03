@@ -114,7 +114,7 @@ export class WorkHistoryFormComponent {
   }
 
   async initWorkHistory() {
-    if (this.userToModify != null && this.userToModify.salaryHistory == null) {
+    if (this.userToModify?.salaryHistory == null) {
       this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
       console.log(this.salaryInfos)
     } else {

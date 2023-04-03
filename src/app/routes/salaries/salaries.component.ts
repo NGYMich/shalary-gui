@@ -108,7 +108,7 @@ export class SalariesComponent implements OnInit {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
     let company;
 
-    if (salaryInfos != null && salaryInfos.length > 0) {
+    if (salaryInfos?.length > 0) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
       if (salaryInfos.length > 0 && latestCompany != null) {
         if (latestCompany.sector != null && latestCompany.sector != "") {
@@ -325,7 +325,7 @@ export class SalariesComponent implements OnInit {
   }
 
   private applyRateToSalary(params, totalSalary: number | null) {
-    if (params.data.salaryHistory && params.data.salaryHistory.salaryCurrency != null && params.data.salaryHistory.salaryCurrency.substring(0, 3) && params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
+    if (params.data.salaryHistory?.salaryCurrency?.substring(0, 3) && params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
       let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
       // console.log(this.forexRates[pair])
       let rate = (pair in this.forexRates) ? this.forexRates[pair] : 1

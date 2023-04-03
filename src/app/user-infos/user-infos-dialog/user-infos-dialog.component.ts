@@ -139,37 +139,37 @@ export class UserInfosDialogComponent implements OnInit {
     baseSalariesSeries = baseSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      (salaryInfo.company?.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
       salaryInfo.contractType)))
 
     bonusSalariesSeries = bonusSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      (salaryInfo.company?.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
       salaryInfo.contractType)))
 
     stockSalariesSeries = stockSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      (salaryInfo.company?.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
       salaryInfo.contractType)))
 
     totalSalariesSeries = totalSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
-      (salaryInfo.company != null && salaryInfo.company.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
+      (salaryInfo.company?.sector != null) ? ("(" + salaryInfo.company.sector + ")") : "",
       salaryInfo.contractType)))
 
     return {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries};
@@ -178,8 +178,8 @@ export class UserInfosDialogComponent implements OnInit {
   private addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     let salaryHistory = this.currentUser.salaryHistory;
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
-    let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
-    let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null) ? "(" + lastSalaryInfo.company.sector + ")" : "";
+    let companyName = (lastSalaryInfo.company?.name !== null) ? lastSalaryInfo.company.name : "";
+    let companySector = (lastSalaryInfo.company?.sector !== null) ? "(" + lastSalaryInfo.company.sector + ")" : "";
     let contractType = (lastSalaryInfo.contractType != null) ? lastSalaryInfo.contractType : ""
 
     let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";

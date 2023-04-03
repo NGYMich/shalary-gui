@@ -181,7 +181,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     baseSalariesSeries = baseSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.baseSalary != null ? salaryInfo.baseSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
       this.getCompanySector(salaryInfo),
@@ -190,7 +190,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     bonusSalariesSeries = bonusSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.bonusSalary != null ? salaryInfo.bonusSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
       this.getCompanySector(salaryInfo),
@@ -199,7 +199,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     stockSalariesSeries = stockSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.stockSalary != null ? salaryInfo.stockSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
       this.getCompanySector(salaryInfo),
@@ -208,7 +208,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
     totalSalariesSeries = totalSalariesSeries.concat(salaryInfos.map(salaryInfo => new Serie(
       String(salaryInfo.yearsOfExperience),
       salaryInfo.totalSalary != null ? salaryInfo.totalSalary : 0,
-      ((salaryInfo.company != null && salaryInfo.company.name != null) ? salaryInfo.company.name : ""),
+      ((salaryInfo.company?.name != null) ? salaryInfo.company.name : ""),
       salaryCurrency,
       salaryInfo.jobName,
       this.getCompanySector(salaryInfo),
@@ -218,14 +218,14 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   private getCompanySector(salaryInfo: SalaryInfo) {
-    return (salaryInfo.company != null && salaryInfo.company.sector != null && salaryInfo.company.sector.length > 0) ? ("(" + salaryInfo.company.sector + ")") : "";
+    return (salaryInfo.company?.sector?.length > 0) ? ("(" + salaryInfo.company.sector + ")") : "";
   }
 
   private addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries: Serie[], bonusSalariesSeries: Serie[], stockSalariesSeries: Serie[], totalSalariesSeries: Serie[]) {
     let salaryHistory = this.currentUser.salaryHistory;
     let lastSalaryInfo = salaryHistory.salaryInfos[salaryHistory.salaryInfos.length - 1];
-    let companyName = (lastSalaryInfo.company != null && lastSalaryInfo.company.name !== null) ? lastSalaryInfo.company.name : "";
-    let companySector = (lastSalaryInfo.company != null && lastSalaryInfo.company.sector !== null && lastSalaryInfo.company.sector.length > 0) ? "(" + lastSalaryInfo.company.sector + ")" : "";
+    let companyName = (lastSalaryInfo.company?.name !== null) ? lastSalaryInfo.company.name : "";
+    let companySector = (lastSalaryInfo.company?.sector?.length > 0) ? "(" + lastSalaryInfo.company.sector + ")" : "";
     let contractType = (lastSalaryInfo.contractType != null) ? lastSalaryInfo.contractType : ""
 
     let salaryCurrency = salaryHistory.salaryCurrency != null ? this.numberService.formatCurrency(this.currentUser.salaryHistory.salaryCurrency) : "";
@@ -304,10 +304,10 @@ export class SalariesAlternativeViewComponent implements OnInit {
     let salaryInfos = params.getValue('salaryHistory.salaryInfos');
     let company;
 
-    if (salaryInfos != null && salaryInfos.length > 0) {
+    if (salaryInfos?.length > 0) {
       let latestCompany = salaryInfos[salaryInfos.length - 1].company;
       if (salaryInfos.length > 0 && latestCompany != null) {
-        if (latestCompany.sector != null && latestCompany.sector.length > 0) {
+        if (latestCompany.sector?.length > 0) {
           company = latestCompany.name + " (" + latestCompany.sector + ")";
         } else {
           company = latestCompany.name
@@ -526,7 +526,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   private applyRateToSalary(params, totalSalary: number | null) {
-    if (params.data.salaryHistory && params.data.salaryHistory.salaryCurrency != null && params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
+    if (params.data.salaryHistory?.salaryCurrency?.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
       let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
       let rate = (pair in this.forexRates) ? this.forexRates[pair] : 1
       return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;
