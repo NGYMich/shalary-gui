@@ -6,7 +6,7 @@
 
         <!-- User Informations Form -->
 
-        <div class="col-xs-2" style="margin-left: 3%; border-right: 1px solid gray;">
+        <div class="col-xs-2" style="margin-left: 1%; border-right: 1px solid gray;">
           <user-informations-form [userToModify]="userToModify"
                                   [isEditUserPage]="true"
           ></user-informations-form>
@@ -19,17 +19,18 @@
                              [isEditUserPage]="true">
 
           </work-history-form>
-          <div class="row" style="padding:0;  margin: 0; width: 100%; background-color: #dadada">
-            <div class="col-xs-6" style="margin-right: 0; padding-right: 0;">
-              <div class="col-xs-12">
-                <button mat-raised-button class="edit-my-career-button" (click)="modifyUser($event)">Save my career !</button>
-              </div>
-            </div>
+          <div class="row" style="padding:0;  margin: 20px 0 0; width: 100%; background-color: #dadada">
             <div class="col-xs-6" style="margin-left: 0; padding-left: 0;">
               <div class="col-xs-12">
                 <button mat-raised-button class="preview-my-career-button" (click)="openUserInfos($event)">Preview my career !</button>
               </div>
             </div>
+            <div class="col-xs-6" style="margin-right: 0; padding-right: 0;">
+              <div class="col-xs-12">
+                <button mat-raised-button class="edit-my-career-button" (click)="modifyUser($event)">Save my career !</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

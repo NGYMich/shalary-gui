@@ -34,6 +34,17 @@ import {LocationService} from "../../services/LocationService";
       ])
     ]),
 
+    trigger('openClose3', [
+      state('in', style({transform: 'translateY(0)'})),
+      transition('open => closed', [
+        style({transform: 'translateY(100%)'}),
+        animate(1000)
+      ]),
+      transition('closed => open', [
+        animate(1000, style({transform: 'translateY(-100%)'}))
+      ])
+    ]),
+
     trigger('apparition', [
       state('open', style({
         opacity: '0'
@@ -42,7 +53,7 @@ import {LocationService} from "../../services/LocationService";
         opacity: '1'
       })),
       transition('open => closed', [
-        animate('1s')
+        animate('500ms 1200ms')
       ])
     ])
   ]

@@ -40,24 +40,23 @@
 <div class="row only-row" >
 
   <div class="col-xs-1"></div>
-  <div class="col-xs-5" [@openClose2]="isOpen ? 'open' : 'closed'">
+  <div class="col-xs-5" [@apparition]="isOpen ? 'open' : 'closed'">
     <div class="card-component">
-      <h1 style="font-size: 38px; text-align: left; line-height: 50px; color: palegoldenrod">
+      <h1>
         SHALARY - SHARE YOUR SALARY
-
       </h1>
-      <h1 style="font-size: 28px; text-align: left; line-height: 50px;">
+      <h2>
         WORLD'S HIGHEST RATED #1
         <br>
         ANONYMOUS CAREERS SHARING SITE
-      </h1>
+      </h2>
 
 
       <div class="search-by-country-and-buttons-div ag-theme-alpine">
 
 
         <div class="wrapper" style="margin-bottom: 10px; ">
-          <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" style=" font-size: 18px; padding-left: 10px; height: 50px; color:#121212;" value="1">
+          <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="search-career-input" value="1">
 
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
@@ -90,7 +89,7 @@
   <!--    <img mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman" >-->
   <!--  </div>-->
 
-  <img class="salaryman-img" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
+  <img class="salaryman-img" [@openClose2]="isOpen ? 'open' : 'closed'" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
   <div class="col-xs-1">
   </div>
 </div>

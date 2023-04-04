@@ -3,10 +3,7 @@
   background-color: white;
 }
 
-.content-divider {
-  position: relative;
-  z-index: 1;
-}
+
 mat-label {
   font-size: 15px;
 }
@@ -14,28 +11,6 @@ mat-label {
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white !important;
   border-radius: 10px;
-}
-
-
-.content-divider>span, .content-divider>a {
-  background-color: #fff;
-  color: #000;
-  display: inline-block;
-  padding: 2px 12px;
-  border-radius: 3px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.content-divider>span:before, .content-divider>a:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 1px;
-  background-color: #ddd;
-  width: 100%;
-  z-index: -1;
 }
 
 .social-login .btn-img {
@@ -71,6 +46,31 @@ label {
   border-radius: 50%;
 }
 
+.content-divider {
+  position: relative;
+  z-index: 1;
+}
+.content-divider>span, .content-divider>a {
+  background-color: #fff;
+  color: #000;
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.content-divider>span:before, .content-divider>a:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  background-color: #ddd;
+  width: 100%;
+  z-index: -1;
+}
+
 .content-divider.center {
   text-align: center;
 }
@@ -88,3 +88,4 @@ label {
   padding: 0.6rem 0;
   margin-right: 10px;
 }
+
