@@ -27,21 +27,10 @@ import {LocationService} from "../../services/LocationService";
       state('in', style({transform: 'translateY(0)'})),
       transition('open => closed', [
         style({transform: 'translateY(-100%)'}),
-        animate(1000)
+        animate('1000ms 1000ms')
       ]),
       transition('closed => open', [
         animate(1000, style({transform: 'translateY(100%)'}))
-      ])
-    ]),
-
-    trigger('openClose3', [
-      state('in', style({transform: 'translateY(0)'})),
-      transition('open => closed', [
-        style({transform: 'translateY(100%)'}),
-        animate(1000)
-      ]),
-      transition('closed => open', [
-        animate(1000, style({transform: 'translateY(-100%)'}))
       ])
     ]),
 
@@ -53,7 +42,7 @@ import {LocationService} from "../../services/LocationService";
         opacity: '1'
       })),
       transition('open => closed', [
-        animate('500ms 1200ms')
+        animate('1300ms 2000ms')
       ])
     ])
   ]
