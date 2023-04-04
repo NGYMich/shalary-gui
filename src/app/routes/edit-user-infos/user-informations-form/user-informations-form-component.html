@@ -74,14 +74,7 @@
           <input matTooltip="Age | Numeric Value < 999" formControlName="age" matInput   maxLength="3">
           <mat-error>Numeric value < 999</mat-error>
         </mat-form-field>
-        <br>
-        <mat-form-field appearance="standard" class="full-width-line">
-          <mat-label class="optional">Gender</mat-label>
-          <mat-select [(value)]="selectedGender" formControlName="gender" matTooltip="Gender">
-            <mat-option *ngFor="let gender of genders"
-                        [value]="gender">{{gender}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+
         <br>
         <mat-form-field appearance="standard" class="full-width-line">
           <mat-label class="optional" >Tell us about your career !</mat-label>

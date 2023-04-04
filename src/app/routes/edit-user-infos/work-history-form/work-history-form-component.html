@@ -16,7 +16,7 @@
         <br>
         <div formArrayName="salaryInfos" class="salary-infos-div" style="width: 100%;">
 
-          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
+          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"  #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
                [formGroupName]="pointIndex">
 
 
@@ -93,7 +93,7 @@
             </mat-form-field>
 
 
-            <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button">
+            <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button"  #experience>
               <mat-icon style="font-size: 30px;">delete</mat-icon>
             </button>
 

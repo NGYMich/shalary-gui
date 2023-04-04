@@ -1,15 +1,19 @@
 <div *isNotMobile>
+  <div class="container-fluid">
+    <div class="col-xs-12 " style="height: 100%; vertical-align: center;">
+      <div style="text-align: center; font-size: 1.8vw;  position: sticky;  z-index: 10;  width: 100%; " *loggedInUserHasNoSalaryHistory>
+        <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Help a fellow by sharing your experiences !</button>
+      </div>
+
+    </div>
+    <div style="height: 100%; background-color: transparent; "></div>
+  </div>
   <mat-progress-bar mode="indeterminate" class="green-progress" *ngIf="showProgressBar"></mat-progress-bar>
 
   <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && isUserInfoDivOpen">
     <!-- Share your experience button-->
-    <div class="container-fluid">
-      <div class="col-xs-12" style="height: 100%; vertical-align: center;">
-        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>
-          <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Share your experience !</button>
-        </div>
-      </div>
-    </div>
+
+    <div style="height: 100%; background-color: transparent; "></div>
 
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">

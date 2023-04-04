@@ -1,15 +1,31 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, Input, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {commonContractTypes, commonSectors} from "../../global/common-variables";
 import {User} from "../../../model/user";
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {UserInputErrorDialogComponent} from "../../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {take} from "rxjs";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'work-history-form',
   templateUrl: './work-history-form-component.html',
-  styleUrls: ['./work-history-form-component.css']
+  styleUrls: ['./work-history-form-component.css'],
+  animations : [
+    trigger("myTrigger", [
+      state(
+        "fadeInFlash",
+        style({
+          opacity: "1"
+        })
+      ),
+      transition("void => *", [
+        style({ opacity: "0", transform: "translateY(20px)" }),
+        animate("1200ms")
+      ])
+    ])
+  ]
 })
 export class WorkHistoryFormComponent {
   contractTypes = commonContractTypes
@@ -17,6 +33,10 @@ export class WorkHistoryFormComponent {
   salaryInfosForm: FormGroup;
   @Input() userToModify: User | null = null;
   @Input() isEditUserPage: boolean = true;
+  @ViewChildren('experience', { read: ElementRef }) deleteElements:  QueryList<ElementRef>;
+  flag: boolean = true;
+  fadeInFlash: string = "fadeInFlash";
+
 
   ngOnChanges() {
     this.initSalaryInfosForm();
@@ -35,13 +55,26 @@ export class WorkHistoryFormComponent {
     if (this.salaryInfos.length >= 20) {
       this.openUserInputErrorDialog(null, null, null, null, "You can't add anymore experiences at the moment. The max is 20 experiences.")
     } else if (this.salaryInfos.length != 0) {
+      if (this.flag) {
+        this.flag = !this.flag; // Enabling Animation
+      }
       let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
       let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
       this.salaryInfos.push(this.formBuilder.group(controlsConfig))
     } else {
       this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
     }
+    this.scrollToLatestExperience();
+  }
 
+  private scrollToLatestExperience() {
+    this.deleteElements.changes.pipe(take(1)).subscribe({
+      next: changes => changes.last.nativeElement.blur()
+    });
+
+    setTimeout(() => {
+      this.deleteElements.last.nativeElement.scrollIntoView()
+    }, 0)
   }
 
   private createEmptySalaryInfo() {
