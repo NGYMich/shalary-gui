@@ -1,13 +1,19 @@
+
 .share-your-experience-button {
-  width: auto;
+  width: 75%;
   height: auto;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
   font-size: 70%;
-  margin-top: 1%;
-  background-color: green;
-  color: white;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  /*background-color: #1b1e20;*/
+  background-color: palegoldenrod;
+  color: black;
+
   border-radius: 15px !important;
+  border-color: #9ecaed;
+  box-shadow: 0 0 30px palegoldenrod;
 }
 
 .flag-and-currency-title {
