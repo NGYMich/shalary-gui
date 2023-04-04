@@ -102,6 +102,10 @@
   color: #121212;
 }
 
+.active_route:hover {
+  background-color: palegoldenrod;
+  color: #121212;
+}
 
 .router-pages-button-before-with-stroked-button {
   margin-right: 0.4%;

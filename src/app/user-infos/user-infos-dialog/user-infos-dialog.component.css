@@ -1,5 +1,5 @@
 body, html {
-  background-color: #dbd8d8;
+  background-color: #121212;
 }
 
 .user-infos {
@@ -28,3 +28,16 @@ body, html {
   font-size: 12px;
   margin-top: 10px;
 }
+:host ::ng-deep .green-progress .mat-progress-bar-fill::after {
+  background-color: black !important;
+}
+
+
+:host ::ng-deep .ngx-charts .gridline-path {
+  stroke: #b4b4b4 !important;
+}
+
+:host ::ng-deep .legend-label-text {
+  color: #111111 !important;
+}
+
