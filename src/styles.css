@@ -6,6 +6,7 @@
 @import "../node_modules/ag-grid-community/styles/ag-theme-material.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~normalize.css';
 
 /*/
   -------------------------- COLORS :

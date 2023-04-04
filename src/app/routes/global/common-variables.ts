@@ -7,20 +7,25 @@ export const commonGenders = ['Male', 'Female']
 export const commonContractTypes = ['Full-time', 'Part-time', 'Freelance', 'Internship', 'Apprenticeship']
 export const commonSectors = [
   '',
-  'Information Technology (IT)',
-  'Health Care',
+  'Information Technology',
+  'Agriculture',
+  'Construction',
+  'Marketing',
+  'Hospitality and catering',
+  'Public',
+  'Manufacturing',
+  'Health',
   'Business',
-  'Finance / Banking',
+  'Finance',
   'Education',
-  'Communication Services',
-  'Industrials',
-  'Hospitality, hotels and restaurants',
-  'Energy, water and sanitation',
-  'Tourism, transports and travelling',
+  'Telecommunication',
+  'Industrial',
+  'Tourism, transports and logistics',
   'Real Estate',
   'Culture and sports',
+  'Retail',
   'Other'
-]
+].sort()
 export const commonNgxGraphColorScheme = {domain: ['crimson', 'orange', 'darkgreen', 'darkblue']}
 
 

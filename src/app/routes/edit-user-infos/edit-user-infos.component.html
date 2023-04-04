@@ -1,7 +1,7 @@
-<div *isNotMobile style=" height: calc(100vh - 80px); margin: 0; padding: 0;">
+<div *isNotMobile class="main-desktop-div">
   <div *isLoggedIn>
     <div *ngIf="userToModify != null">
-      <div class="row" style="padding:0;  margin: 0;width: 100%; background-color: #dadada;">
+      <div class="row" style="padding:0;  margin: 0; background-color: #dadada;">
 
 
         <!-- User Informations Form -->
@@ -19,27 +19,21 @@
                              [isEditUserPage]="true">
 
           </work-history-form>
-        </div>
-
-
-      </div>
-
-      <div class="row" style="padding:0;  margin: 0; width: 100%; background-color: #dadada">
-        <div class="col-xs-6" style="margin-right: 0; padding-right: 0;">
-          <div class="col-xs-12">
-            <button mat-raised-button class="edit-my-career-button" (click)="modifyUser($event)">Save my career !</button>
-          </div>
-        </div>
-        <div class="col-xs-6" style="margin-left: 0; padding-left: 0;">
-          <div class="col-xs-12">
-            <button mat-raised-button class="preview-my-career-button" (click)="openUserInfos($event)">Preview my career !</button>
+          <div class="row" style="padding:0;  margin: 0; width: 100%; background-color: #dadada">
+            <div class="col-xs-6" style="margin-right: 0; padding-right: 0;">
+              <div class="col-xs-12">
+                <button mat-raised-button class="edit-my-career-button" (click)="modifyUser($event)">Save my career !</button>
+              </div>
+            </div>
+            <div class="col-xs-6" style="margin-left: 0; padding-left: 0;">
+              <div class="col-xs-12">
+                <button mat-raised-button class="preview-my-career-button" (click)="openUserInfos($event)">Preview my career !</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-
-
   </div>
 </div>
 
