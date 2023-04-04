@@ -1,8 +1,8 @@
-<div *isNotMobile style="max-height: 80vh; overflow-y: scroll">
+<div *isNotMobile style="max-height: 78vh; overflow-y: scroll">
   <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
 
-    <h1 style="text-align: center">Work History</h1>
-    <div style="text-align: center;">
+    <h1 style="text-align: center">Career</h1>
+    <div style="text-align: center;  position: sticky;  top: 0; z-index: 9999;">
       <button (click)="addNewJobFormLine(true)"
               color="add-job"
               style=" font-size: 18px;"
