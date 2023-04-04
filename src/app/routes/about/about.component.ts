@@ -33,6 +33,8 @@ export class AboutComponent implements OnInit {
     'Add forgot password',
     'Add sticky right div in alternative salaries view',
     'Add salary / month view',
+    'Add gifs for tips and tricks',
+    'Add animations for removing view 1 / view 2',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',

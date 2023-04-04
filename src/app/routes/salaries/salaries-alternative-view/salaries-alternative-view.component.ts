@@ -260,7 +260,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   };
 
   baseSalaryValueGetter(params) {
-    if (params.salaryHistory != null) {
+    if (params.salaryHistory !== null) {
       let baseSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
       return this.applyRateToSalary(params, baseSalary)
     } else return ''
@@ -387,7 +387,20 @@ export class SalariesAlternativeViewComponent implements OnInit {
       width: 120,
       cellStyle: params => totalYearsOfExperienceCellStyle(params),
     },
-
+    {
+      valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false,
+    },
+    {
+      valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
+    },
+    {
+      valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
+    },
+    {
+      valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: () => {
+        return this.defaultCellStyle;
+      }, columnGroupShow: 'open', hide: false
+    },
     {
       field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: () => {
         return this.defaultCellStyle;
@@ -413,20 +426,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
         return this.defaultCellStyle;
       }, columnGroupShow: 'open', hide: true
     },
-    {
-      valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false,
-    },
-    {
-      valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
-    },
-    {
-      valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => totalSalaryCellStyle(params), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
-    },
-    {
-      valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: () => {
-        return this.defaultCellStyle;
-      }, columnGroupShow: 'open', hide: false
-    },
+
 
   ];
 

@@ -10,9 +10,24 @@ h1 {
   margin: 0;
   padding: 20px;
   text-align: center;
-  font-size: 40px;
+  font-size: 32px;
 }
 
 h3 {
   text-align: center;
+}
+
+.tuto-buttons {
+  margin: 0 10px 20px;
+  font-style: italic;
+
+}
+.is-chosen-tuto-button {
+  background-color: palegoldenrod;
+  color: black;
+}
+
+.is-not-chosen-tuto-button {
+  background-color: #dadada;
+  color: black;
 }

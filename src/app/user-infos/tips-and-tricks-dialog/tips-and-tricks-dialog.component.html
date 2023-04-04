@@ -1,37 +1,65 @@
 <div class="main-container">
   <h1>
-    Tips and Tricks {{isUserInfoDivOpen ? 'while graph is hidden' : 'while graph is exposed'}} [[MUST SEE GIF]]
-
+    Tips and Tricks
   </h1>
 
-  <br>
-  <h3>
-    You can click on any line to get the user full informations as seen on the graph.
-    <br>
-    <br>
-    You can filter by anything as long as the user informations contains the word you are looking for.
-    <br>
-    <br>
-    You can filter by column using the 3 bars next to each column's name.
-    <br>
-    <br>
-    You can sort each column by clicking on the name.
-    <br>
-    <br>
-    You can click and hold a column and move it, or even remove it if you just drag it outside the grid.
-    <br>
-    <br>
-    You can navigate between the columns using the horizontal slider at the bottom of the grid.
-    <br>
-    <br>
-    You can expand the grid by clicking on the button below tips and tricks button.
-    <br>
-    <br>
-    You can convert all salaries to the selected currency
-    <br>
-    <br>
-    You can put your cursor on a graph point to see the details of the user's experience : salaries, contract type, company, job name.
+  <div style="display: flex; justify-content: center">
+    <button [ngClass]="{'is-chosen-tuto-button' : this.chosenGif == 'ClickUserTuto', 'is-not-chosen-tuto-button': !(this.chosenGif == 'ClickUserTuto')}" class="tuto-buttons" mat-raised-button
+            (click)="setChosenGifName('ClickUserTuto')">
+      Change displayed user
+    </button>
+    <button [ngClass]="{'is-chosen-tuto-button' : this.chosenGif == 'UserInfosTuto', 'is-not-chosen-tuto-button': !(this.chosenGif == 'UserInfosTuto')}" class="tuto-buttons" mat-raised-button
+            (click)="setChosenGifName('UserInfosTuto')">
+      Career Graph
+    </button>
+    <button [ngClass]="{'is-chosen-tuto-button' : this.chosenGif == 'FilterTuto', 'is-not-chosen-tuto-button': !(this.chosenGif == 'FilterTuto')}" class="tuto-buttons" mat-raised-button
+            (click)="setChosenGifName('FilterTuto')">
+      Filters
+    </button>
+    <button [ngClass]="{'is-chosen-tuto-button' : this.chosenGif == 'SortTuto', 'is-not-chosen-tuto-button': !(this.chosenGif == 'SortTuto')}" class="tuto-buttons" mat-raised-button
+            (click)="setChosenGifName('SortTuto')">
+      Sort Columns
+    </button>
+  </div>
+  <div style="display: flex; justify-content: center" *ngIf="isUserInfoDivOpen">
+    <img *ngIf="this.chosenGif == 'ClickUserTuto'" src="/assets/gifs/ClickUserTuto.gif" width="90%" height="60%"/>
+    <img *ngIf="this.chosenGif == 'UserInfosTuto'" src="/assets/gifs/UserInfosTuto.gif" width="40%" height="5%"/>
+    <img *ngIf="this.chosenGif == 'FilterTuto'" src="/assets/gifs/FilterTuto.gif" width="80%" height="50%"/>
+    <img *ngIf="this.chosenGif == 'SortTuto'" src="/assets/gifs/SortTuto.gif" width="45%" height="50%"/>
+  </div>
+  <div style="display: flex; justify-content: center" *ngIf="!isUserInfoDivOpen">
+<!--    <img *ngIf="this.chosenGif == 'ClickUserTuto'" src="/assets/gifs/ClickUserTuto.gif" width="90%" height="60%"/>-->
+<!--    <img *ngIf="this.chosenGif == 'UserInfosTuto'" src="/assets/gifs/UserInfosTuto.gif" width="40%" height="5%"/>-->
+<!--    <img *ngIf="this.chosenGif == 'FilterTuto'" src="/assets/gifs/FilterTuto.gif" width="80%" height="50%"/>-->
+<!--    <img *ngIf="this.chosenGif == 'SortTuto'" src="/assets/gifs/SortTuto.gif" width="45%" height="50%"/>-->
+  </div>
+  <!--  <h3>-->
+  <!--    You can click on any line to get the user full informations as seen on the graph.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can filter by anything as long as the user informations contains the word you are looking for.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can filter by column using the 3 bars next to each column's name.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can sort each column by clicking on the name.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can click and hold a column and move it, or even remove it if you just drag it outside the grid.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can navigate between the columns using the horizontal slider at the bottom of the grid.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can expand the grid by clicking on the button below tips and tricks button.-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can convert all salaries to the selected currency-->
+  <!--    <br>-->
+  <!--    <br>-->
+  <!--    You can put your cursor on a graph point to see the details of the user's experience : salaries, contract type, company, job name.-->
 
-  </h3>
+  <!--  </h3>-->
 
 </div>

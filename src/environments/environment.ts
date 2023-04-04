@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:2111/',
-  // baseUrl: 'https://shalary-back.herokuapp.com/'
-  baseGuiUrl: 'http://localhost:4200/'
+  // baseUrl: 'http://localhost:2111/',
+  baseUrl: 'https://shalary-back.herokuapp.com/',
+  baseGuiUrl: 'http://localhost:4200/',
 };
 
 /*
