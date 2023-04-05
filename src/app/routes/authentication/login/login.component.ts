@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log('error during onSubtmi() ', err.error.message)
-        this.errorMessage = err.error.message.startsWith("Bad credentials") ? "Wrong username or password" : err.error.message;
+        this.errorMessage = err.error.status == 401 ? "Wrong username or password" : err.error.error;
         this.isLoginFailed = true;
       }
     );
