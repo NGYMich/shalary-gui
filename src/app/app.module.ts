@@ -80,6 +80,7 @@ const routes: Routes = [
   {path: 'faq', component: FaqComponent},
   {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'articles', component: ArticlesComponent},
   {path: '**', component: SalariesAlternativeViewComponent},
 

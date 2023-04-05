@@ -292,7 +292,7 @@ export class SalariesComponent implements OnInit {
     const selectedUser = selectedNodes.map(node => node.data)[0];
     this.dialog.open(UserInfosDialogComponent, {
       width: '100%',
-      height: '80%',
+      height: '85%',
       data: {selectedUser: selectedUser},
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']

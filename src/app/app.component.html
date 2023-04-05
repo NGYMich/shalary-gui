@@ -14,7 +14,7 @@
                 routerLinkActive="active_route"
                 mat-button routerLink="/home">
           SHALARY
-<!--          $HALAR¥-->
+          <!--          $HALAR¥-->
         </button>
 
 
@@ -57,13 +57,13 @@
 
       <div fxFlex fxLayoutAlign="flex-end center">
         <button *isLoggedIn class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos">My Career</button>
+        <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
 
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
         <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openLoginDialog()">Log In</button>
         <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openSignupDialog()">Create account</button>
 
         <!--        <span *isLoggedIn style="font-size: 14px;">Welcome {{loggedUser.username}} !</span>-->
-        <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
 
       </div>
 
@@ -73,15 +73,25 @@
 
   <!--  Mobile material sidebar navigator-->
   <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed;">
-      <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 58px; background-color: #121212; color: whitesmoke;">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 60%;">
+      <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 70px; background-color: #121212; color: whitesmoke;">
+
         <a mat-button routerLink="/home">Shalary - Homepage</a>
-        <a mat-button routerLink="/salaries" style="margin-left: 5%;">Careers and Salaries</a>
-        <a mat-button routerLink="/add-user-infos">Add user experience</a>
-        <a mat-button routerLink="/edit-user-infos">Update user experience</a>
+
+        <a mat-button routerLink="/login" *isNotLoggedIn>Log In</a>
+        <a mat-button routerLink="/register" *isNotLoggedIn>Create Account</a>
+        <a mat-button routerLink="/edit-user-infos" *isLoggedIn >My Career</a>
+        <a mat-button *isLoggedIn (click)="logOut(true)">Log Out</a>
+
+
+        <a mat-button routerLink="/salaries/view2" style="margin-top: 10%;">Careers and Salaries</a>
+
+        <a mat-button routerLink="/articles">Articles</a>
+        <a mat-button routerLink="/faq">F.A.Q</a>
         <a mat-button routerLink="/data">Data Analytics</a>
         <a mat-button routerLink="/about">User Feedback</a>
         <a mat-button routerLink="/test"></a>
+
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="website-background-color">

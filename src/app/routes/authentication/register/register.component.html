@@ -1,4 +1,4 @@
-<div class="col-xs-12" style="margin-top: 10px;">
+<div class="col-xs-12" style="margin-top: 10px;" *isNotMobile>
   <div class="card card-container">
     <div style="text-align: center ; margin-bottom: 15px;">
       <h1>Welcome</h1>
@@ -63,6 +63,82 @@
 <!--          <a href="{{ facebookURL }}">-->
 <!--            <img alt="Login with Facebook" src="/assets/img/facebook.png" class="btn-img">-->
 <!--          </a>-->
+          <a href="{{ githubURL }}">
+            <img alt="Login with Github" src="/assets/img/github.png" class="btn-img">
+          </a>
+          <a href="{{ linkedinURL }}">
+            <img alt="Login with Linkedin" src="/assets/img/linkedin.png" class="btn-img-linkedin">
+          </a>
+        </p>
+      </div>
+    </form>
+    <div class="alert alert-success" style="margin-top: 20px;" *ngIf="isSuccessful">Your registration is successful!</div>
+  </div>
+</div>
+
+
+<div class="col-xs-12" style="margin-top: 10px; color: white;" *isMobile>
+  <div class="card card-container">
+    <div style="text-align: center ; margin-bottom: 15px;">
+      <h1>Welcome</h1>
+      <h3>Create an account to continue to Shalary</h3>
+    </div>
+    <form *ngIf="!isSuccessful" name="form" [formGroup]="userInformationsForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
+      <mat-form-field appearance="outline" class="form-field" floatLabel="never">
+        <input  matInput [formControl]="usernameFormControl" placeholder="Username" #username>
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="form-field">
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Email">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <input [type]="showPassword ? 'text' : 'password'" matInput [formControl]="passwordFormControl" minlength=4 placeholder="Password">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-hint align="start">Password must be at least 4 characters</mat-hint>
+        <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+          Password must be at least 4 characters
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-group" style="margin-top: 0; padding-top: 0; color: red">
+        <div role="alert" *ngIf="isSignUpFailed">
+          <mat-icon style="vertical-align: bottom">error</mat-icon>
+          Registration Failed : {{ errorMessage }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button mat-button color="accent" style="width: 100%; height: 40px; background-color: royalblue; color:white;">Create Account</button>
+      </div>
+
+      <div style="font-size: 14px;; margin-bottom: 15px;">
+        Already have an account ? <a href="javascript:void(0);" (click)="redirectToLogin()">Log in</a>
+      </div>
+      <div class="form-group">
+        <p class="content-divider center mt-3">
+          <span>or</span>
+        </p>
+        <p class="social-login text-center">
+          <a href="{{ googleURL }}" class="ml-2">
+            <img alt="Login with Google" src="/assets/img/google.png" class="btn-img">
+          </a>
+          <!--          <a href="{{ facebookURL }}">-->
+          <!--            <img alt="Login with Facebook" src="/assets/img/facebook.png" class="btn-img">-->
+          <!--          </a>-->
           <a href="{{ githubURL }}">
             <img alt="Login with Github" src="/assets/img/github.png" class="btn-img">
           </a>

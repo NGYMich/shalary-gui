@@ -45,11 +45,17 @@ export class AppComponent {
   }
 
 
-  logOut() {
+  logOut(isMobile: boolean = false) {
     this.tokenStorageService.signOut()
-    this.router.navigate(['/salaries/view1']).then(() =>
-      window.location.reload()
-    )
+    if (!isMobile) {
+      this.router.navigate(['/salaries/view1']).then(() =>
+        window.location.reload()
+      )
+    } else {
+      this.router.navigate(['/salaries/view2']).then(() =>
+        window.location.reload()
+      )
+    }
   }
 
   openSignupDialog() {

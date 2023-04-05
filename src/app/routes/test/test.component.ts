@@ -111,11 +111,15 @@ export class TestComponent implements OnInit {
     return this.allCountriesWithTheirFlags.filter(country => country.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  navigateToSalaries() {
-    this.router.navigate(['/salaries/view1'], {state: {chosenCountry: this.countriesControl.value}})
+  navigateToSalaries(isMobile: boolean = false) {
+    if (!isMobile) {
+      this.router.navigate(['/salaries/view1'], {state: {chosenCountry: this.countriesControl.value}})
+    } else {
+      this.router.navigate(['/salaries/view2'], {state: {chosenCountry: this.countriesControl.value}})
+    }
   }
 
-  navigateToDataAnalytics() {
+  navigateToDataAnalytics(isMobile: boolean = false) {
     this.router.navigate(['/data'])
   }
 }

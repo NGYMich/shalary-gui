@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute,
               private userService: UserService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -103,8 +104,15 @@ export class LoginComponent implements OnInit {
 
           })
     } else {
-      this.router.navigate(['/salaries/view1'])
-        .then(() => window.location.reload())
+      if (this.tokenStorageService.getToken() != null && this.tokenStorageService.getToken() != '') {
+        this.router.navigate(['/salaries/view2']).then(() =>
+          window.location.reload()
+        )
+      } else {
+        this.router.navigate(['/salaries/view1']).then(() =>
+          window.location.reload()
+        )
+      }
     }
   }
 

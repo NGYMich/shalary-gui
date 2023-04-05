@@ -82,7 +82,7 @@
 
 
 <div *isMobile>
-  <div class="col-xs-12">
+  <div class="col-xs-12" style="padding: 10px 10px 0;">
     <div style="line-height: 6px;">
       <h3 style="margin-bottom: 0; font-weight: bold">
         {{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
@@ -94,7 +94,7 @@
   </div>
   <div #containerRef>
     <ngx-charts-line-chart
-      [view]="[containerRef.offsetWidth+10, 350]"
+      [view]="[containerRef.offsetWidth, 350]"
       [scheme]="colorScheme"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
@@ -144,7 +144,7 @@
   </div>
 
   <br>
-  <div *ngIf="currentUser.comment" style="white-space:pre-wrap;">
+  <div *ngIf="currentUser.comment" style="white-space:pre-wrap; padding-left: 10px;">
     <h2 style="text-align: left; font-weight: bolder">Comment</h2>{{currentUser.comment}}
   </div>
 </div>
