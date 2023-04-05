@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="col-xs-12 " style="height: 100%; vertical-align: center;">
       <div style="text-align: center; font-size: 1.8vw;  position: sticky;  z-index: 10;  width: 100%; " *loggedInUserHasNoSalaryHistory>
-        <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Help a fellow by sharing your experiences !</button>
+        <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Help your fellow by shalarying !</button>
       </div>
 
     </div>
@@ -27,12 +27,11 @@
         </div>
         <div class="col-xs-5"></div>
         <div class="col-xs-2">
-          <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS AND TRICKS</button>
         </div>
 
-        <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
+        <div class="col-xs-12" style=" padding: 0; margin-top: 10px; ">
           <div class="col-xs-5" style="font-size: 16px;padding: 0;">
-            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 250px; margin-top:0.3%;">
+            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 250px;">
               <mat-label>
                 <mat-icon>search</mat-icon>
                 Filter by anything
@@ -42,8 +41,9 @@
           </div>
           <div class="col-xs-5">
           </div>
-          <div class="col-xs-2" style="font-size: 10px;">
-            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">EXPAND GRID AND HIDE GRAPH</button>
+          <div class="col-xs-2 bottom-div-buttons" style="font-size: 10px;">
+            <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS</button>
+            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">EXPAND TABLE</button>
           </div>
         </div>
 
@@ -151,13 +151,13 @@
 
   <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && !isUserInfoDivOpen">
     <!-- Share your experience button-->
-<!--    <div class="container-fluid">-->
-<!--      <div class="col-xs-12" style="height: 100%; vertical-align: center;">-->
-<!--        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>-->
-<!--          <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Share your experience !</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="container-fluid">-->
+    <!--      <div class="col-xs-12" style="height: 100%; vertical-align: center;">-->
+    <!--        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>-->
+    <!--          <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Share your experience !</button>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
@@ -170,9 +170,7 @@
              (click)="applyNewCurrencySelected(currency)">{{currency}}</a>
         </div>
         <div class="col-xs-5"></div>
-        <div class="col-xs-2">
-          <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS AND TRICKS</button>
-        </div>
+
 
         <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
           <div class="col-xs-5" style="font-size: 10px;padding: 0;">
@@ -186,8 +184,9 @@
           </div>
           <div class="col-xs-5">
           </div>
-          <div class="col-xs-2" style="font-size: 10px;">
-            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">SHRINK GRID AND SHOW GRAPH</button>
+          <div class="col-xs-2 bottom-div-buttons" style="font-size: 10px;">
+            <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS</button>
+            <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">SHOW GRAPH</button>
           </div>
         </div>
 

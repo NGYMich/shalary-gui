@@ -24,7 +24,7 @@
 
 .router-pages-button {
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
   margin-left: 5px;
@@ -36,7 +36,7 @@
 }
 
 .router-pages-button-login {
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
   background-color: green;
@@ -46,7 +46,7 @@
 }
 
 .router-pages-button-signup {
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
   background-color: royalblue;
@@ -54,7 +54,7 @@
 }
 
 .router-pages-button-logout {
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
   background-color: indianred;
@@ -64,7 +64,7 @@
 
 .dropdown-router-pages-button {
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px !important;
   border-color: white !important;
   background-color: #121212;

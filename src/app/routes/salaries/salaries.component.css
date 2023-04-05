@@ -16,6 +16,11 @@
   box-shadow: 0 0 30px palegoldenrod;
 }
 
+.ag-theme-alpine-dark {
+  /*--ag-row-border-style: 0px ;*/
+  /*--ag-borders: none;*/
+}
+
 .flag-and-currency-title {
   font-size: 14px;
   font-weight: bold;

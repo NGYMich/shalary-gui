@@ -118,15 +118,31 @@
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white !important;
   border-radius: 10px;
+  margin: 0;
+  padding: 0;
 }
 
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -12px !important;
+}
+.ag-theme-alpine-dark {
+  --ag-row-border-style: 0px ;
+  /*--ag-borders: none;*/
+}
 .user-action-button {
   padding: 0 20px;
   margin: 5px 0 5px 0;
-  height: 52px;
-  vertical-align: center;
+  height: 30px;
+  vertical-align: bottom;
   float: right;
-  width: 250px;
+  width: 150px;
+}
+
+.bottom-div-buttons {
+  padding-right: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .expand-shrink {

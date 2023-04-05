@@ -326,7 +326,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   desktopColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {
-      field: 'id', sortable: true, resizable: true, width: 80, filter: 'agNumberColumnFilter', hide: false, cellStyle: this.defaultCellStyle,
+      field: 'id', sortable: true, resizable: true, width: 80, filter: 'agNumberColumnFilter', hide: true, cellStyle: this.defaultCellStyle,
     },
 
     {
@@ -340,7 +340,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       cellRenderer: CompanyCellRendererAlternativeView,
       cellStyle: () => {
         let copyVerticalAlignColumn = {...this.defaultCellStyle};
-        copyVerticalAlignColumn["font-weight"] = 'bold'
+        copyVerticalAlignColumn["font-weight"] = '600'
         return copyVerticalAlignColumn;
       },
       autoHeight: true,

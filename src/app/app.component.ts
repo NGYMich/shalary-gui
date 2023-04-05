@@ -2,9 +2,7 @@ import {Component} from '@angular/core';
 import * as packageInfo from '../../package.json';
 import {TokenStorageService} from "./services/TokenStorageService";
 import {MatDialog} from "@angular/material/dialog";
-import {UserInputErrorDialogComponent} from "./user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {RegisterComponent} from "./routes/authentication/register/register.component";
-import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 import {LoginComponent} from "./routes/authentication/login/login.component";
 import {Router} from "@angular/router";
 import {AppConstants} from "./routes/global/common-variables";
@@ -24,6 +22,8 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  currentUserIsAdmin: boolean = false;
+  admins = ["Crystalis", "Synha", "darkonatre", "Hai Bang"]
 
   constructor(private tokenStorageService: TokenStorageService, public dialog: MatDialog, private router: Router) {
   }
@@ -31,6 +31,7 @@ export class AppComponent {
   ngOnInit() {
     this.loggedUser = this.tokenStorageService.getUser()
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.currentUserIsAdmin = this.admins.includes(JSON.parse(this.loggedUser).username)
     //
     // if (this.isLoggedIn) {
     //   const user = this.tokenStorageService.getUser();

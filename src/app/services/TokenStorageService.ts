@@ -77,10 +77,7 @@ export class TokenStorageService {
   }
 
   public getUser(): any {
-    let cookieUserKey = this.cookieService.get(USER_KEY);
-    // console.log(this.cookieService.get(USER_KEY))
-    // console.log(JSON.parse(this.cookieService.get(USER_KEY)))
-    return cookieUserKey;
+    return this.cookieService.get(USER_KEY);
   }
 
   public saveHasSalaryHistory(boolean): any {
