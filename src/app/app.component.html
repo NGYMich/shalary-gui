@@ -40,12 +40,13 @@
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/data">Data Analytics</button>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/articles">Articles</button>
         <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/faq">F.A.Q</button>
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/about">About Us</button>
 
-        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button">Admin Accesses
+        <button mat-button [matMenuTriggerFor]="menu2" class="router-pages-button" *ngIf="currentUserIsAdmin">Admin Accesses
           <mat-icon style="margin-top: 0; padding: 0;">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu2="matMenu" class="router-pages-button-2">
-          <button mat-menu-item class="dropdown-router-pages-button test-and-user-feedbacks" routerLinkActive="active_route" routerLink="/about">User Feedback</button>
+          <button mat-menu-item class="dropdown-router-pages-button test-and-user-feedbacks" routerLinkActive="active_route" routerLink="/user-feedbacks">User Feedback</button>
           <button mat-menu-item class="dropdown-router-pages-button test-and-user-feedbacks" routerLinkActive="active_route" routerLink="/test">Test Page</button>
 
         </mat-menu>

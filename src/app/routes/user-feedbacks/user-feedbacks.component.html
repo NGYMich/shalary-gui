@@ -1,0 +1,31 @@
+<div style="text-align: center; margin-top: 1%; color: #dadada;   word-wrap: break-word
+">
+  <h2 style="color: palegoldenrod;   word-wrap: break-word">
+    TODO LIST - ALGORITHM / BACKEND
+  </h2>
+  <mat-list>
+    <mat-list-item *ngFor="let algorithmSuggestion of algorithmSuggestions" style="color: palegoldenrod;">
+      <div mat-line>-> {{algorithmSuggestion}}</div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <h2 style="color: darkgreen; margin-top: 1%; margin-bottom: 1%;">
+      TODO LIST - GRAPHICAL / FRONTEND
+    </h2>
+    <mat-list-item *ngFor="let graphicalSuggestion of graphicalSuggestions" style="color: darkgreen;" >
+      <div mat-line>- {{graphicalSuggestion}}</div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <h2 style="color: darkred; margin-top: 1%; margin-bottom: 1%;">
+      THINGS TO THINK ABOUT
+    </h2>
+    <mat-list-item *ngFor="let otherSuggestion of otherSuggestions" style="color: darkred;">
+      <div mat-line>- {{otherSuggestion}}</div>
+    </mat-list-item>
+
+  </mat-list>
+
+</div>

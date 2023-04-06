@@ -67,6 +67,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AgGridModule} from "ag-grid-angular";
 import { TipsAndTricksDialogComponent } from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
+import { UserFeedbacksComponent } from './routes/user-feedbacks/user-feedbacks.component';
 
 const routes: Routes = [
   // {path: '', component: SalariesAlternativeViewComponent},
@@ -82,6 +83,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'articles', component: ArticlesComponent},
+  {path: 'user-feedbacks', component: UserFeedbacksComponent},
   {path: '**', component: SalariesAlternativeViewComponent},
 
 ];
@@ -129,6 +131,7 @@ const routes: Routes = [
     ArticlesComponent,
     OpenCloseComponent,
     TipsAndTricksDialogComponent,
+    UserFeedbacksComponent,
   ],
   imports: [
     BrowserModule,

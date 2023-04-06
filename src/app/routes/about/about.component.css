@@ -1,4 +1,41 @@
-html, body {
-  white-space: initial;
-  word-wrap: break-word
+.main-div {
+  margin: 0;
+  padding: 0;
+  background-image: url(/assets/img/wave6.svg);
+  background-size: cover;
+  width: 100%;
+  min-height: 100%;
+  height: calc(100vh - 70px);
 }
+
+.col-xs-6 {
+  height: calc(100vh - 70px);
+  color: black;
+}
+
+h1 {
+  padding-top: 30px;
+  font-weight: bold;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  font-size: 2.5vw;
+  text-align: center;
+  line-height: 50px;
+  color: palegoldenrod;
+  padding-bottom: 1%;
+
+}
+
+.container-1 {
+  padding: 0 5%;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: #dadada;
+  color: black;
+  height: 40px;
+  align-items: center;
+  align-content: center
+}
+

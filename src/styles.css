@@ -15,34 +15,18 @@
   WHOLE WEBSITE : check body {} in this file
   FONT-FAMIly : check * {} under this
  */
-* {
-  /*font-family: 'Source Sans Pro', sans-serif;*/
-}
-
-input[type="color"],
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-select:focus,
-textarea {
-  font-size: 16px;
-}
-
 
 body {
   margin: 0;
   /*font-family: "IBM Plex", "Helvetica Neue", sans-serif;*/
   background-color: #121212;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .custom-dialog-container .mat-dialog-container {
@@ -72,12 +56,6 @@ body {
 .ag-cell-focus, .ag-cell-no-focus {
   border: none !important;
   outline: none;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 .mat-tooltip {
