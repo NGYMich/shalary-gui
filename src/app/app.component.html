@@ -68,14 +68,14 @@
 
   <!--  Mobile material sidebar navigator-->
   <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 60%;">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 60%;" (click)="sidenav.toggle()">
       <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 70px; background-color: #121212; color: whitesmoke;">
 
         <a mat-button routerLink="/home">Shalary - Homepage</a>
 
         <a mat-button routerLink="/login" *isNotLoggedIn>Log In</a>
         <a mat-button routerLink="/register" *isNotLoggedIn>Create Account</a>
-        <a mat-button routerLink="/edit-user-infos" *isLoggedIn >My Career</a>
+        <a mat-button routerLink="/edit-user-infos" *isLoggedIn>My Career</a>
         <a mat-button *isLoggedIn (click)="logOut(true)">Log Out</a>
 
 
