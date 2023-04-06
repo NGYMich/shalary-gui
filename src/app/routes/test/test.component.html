@@ -64,6 +64,7 @@
     <h3>
       SHALARY - SALARY SHARING
     </h3>
+    <br>
     <h4 style="color: #dadada">
       WORLD'S HIGHEST RATED #1
       <br>
@@ -74,7 +75,7 @@
     <div class="mobile-search-by-country-and-buttons-div ag-theme-alpine">
 
 
-      <div class="wrapper" style="margin-bottom: 10px; ">
+      <div class="wrapper" style="">
         <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="mobile-search-career-input" value="1">
 
         <mat-autocomplete #auto="matAutocomplete">
@@ -85,11 +86,18 @@
           </mat-option>
 
         </mat-autocomplete>
-        <button class="mobile-search-country-button" (click)="navigateToSalaries(true)">
+        <button matSuffix class="mobile-search-country-button" (click)="navigateToSalaries(true)">
           GO
         </button>
 
       </div>
+
+
+<!--      <mat-form-field class="example-full-width w-full" appearance="standard">-->
+<!--        <mat-label>Request name</mat-label>-->
+<!--        <input type="tel" matInput>-->
+<!--        <button matSuffix>Create request</button>-->
+<!--      </mat-form-field>-->
 
 
       <br>
