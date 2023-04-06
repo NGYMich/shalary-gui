@@ -30,8 +30,8 @@
 
           </mat-autocomplete>
           <button class="search-country-button" (click)="navigateToSalaries()">
-            <!--                        <mat-icon style="color: #121212; padding: 0; margin: 0; height: auto; width: auto;" >today</mat-icon>-->
-            GO
+            <mat-icon style="color: black; padding: 0; margin: 0; height: auto; width: auto; transform:scale(1.7)">search</mat-icon>
+            <!--            GO-->
           </button>
 
         </div>
@@ -71,8 +71,8 @@
     <div class="mobile-search-by-country-and-buttons-div ag-theme-alpine">
 
 
-      <div class="wrapper" style="margin-bottom: 10px; ">
-        <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="mobile-search-career-input" value="1">
+      <div class="wrapper" style="margin-bottom: 10px; height: 50px;">
+        <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="mobile-search-career-input">
 
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
@@ -83,19 +83,15 @@
 
         </mat-autocomplete>
         <button class="mobile-search-country-button" (click)="navigateToSalaries(true)">
-          GO
+          <mat-icon style="color: palegoldenrod; padding: 0; margin: 0; height: auto; width: auto; transform:scale(1.5)">search</mat-icon>
+          <!--          GO-->
         </button>
-
       </div>
-
-
       <br>
       <div style="display: flex; align-items: center; justify-content: center">
         <button mat-raised-button class="mobile-route-buttons" (click)="navigateToSalaries(true)">CAREERS AND SALARIES</button>
         <button mat-raised-button class="mobile-route-buttons" (click)="navigateToDataAnalytics()">DATA ANALYTICS</button>
       </div>
-
-
     </div>
   </div>
 

@@ -1,6 +1,6 @@
 import {CellClassParams} from "ag-grid-community";
 
-export let ROW_INDEX_TO_BLUR = 4;
+export let ROW_INDEX_TO_BLUR = 6;
 export let IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER = true;
 
 export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean = false) {
@@ -9,6 +9,7 @@ export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean
     height: '100%',
     minHeight: '40px',
     display: 'flex ',
+    'align-items': 'center',
   };
   blurCellIfIsNotLoggedIn(isLoggedIn, style, params.rowIndex);
 
@@ -75,7 +76,6 @@ export function blurCellIfIsNotLoggedIn(isLoggedIn: boolean, style: any, rowInde
       style['-ms-filter'] = 'blur(3px)'
       style['filter'] = 'blur(3px)'
     }
-
   }
 }
 
@@ -92,8 +92,6 @@ export function globalAgGridStyleDependingOnBlur(isLoggedIn, chosenUserRowIndex)
         'filter': 'blur(3px)',
       }
     }
-
-
   }
   return null
 }
@@ -101,6 +99,6 @@ export function globalAgGridStyleDependingOnBlur(isLoggedIn, chosenUserRowIndex)
 
 export function globalHideLegendsBecauseOfBlur(isLoggedIn, chosenUserRowIndex) {
   if (IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER)
-    return isLoggedIn || chosenUserRowIndex < 4
+    return isLoggedIn || chosenUserRowIndex < ROW_INDEX_TO_BLUR
   return true
 }

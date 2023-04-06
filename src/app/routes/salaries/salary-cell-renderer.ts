@@ -6,7 +6,7 @@ import {ICellRendererParams} from "ag-grid-community";
 @Component({
   selector: 'salary-cell-renderer',
   template: `
-    <div>{{this.renderedSalaryWithCurrency}}</div>
+    {{this.renderedSalaryWithCurrency}}
   `,
 })
 export class SalaryCellRenderer implements ICellRendererAngularComp {

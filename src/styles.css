@@ -57,8 +57,9 @@ body {
 }
 
 .ag-row-selected {
-  background-color: black;
-  color: white;
+  background-color: whitesmoke;
+  color: black;
+  /*box-shadow: 0 0 30px palegoldenrod;*/
 }
 
 
@@ -88,7 +89,7 @@ html, body {
 .material-icons {
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 16px;  /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;

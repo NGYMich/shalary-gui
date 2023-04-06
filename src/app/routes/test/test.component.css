@@ -75,6 +75,7 @@ h2 {
 
 .search-by-country-and-buttons-div {
   padding-top: 7%;
+  height: 50px;
 }
 
 
@@ -84,12 +85,10 @@ h2 {
 }
 
 .search-country-button {
-  font-weight: bold;
   width: 50px;
   height: 50px;
   font-size: 18px;
   background-color: palegoldenrod;
-  color: #121212;
   border: 2px solid palegoldenrod;
 }
 
@@ -120,6 +119,7 @@ h3 {
 
 .mobile-search-by-country-and-buttons-div {
   padding-top: 3%;
+  height: 50px;
 }
 
 .mobile-search-country-button {
