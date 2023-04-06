@@ -18,10 +18,10 @@ export class IsMobileDirective implements OnInit {
 
   ngOnInit() {
     this.breakpointObserver.observe([
-      "(max-width: 1200px)"
+      "(max-width: 970px)"
     ]).subscribe((result: BreakpointState) => {
       if (result.matches || this.deviceService.isMobile()) {
-        console.log('width < 1200px')
+        console.log('width < 970px')
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();
