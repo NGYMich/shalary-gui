@@ -11,7 +11,7 @@ import {Component} from "@angular/core";
             {{this.params.data.salaryHistory.totalYearsOfExperience <= 1 ? "year" : "years"}})
         </span>
 
-          - {{this.companyName}}
+          {{this.companyName != null ? "-" : ""}} {{this.companyName}}
           <span *ngIf="this.sector != null" style="font-style: italic">
         ({{this.sector}})
       </span>

@@ -52,6 +52,11 @@
   color: #121212;
 }
 
+.ag-theme-alpine-dark {
+  --ag-row-border-style: 1px ;
+  /*--ag-borders: none;*/
+}
+
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white !important;
   border-radius: 10px;

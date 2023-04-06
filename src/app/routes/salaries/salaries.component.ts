@@ -43,7 +43,6 @@ export class SalariesComponent implements OnInit {
   defaultCellStyle = {
     'white-space': 'normal',
     height: '100%',
-    minHeight: '40px',
     display: 'flex ',
     'align-items': 'center',
   };
@@ -191,11 +190,11 @@ export class SalariesComponent implements OnInit {
     {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true, cellStyle: this.defaultCellStyle,},
     {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', hide: true, cellStyle: this.defaultCellStyle,},
     {
-      valueGetter: this.currentJobGetter, headerName: 'Job (click user for infos)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+      valueGetter: this.currentJobGetter, headerName: 'Job (click user to see career)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRenderer: JobCellRenderer,
-      cellStyle: {"white-space": "normal"},
+      cellStyle: {"white-space": "normal", "line-height": 2.5},
       autoHeight: true,
-      width: 220
+      width: 240
     },
     {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer, hide: true, cellStyle: this.defaultCellStyle,},
     {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: this.defaultCellStyle,},
