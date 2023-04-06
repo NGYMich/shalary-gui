@@ -12,7 +12,7 @@ import {CompanyCellRenderer} from "./company-cell-renderer";
 import {JobCellRenderer} from "./job-cell-renderer";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../services/TokenStorageService";
-import {totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/cell-style";
+import {getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/cell-style";
 
 @Component({
   selector: 'app-salaries',
@@ -32,6 +32,7 @@ export class SalariesComponent implements OnInit {
   forexRates: any;
   tooltipShowDelay = 0;
   tooltipHideDelay = 5000;
+  isLoggedIn: boolean = false;
 
   gridOptions: GridOptions = {
     rowSelection: 'single',
@@ -49,9 +50,10 @@ export class SalariesComponent implements OnInit {
 
   defaultColDef: ColDef = {
     tooltipValueGetter: (params) => {
-      return params.value;
+      return this.isLoggedIn && !IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER ? params.value : "";
     }
   };
+  selectedUserRowIndex: any;
 
   constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
               private tokenStorageService: TokenStorageService) {
@@ -135,14 +137,14 @@ export class SalariesComponent implements OnInit {
     {
       headerName: 'User',
       children: [
-        {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter',},
-        {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter'},
-        {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer},
-        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open'},
-        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
-        {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open'},
+        {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {valueGetter: this.currentJobGetter, headerName: 'Current job', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), cellRenderer: CompanyCellRenderer},
+        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open'},
+        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open'},
+        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open'},
+        {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open'},
         {
           field: 'salaryHistory.totalYearsOfExperience',
           headerName: 'Experience',
@@ -155,19 +157,18 @@ export class SalariesComponent implements OnInit {
 
         },
         {
-          field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+          field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
           cellRenderer: LocationCellRenderer,
         },
-
       ]
     },
     {
       headerName: 'Salary',
 
       children: [
-        {field: 'salaryHistory.salaryCurrency', hide: true},
-        {field: 'salaryHistory.salaryInfos', hide: true},
-        {field: 'salaryHistory', hide: true},
+        {field: 'salaryHistory.salaryCurrency', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {field: 'salaryHistory.salaryInfos', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {field: 'salaryHistory', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
         {
           valueGetter: this.totalSalaryValueGetter.bind(this),
           width: 150,
@@ -177,12 +178,12 @@ export class SalariesComponent implements OnInit {
           filter: 'agNumberColumnFilter',
           cellRenderer: SalaryCellRenderer,
           cellRendererParams: {selectedCurrency: this.selectedCurrency},
-          cellStyle: params => totalSalaryCellStyle(params),
+          cellStyle: params => totalSalaryCellStyle(params, this.isLoggedIn),
         },
-        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer},
-        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'closed'},
+        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)},
+        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'closed', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn)}
       ]
     },
   ];
@@ -235,6 +236,7 @@ export class SalariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
     this.loadUsers();
@@ -275,12 +277,16 @@ export class SalariesComponent implements OnInit {
   }
 
   openUserInfos(event): void {
+    this.selectedUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
     const selectedNodes = this.gridApi.getSelectedNodes();
     const selectedUser = selectedNodes.map(node => node.data)[0];
     this.dialog.open(UserInfosDialogComponent, {
       width: '100%',
       height: '85%',
-      data: {selectedUser: selectedUser},
+      data: {
+        selectedUser: selectedUser,
+        selectedRowIndex: this.selectedUserRowIndex
+      },
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
     });

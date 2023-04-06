@@ -198,6 +198,7 @@ export class UserInfosDialogComponent implements OnInit {
 
 
   returnAgGridStyleDependingOnBlur() {
+    console.log('opening dialog for user' + this.chosenUserRowIndex)
     return globalAgGridStyleDependingOnBlur(this.isLoggedIn, this.chosenUserRowIndex);
   }
 

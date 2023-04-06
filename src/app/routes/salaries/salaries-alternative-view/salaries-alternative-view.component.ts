@@ -75,7 +75,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];
   chosenCountryFromHomePage: any = null;
-  chosenUserRowIndex: any = 0;
+  selectedUserRowIndex: any = 0;
 
   constructor(public numberService: NumberService,
               private router: Router,
@@ -327,7 +327,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
     {
       valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRenderer: JobCellRendererAlternativeView, cellStyle: params => getDefaultCellStyle(params, this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""),
+      cellRenderer: JobCellRendererAlternativeView, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
       autoHeight: true,
       width: 280
     },
@@ -510,7 +510,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   openUserInfos(event): void {
     this.currentUser = this.gridApi.getSelectedNodes().map(node => node.data)[0];
-    this.chosenUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
+    this.selectedUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
     this.updateDataGraph();
   }
 
@@ -533,7 +533,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   openUserInfosDialog(event): void {
-    this.chosenUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
+    this.selectedUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
     const selectedNodes = this.gridApi.getSelectedNodes();
     const selectedUser = selectedNodes.map(node => node.data)[0];
     this.dialog.open(UserInfosDialogComponent, {
@@ -541,7 +541,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       height: '80%',
       data: {
         selectedUser: selectedUser,
-        selectedRowIndex: this.chosenUserRowIndex,
+        selectedRowIndex: this.selectedUserRowIndex,
       },
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
@@ -560,11 +560,11 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   returnAgGridStyleDependingOnBlur() {
-    return globalAgGridStyleDependingOnBlur(this.isLoggedIn, this.chosenUserRowIndex);
+    return globalAgGridStyleDependingOnBlur(this.isLoggedIn, this.selectedUserRowIndex);
   }
 
   hideLegendsBecauseOfBlur() {
-    return globalHideLegendsBecauseOfBlur(this.isLoggedIn, this.chosenUserRowIndex)
+    return globalHideLegendsBecauseOfBlur(this.isLoggedIn, this.selectedUserRowIndex)
   }
 }
 
