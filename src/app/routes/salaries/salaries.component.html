@@ -84,13 +84,16 @@
       <div class="col-xs-12" style="margin: 0; padding: 0;">
 
 
-        <div style="text-align: center; font-size: 31px;"  *loggedInUserHasNoSalaryHistory >
+        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>
           <button mat-raised-button class="mobile-share-your-experience-button" (click)="redirectToAddUserExperienceRoute($event)">
             Help your fellow by shalarying !
           </button>
           <br>
 
-          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 12px; width: 80%; margin-top:2%;">
+        </div>
+
+        <div fxLayout="row" style="display: flex; align-items: center; justify-content: center">
+          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 12px; width: 75%; padding-top:2%;">
             <mat-label style="text-align: left; display: block; width: auto;">
               <mat-icon>search</mat-icon>
               Filter by anything in the table
@@ -98,9 +101,8 @@
             <input matInput style="text-align: left;" id="filter-text-box" (input)="onFilterTextBoxChanged()"/>
           </mat-form-field>
         </div>
-
-
         <div fxLayout="row">
+
           <div class="flag-and-currency-title">
             Filter by countries with most data
           </div>
