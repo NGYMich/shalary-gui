@@ -21,7 +21,7 @@ import {Location} from "@angular/common";
 import {SalaryInfo} from "../../../model/salaryInfo";
 import {UserInfosDialogComponent} from "../../../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {TipsAndTricksDialogComponent} from "../../../user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component";
-import {getDefaultCellStyle, ROW_INDEX_TO_BLUR, totalSalaryCellStyle, totalYearsOfExperienceCellStyle, globalAgGridStyleDependingOnBlur, globalHideLegendsBecauseOfBlur} from "../../global/cell-style";
+import {getDefaultCellStyle, globalAgGridStyleDependingOnBlur, globalHideLegendsBecauseOfBlur, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/cell-style";
 
 
 @Component({

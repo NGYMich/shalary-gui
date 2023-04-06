@@ -16,8 +16,19 @@
   box-shadow: 0 0 30px palegoldenrod;
 }
 
+.ag-row .ag-cell {
+  display: flex;
+  justify-content: left; /* align horizontal */
+  align-items: center;
+}
+
+.ag-center-cols-clipper,
+.ag-center-cols-container {
+  min-height: 300px !important;
+}
+
 .ag-theme-alpine-dark {
-  /*--ag-row-border-style: 0px ;*/
+  --ag-row-border-style: 1px;
   /*--ag-borders: none;*/
 }
 
@@ -52,10 +63,6 @@
   color: #121212;
 }
 
-.ag-theme-alpine-dark {
-  --ag-row-border-style: 1px ;
-  /*--ag-borders: none;*/
-}
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white !important;

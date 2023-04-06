@@ -30,12 +30,25 @@
   align-items: center;
 }
 
+
+.ag-center-cols-clipper,
+.ag-center-cols-container {
+  min-height: 300px !important;
+}
+
+.ag-theme-alpine-dark {
+  --ag-row-border-style: 0px ;
+  /*--ag-borders: none;*/
+}
+
 .flag-and-currency-title {
   font-size: 14px;
   font-weight: bold;
   /*font-style: italic;*/
   color: white;
 }
+
+
 
 .currency {
   font-size: 14px;
@@ -110,10 +123,6 @@
 }
 
 
-.ag-center-cols-clipper,
-.ag-center-cols-container {
-  min-height: 300px !important;
-}
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   background-color: white !important;
@@ -125,10 +134,7 @@
 ::ng-deep .mat-form-field-wrapper{
   margin-bottom: -12px !important;
 }
-.ag-theme-alpine-dark {
-  --ag-row-border-style: 0px ;
-  /*--ag-borders: none;*/
-}
+
 .user-action-button {
   padding: 0 20px;
   margin: 5px 0 5px 0;

@@ -3,12 +3,13 @@ import {CellClassParams} from "ag-grid-community";
 export let ROW_INDEX_TO_BLUR = 6;
 export let IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER = true;
 
-export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean = false) {
+export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean = false, isView2: boolean = false) {
   let style = {
     'white-space': 'normal',
     height: '100%',
-    minHeight: '40px',
-    display: 'flex ',
+    'line-height': isView2 ? '30px' : '40px',
+    // minHeight: "10px",
+    display: 'flex',
     'align-items': 'center',
   };
   blurCellIfIsNotLoggedIn(isLoggedIn, style, params.rowIndex);
