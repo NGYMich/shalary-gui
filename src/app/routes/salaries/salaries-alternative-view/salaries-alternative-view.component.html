@@ -101,26 +101,27 @@
                 <ng-template #seriesTooltipTemplate let-model="model">
                   <div>
                     <h3 style="text-align: center; margin-bottom: 0; color:azure">
-                      {{model[0].jobName}}
-                      {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
-                      {{model[0].companyName}}
-                      {{model[0].companySector}}
-
+                      {{model[0]["jobName"]}}
+                      {{((model[0]["jobName"] != "" && model[0]["jobName"] != null) && (model[0]["companyName"] != "" && model[0]["companyName"] != null) ? " - " : "") }}
+                      {{model[0]["companyName"]}}
+                      {{model[0]["companySector"]}}
                     </h3>
-                    <h4
-                      style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">{{model[0].contractType}}</h4>
+
+                    <h4 style="text-align: left; margin-bottom: 0; margin-top: 0; color:whitesmoke; font-style: italic">
+                      {{model[0]["contractType"]}}
+                    </h4>
+
                     <div
                       style="text-align: left; vertical-align: center; border-radius: 5px; border-color: white; margin-bottom: 3%;">
-                      Base Salary : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      Base Salary : {{model[1].value != null ? this.numberService.formatBigNumberWithSpaces(model[1].value) : 0}} {{this.numberService.formatCurrency(model[0]["salaryCurrency"])}}
                       <br>
-                      Bonus Salary : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      Bonus Salary : {{model[2].value != null ? this.numberService.formatBigNumberWithSpaces(model[2].value) : 0}} {{this.numberService.formatCurrency(model[0]["salaryCurrency"])}}
                       <br>
-                      Equity : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      Equity : {{model[3].value != null ? this.numberService.formatBigNumberWithSpaces(model[3].value) : 0}} {{this.numberService.formatCurrency(model[0]["salaryCurrency"])}}
                       <br>
-                      Total Salary : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0].salaryCurrency)}}
+                      Total Salary : {{model[0].value != null ? this.numberService.formatBigNumberWithSpaces(model[0].value) : 0}} {{this.numberService.formatCurrency(model[0]["salaryCurrency"])}}
                     </div>
                   </div>
-
                 </ng-template>
               </ngx-charts-line-chart>
             </div>
@@ -215,3 +216,4 @@
 
 </div>
 
+<div></div>
