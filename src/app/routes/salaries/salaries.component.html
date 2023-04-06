@@ -84,9 +84,9 @@
       <div class="col-xs-12" style="margin: 0; padding: 0;">
 
 
-        <div style="text-align: center; font-size: 31px;">
-          <button mat-raised-button class="mobile-share-your-experience-button"
-                  (click)="redirectToAddUserExperienceRoute($event)">Share your experience !
+        <div style="text-align: center; font-size: 31px;"  *loggedInUserHasNoSalaryHistory >
+          <button mat-raised-button class="mobile-share-your-experience-button" (click)="redirectToAddUserExperienceRoute($event)">
+            Share your experience !
           </button>
           <br>
 
@@ -122,10 +122,10 @@
         </div>
 
         <div fxLayout="row">
-            <div [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency"
-                 *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)" style="float: left;">
-              {{currency}}
-            </div>
+          <div [style.background-color]="currency !== selectedCurrency ? 'white' : 'yellow'" class="currency"
+               *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)" style="float: left;">
+            {{currency}}
+          </div>
         </div>
 
 
