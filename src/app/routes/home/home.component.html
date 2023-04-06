@@ -1,100 +1,98 @@
-<!--<div class="ag-theme-balham, home-text" *isNotMobile>-->
-<!--  <div class="container-fluid">-->
-<!--    <div class="row" style="padding-top: 1%; text-align: justify;">-->
-<!--      <div class="col-lg-12" style="text-align: center">-->
-<!--        <h1 style="text-align: center; font-size: 30px; margin: 10px">Shalary - Share your experience !</h1>-->
-<!--        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">-->
-<!--          View careers and salaries-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="col-lg-2"></div>-->
-<!--      <div class="col-lg-8" style="margin-top: 1.5%">-->
-<!--        <mat-divider></mat-divider>-->
-<!--        <div class="col-lg-6">-->
-<!--          <div class="card-component">-->
-<!--            <div style="text-align: center; ">-->
-<!--              <h1> Career History </h1>-->
-<!--              <div class="material-icons" style="font-size: 120px; color: #dddddd"> auto_graph</div>-->
-<!--            </div>-->
-<!--            <p [innerHTML]="introductionMessage" style="font-size: 16px;"></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-lg-6">-->
-<!--          <div class="card-component">-->
-<!--            <div style="text-align: center; ">-->
-<!--              <h1>Salaries</h1>-->
-<!--              <div class="material-icons-outlined" style="font-size: 120px; color: #dddddd;"> auto_stories</div>-->
-<!--            </div>-->
-<!--            <p [innerHTML]="introductionMessage2" style="font-size: 16px;"></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="col-lg-2"></div>-->
-<!--    </div>-->
-<!--    <div class="row" style="padding-top: 1%; text-align: justify;">-->
-<!--      <div class="col-lg-2"></div>-->
-<!--      <div class="col-lg-8">-->
-<!--        <mat-divider></mat-divider>-->
-<!--      </div>-->
-<!--      <div class="col-lg-2"></div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div class="ag-theme-balham, home-text" *isMobile>-->
-<!--  <div class="container-fluid">-->
-<!--    <div class="row" style="padding-top: 1%; padding-bottom: 7%;text-align: justify; background-color: darkgray; color:white;">-->
-<!--      <div class="col-lg-12" style="text-align: center">-->
-<!--        <h2 style="text-align: center; margin: 10px">Shalary - Share your experience !</h2>-->
-<!--        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">-->
-<!--          View careers and salaries-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
+<div class="row main-row" *isNotMobile>
 
-<!--    <div class="row" style="text-align: justify;">-->
-<!--        <div class="col-lg-4">-->
-<!--          <div class="mobile-card-component">-->
-<!--            <div style="text-align: center; ">-->
-<!--              <h3>Career History</h3>-->
-<!--              <div class="material-icons" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_graph</div>-->
+  <div class="col-xs-1"></div>
+  <div class="col-xs-5">
+    <div class="card-component">
+      <div [@openClose]="isOpen ? 'open' : 'closed'">
+        <h1>
+          SHALARY - SALARY SHARING
+        </h1>
+        <h2>
+          WORLD'S HIGHEST RATED #1
+          <br>
+          ANONYMOUS CAREERS SHARING SITE
+        </h2>
+      </div>
 
-<!--            </div>-->
-<!--            <p [innerHTML]="introductionMessage"></p>-->
-<!--          </div>-->
-<!--        </div>-->
 
-<!--        <div class="col-lg-4">-->
-<!--          <mat-divider></mat-divider>-->
-<!--          <div class="mobile-card-component">-->
-<!--            <div style="text-align: center; ">-->
-<!--              <h3>Salaries</h3>-->
-<!--              <div class="material-icons-outlined" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_stories</div>-->
-<!--            </div>-->
-<!--            <p [innerHTML]="introductionMessage2"></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+      <div class="search-by-country-and-buttons-div ag-theme-alpine" [@apparition]="isOpen ? 'open' : 'closed'">
 
-<div class="test">
-  <div class="row main-row" *isNotMobile>
 
-    <div class="col-xs-1" style="margin: 0;  padding: 0;"></div>
-    <div class="col-xs-5" style="margin: 0;  padding: 0;">
-      <div class="card-component" style="margin: 0;  padding: 0;">
-        <div>
-          <h1>
-            SHALARY - SALARY SHARING
-          </h1>
-          <h2>
-            WORLD'S HIGHEST RATED #1
-            <br>
-            ANONYMOUS CAREERS SHARING SITE
-          </h2>
+        <div class="wrapper" style="margin-bottom: 10px; ">
+          <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="search-career-input" value="1">
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+              <img [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
+                   onerror="this.onerror=null; this.remove();">
+              <span style="font-size: 14px; color: #121212;"> {{country.name}}</span>
+            </mat-option>
+
+          </mat-autocomplete>
+          <button class="search-country-button" (click)="navigateToSalaries()">
+            <mat-icon style="color: black; padding: 0; margin: 0; height: auto; width: auto; transform:scale(1.7)">search</mat-icon>
+            <!--            GO-->
+          </button>
+
         </div>
+
+
+        <br>
+        <div style="padding-right: 20px;">
+          <button mat-raised-button class="route-buttons" (click)="navigateToSalaries()">CAREERS AND SALARIES</button>
+          <button mat-raised-button class="route-buttons" (click)="navigateToDataAnalytics()">DATA ANALYTICS</button>
+        </div>
+
+
       </div>
     </div>
   </div>
+
+  <img class="salaryman-img" [@openClose2]="isOpen ? 'open' : 'closed'" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
+  <div class="col-xs-1">
+  </div>
 </div>
 
+<div class="row mobile-only-row" *isMobile>
+  <img class="mobile-salaryman-img" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
+
+  <div class="mobile-card-component" style="text-align: center">
+    <h3>
+      SHALARY - SALARY SHARING
+    </h3>
+    <br>
+    <h4 style="color: #dadada">
+      WORLD'S HIGHEST RATED #1
+      <br>
+      ANONYMOUS CAREERS SHARING SITE
+    </h4>
+
+
+    <div class="mobile-search-by-country-and-buttons-div ag-theme-alpine">
+
+
+      <div class="wrapper" style="margin-bottom: 10px; height: 50px;">
+        <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="mobile-search-career-input">
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+            <img [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35"
+                 onerror="this.onerror=null; this.remove();">
+            <span style="font-size: 14px; color: #121212;"> {{country.name}}</span>
+          </mat-option>
+
+        </mat-autocomplete>
+        <button class="mobile-search-country-button" (click)="navigateToSalaries(true)">
+          <mat-icon style="color: palegoldenrod; padding: 0; margin: 0; height: auto; width: auto; transform:scale(1.5)">search</mat-icon>
+          <!--          GO-->
+        </button>
+      </div>
+      <br>
+      <div style="display: flex; align-items: center; justify-content: center">
+        <button mat-raised-button class="mobile-route-buttons" (click)="navigateToSalaries(true)">CAREERS AND SALARIES</button>
+        <button mat-raised-button class="mobile-route-buttons" (click)="navigateToDataAnalytics()">DATA ANALYTICS</button>
+      </div>
+    </div>
+  </div>
+
+</div>

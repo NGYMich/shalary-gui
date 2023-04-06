@@ -1,27 +1,12 @@
-.main-row {
+.test {
+  background-image: url(/assets/img/test2.svg);
+  height: calc(100vh - 75px);
+  width: 100vw;
+  background-size: cover;
   margin: 0;
   padding: 0;
-  text-align: justify;
-  background-color: #121212;
-  color: white;
-  width: 100%;
-  min-height: 100%;
-  height: calc(100vh - 70px); /*check toolbar size*/
 }
 
-.salaryman-img {
-  /*width: 600px;*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3%;
-
-  border-radius: 0 0 300px 300px;
-  /*border-radius: 400px 400px 0 0;*/
-  /*max-width: 640px;*/
-  max-width: 32%;
-  height: auto;
-}
 
 h1, h2 {
   padding-top: 50px;
@@ -65,8 +50,8 @@ h2 {
 
 .search-by-country-and-buttons-div {
   padding-top: 7%;
-  height: 50px;
 }
+
 
 
 .mat-auto-complete {
@@ -74,10 +59,12 @@ h2 {
 }
 
 .search-country-button {
+  font-weight: bold;
   width: 50px;
   height: 50px;
   font-size: 18px;
   background-color: palegoldenrod;
+  color: #121212;
   border: 2px solid palegoldenrod;
 }
 
@@ -108,7 +95,6 @@ h3 {
 
 .mobile-search-by-country-and-buttons-div {
   padding-top: 3%;
-  height: 50px;
 }
 
 .mobile-search-country-button {

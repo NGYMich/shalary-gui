@@ -60,30 +60,35 @@ import {LoggedInUserHasNoSalaryHistoryDirective} from "./routes/global/logged-in
 import {LoggedInUserHasSalaryHistoryDirective} from "./routes/global/logged-in-user-has-salary-history-directive";
 import {FaqComponent} from './routes/faq/faq.component';
 import {authInterceptorProviders} from "./services/AuthInterceptor";
-import { ArticlesComponent } from './routes/articles/articles.component';
-import { CookieService } from 'ngx-cookie-service';
-import { OpenCloseComponent } from './animations/open-close/open-close.component';
+import {ArticlesComponent} from './routes/articles/articles.component';
+import {CookieService} from 'ngx-cookie-service';
+import {OpenCloseComponent} from './animations/open-close/open-close.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AgGridModule} from "ag-grid-angular";
-import { TipsAndTricksDialogComponent } from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
-import { UserFeedbacksComponent } from './routes/user-feedbacks/user-feedbacks.component';
+import {TipsAndTricksDialogComponent} from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
+import {UserFeedbacksComponent} from './routes/user-feedbacks/user-feedbacks.component';
 
 const routes: Routes = [
-  // {path: '', component: SalariesAlternativeViewComponent},
-  {path: 'home', component: TestComponent},
+  {path: 'home', component: HomeComponent},
+
   {path: 'salaries/view2', component: SalariesComponent},
-  {path: 'salaries', component: SalariesAlternativeViewComponent},
+  {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+
   {path: 'data', component: DataComponent},
+  {path: 'articles', component: ArticlesComponent},
+  {path: 'faq', component: FaqComponent},
   {path: 'about', component: AboutComponent},
   {path: 'edit-user-infos', component: EditUserInfosComponent},
-  {path: 'test', component: HomeComponent},
-  {path: 'faq', component: FaqComponent},
-  {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+
+  {path: 'user-feedbacks', component: UserFeedbacksComponent},
+  {path: 'test', component: TestComponent},
+
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'articles', component: ArticlesComponent},
-  {path: 'user-feedbacks', component: UserFeedbacksComponent},
+
+  // redirect
+  {path: 'salaries', component: SalariesAlternativeViewComponent},
   {path: '**', component: SalariesAlternativeViewComponent},
 
 ];

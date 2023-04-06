@@ -1,5 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {FormControl, Validators} from "@angular/forms";
+import {map, Observable, startWith} from "rxjs";
+import {Country} from "../../model/country";
+import {UserService} from "../../services/UserService";
+import {LocationService} from "../../services/LocationService";
 
 @Component({
   selector: 'app-home',
@@ -7,47 +12,59 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  // sectors = ['Banking & Finance', 'Economics', 'Politics', 'Energy', 'Consulting', 'Healthcare', 'Manual Working', 'Real Estate', 'Catering'];
 
-  introductionMessage =
-    `
-        Nowadays, many people do not know what their salary expectations should be, even after working for several years.
-        Some underestimate their market value, and some overestimate it : it can be very difficult to get accurate
-        data.
-        <br><br>
-        After two years of experience in the same company, let's say that you want to know what salary increase you could get by switching jobs and company.
-        <br><br>
-        You start to look, but you realize information given is all over the place : salary in different currencies
-        and countries, you don't find people with same skills as yours, or in the same sector as you work in, and
-        around you, no one wants to share their salary. Well good news, Shalary is here to save you !
-    `
+  vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
 
-  introductionMessage2 =
-    `
-        Shalary is a website where everyone can anonymously share their salary history.
-        <br><br>
-        From anywhere in the world,
-        you can read data about other users, their story and their progression throughout their careers, in
-        various
-        sectors such as Banking, Finance, IT, Sales, Trading, Healthcare, etc.
-        <br>
-        <br>
-        You will be able to obtain interesting data thanks to the various testimonies of the users of the site.
-        For
-        example, you want to know the average salary of a data scientist after a master and 5 years of experience
-        in
-        Paris in consulting firms?
-        No problem, Shalary is here for you.
-    `
 
-  constructor(private router: Router) {
+  isOpen = true;
+  countriesControl = new FormControl("", (Validators.required))
+  @Input() filteredCountries: Observable<Country[]>;
+  allCountriesWithTheirFlags: any;
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+
+  constructor(private userService: UserService, private router: Router, private locationService: LocationService) {
+    setTimeout(() => {
+      this.toggle()
+    }, 0);
   }
 
   ngOnInit(): void {
+    this.loadCountriesWithFlag()
+    this.countriesControl = new FormControl('')
+    document.documentElement.style.setProperty('--vh', `${this.vh}px`);
   }
 
-  redirectToSalariesPage() {
-    this.router.navigate(['/salaries/view1'])
+  private loadCountriesWithFlag() {
+    this.countriesControl = new FormControl('France', (Validators.required))
+    this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
+      this.allCountriesWithTheirFlags = data
+      this.filteredCountries = this.countriesControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(country => country ? this._filterCountries(country) : this.allCountriesWithTheirFlags.slice()),
+        );
+    })
+  }
+
+  private _filterCountries(value): Country[] {
+    const filterValue = value.toLowerCase();
+    return this.allCountriesWithTheirFlags.filter(country => country.name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  navigateToSalaries(isMobile: boolean = false) {
+    if (!isMobile) {
+      this.router.navigate(['/salaries/view1'], {state: {chosenCountry: this.countriesControl.value}})
+    } else {
+      this.router.navigate(['/salaries/view2'], {state: {chosenCountry: this.countriesControl.value}})
+    }
+  }
+
+  navigateToDataAnalytics(isMobile: boolean = false) {
+    this.router.navigate(['/data'])
   }
 
 }
