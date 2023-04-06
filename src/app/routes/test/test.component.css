@@ -77,11 +77,7 @@ h2 {
   padding-top: 7%;
 }
 
-input {
-  height: 100%;
-  width: 350px;
-  border: 2px solid palegoldenrod
-}
+
 
 .mat-auto-complete {
   border: 2px solid palegoldenrod
@@ -102,6 +98,8 @@ input {
   padding-left: 10px;
   height: 50px;
   color: #121212;
+  width: 350px;
+  border: 2px solid palegoldenrod
 }
 
 /* MOBILE */
@@ -132,7 +130,6 @@ h3 {
   background-color: palegoldenrod;
   color: #121212;
   border: 2px solid palegoldenrod;
-  /*height: 100%;*/
 }
 
 .mobile-search-career-input {
@@ -171,11 +168,4 @@ h3 {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-:host ::ng-deep .mat-form-field-infix {
-  top: 0em !important;
-}
-:host ::ng-deep .mat-form-field-suffix {
-  top: 0em !important;
 }

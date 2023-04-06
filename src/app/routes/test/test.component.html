@@ -48,10 +48,6 @@
     </div>
   </div>
 
-  <!--  <div class="col-xs-5 image-component"  >-->
-  <!--    <img mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman" >-->
-  <!--  </div>-->
-
   <img class="salaryman-img" [@openClose2]="isOpen ? 'open' : 'closed'" mat-card-image src="https://i.imgur.com/blAJxxW.png" alt="Salaryman">
   <div class="col-xs-1">
   </div>
@@ -75,7 +71,7 @@
     <div class="mobile-search-by-country-and-buttons-div ag-theme-alpine">
 
 
-      <div class="wrapper" style="">
+      <div class="wrapper" style="margin-bottom: 10px; ">
         <input [matAutocomplete]="auto" [formControl]="countriesControl" placeholder="Search careers by country" class="mobile-search-career-input" value="1">
 
         <mat-autocomplete #auto="matAutocomplete">
@@ -86,18 +82,11 @@
           </mat-option>
 
         </mat-autocomplete>
-        <button matSuffix class="mobile-search-country-button" (click)="navigateToSalaries(true)">
+        <button class="mobile-search-country-button" (click)="navigateToSalaries(true)">
           GO
         </button>
 
       </div>
-
-
-<!--      <mat-form-field class="example-full-width w-full" appearance="standard">-->
-<!--        <mat-label>Request name</mat-label>-->
-<!--        <input type="tel" matInput>-->
-<!--        <button matSuffix>Create request</button>-->
-<!--      </mat-form-field>-->
 
 
       <br>
