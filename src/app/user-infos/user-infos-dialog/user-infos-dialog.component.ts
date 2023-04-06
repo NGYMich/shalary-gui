@@ -1,13 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../model/user";
 import {Serie} from "../../model/serie";
 import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
 import {NumberService} from "../../services/NumberService";
-import {EditUserInfosComponent} from "../../routes/edit-user-infos/edit-user-infos.component";
 import {Router} from "@angular/router";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {commonNgxGraphColorScheme} from "../../routes/global/common-variables";
+import {TokenStorageService} from "../../services/TokenStorageService";
+import {globalAgGridStyleDependingOnBlur, globalHideLegendsBecauseOfBlur} from 'src/app/routes/global/cell-style';
 
 @Component({
   selector: 'app-user-infos-dialog',
@@ -36,7 +37,8 @@ export class UserInfosDialogComponent implements OnInit {
   below = LegendPosition.Below;
   salaryCurrency;
   isMobile: boolean;
-
+  chosenUserRowIndex: any = 0;
+  isLoggedIn: boolean = false;
 
   public activeEntries: any[] = [];
   public chartData: { name: string, series: { name: string, value?: string | number }[] }[];
@@ -48,13 +50,16 @@ export class UserInfosDialogComponent implements OnInit {
   userInfosString: string[] = [];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>, private deviceService: DeviceDetectorService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public numberService: NumberService, private router: Router, public dialogRef: MatDialogRef<UserInfosDialogComponent>, private deviceService: DeviceDetectorService, private tokenStorageService: TokenStorageService,
+  ) {
     Object.assign(this, this.dataGraph);
     this.salaryCurrency = this.data.selectedUser.salaryHistory.salaryCurrency
+    this.chosenUserRowIndex = this.data.selectedRowIndex
   }
 
 
   ngOnInit(): void {
+    this.isLoggedIn = this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""
     this.currentUser = this.data.selectedUser;
     this.isMobile = this.deviceService.isMobile();
 
@@ -62,7 +67,7 @@ export class UserInfosDialogComponent implements OnInit {
       this.mostRecentJobName = this.currentUser.salaryHistory.salaryInfos[this.currentUser.salaryHistory.salaryInfos.length - 1]?.jobName
       let {baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries} = this.computeSalariesSeries();
 
-      console.log(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries)
+      // console.log(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries)
       this.addLastGraphPointWithTotalYearsOfExperience(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
       this.addSalariesSeriesToDataGraph(baseSalariesSeries, bonusSalariesSeries, stockSalariesSeries, totalSalariesSeries);
     }
@@ -191,17 +196,12 @@ export class UserInfosDialogComponent implements OnInit {
     totalSalariesSeries.push(new Serie(String(salaryHistory.totalYearsOfExperience), lastSalaryInfo.totalSalary, companyName, salaryCurrency, latestJobName, companySector, contractType));
   }
 
-  editOrRemoveExperience() {
-    // this.dialog.open(EditUserInfosComponent, {
-    //   width: '120%',
-    //   height: '100%',
-    //   // data: {selectedUser: selectedUser},
-    //   autoFocus: false,
-    //   panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
-    // });
-    this.dialogRef.close()
-    this.router.navigate(['/edit-user-infos'], {state: {chosenUsernameToEdit: this.currentUser.username}});
+
+  returnAgGridStyleDependingOnBlur() {
+    return globalAgGridStyleDependingOnBlur(this.isLoggedIn, this.chosenUserRowIndex);
   }
 
-
+  hideLegendsBecauseOfBlur() {
+    return globalHideLegendsBecauseOfBlur(this.isLoggedIn, this.chosenUserRowIndex)
+  }
 }

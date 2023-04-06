@@ -65,7 +65,7 @@
           </ag-grid-angular>
         </div>
       </div>
-      <div class="col-xs-5 user-infos-and-ngx-graph-div" *ngIf="currentUser != null">
+      <div class="col-xs-5 user-infos-and-ngx-graph-div" *ngIf="currentUser != null"  [ngStyle]="returnAgGridStyleDependingOnBlur()">
         <div class="col-xs-12" style="margin: 0; padding: 0; ">
           <div class="user-infos">
             <div style="margin-left: 15px; ">
@@ -99,7 +99,7 @@
                 (select)="onSelect($event)"
               >
                 <ng-template #seriesTooltipTemplate let-model="model">
-                  <div>
+                  <div  *ngIf="hideLegendsBecauseOfBlur()">
                     <h3 style="text-align: center; margin-bottom: 0; color:azure">
                       {{model[0]["jobName"]}}
                       {{((model[0]["jobName"] != "" && model[0]["jobName"] != null) && (model[0]["companyName"] != "" && model[0]["companyName"] != null) ? " - " : "") }}
@@ -149,17 +149,10 @@
     </div>
   </div>
 
+  <!-- EXPANDED GRID !!!!!!!!!!!!!!!!!!!!!!!! -->
+
 
   <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && !isUserInfoDivOpen">
-    <!-- Share your experience button-->
-    <!--    <div class="container-fluid">-->
-    <!--      <div class="col-xs-12" style="height: 100%; vertical-align: center;">-->
-    <!--        <div style="text-align: center; font-size: 31px;" *loggedInUserHasNoSalaryHistory>-->
-    <!--          <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">Share your experience !</button>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
     <!-- Convert salaries to currency & currencies-->
     <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
       <div class="col-xs-12">
@@ -175,7 +168,7 @@
 
         <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
           <div class="col-xs-5" style="font-size: 10px;padding: 0;">
-            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 250px; margin-top:0.3%;">
+            <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 350px;">
               <mat-label>
                 <mat-icon>search</mat-icon>
                 Filter by anything
@@ -219,3 +212,8 @@
 <div *isMobile>
   <app-salaries></app-salaries>
 </div>
+
+
+
+
+

@@ -7,6 +7,7 @@ import {TokenStorageService} from "../../../services/TokenStorageService";
 import {MatDialog} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegisterComponent} from "../register/register.component";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 
 @Component({
@@ -40,7 +41,8 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private dialog: MatDialog,
-              private tokenStorageService: TokenStorageService) {
+              private deviceService: DeviceDetectorService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -104,7 +106,7 @@ export class LoginComponent implements OnInit {
 
           })
     } else {
-      if (this.tokenStorageService.getToken() != null && this.tokenStorageService.getToken() != '') {
+      if (this.tokenStorage.getToken() != null && this.tokenStorage.getToken() != '' && this.deviceService.isMobile()) {
         this.router.navigate(['/salaries/view2']).then(() =>
           window.location.reload()
         )

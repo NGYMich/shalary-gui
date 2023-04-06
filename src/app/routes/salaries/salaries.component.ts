@@ -12,7 +12,7 @@ import {CompanyCellRenderer} from "./company-cell-renderer";
 import {JobCellRenderer} from "./job-cell-renderer";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../services/TokenStorageService";
-import {totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/common-variables";
+import {totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/cell-style";
 
 @Component({
   selector: 'app-salaries',

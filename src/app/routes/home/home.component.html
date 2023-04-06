@@ -1,78 +1,100 @@
-<div class="ag-theme-balham, home-text" *isNotMobile>
-  <div class="container-fluid">
-    <div class="row" style="padding-top: 1%; text-align: justify;">
-      <div class="col-lg-12" style="text-align: center">
-        <h1 style="text-align: center; font-size: 30px; margin: 10px">Shalary - Share your experience !</h1>
-        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">
-          View careers and salaries
-        </button>
-      </div>
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8" style="margin-top: 1.5%">
-        <mat-divider></mat-divider>
-        <div class="col-lg-6">
-          <div class="card-component">
-            <div style="text-align: center; ">
-              <h1> Career History </h1>
-              <div class="material-icons" style="font-size: 120px; color: #dddddd"> auto_graph</div>
-            </div>
-            <p [innerHTML]="introductionMessage" style="font-size: 16px;"></p>
-          </div>
+<!--<div class="ag-theme-balham, home-text" *isNotMobile>-->
+<!--  <div class="container-fluid">-->
+<!--    <div class="row" style="padding-top: 1%; text-align: justify;">-->
+<!--      <div class="col-lg-12" style="text-align: center">-->
+<!--        <h1 style="text-align: center; font-size: 30px; margin: 10px">Shalary - Share your experience !</h1>-->
+<!--        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">-->
+<!--          View careers and salaries-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="col-lg-2"></div>-->
+<!--      <div class="col-lg-8" style="margin-top: 1.5%">-->
+<!--        <mat-divider></mat-divider>-->
+<!--        <div class="col-lg-6">-->
+<!--          <div class="card-component">-->
+<!--            <div style="text-align: center; ">-->
+<!--              <h1> Career History </h1>-->
+<!--              <div class="material-icons" style="font-size: 120px; color: #dddddd"> auto_graph</div>-->
+<!--            </div>-->
+<!--            <p [innerHTML]="introductionMessage" style="font-size: 16px;"></p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-6">-->
+<!--          <div class="card-component">-->
+<!--            <div style="text-align: center; ">-->
+<!--              <h1>Salaries</h1>-->
+<!--              <div class="material-icons-outlined" style="font-size: 120px; color: #dddddd;"> auto_stories</div>-->
+<!--            </div>-->
+<!--            <p [innerHTML]="introductionMessage2" style="font-size: 16px;"></p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-2"></div>-->
+<!--    </div>-->
+<!--    <div class="row" style="padding-top: 1%; text-align: justify;">-->
+<!--      <div class="col-lg-2"></div>-->
+<!--      <div class="col-lg-8">-->
+<!--        <mat-divider></mat-divider>-->
+<!--      </div>-->
+<!--      <div class="col-lg-2"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="ag-theme-balham, home-text" *isMobile>-->
+<!--  <div class="container-fluid">-->
+<!--    <div class="row" style="padding-top: 1%; padding-bottom: 7%;text-align: justify; background-color: darkgray; color:white;">-->
+<!--      <div class="col-lg-12" style="text-align: center">-->
+<!--        <h2 style="text-align: center; margin: 10px">Shalary - Share your experience !</h2>-->
+<!--        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">-->
+<!--          View careers and salaries-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="row" style="text-align: justify;">-->
+<!--        <div class="col-lg-4">-->
+<!--          <div class="mobile-card-component">-->
+<!--            <div style="text-align: center; ">-->
+<!--              <h3>Career History</h3>-->
+<!--              <div class="material-icons" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_graph</div>-->
+
+<!--            </div>-->
+<!--            <p [innerHTML]="introductionMessage"></p>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-4">-->
+<!--          <mat-divider></mat-divider>-->
+<!--          <div class="mobile-card-component">-->
+<!--            <div style="text-align: center; ">-->
+<!--              <h3>Salaries</h3>-->
+<!--              <div class="material-icons-outlined" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_stories</div>-->
+<!--            </div>-->
+<!--            <p [innerHTML]="introductionMessage2"></p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="test">
+  <div class="row only-row" *isNotMobile>
+
+    <div class="col-xs-1"></div>
+    <div class="col-xs-5">
+      <div class="card-component">
+        <div>
+          <h1>
+            SHALARY - SALARY SHARING
+          </h1>
+          <h2>
+            WORLD'S HIGHEST RATED #1
+            <br>
+            ANONYMOUS CAREERS SHARING SITE
+          </h2>
         </div>
-        <div class="col-lg-6">
-          <div class="card-component">
-            <div style="text-align: center; ">
-              <h1>Salaries</h1>
-              <div class="material-icons-outlined" style="font-size: 120px; color: #dddddd;"> auto_stories</div>
-            </div>
-            <p [innerHTML]="introductionMessage2" style="font-size: 16px;"></p>
-          </div>
-        </div>
       </div>
-      <div class="col-lg-2"></div>
-    </div>
-    <div class="row" style="padding-top: 1%; text-align: justify;">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
-        <mat-divider></mat-divider>
-      </div>
-      <div class="col-lg-2"></div>
     </div>
   </div>
 </div>
-<div class="ag-theme-balham, home-text" *isMobile>
-  <div class="container-fluid">
-    <div class="row" style="padding-top: 1%; padding-bottom: 7%;text-align: justify; background-color: darkgray; color:white;">
-      <div class="col-lg-12" style="text-align: center">
-        <h2 style="text-align: center; margin: 10px">Shalary - Share your experience !</h2>
-        <button mat-raised-button class="view-experiences-and-salaries-button" (click)="redirectToSalariesPage()">
-          View careers and salaries
-        </button>
-      </div>
-    </div>
 
-    <div class="row" style="text-align: justify;">
-        <div class="col-lg-4">
-          <div class="mobile-card-component">
-            <div style="text-align: center; ">
-              <h3>Career History</h3>
-              <div class="material-icons" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_graph</div>
-
-            </div>
-            <p [innerHTML]="introductionMessage"></p>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <mat-divider></mat-divider>
-          <div class="mobile-card-component">
-            <div style="text-align: center; ">
-              <h3>Salaries</h3>
-              <div class="material-icons-outlined" style="font-size: 70px; margin: 0; color: rgb(0, 0, 0);"> auto_stories</div>
-            </div>
-            <p [innerHTML]="introductionMessage2"></p>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>

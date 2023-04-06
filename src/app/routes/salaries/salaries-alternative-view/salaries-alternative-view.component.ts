@@ -16,11 +16,12 @@ import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-altern
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {RegisterComponent} from "../../authentication/register/register.component";
 import {MatDialog} from "@angular/material/dialog";
-import {AppConstants, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/common-variables";
+import {AppConstants} from "../../global/common-variables";
 import {Location} from "@angular/common";
 import {SalaryInfo} from "../../../model/salaryInfo";
 import {UserInfosDialogComponent} from "../../../user-infos/user-infos-dialog/user-infos-dialog.component";
 import {TipsAndTricksDialogComponent} from "../../../user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component";
+import {getDefaultCellStyle, ROW_INDEX_TO_BLUR, totalSalaryCellStyle, totalYearsOfExperienceCellStyle, globalAgGridStyleDependingOnBlur, globalHideLegendsBecauseOfBlur} from "../../global/cell-style";
 
 
 @Component({
@@ -41,13 +42,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
   forexRates: any;
   tooltipShowDelay = 0;
   tooltipHideDelay = 5000;
-  defaultCellStyle = {
-    'white-space': 'normal',
-    height: '100%',
-    minHeight: '40px',
-    display: 'flex ',
-    'align-items': 'center',
-  };
   salaryHistory: any;
   currentUser: User;
 
@@ -71,6 +65,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
   isMobile: boolean;
   showProgressBar: any = true;
   isUserInfoDivOpen: boolean = true;
+  isLoggedIn: boolean = false;
 
   public activeEntries: any[] = [];
   public chartNames: string[];
@@ -80,25 +75,26 @@ export class SalariesAlternativeViewComponent implements OnInit {
   public yAxisTickFormattingMobile = this.formatSalaryMobile.bind(this);
   userInfosString: string[] = [];
   chosenCountryFromHomePage: any = null;
+  chosenUserRowIndex: any = 0;
 
   constructor(public numberService: NumberService,
               private router: Router,
               private deviceService: DeviceDetectorService,
               private userService: UserService, private forexService: ForexService,
-              private tokenStorage: TokenStorageService,
+              private tokenStorageService: TokenStorageService,
               public dialog: MatDialog,
               private location: Location,
   ) {
 
     Object.assign(this, this.dataGraph);
-    console.log(location.getState())
     Object.entries(location.getState() as Map<any, any>).map(([key, value]) => {
       if (key == "chosenCountry") this.chosenCountryFromHomePage = value;
     })
+
   }
 
-
   ngOnInit(): void {
+    this.isLoggedIn = this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency}
     this.loadMostPopularCountries();
     if (this.chosenCountryFromHomePage != null) {
@@ -108,8 +104,8 @@ export class SalariesAlternativeViewComponent implements OnInit {
       this.loadUsersWithSalaryHistory();
     }
     this.loadForexes();
-  }
 
+  }
 
   private constructUserInfosString() {
     this.userInfosString = []
@@ -326,20 +322,20 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   desktopColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
     {
-      field: 'id', sortable: true, resizable: true, width: 80, filter: 'agNumberColumnFilter', hide: true, cellStyle: this.defaultCellStyle,
+      field: 'id', sortable: true, resizable: true, width: 80, filter: 'agNumberColumnFilter', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
     },
 
     {
       valueGetter: this.currentJobGetter, headerName: 'Job', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRenderer: JobCellRendererAlternativeView, cellStyle: this.defaultCellStyle,
+      cellRenderer: JobCellRendererAlternativeView, cellStyle: params => getDefaultCellStyle(params, this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""),
       autoHeight: true,
       width: 280
     },
     {
       valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter',
       cellRenderer: CompanyCellRendererAlternativeView,
-      cellStyle: () => {
-        let copyVerticalAlignColumn = {...this.defaultCellStyle};
+      cellStyle: params => {
+        let copyVerticalAlignColumn = {...(getDefaultCellStyle(params, this.isLoggedIn))};
         copyVerticalAlignColumn["font-weight"] = '600'
         return copyVerticalAlignColumn;
       },
@@ -349,11 +345,11 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
     {
       field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
-      cellRenderer: LocationCellRenderer, hide: true, cellStyle: this.defaultCellStyle,
+      cellRenderer: LocationCellRenderer, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
     },
 
     {
-      field: 'salaryHistory.salaryCurrency', hide: true, cellStyle: this.defaultCellStyle,
+      field: 'salaryHistory.salaryCurrency', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
     },
     {field: 'salaryHistory.salaryInfos', hide: true,},
     {field: 'salaryHistory', hide: true,},
@@ -366,7 +362,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
       filter: 'agNumberColumnFilter',
       cellRenderer: SalaryCellRenderer,
       cellRendererParams: {selectedCurrency: this.selectedCurrency},
-      cellStyle: params => totalSalaryCellStyle(params)
+      cellStyle: params => totalSalaryCellStyle(params, this.isLoggedIn)
 
     },
     {
@@ -377,34 +373,34 @@ export class SalariesAlternativeViewComponent implements OnInit {
       valueFormatter: this.experienceFormatter,
       filter: 'agTextColumnFilter',
       width: 120,
-      cellStyle: params => totalYearsOfExperienceCellStyle(params),
+      cellStyle: params => totalYearsOfExperienceCellStyle(params, this.isLoggedIn),
     },
     {
-      valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false,
+      valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false,
     },
     {
-      valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
+      valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
     },
     {
-      valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
+      valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, hide: false
     },
     {
-      valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', hide: false
+      valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', hide: false
     },
     {
-      field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: this.defaultCellStyle, hide: false
+      field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), hide: false
     },
     {
-      field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', hide: true
+      field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', hide: true
     },
     {
-      field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', hide: true
+      field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', hide: true
     },
     {
-      field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', hide: false
+      field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', hide: false
     },
     {
-      field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', cellStyle: this.defaultCellStyle, columnGroupShow: 'open', hide: true
+      field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open', hide: true
     },
 
 
@@ -470,12 +466,6 @@ export class SalariesAlternativeViewComponent implements OnInit {
   onGridReady(params): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    // console.log(this.gridApi.forEachNode(node => node.rowIndex ? 0 : node.setSelected(true)))
-
-    // setTimeout(() => {
-    //   this.openUserInfos(null)
-    // }, 1500)
-
   }
 
   openSignupDialog(event): void {
@@ -520,6 +510,7 @@ export class SalariesAlternativeViewComponent implements OnInit {
 
   openUserInfos(event): void {
     this.currentUser = this.gridApi.getSelectedNodes().map(node => node.data)[0];
+    this.chosenUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
     this.updateDataGraph();
   }
 
@@ -542,12 +533,16 @@ export class SalariesAlternativeViewComponent implements OnInit {
   }
 
   openUserInfosDialog(event): void {
+    this.chosenUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
     const selectedNodes = this.gridApi.getSelectedNodes();
     const selectedUser = selectedNodes.map(node => node.data)[0];
     this.dialog.open(UserInfosDialogComponent, {
       width: '100%',
       height: '80%',
-      data: {selectedUser: selectedUser},
+      data: {
+        selectedUser: selectedUser,
+        selectedRowIndex: this.chosenUserRowIndex,
+      },
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
     });
@@ -562,6 +557,14 @@ export class SalariesAlternativeViewComponent implements OnInit {
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
     });
 
+  }
+
+  returnAgGridStyleDependingOnBlur() {
+    return globalAgGridStyleDependingOnBlur(this.isLoggedIn, this.chosenUserRowIndex);
+  }
+
+  hideLegendsBecauseOfBlur() {
+    return globalHideLegendsBecauseOfBlur(this.isLoggedIn, this.chosenUserRowIndex)
   }
 }
 

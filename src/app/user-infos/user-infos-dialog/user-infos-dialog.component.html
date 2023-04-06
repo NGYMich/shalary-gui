@@ -1,4 +1,4 @@
-<div *isNotMobile style="margin: 0; padding: 0; background-color: #dddddd; height: 100%;">
+<div *isNotMobile style="margin: 0; padding: 0; background-color: #dddddd; height: 100%;" [ngStyle]="returnAgGridStyleDependingOnBlur()">
   <div class="user-infos">
     <div>
       <h1>{{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
@@ -32,7 +32,7 @@
         (select)="onSelect($event)"
       >
         <ng-template #seriesTooltipTemplate let-model="model">
-          <div>
+          <div *ngIf="hideLegendsBecauseOfBlur()">
             <h3 style="text-align: center; margin-bottom: 0; color:azure">
               {{model[0].jobName}}
               {{((model[0].jobName != "" && model[0].jobName != null) && (model[0].companyName != "" && model[0].companyName != null) ? " - " : "") }}
@@ -104,7 +104,7 @@
   <div class="col-xs-"></div>
 
 
-  <div #containerRef>
+  <div #containerRef [ngStyle]="returnAgGridStyleDependingOnBlur()">
     <ngx-charts-line-chart
       [view]="[containerRef.offsetWidth, 350]"
       [scheme]="colorScheme"
@@ -122,7 +122,7 @@
       (deactivate)="legendLabelDeactivate($event)"
       (select)="onSelect($event)"
     >
-      <ng-template #seriesTooltipTemplate let-model="model">
+      <ng-template #seriesTooltipTemplate let-model="model" *ngIf="isLoggedIn || chosenUserRowIndex < 4">
         <div style="text-align: left; ">
           <h5 style="margin-bottom: 0; color:bisque; font-size: 15px; width: 150px; overflow: hidden;">{{model[0].jobName}}</h5>
           <h5 style="margin-bottom: 0; color: azure">{{model[0].companyName}}</h5>

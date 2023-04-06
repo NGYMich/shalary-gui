@@ -31,7 +31,7 @@ export class AppComponent {
   ngOnInit() {
     this.loggedUser = this.tokenStorageService.getUser()
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.currentUserIsAdmin = this.admins.includes(JSON.parse(this.loggedUser).username)
+    if ((this.loggedUser != null && this.loggedUser !== "")) this.currentUserIsAdmin = this.admins.includes(JSON.parse(this.loggedUser).username)
     //
     // if (this.isLoggedIn) {
     //   const user = this.tokenStorageService.getUser();
@@ -75,4 +75,6 @@ export class AppComponent {
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
   }
+
+
 }
