@@ -16,7 +16,7 @@
         <br>
         <div formArrayName="salaryInfos" class="salary-infos-div" style="width: 100%;">
 
-          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"  #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
+          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index" #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
                [formGroupName]="pointIndex">
 
 
@@ -93,7 +93,7 @@
             </mat-form-field>
 
 
-            <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button"  #experience>
+            <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button" #experience>
               <mat-icon style="font-size: 30px;">delete</mat-icon>
             </button>
 
@@ -106,80 +106,189 @@
   </div>
 </div>
 
+<!--<div *isMobile>-->
+<!--  <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">-->
+<!--    <div class="col-xs-12">-->
+<!--      <div job-form-line>-->
+<!--        <h1>Work History</h1>-->
+<!--      </div>-->
+<!--      <div class="job-form-line">-->
+<!--        <form [formGroup]="salaryInfosForm">-->
+<!--          <br>-->
+
+<!--          <div formArrayName="salaryInfos">-->
+<!--            <div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"-->
+<!--                 [formGroupName]="pointIndex">-->
+
+<!--              <mat-form-field appearance="outline" style="float: left; width: 65%; margin-right: 5%;">-->
+<!--                <input formControlName="jobName" matTooltip="'Job Name'" matInput/>-->
+<!--                <mat-label class="optional" matTooltip='Job Name'>Job Name</mat-label>-->
+
+<!--              </mat-form-field>-->
+
+<!--              <mat-form-field appearance="outline" style="float: left; width: 25%;">-->
+<!--                <mat-label>Years of XP *</mat-label>-->
+<!--                <input formControlName="yearsOfExperience" matInput/>-->
+<!--              </mat-form-field>-->
+
+
+<!--              <div formGroupName="company">-->
+<!--                <mat-form-field appearance="outline" style="float: left; width: 35%; margin-right: 5%;" class="italic">-->
+<!--                  <input formControlName="name" matInput maxLength="30"/>-->
+<!--                  <mat-label>Company</mat-label>-->
+<!--                </mat-form-field>-->
+<!--              </div>-->
+
+<!--              <div formGroupName="company">-->
+<!--                <mat-form-field appearance="outline" style="float: left; width: 30%; margin-right: 5%;" class="italic">-->
+<!--                  &lt;!&ndash;                  <input formControlName="sector" matInput/>&ndash;&gt;-->
+<!--                  <mat-select formControlName="sector">-->
+<!--                    <mat-option *ngFor="let sector of sectors"-->
+<!--                                [value]="sector">{{sector}}</mat-option>-->
+<!--                  </mat-select>-->
+<!--                  <mat-label>Sector</mat-label>-->
+<!--                </mat-form-field>-->
+<!--              </div>-->
+
+<!--              <mat-form-field appearance="outline" style="float: left;width: 20%;">-->
+<!--                <mat-label>Contract</mat-label>-->
+<!--                <mat-select formControlName="contractType">-->
+<!--                  <mat-option *ngFor="let contractType of contractTypes"-->
+<!--                              [value]="contractType">{{contractType}}</mat-option>-->
+<!--                </mat-select>-->
+<!--              </mat-form-field>-->
+
+
+<!--              &lt;!&ndash;                  <mat-form-field  appearance="outline" class="mobile-job-form-field">&ndash;&gt;-->
+<!--              <mat-form-field appearance="outline" style="width: 28.33%; margin-right: 5%;">-->
+<!--                <input formControlName="baseSalary" matInput/>-->
+<!--                <mat-label>Base Salary</mat-label>-->
+<!--              </mat-form-field>-->
+
+<!--              <mat-form-field appearance="outline" style="width: 28.33%; margin-right: 5%;">-->
+<!--                <input formControlName="bonusSalary" matInput/>-->
+<!--                <mat-label>Bonus Salary</mat-label>-->
+<!--              </mat-form-field>-->
+
+<!--              <mat-form-field appearance="outline" style="width: 28.33%">-->
+<!--                <input formControlName="stockSalary" matInput/>-->
+<!--                <mat-label>Equity</mat-label>-->
+<!--              </mat-form-field>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <button (click)="addNewJobFormLine()" color="add-job" mat-raised-button>Add job experience</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <div *isMobile>
   <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
-    <div class="col-xs-12">
-      <div job-form-line>
-        <h1>Work History</h1>
-      </div>
-      <div class="job-form-line">
-        <form [formGroup]="salaryInfosForm">
-          <br>
 
-          <div formArrayName="salaryInfos">
-            <div style="margin-bottom: 30px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index"
-                 [formGroupName]="pointIndex">
-
-              <mat-form-field appearance="outline" style="float: left; width: 65%; margin-right: 5%;">
-                <input formControlName="jobName" matTooltip="'Job Name'" matInput/>
-                <mat-label class="optional" matTooltip='Job Name'>Job Name</mat-label>
-
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" style="float: left; width: 25%;">
-                <mat-label>Years of XP *</mat-label>
-                <input formControlName="yearsOfExperience" matInput/>
-              </mat-form-field>
-
-
-              <div formGroupName="company">
-                <mat-form-field appearance="outline" style="float: left; width: 35%; margin-right: 5%;" class="italic">
-                  <input formControlName="name" matInput maxLength="30"/>
-                  <mat-label>Company</mat-label>
-                </mat-form-field>
-              </div>
-
-              <div formGroupName="company">
-                <mat-form-field appearance="outline" style="float: left; width: 30%; margin-right: 5%;" class="italic">
-                  <!--                  <input formControlName="sector" matInput/>-->
-                  <mat-select formControlName="sector">
-                    <mat-option *ngFor="let sector of sectors"
-                                [value]="sector">{{sector}}</mat-option>
-                  </mat-select>
-                  <mat-label>Sector</mat-label>
-                </mat-form-field>
-              </div>
-
-              <mat-form-field appearance="outline" style="float: left;width: 20%;">
-                <mat-label>Contract</mat-label>
-                <mat-select formControlName="contractType">
-                  <mat-option *ngFor="let contractType of contractTypes"
-                              [value]="contractType">{{contractType}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-
-
-              <!--                  <mat-form-field  appearance="outline" class="mobile-job-form-field">-->
-              <mat-form-field appearance="outline" style="width: 28.33%; margin-right: 5%;">
-                <input formControlName="baseSalary" matInput/>
-                <mat-label>Base Salary</mat-label>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" style="width: 28.33%; margin-right: 5%;">
-                <input formControlName="bonusSalary" matInput/>
-                <mat-label>Bonus Salary</mat-label>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" style="width: 28.33%">
-                <input formControlName="stockSalary" matInput/>
-                <mat-label>Equity</mat-label>
-              </mat-form-field>
-
-            </div>
-          </div>
-        </form>
-      </div>
-      <button (click)="addNewJobFormLine()" color="add-job" mat-raised-button>Add job experience</button>
+    <h1 style="text-align: center">Career</h1>
+    <div style="text-align: center;  position: sticky;  top: 0; z-index: 9999;">
+      <button (click)="addNewJobFormLine(true)"
+              color="add-job"
+              style=" font-size: 18px;"
+              mat-raised-button>
+        Add an experience
+      </button>
     </div>
+
+    <div class="job-form-line">
+      <form [formGroup]="salaryInfosForm" style="width: 100%;">
+        <br>
+        <div formArrayName="salaryInfos" class="salary-infos-div" style="width: 100%;">
+
+          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index" #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
+               [formGroupName]="pointIndex">
+
+
+            <div class="form-group">
+              <p class="content-divider center mt-3">
+                <span>Experience #{{pointIndex + 1}}</span>
+              </p>
+            </div>
+            <mat-form-field appearance="outline"
+                            style="width: 100%;">
+              <input matTooltip="Job Name | Max Length 50" formControlName="jobName" matInput maxLength="50"/>
+              <mat-label class="optional">Job Name</mat-label>
+              <mat-error>
+                Job Name is required | Min Length 2
+              </mat-error>
+            </mat-form-field>
+
+            <div formGroupName="company">
+              <mat-form-field appearance="outline"
+                              style="width: 100%;"
+                              class="italic">
+                <input matTooltip="Company | Max Length 50" formControlName="name" matInput maxLength="50"/>
+                <mat-label>Company</mat-label>
+              </mat-form-field>
+            </div>
+
+            <div formGroupName="company">
+              <mat-form-field appearance="outline"
+                              style="width: 100%;"
+                              class=" italic">
+                <mat-select formControlName="sector" matTooltip="Sector">
+                  <mat-option *ngFor="let sector of sectors"
+                              [value]="sector">{{sector}}</mat-option>
+                </mat-select>
+                <mat-label>Sector</mat-label>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Contract</mat-label>
+              <mat-select formControlName="contractType" matTooltip="Contract">
+                <mat-option *ngFor="let contractType of contractTypes"
+                            [value]="contractType">{{contractType}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Years of XP *</mat-label>
+              <input matTooltip="Years of XP | Numeric Value < 100" formControlName="yearsOfExperience" matInput maxLength="2"/>
+              <mat-error>
+                Years of XP is required | Numeric Value < 100
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mobile-job-form-field-salary">
+              <input matTooltip="Base Salary" formControlName="baseSalary" maxLength="10" matInput/>
+              <mat-label>Base Salary *</mat-label>
+              <mat-hint align="start">Gross/Year</mat-hint>
+              <mat-error>Base Salary is required | Numeric Value</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mobile-job-form-field-salary italic">
+              <input matTooltip="Bonus Salary" formControlName="bonusSalary" maxLength="10" matInput/>
+              <mat-label>Bonus Salary</mat-label>
+              <mat-hint align="start">Avg/Year</mat-hint>
+              <mat-error>Numeric Value</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mobile-job-form-field-salary italic">
+              <input matTooltip="Equity" formControlName="stockSalary" maxLength="10" matInput/>
+              <mat-label>Equity</mat-label>
+              <mat-hint align="start">Avg/Year</mat-hint>
+              <mat-error>Numeric Value</mat-error>
+            </mat-form-field>
+
+
+            <button (click)="removeJobFormLine(pointIndex)" mat-flat-button type="button" style="width: 100%;  background-color: #dadada; color: darkred;" #experience>
+              Remove this experience
+            </button>
+
+
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
 </div>

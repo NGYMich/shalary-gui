@@ -96,3 +96,7 @@ h1 {
   background: black;
   border-radius: 10px;
 }
+
+.mobile-job-form-field-salary {
+  width: 100%;
+}

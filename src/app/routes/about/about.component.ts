@@ -35,6 +35,8 @@ export class AboutComponent implements OnInit {
     'Add salary / month view',
     'Add gifs for tips and tricks',
     'Add animations for removing view 1 / view 2',
+    'Fix wordbreak in mobile for todolists',
+    'Fix everything in edit user form',
     '------------------------------ Second priority ----------------------------',
     'Add journal info with every event in the day + purge last week',
     'Responsive : add headers in function of screen size?',

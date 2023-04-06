@@ -86,11 +86,10 @@
 
 </div>
 
-<div class="col-xs-12" *isMobile>
+<div class="col-xs-12" *isMobile style="padding-top: 20px;">
   <div *ngIf="userToModify != null || (!isEditUserPage && userToModify == null)">
     <div>
-      <h1 style="float: left;"> Informations</h1>
-      <br style="clear:both"/>
+      <h1 style="text-align: center; margin: 0; padding: 0;"> Informations</h1>
 
       <form [formGroup]="userInformationsForm">
         <mat-form-field appearance="standard" style="width: 45%; margin-right: 5%; float: left;">

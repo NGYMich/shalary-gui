@@ -3,8 +3,6 @@
     <button (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-
-
     <!--    Desktop material navbar-->
     <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -62,11 +60,8 @@
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
         <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openLoginDialog()">Log In</button>
         <button *isNotLoggedIn class="router-pages-button" mat-button (click)="openSignupDialog()">Create account</button>
-
         <!--        <span *isLoggedIn style="font-size: 14px;">Welcome {{loggedUser.username}} !</span>-->
-
       </div>
-
     </div>
   </mat-toolbar>
 
