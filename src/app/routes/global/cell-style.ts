@@ -3,11 +3,11 @@ import {CellClassParams} from "ag-grid-community";
 export let ROW_INDEX_TO_BLUR = 6;
 export let IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER = true;
 
-export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean = false, isView2: boolean = false) {
+export function getDefaultCellStyle(params: CellClassParams, isLoggedIn: boolean = false) {
   let style = {
     'white-space': 'normal',
     height: '100%',
-    'line-height': isView2 ? '30px' : '40px',
+    'line-height': '25px',
     // minHeight: "10px",
     display: 'flex',
     'align-items': 'center',

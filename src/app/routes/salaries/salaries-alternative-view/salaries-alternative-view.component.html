@@ -55,8 +55,14 @@
         <!-- ################# AG GRID ################# -->
         <!-- ########################################### -->
         <div class="col-xs-12 no-margin-no-padding" *ngIf="currentUser != null || chosenCountryFromHomePage != null">
+
+          <div class="div-unlock-by-shalarying ag-grid-unlock" *ngIf="!isLoggedIn">
+            <button mat-raised-button class="unlock-by-shalarying-button" (click)="openSignupDialog($event)">Unlock
+            </button>
+          </div>
+
           <ag-grid-angular
-            style="width: 100%;"
+            style="width: 100%; position: relative;"
             class="ag-theme-alpine-dark"
             [rowData]="rowData"
             [columnDefs]="desktopColumnDefs"
@@ -71,9 +77,14 @@
       </div>
 
 
-      <div class="col-xs-5 user-infos-and-ngx-graph-div" *ngIf="currentUser != null" [ngStyle]="returnAgGridStyleDependingOnBlur()">
-        <div class="col-xs-12 no-margin-no-padding">
-          <div class="user-infos">
+      <div class="col-xs-5 user-infos-and-ngx-graph-div" *ngIf="currentUser != null">
+
+        <div class="div-unlock-by-shalarying user-infos-unlock" *ngIf="!isLoggedIn && selectedUserRowIndex > ROW_INDEX_TO_BLUR">
+          <button mat-raised-button class="unlock-by-shalarying-button" (click)="openSignupDialog($event)">Unlock
+          </button>
+        </div>
+        <div class="col-xs-12 no-margin-no-padding" [ngStyle]="returnAgGridStyleDependingOnBlur()">
+          <div class="user-infos" [ngStyle]="returnAgGridStyleDependingOnBlur()">
             <div style="margin-left: 15px; ">
               <h2 style="margin-top: 15px; margin-bottom: 0;">
                 {{this.currentUser.username != null && this.currentUser.username != '' ? this.currentUser.username : ""}}
@@ -84,8 +95,8 @@
             </div>
 
           </div>
-          <div fxLayout="row">
-            <div #containerRef fxFlex="100%">
+          <div fxLayout="row" [ngStyle]="returnAgGridStyleDependingOnBlur()">
+            <div #containerRef fxFlex="100%" [ngStyle]="returnAgGridStyleDependingOnBlur()">
               <ngx-charts-line-chart
                 [view]="[containerRef.offsetWidth, 400]"
                 [scheme]="colorScheme"
@@ -132,20 +143,20 @@
               </ngx-charts-line-chart>
             </div>
           </div>
-          <ngx-charts-legend
-            class="chart-legend"
-            [data]="chartNames"
-            [title]="'Salary Graphs'"
-            [colors]="colors"
-            (labelActivate)="legendLabelActivate($event)"
-            (labelDeactivate)="legendLabelDeactivate($event)"
-            [activeEntries]="activeEntries"
-            (select)="onSelect($event)"
-            style="margin-bottom: 25px; color: black;"
+          <ngx-charts-legend [ngStyle]="returnAgGridStyleDependingOnBlur()"
+                             class="chart-legend"
+                             [data]="chartNames"
+                             [title]="'Salary Graphs'"
+                             [colors]="colors"
+                             (labelActivate)="legendLabelActivate($event)"
+                             (labelDeactivate)="legendLabelDeactivate($event)"
+                             [activeEntries]="activeEntries"
+                             (select)="onSelect($event)"
+                             style="margin-bottom: 25px; color: black;"
           ></ngx-charts-legend>
         </div>
 
-        <div *ngIf="currentUser.comment" style="white-space:pre-wrap; margin-left: 15px;">
+        <div *ngIf="currentUser.comment" style="white-space:pre-wrap; margin-left: 15px;" [ngStyle]="returnAgGridStyleDependingOnBlur()">
           <h2 style="text-align: left; font-weight: bolder;">
             Comment
           </h2>
@@ -155,13 +166,17 @@
     </div>
   </div>
 
-  <!-- EXPANDED GRID !!!!!!!!!!!!!!!!!!!!!!!! -->
+
+  <!-- --------------- EXPANDED GRID --------------- -->
+  <!-- --------------- EXPANDED GRID --------------- -->
+  <!-- --------------- EXPANDED GRID --------------- -->
+  <!-- --------------- EXPANDED GRID --------------- -->
 
 
   <div class="ag-theme-alpine" *ngIf="(currentUser != null || chosenCountryFromHomePage != null) && !isUserInfoDivOpen">
     <!-- Convert salaries to currency & currencies-->
-    <div fxLayout="row" style="padding-top: 15px; padding-bottom: 0;">
-      <div class="col-xs-12">
+    <div fxLayout="row" style="padding-top: 0; padding-bottom: 0;">
+      <div class="col-xs-12 no-margin-no-padding">
         <div class="col-xs-5" style="margin-left: 0; padding-left: 0;">
           <br>
           <div class="flag-and-currency-title">Convert salaries to currency</div>
@@ -173,7 +188,7 @@
 
 
         <div class="col-xs-12" style=" padding: 0; margin-top: 10px;">
-          <div class="col-xs-5" style="font-size: 10px; padding-right: 0;">
+          <div class="col-xs-5" style="font-size: 10px; padding: 0;">
             <mat-form-field floatLabel="never" appearance="outline" style="font-size: 14px; width: 350px;">
               <mat-label>
                 <mat-icon style="transform: scale(1.2)">search</mat-icon>
@@ -185,7 +200,7 @@
           </div>
           <div class="col-xs-5">
           </div>
-          <div class="col-xs-2 bottom-div-buttons" style="font-size: 10px; padding-right: 0;">
+          <div class="col-xs-2 bottom-div-buttons" style="font-size: 10px;">
             <button mat-raised-button class="user-action-button tips-and-tricks" style="margin-left: 20px;" (click)="openTipsAndTricksDialog()">TIPS</button>
             <button mat-raised-button class="user-action-button expand-shrink" style="margin-left: 20px;" (click)="openOrCloseUserInfosDiv()">SHOW GRAPH</button>
           </div>
