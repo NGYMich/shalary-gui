@@ -240,10 +240,11 @@ export class SalariesAlternativeViewComponent implements OnInit {
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
+    suppressPaginationPanel: !(this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""),
     paginationPageSize: 13,
     domLayout: 'autoHeight',
     rowHeight: 70,
-    suppressMenuHide: true
+    suppressMenuHide: true,
   };
 
 
