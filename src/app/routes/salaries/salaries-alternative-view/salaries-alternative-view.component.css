@@ -6,7 +6,7 @@
   padding: 0;
   outline: none;
   position: sticky;
-  width: 41%;
+  width: 43%;
 }
 
 .user-infos {
@@ -138,7 +138,7 @@
 .user-action-button {
   padding: 0 20px;
   margin: 5px 0 5px 0;
-  height: 30px;
+  height: 35px;
   vertical-align: bottom;
   float: right;
   width: 150px;
@@ -157,4 +157,9 @@
 
 .tips-and-tricks {
   background-color: #dadada;
+}
+
+.no-margin-no-padding {
+  padding: 0;
+  margin: 0;
 }

@@ -71,11 +71,11 @@ export function totalYearsOfExperienceCellStyle(params: CellClassParams, isLogge
 export function blurCellIfIsNotLoggedIn(isLoggedIn: boolean, style: any, rowIndex = 0) {
   if (!isLoggedIn && rowIndex > ROW_INDEX_TO_BLUR) {
     if (IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER) {
-      style['-webkit-filter'] = 'blur(3px)'
-      style['-moz-filter'] = 'blur(3px)'
-      style['-o-filter'] = 'blur(3px)'
-      style['-ms-filter'] = 'blur(3px)'
-      style['filter'] = 'blur(3px)'
+      style['-webkit-filter'] = 'blur(5px)'
+      style['-moz-filter'] = 'blur(5px)'
+      style['-o-filter'] = 'blur(5px)'
+      style['-ms-filter'] = 'blur(5px)'
+      style['filter'] = 'blur(5px)'
     }
   }
 }
@@ -86,11 +86,11 @@ export function globalAgGridStyleDependingOnBlur(isLoggedIn, chosenUserRowIndex)
   else if (chosenUserRowIndex > ROW_INDEX_TO_BLUR) {
     if (IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER) {
       return {
-        '-webkit-filter': 'blur(3px)',
-        '-moz-filter': 'blur(3px)',
-        '-o-filter': 'blur(3px)',
-        '-ms-filter': 'blur(3px)',
-        'filter': 'blur(3px)',
+        '-webkit-filter': 'blur(5px)',
+        '-moz-filter': 'blur(5px)',
+        '-o-filter': 'blur(5px)',
+        '-ms-filter': 'blur(5px)',
+        'filter': 'blur(5px)',
       }
     }
   }
