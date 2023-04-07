@@ -4,7 +4,7 @@
       <div style="text-align: center; font-size: 1.8vw;  position: sticky;  z-index: 10;  width: 100%; " *loggedInUserHasNoSalaryHistory>
         <button mat-raised-button class="share-your-experience-button" (click)="openSignupDialog($event)">
           <!--          Help your fellow by shalarying !-->
-          Help your fellow and unlock everything by shalarying ! <span *ngIf="!showProgressBar">({{this.gridOptions?.api?.getDisplayedRowCount()}} current users)</span>
+          Help your fellow and unlock everything by shalarying ! <span *ngIf="!showProgressBar">({{this.gridOptions?.api?.getDisplayedRowCount()}} current users shared)</span>
         </button>
       </div>
 
@@ -55,7 +55,7 @@
         <!-- ########################################### -->
         <div class="col-xs-12 no-margin-no-padding" *ngIf="currentUser != null || chosenCountryFromHomePage != null">
 
-          <div class="div-unlock-by-shalarying ag-grid-unlock" *ngIf="!isLoggedIn" [ng>
+          <div class="div-unlock-by-shalarying ag-grid-unlock" *ngIf="!isLoggedIn">
             <button mat-raised-button class="unlock-by-shalarying-button" (click)="openSignupDialog($event)">
               Unlock
             </button>
