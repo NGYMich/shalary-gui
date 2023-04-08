@@ -212,6 +212,11 @@
         <!-- ################# AG GRID ################# -->
         <!-- ########################################### -->
         <div class="col-xs-12 no-margin-no-padding" *ngIf="currentUser != null || chosenCountryFromHomePage != null">
+          <div class="div-unlock-by-shalarying ag-grid-unlock" *ngIf="!isLoggedIn">
+            <button mat-raised-button class="unlock-by-shalarying-button" (click)="openSignupDialog($event)">
+              Unlock
+            </button>
+          </div>
           <ag-grid-angular
             style="width: 100%;"
             class="ag-theme-alpine-dark"
