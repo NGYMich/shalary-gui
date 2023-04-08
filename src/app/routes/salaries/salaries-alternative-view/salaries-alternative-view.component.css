@@ -35,7 +35,7 @@
 }
 
 .ag-theme-alpine-dark {
-  --ag-row-border-style: 0px;
+  --ag-row-border-style: 1px solid whitesmoke;
   /*--ag-borders: none;*/
 }
 
