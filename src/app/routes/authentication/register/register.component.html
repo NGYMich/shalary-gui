@@ -49,7 +49,7 @@
         <button mat-button color="accent" style="width: 100%; height: 40px; background-color: royalblue; color:white;">Create Account</button>
       </div>
 
-      <div style="font-size: 14px;; margin-bottom: 15px;">
+      <div style="font-size: 14px; margin-bottom: 15px; ">
         Already have an account ? <a href="javascript:void(0);" (click)="redirectToLogin()">Log in</a>
       </div>
       <div class="form-group">
@@ -83,7 +83,7 @@
       <h1>Welcome</h1>
       <h3>Create an account to continue to Shalary</h3>
     </div>
-    <form *ngIf="!isSuccessful" name="form" [formGroup]="userInformationsForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
+    <form *ngIf="!isSuccessful" name="form" [formGroup]="userInformationsForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate style="color: black;">
       <mat-form-field appearance="outline" class="form-field" floatLabel="never">
         <input  matInput [formControl]="usernameFormControl" placeholder="Username" #username>
         <mat-error *ngIf="usernameFormControl.hasError('required')">
@@ -105,7 +105,7 @@
       <mat-form-field appearance="outline" class="form-field">
         <input [type]="showPassword ? 'text' : 'password'" matInput [formControl]="passwordFormControl" minlength=4 placeholder="Password">
         <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        <mat-hint align="start">Password must be at least 4 characters</mat-hint>
+        <mat-hint align="start" style="color: white;">Password must be at least 4 characters</mat-hint>
         <mat-error *ngIf="passwordFormControl.hasError('minlength')">
           Password must be at least 4 characters
         </mat-error>
@@ -125,7 +125,7 @@
         <button mat-button color="accent" style="width: 100%; height: 40px; background-color: royalblue; color:white;">Create Account</button>
       </div>
 
-      <div style="font-size: 14px;; margin-bottom: 15px;">
+      <div style="font-size: 14px;; margin-bottom: 15px; color: white;">
         Already have an account ? <a href="javascript:void(0);" (click)="redirectToLogin()">Log in</a>
       </div>
       <div class="form-group">

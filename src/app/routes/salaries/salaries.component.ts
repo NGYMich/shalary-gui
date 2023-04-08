@@ -295,7 +295,7 @@ export class SalariesComponent implements OnInit {
   }
 
   redirectToAddUserExperienceRoute(event): void {
-    this.router.navigate(['/add-user-infos'])
+    this.router.navigate(['/register'])
   }
 
   onFilterTextBoxChanged() {
