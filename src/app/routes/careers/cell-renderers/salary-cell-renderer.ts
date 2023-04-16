@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ICellEditorAngularComp, ICellRendererAngularComp} from "ag-grid-angular";
-import {NumberService} from "../../services/NumberService";
+import {NumberService} from "../../../services/NumberService";
 import {ICellRendererParams} from "ag-grid-community";
 
 @Component({

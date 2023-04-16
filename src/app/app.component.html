@@ -32,8 +32,8 @@
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu" class="router-pages-button-2">
-          <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view1">Graphical View</button>
-          <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/salaries/view2">Data View</button>
+          <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/careers/graphical-view">Graphical View</button>
+          <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/careers/data-view">Data View</button>
         </mat-menu>
 
 
@@ -81,7 +81,7 @@
         <a mat-button *isLoggedIn (click)="logOut(true)">Log Out</a>
 
 
-        <a mat-button routerLink="/salaries/view2" style="margin-top: 10%;">Careers and Salaries</a>
+        <a mat-button routerLink="/careers/data-view" style="margin-top: 10%;">Careers and Salaries</a>
 
         <a mat-button routerLink="/articles">Articles</a>
         <a mat-button routerLink="/faq">F.A.Q</a>

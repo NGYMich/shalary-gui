@@ -5,14 +5,14 @@ import {ColDef, ColGroupDef, GridOptions} from "ag-grid-community";
 import {UserService} from "../../../services/UserService";
 import {ForexService} from "../../../services/ForexService";
 import {Router} from "@angular/router";
-import {LocationCellRenderer} from "../location-cell-renderer";
-import {SalaryCellRenderer} from "../salary-cell-renderer";
+import {LocationCellRenderer} from "../cell-renderers/location-cell-renderer";
+import {SalaryCellRenderer} from "../cell-renderers/salary-cell-renderer";
 import {ColorHelper, LegendPosition, ScaleType} from "@swimlane/ngx-charts";
 import {NumberService} from "../../../services/NumberService";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {Serie} from "../../../model/serie";
-import {JobCellRendererAlternativeView} from "./job-cell-renderer-alternative-view";
-import {CompanyCellRendererAlternativeView} from "./company-cell-renderer-alternative-view";
+import {JobCellRendererAlternativeView} from "../cell-renderers/job-cell-renderer-alternative-view";
+import {CompanyCellRendererAlternativeView} from "../cell-renderers/company-cell-renderer-alternative-view";
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {RegisterComponent} from "../../authentication/register/register.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -26,10 +26,10 @@ import {getDefaultCellStyle, globalAgGridStyleDependingOnBlur, globalHideLegends
 
 @Component({
   selector: 'app-salaries-alternative-view',
-  templateUrl: './salaries-alternative-view.component.html',
-  styleUrls: ['./salaries-alternative-view.component.css'],
+  templateUrl: './careers-graphical-view.html',
+  styleUrls: ['./careers-graphical-view.css'],
 })
-export class SalariesAlternativeViewComponent implements OnInit {
+export class CareersGraphicalView implements OnInit {
 
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;

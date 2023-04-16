@@ -117,7 +117,7 @@ export class EditUserInfosComponent implements OnInit {
   }
 
   redirectToSalariesPage() {
-    this.router.navigate(['/salaries/view1'])
+    this.router.navigate(['/careers/graphical-view'])
   }
 
 

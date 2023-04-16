@@ -48,11 +48,11 @@ export class AppComponent {
   logOut(isMobile: boolean = false) {
     this.tokenStorageService.signOut()
     if (!isMobile) {
-      this.router.navigate(['/salaries/view1']).then(() =>
+      this.router.navigate(['/careers/graphical-view']).then(() =>
         window.location.reload()
       )
     } else {
-      this.router.navigate(['/salaries/view2']).then(() =>
+      this.router.navigate(['/careers/data-view']).then(() =>
         window.location.reload()
       )
     }

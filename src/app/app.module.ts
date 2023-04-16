@@ -7,7 +7,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import {MatButtonModule} from "@angular/material/button";
-import {SalariesComponent} from './routes/salaries/salaries.component';
+import {CareersDataViewComponent} from './routes/careers/careers-data-view/careers-data-view.component';
 import {DataComponent} from './routes/data/data.component';
 import {AboutComponent} from './routes/about/about.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -19,33 +19,32 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
-import {SalaryCellRenderer} from "./routes/salaries/salary-cell-renderer";
+import {SalaryCellRenderer} from "./routes/careers/cell-renderers/salary-cell-renderer";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {LocationCellRenderer} from "./routes/salaries/location-cell-renderer";
+import {LocationCellRenderer} from "./routes/careers/cell-renderers/location-cell-renderer";
 import {SafePipe} from "./util/SafePipe";
 import {EditUserInfosComponent} from './routes/edit-user-infos/edit-user-infos.component';
 import {FilterPipe} from "./routes/edit-user-infos/FilterPipe";
 import {HighlightDirective} from "./routes/edit-user-infos/HighlightDirective";
 import {DeleteUserDialogComponent} from './user-infos/delete-user-dialog/delete-user-dialog.component';
-import {CompanyCellRenderer} from "./routes/salaries/company-cell-renderer";
+import {CompanyCellRenderer} from "./routes/careers/cell-renderers/company-cell-renderer";
 import {TestComponent} from './routes/test/test.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {JobCellRenderer} from "./routes/salaries/job-cell-renderer";
+import {JobCellRenderer} from "./routes/careers/cell-renderers/job-cell-renderer";
 import {IsMobileDirective} from "./routes/global/is-mobile-directive";
 import {IsNotMobileDirective} from "./routes/global/is-not-mobile-directive";
-import {CustomTooltip} from "./routes/salaries/custom-tooltip.component";
-import {AddUserInfosComponent} from './routes/add-user-infos/add-user-infos.component';
+import {CustomTooltip} from "./routes/careers/cell-renderers/custom-tooltip.component";
 import {WorkHistoryFormComponent} from './routes/edit-user-infos/work-history-form/work-history-form-component';
 import {UserInformationsFormComponent} from './routes/edit-user-infos/user-informations-form/user-informations-form-component';
 import {UserInputErrorDialogComponent} from './user-infos/user-input-error-dialog/user-input-error-dialog.component';
-import {SalariesAlternativeViewComponent} from './routes/salaries/salaries-alternative-view/salaries-alternative-view.component';
-import {JobCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/job-cell-renderer-alternative-view";
-import {CompanyCellRendererAlternativeView} from "./routes/salaries/salaries-alternative-view/company-cell-renderer-alternative-view";
+import {CareersGraphicalView} from './routes/careers/careers-graphical-view/careers-graphical-view';
+import {JobCellRendererAlternativeView} from "./routes/careers/cell-renderers/job-cell-renderer-alternative-view";
+import {CompanyCellRendererAlternativeView} from "./routes/careers/cell-renderers/company-cell-renderer-alternative-view";
 import {MatMenuModule} from "@angular/material/menu";
 import {AuthenticationComponent} from './routes/authentication/authentication.component';
 import {LoginComponent} from './routes/authentication/login/login.component';
@@ -68,12 +67,13 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {AgGridModule} from "ag-grid-angular";
 import {TipsAndTricksDialogComponent} from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
 import {UserFeedbacksComponent} from './routes/user-feedbacks/user-feedbacks.component';
+import { SalariesComponent } from './salaries/salaries.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
 
-  {path: 'salaries/view2', component: SalariesComponent},
-  {path: 'salaries/view1', component: SalariesAlternativeViewComponent},
+  {path: 'careers/data-view', component: CareersDataViewComponent},
+  {path: 'careers/graphical-view', component: CareersGraphicalView},
 
   {path: 'data', component: DataComponent},
   {path: 'articles', component: ArticlesComponent},
@@ -88,8 +88,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
 
   // redirect
-  {path: 'salaries', component: SalariesAlternativeViewComponent},
-  {path: '**', component: SalariesAlternativeViewComponent},
+  {path: 'salaries', component: CareersGraphicalView},
+  {path: '**', component: CareersGraphicalView},
 
 ];
 
@@ -97,7 +97,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    SalariesComponent,
+    CareersDataViewComponent,
     DataComponent,
     AboutComponent,
     UserInfosDialogComponent,
@@ -116,11 +116,10 @@ const routes: Routes = [
     IsMobileDirective,
     IsNotMobileDirective,
     CustomTooltip,
-    AddUserInfosComponent,
     WorkHistoryFormComponent,
     UserInformationsFormComponent,
     UserInputErrorDialogComponent,
-    SalariesAlternativeViewComponent,
+    CareersGraphicalView,
     AuthenticationComponent,
     LoginComponent,
     RegisterComponent,
@@ -137,6 +136,7 @@ const routes: Routes = [
     OpenCloseComponent,
     TipsAndTricksDialogComponent,
     UserFeedbacksComponent,
+    SalariesComponent,
   ],
   imports: [
     BrowserModule,

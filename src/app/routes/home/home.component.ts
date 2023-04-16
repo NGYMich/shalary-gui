@@ -57,9 +57,9 @@ export class HomeComponent implements OnInit {
 
   navigateToSalaries(isMobile: boolean = false) {
     if (!isMobile) {
-      this.router.navigate(['/salaries/view1'], {state: {chosenCountry: this.countriesControl.value}})
+      this.router.navigate(['/careers/graphical-view'], {state: {chosenCountry: this.countriesControl.value}})
     } else {
-      this.router.navigate(['/salaries/view2'], {state: {chosenCountry: this.countriesControl.value}})
+      this.router.navigate(['/careers/data-view'], {state: {chosenCountry: this.countriesControl.value}})
     }
   }
 

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserInfosComponent } from './add-user-infos.component';
+import { CareersDataViewComponent } from './careers-data-view.component';
 
-describe('AddUserInfosComponent', () => {
-  let component: AddUserInfosComponent;
-  let fixture: ComponentFixture<AddUserInfosComponent>;
+describe('SalariesComponent', () => {
+  let component: CareersDataViewComponent;
+  let fixture: ComponentFixture<CareersDataViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddUserInfosComponent ]
+      declarations: [ CareersDataViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserInfosComponent);
+    fixture = TestBed.createComponent(CareersDataViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

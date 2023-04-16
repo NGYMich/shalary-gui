@@ -1,25 +1,25 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "../../services/UserService";
-import {User} from "../../model/user";
+import {UserService} from "../../../services/UserService";
+import {User} from "../../../model/user";
 import {ColDef, ColGroupDef, GridOptions} from "ag-grid-community";
 import {MatDialog} from "@angular/material/dialog";
-import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
-import {SalaryCellRenderer} from "./salary-cell-renderer";
-import {LocationCellRenderer} from "./location-cell-renderer";
-import {Country} from "../../model/country";
-import {ForexService} from "../../services/ForexService";
-import {CompanyCellRenderer} from "./company-cell-renderer";
-import {JobCellRenderer} from "./job-cell-renderer";
+import {UserInfosDialogComponent} from "../../../user-infos/user-infos-dialog/user-infos-dialog.component";
+import {SalaryCellRenderer} from "../cell-renderers/salary-cell-renderer";
+import {LocationCellRenderer} from "../cell-renderers/location-cell-renderer";
+import {Country} from "../../../model/country";
+import {ForexService} from "../../../services/ForexService";
+import {CompanyCellRenderer} from "../cell-renderers/company-cell-renderer";
+import {JobCellRenderer} from "../cell-renderers/job-cell-renderer";
 import {Router} from "@angular/router";
-import {TokenStorageService} from "../../services/TokenStorageService";
-import {getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../global/cell-style";
+import {TokenStorageService} from "../../../services/TokenStorageService";
+import {getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/cell-style";
 
 @Component({
   selector: 'app-salaries',
-  templateUrl: './salaries.component.html',
-  styleUrls: ['./salaries.component.css']
+  templateUrl: './careers-data-view.component.html',
+  styleUrls: ['./careers-data-view.component.css']
 })
-export class SalariesComponent implements OnInit {
+export class CareersDataViewComponent implements OnInit {
 
   mostPopularCountries: Country[] = [];
   @Input() rowData: any;

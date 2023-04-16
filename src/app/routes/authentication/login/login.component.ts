@@ -107,11 +107,11 @@ export class LoginComponent implements OnInit {
           })
     } else {
       if (this.tokenStorage.getToken() != null && this.tokenStorage.getToken() != '' && this.deviceService.isMobile()) {
-        this.router.navigate(['/salaries/view2']).then(() =>
+        this.router.navigate(['/careers/data-view']).then(() =>
           window.location.reload()
         )
       } else {
-        this.router.navigate(['/salaries/view1']).then(() =>
+        this.router.navigate(['/careers/graphical-view']).then(() =>
           window.location.reload()
         )
       }

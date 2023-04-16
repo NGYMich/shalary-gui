@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SalariesAlternativeViewComponent } from './salaries-alternative-view.component';
+import { CareersGraphicalView } from './careers-graphical-view';
 
 describe('SalariesAlternativeViewComponent', () => {
-  let component: SalariesAlternativeViewComponent;
-  let fixture: ComponentFixture<SalariesAlternativeViewComponent>;
+  let component: CareersGraphicalView;
+  let fixture: ComponentFixture<CareersGraphicalView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SalariesAlternativeViewComponent ]
+      declarations: [ CareersGraphicalView ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SalariesAlternativeViewComponent);
+    fixture = TestBed.createComponent(CareersGraphicalView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
