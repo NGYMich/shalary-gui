@@ -137,8 +137,8 @@ export class SalariesComponent implements OnInit {
           field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, autoHeight: true,
           cellStyle: params => totalYearsOfExperienceCellStyle(params.data.yearsOfExperience, this.isLoggedIn)
         },
-        {field: 'companyName', width: 180, headerName: 'Company', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {field: 'companySector', width: 180, headerName: 'Sector', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {field: 'companyName', width: 250, headerName: 'Company', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {field: 'companySector', width: 250, headerName: 'Sector', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
         {field: 'username', sortable: true, width: 150, resizable: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn), columnGroupShow: 'open'},
         {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
         {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},

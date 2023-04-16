@@ -69,7 +69,8 @@
   border-radius: 0;
   border: 0;
   border-right: 1px solid lightgray;
-  font-size: 15px;
+  border-top: 1px solid lightgray;
+  /*font-size: 15px;*/
 }
 
 :host ::ng-deep div.mat-form-field-outline-start {
@@ -90,7 +91,7 @@
 :host ::ng-deep .mat-form-field-wrapper {
   margin: 0 !important;
   padding: 0 !important;
-  font-size: 15px;
+  /*font-size: 15px;*/
 }
 
 ::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
