@@ -170,14 +170,15 @@ export class SalariesComponent implements OnInit {
   selectedSalaryRanges: any;
   selectedSectors: any;
   selectedEducations: any;
+  selectedContracts: any;
+  selectedCompanies: any;
+  selectedJobs: any;
+
   educations: any = commonEducationLevels;
   contracts: any = commonContractTypes;
   sectors: any = commonSectors.slice(1);
   salaryRanges: any = [' <30 000€', '>= 30 000€, < 60 000€', '>= 60 000€, < 100 000€', '>= 100 000€']
-  selectedContracts: any;
-  selectedCompanies: any;
   companies: any;
-  selectedJobs: any;
   jobNames: any;
 
 
@@ -192,6 +193,24 @@ export class SalariesComponent implements OnInit {
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
     })
+  }
+
+  searchWithCriteria() {
+    this.salaryService.getSalariesWithSearchCriteria({
+
+        locations: this.selectedCountries,
+        jobs: this.selectedJobs,
+        sectors: this.selectedSectors,
+        companies: this.selectedCompanies,
+        salaryRanges: this.selectedSalaryRanges,
+        educationLevels: this.selectedEducations,
+        contractTypes: this.selectedContracts,
+
+      }
+    ).subscribe((salaries: User[]) => {
+      this.rowData = salaries;
+    })
+
   }
 
 

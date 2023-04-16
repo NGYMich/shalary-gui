@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {GridOptions} from "ag-grid-community";
+import {User} from "../model/user";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -24,6 +24,12 @@ export class SalaryService {
   getSalaries(): any {
     console.log('called', this.rootURL + '/salaries/salaries');
     return this.http.get(this.rootURL + '/salaries/salaries');
+  }
+
+  getSalariesWithSearchCriteria(salarySearchCriteriaRequest): any {
+    console.log('called', this.rootURL + '/salaries/salariesWithSearchCriteria');
+    const body = JSON.stringify(salarySearchCriteriaRequest);
+    return this.http.post<User>(this.rootURL + '/salaries/salariesWithSearchCriteria', body, {'headers': {'content-type': 'application/json'}})
   }
 
   getJobs(): any {

@@ -48,12 +48,6 @@ export class UserService {
     return this.http.get(this.rootURL + '/mostPopularCountries');
   }
 
-  addUser(user: User): any {
-    const body = JSON.stringify(user);
-    const headers = {'content-type': 'application/json'};
-    return this.http.post<User>(this.rootURL + '/user', body, {'headers': headers})
-  }
-
   modifyUser(user: User): any {
     console.log('modifying user', user.username + ' with id', user.id)
     const body = JSON.stringify(user);
