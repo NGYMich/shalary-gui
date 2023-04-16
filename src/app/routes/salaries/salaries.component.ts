@@ -12,6 +12,8 @@ import {SalaryService} from "../../services/SalaryService";
 import {RedirectService} from "../../services/RedirectService";
 import {LocationCellRenderer} from "../careers/cell-renderers/location-cell-renderer";
 import {SalaryCellRenderer} from "../careers/cell-renderers/salary-cell-renderer";
+import {LocationService} from "../../services/LocationService";
+import {commonContractTypes, commonEducationLevels, commonSectors} from "../global/common-variables";
 
 @Component({
   selector: 'app-salaries',
@@ -46,9 +48,10 @@ export class SalariesComponent implements OnInit {
       return this.isLoggedIn && !IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER ? params.value : "";
     }
   };
+  allCountriesWithTheirFlags: Country[];
 
   constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
-              private tokenStorageService: TokenStorageService, public salaryService: SalaryService, public redirectService: RedirectService) {
+              private tokenStorageService: TokenStorageService, public salaryService: SalaryService, public redirectService: RedirectService, private locationService: LocationService) {
   }
 
 
@@ -56,7 +59,10 @@ export class SalariesComponent implements OnInit {
     this.isLoggedIn = this.tokenStorageService.getUser() != null && this.tokenStorageService.getUser() != ""
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency, isSalaryComponent: true}
     this.loadSalaries();
+    this.loadJobs()
+    this.loadCompanies()
     this.loadForexes();
+    this.loadCountriesWithFlag()
   }
 
   onGridReady(params): void {
@@ -68,6 +74,18 @@ export class SalariesComponent implements OnInit {
   loadSalaries() {
     this.salaryService.getSalaries().subscribe((salaries: User[]) => {
       this.rowData = salaries;
+    })
+  }
+
+  loadJobs() {
+    this.salaryService.getJobs().subscribe((jobs: User[]) => {
+      this.jobNames = jobs;
+    })
+  }
+
+  loadCompanies() {
+    this.salaryService.getCompanies().subscribe((companies: User[]) => {
+      this.companies = companies;
     })
   }
 
@@ -148,11 +166,33 @@ export class SalariesComponent implements OnInit {
     },
 
   ];
+  selectedCountries: any;
+  selectedSalaryRanges: any;
+  selectedSectors: any;
+  selectedEducations: any;
+  educations: any = commonEducationLevels;
+  contracts: any = commonContractTypes;
+  sectors: any = commonSectors.slice(1);
+  salaryRanges: any = [' <30 000€', '>= 30 000€, < 60 000€', '>= 60 000€, < 100 000€', '>= 100 000€']
+  selectedContracts: any;
+  selectedCompanies: any;
+  companies: any;
+  selectedJobs: any;
+  jobNames: any;
+
 
   applyNewCurrencySelected(currency: string) {
     this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
     this.gridOptions.context = {selectedCurrency: this.selectedCurrency, isSalaryComponent: true}
     this.gridApi.refreshCells(this.gridApi.columns);
+    console.log(this.selectedCountries)
   }
+
+  private loadCountriesWithFlag() {
+    this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
+      this.allCountriesWithTheirFlags = data
+    })
+  }
+
 
 }

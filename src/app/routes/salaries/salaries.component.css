@@ -57,16 +57,52 @@
 }
 
 
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white;
-  border-radius: 10px;
-  color: #121212;
-}
+/*.mat-form-field-appearance-outline .mat-form-field-outline {*/
+/*  background-color: white;*/
+/*  border-radius: 0;*/
+/*  color: #121212;*/
+/*}*/
 
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white !important;
-  border-radius: 10px;
+  background-color: #f1f1f1 !important;
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid lightgray;
+  font-size: 15px;
+}
+
+:host ::ng-deep div.mat-form-field-outline-start {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-outline-gap {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-outline-end {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 15px;
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background-color: palegoldenrod;
+}
+
+::ng-deep .mat-pseudo-checkbox::after {
+  color: black;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: black;
 }
 
 /*MOBILE*/

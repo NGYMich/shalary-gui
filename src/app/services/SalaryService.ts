@@ -26,6 +26,16 @@ export class SalaryService {
     return this.http.get(this.rootURL + '/salaries/salaries');
   }
 
+  getJobs(): any {
+    console.log('called', this.rootURL + '/salaries/jobs');
+    return this.http.get(this.rootURL + '/salaries/jobs');
+  }
+
+  getCompanies(): any {
+    console.log('called', this.rootURL + '/salaries/companies');
+    return this.http.get(this.rootURL + '/salaries/companies');
+  }
+
   filterByCountry(name: string, isFilteredByPopularCountry, gridApi) {
     if (isFilteredByPopularCountry && gridApi.getFilterInstance('location').appliedModel.filter == name) {
       gridApi.destroyFilter('location');

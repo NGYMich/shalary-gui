@@ -3,16 +3,86 @@
     <div class="row">
 
 
-      <div class="col-xs-12" style="height: 100%; vertical-align: center">
+      <div class="col-xs-12" style="height: 100%; vertical-align: center; padding-top: 20px;">
 
 
-        <div style="text-align: center; font-size: 1.8vw;">
+        <div style="text-align: center; vertical-align: middle;  padding: 10px;     align-items: center;">
+          <mat-form-field appearance="outline">
+            <mat-label>Countries</mat-label>
+            <mat-select multiple [(ngModel)]="selectedCountries" class="mat-primary">
+              <mat-option *ngFor="let country of allCountriesWithTheirFlags" [value]="country.name">
+                <img aria-hidden [src]="country.flag.valueOf() | safe:'resourceUrl'" height="25" width="35" onerror="this.onerror=null; this.remove();">
+                <span style="font-size: 14px;"> {{country.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sectors</mat-label>
+            <mat-select multiple [(ngModel)]="selectedSectors">
+              <mat-option *ngFor="let sector of sectors" [value]="sector">
+                {{sector}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Jobs</mat-label>
+            <mat-select multiple [(ngModel)]="selectedJobs">
+              <mat-option *ngFor="let jobName of jobNames" [value]="jobName">
+                {{jobName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Companies</mat-label>
+            <mat-select multiple [(ngModel)]="selectedCompanies">
+              <mat-option *ngFor="let company of companies" [value]="company">
+                {{company}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Salary Ranges</mat-label>
+            <mat-select multiple [(ngModel)]="selectedSalaryRanges">
+              <mat-option *ngFor="let salaryRange of salaryRanges" [value]="salaryRange">
+                {{salaryRange}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Contract Types</mat-label>
+            <mat-select multiple [(ngModel)]="selectedContracts">
+              <mat-option *ngFor="let contract of contracts" [value]="contract">
+                {{contract}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Education</mat-label>
+            <mat-select multiple [(ngModel)]="selectedEducations">
+              <mat-option *ngFor="let education of educations" [value]="education">
+                {{education}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div style="text-align: center; font-size: 1.8vw">
           <button mat-raised-button class="share-your-experience-button" *loggedInUserHasNoSalaryHistory (click)="redirectService.redirectToRegisterRoute($event)">
             <!--            Help your fellow by shalarying !-->
             Help your fellow and unlock everything by shalarying !
           </button>
-          <br>
-          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 45%; margin-top:0.3%;">
+          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 45%; padding-top: 0.3%;">
             <mat-label style="text-align: left; display: block; width: auto;">
               <mat-icon>search</mat-icon>
               Filter by anything (columns are also filterable by using the button next to the columns' names!)
