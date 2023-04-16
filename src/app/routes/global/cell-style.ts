@@ -29,7 +29,7 @@ export function totalSalaryCellStyle(params: CellClassParams, isLoggedIn: boolea
 
   blurCellIfIsNotLoggedIn(isLoggedIn, style, params.rowIndex);
 
-  let salary = params.value;
+  let salary = params.value != null ? params.value : params;
   if (salary < 3)
     style["background-color"] = ''
   else if (salary < 20000)
@@ -50,8 +50,7 @@ export function totalSalaryCellStyle(params: CellClassParams, isLoggedIn: boolea
 export function totalYearsOfExperienceCellStyle(params: CellClassParams, isLoggedIn: boolean = false) {
   let style = {height: '100%', display: 'flex ', 'align-items': 'center', 'background-color': '', color: 'black',};
   blurCellIfIsNotLoggedIn(isLoggedIn, style, params.rowIndex);
-  let experience = params.value;
-
+  let experience = params.value != null ? params.value : params;
   if (experience < 3)
     style["background-color"] = '#dadada'
   else if (experience < 6)

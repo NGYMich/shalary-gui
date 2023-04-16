@@ -67,7 +67,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {AgGridModule} from "ag-grid-angular";
 import {TipsAndTricksDialogComponent} from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
 import {UserFeedbacksComponent} from './routes/user-feedbacks/user-feedbacks.component';
-import { SalariesComponent } from './salaries/salaries.component';
+import { SalariesComponent } from './routes/salaries/salaries.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -88,7 +88,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
 
   // redirect
-  {path: 'salaries', component: CareersGraphicalView},
+  {path: 'salaries', component: SalariesComponent},
   {path: '**', component: CareersGraphicalView},
 
 ];

@@ -28,9 +28,13 @@
 
       <div fxFlex fxLayoutAlign="center center">
 
-        <button mat-button [matMenuTriggerFor]="menu" class="router-pages-button">Careers and Salaries
+        <button mat-button [matMenuTriggerFor]="menu" class="router-pages-button">Careers
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
+
+        <button class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/salaries">Salaries</button>
+
+
         <mat-menu #menu="matMenu" class="router-pages-button-2">
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/careers/graphical-view">Graphical View</button>
           <button mat-menu-item class="dropdown-router-pages-button careers-and-salaries" routerLinkActive="active_route" routerLink="/careers/data-view">Data View</button>

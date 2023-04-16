@@ -19,12 +19,6 @@ export class SalaryCellRenderer implements ICellRendererAngularComp {
   }
 
   agInit(params: any): void {
-    this.params = params;
-    this.data = params?.data
-
-    let salaryCurrency = this.data.salaryHistory.salaryCurrency;
-    let salaryAmount = params?.value;
-
     let pairSymbols = {
       'EUR': '€',
       'USD': '$',
@@ -34,16 +28,29 @@ export class SalaryCellRenderer implements ICellRendererAngularComp {
       'AUD': 'AU$',
       'CAD': 'C$'
     }
-
-    if (params.context.selectedCurrency == '' || params.context.selectedCurrency == 'DEFAULT' ) {
-      this.renderedSalaryWithCurrency = salaryAmount == 0 ? null : this.data.salaryHistory.salaryInfos.length > 0 ?
-        (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + this.numberService.formatCurrency(salaryCurrency))
-        : null;
+    this.params = params;
+    this.data = params?.data
+    let salaryAmount = params.value;
+    let salaryCurrency = params.context.isSalaryComponent ? this.data.currency : this.data.salaryHistory.salaryCurrency;
+    if (params.context.isSalaryComponent) {
+      if (params.context.selectedCurrency == '' || params.context.selectedCurrency == 'DEFAULT' ) {
+        this.renderedSalaryWithCurrency = (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + this.numberService.formatCurrency(salaryCurrency))
+      } else {
+        this.renderedSalaryWithCurrency = (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + pairSymbols[params.context.selectedCurrency])
+      }
     } else {
-      this.renderedSalaryWithCurrency = salaryAmount == 0 ? null : this.data.salaryHistory.salaryInfos.length > 0 ?
-        (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + pairSymbols[params.context.selectedCurrency])
-        : null;
+      if (params.context.selectedCurrency == '' || params.context.selectedCurrency == 'DEFAULT' ) {
+        this.renderedSalaryWithCurrency = salaryAmount == 0 ? null : this.data.salaryHistory.salaryInfos.length > 0 ?
+          (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + this.numberService.formatCurrency(salaryCurrency))
+          : null;
+      } else {
+        this.renderedSalaryWithCurrency = salaryAmount == 0 ? null : this.data.salaryHistory.salaryInfos.length > 0 ?
+          (this.numberService.formatBigNumberWithSpaces(salaryAmount) + " " + pairSymbols[params.context.selectedCurrency])
+          : null;
+      }
     }
+
+
 
   }
 
@@ -51,8 +58,8 @@ export class SalaryCellRenderer implements ICellRendererAngularComp {
   refresh(params): boolean {
     this.params = params;
     params.api.redrawRows();
-    console.log("params:", params)
-    console.log("selectedCurrency in cell renderer :", params.context.selectedCurrency)
+    // console.log("params:", params)
+    // console.log("selectedCurrency in cell renderer :", params.context.selectedCurrency)
 
     return true;
   }

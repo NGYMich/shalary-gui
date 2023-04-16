@@ -13,6 +13,8 @@ import {JobCellRenderer} from "../cell-renderers/job-cell-renderer";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../../services/TokenStorageService";
 import {getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/cell-style";
+import {SalaryService} from "../../../services/SalaryService";
+import {RedirectService} from "../../../services/RedirectService";
 
 @Component({
   selector: 'app-salaries',
@@ -37,16 +39,10 @@ export class CareersDataViewComponent implements OnInit {
   gridOptions: GridOptions = {
     rowSelection: 'single',
     pagination: true,
-    paginationPageSize: 15,
+    paginationPageSize: 50,
     domLayout: 'autoHeight',
     rowHeight: 40,
     suppressMenuHide: true
-  };
-  defaultCellStyle = {
-    // 'white-space': 'normal',
-    // height: '100%',
-    // display: 'flex ',
-    // 'align-items': 'center',
   };
 
   defaultColDef: ColDef = {
@@ -56,14 +52,14 @@ export class CareersDataViewComponent implements OnInit {
   };
   selectedUserRowIndex: any;
 
-  constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
-              private tokenStorageService: TokenStorageService) {
+  constructor(private userService: UserService, public salaryService: SalaryService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
+              private tokenStorageService: TokenStorageService, public redirectService: RedirectService) {
   }
 
   totalSalaryValueGetter(params) {
     if (params.salaryHistory !== null) {
       let totalSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].totalSalary) : null;
-      return this.applyRateToSalary(params, totalSalary);
+      return this.salaryService.applyRateToSalary(params, totalSalary, this.selectedCurrency, this.forexRates);
     } else {
       return ''
     }
@@ -72,21 +68,21 @@ export class CareersDataViewComponent implements OnInit {
   baseSalaryValueGetter(params) {
     if (params.salaryHistory != null) {
       let baseSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].baseSalary) : null;
-      return this.applyRateToSalary(params, baseSalary)
+      return this.salaryService.applyRateToSalary(params, baseSalary, this.selectedCurrency, this.forexRates)
     } else return ''
   };
 
   bonusSalaryValueGetter(params) {
     if (params.salaryHistory !== null) {
       let bonusSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].bonusSalary) : null;
-      return this.applyRateToSalary(params, bonusSalary)
+      return this.salaryService.applyRateToSalary(params, bonusSalary, this.selectedCurrency, this.forexRates)
     } else return ''
   };
 
   stockSalaryValueGetter(params) {
     if (params.salaryHistory !== null) {
       let stockSalary = params.getValue('salaryHistory.salaryInfos').length > 0 ? Number((params.getValue('salaryHistory.salaryInfos'))[params.getValue('salaryHistory.salaryInfos').length - 1].stockSalary) : null;
-      return this.applyRateToSalary(params, stockSalary)
+      return this.salaryService.applyRateToSalary(params, stockSalary, this.selectedCurrency, this.forexRates)
     } else return ''
   };
 
@@ -265,14 +261,6 @@ export class CareersDataViewComponent implements OnInit {
     });
   }
 
-  autoSizeAll() {
-    const allColumnsIds: string[] = [];
-    this.gridOptions.columnApi?.getAllColumns()?.forEach((column) => {
-      allColumnsIds.push(column.getId());
-    })
-    this.gridOptions.columnApi?.autoSizeColumns(allColumnsIds, false)
-  }
-
   onGridReady(params): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -294,23 +282,8 @@ export class CareersDataViewComponent implements OnInit {
     });
   }
 
-  redirectToAddUserExperienceRoute(event): void {
-    this.router.navigate(['/register'])
-  }
-
   onFilterTextBoxChanged() {
     this.gridOptions.api!.setQuickFilter((document.getElementById('filter-text-box') as HTMLInputElement).value);
-  }
-
-  filterByCountry(name: string) {
-    if (this.isFilteredByPopularCountry && this.gridApi.getFilterInstance('location').appliedModel.filter == name) {
-      this.gridApi.destroyFilter('location');
-      this.isFilteredByPopularCountry = false;
-    } else {
-      this.gridApi.getFilterInstance('location').setModel({type: "equals", filter: name});
-      this.isFilteredByPopularCountry = true;
-    }
-    this.gridApi!.onFilterChanged();
   }
 
   applyNewCurrencySelected(currency: string) {
@@ -319,14 +292,4 @@ export class CareersDataViewComponent implements OnInit {
     this.gridApi.refreshCells(this.gridApi.columns);
   }
 
-  private applyRateToSalary(params, totalSalary: number | null) {
-    if (params.data.salaryHistory?.salaryCurrency?.substring(0, 3) && params.data.salaryHistory.salaryCurrency.substring(0, 3) != this.selectedCurrency && this.selectedCurrency != 'DEFAULT') {
-      let pair = params.data.salaryHistory.salaryCurrency.substring(0, 3) + "_" + this.selectedCurrency
-      // console.log(this.forexRates[pair])
-      let rate = (pair in this.forexRates) ? this.forexRates[pair] : 1
-      return totalSalary != null ? (Math.ceil(totalSalary * rate / 100) * 100).toFixed(0) : totalSalary;
-    } else {
-      return totalSalary
-    }
-  }
 }
