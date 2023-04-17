@@ -97,8 +97,14 @@
           </mat-form-field>
           <br>
 
-          <button mat-raised-button (click)="searchWithCriteria()" style="background-color: palegoldenrod; color: black; width: 10%; margin-top: 10px; font-size: 18px; height:35px;">SEARCH</button>
-
+          <button mat-raised-button (click)="searchWithCriteria()" style="background-color: palegoldenrod; color: black;margin-top: 10px; font-size: 16px; height:35px; text-align: left;">
+            <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>
+            SEARCH WITH FILTERS
+          </button>
+          <button mat-raised-button (click)="resetFilters()" style="background-color: palegoldenrod; margin-left: 15px; color: black;margin-top: 10px; font-size: 16px; height:35px; text-align: left;">
+            <mat-icon style="font-size: 20px;  vertical-align: middle;">close</mat-icon>
+            RESET
+          </button>
         </div>
 
 
@@ -160,6 +166,7 @@
           (gridReady)="onGridReady($event)"
           [tooltipShowDelay]="tooltipShowDelay"
           [tooltipHideDelay]="tooltipHideDelay"
+          (rowClicked)="openUserInfos($event)"
         >
         </ag-grid-angular>
       </div>

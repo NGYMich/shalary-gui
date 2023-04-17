@@ -15,6 +15,7 @@ import {SalaryCellRenderer} from "../careers/cell-renderers/salary-cell-renderer
 import {LocationService} from "../../services/LocationService";
 import {commonContractTypes, commonEducationLevels, commonSectors} from "../global/common-variables";
 import {FormControl} from "@angular/forms";
+import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-infos-dialog.component";
 
 @Component({
   selector: 'app-salaries',
@@ -51,6 +52,8 @@ export class SalariesComponent implements OnInit {
   };
   allCountriesWithTheirFlags: Country[];
   allCountriesName: any;
+  selectedUserRowIndex: any;
+
   constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
               private tokenStorageService: TokenStorageService, public salaryService: SalaryService, public redirectService: RedirectService, private locationService: LocationService) {
   }
@@ -206,22 +209,52 @@ export class SalariesComponent implements OnInit {
   }
 
   searchWithCriteria() {
-    this.salaryService.getSalariesWithSearchCriteria({
+    if (this.selectedCountries != null || this.selectedJobs != null || this.selectedSectors != null || this.selectedCompanies != null || this.selectedSalaryRanges != null || this.selectedEducations != null || this.selectedContracts != null) {
+      this.salaryService.getSalariesWithSearchCriteria({
 
-        locations: this.selectedCountries,
-        jobs: this.selectedJobs,
-        sectors: this.selectedSectors,
-        companies: this.selectedCompanies,
-        salaryRanges: this.selectedSalaryRanges,
-        educationLevels: this.selectedEducations,
-        contractTypes: this.selectedContracts,
+          locations: this.selectedCountries,
+          jobs: this.selectedJobs,
+          sectors: this.selectedSectors,
+          companies: this.selectedCompanies,
+          salaryRanges: this.selectedSalaryRanges,
+          educationLevels: this.selectedEducations,
+          contractTypes: this.selectedContracts,
 
-      }
-    ).subscribe((salaries: User[]) => {
-      this.rowData = salaries;
-    })
+        }
+      ).subscribe((salaries: User[]) => {
+        this.rowData = salaries;
+      })
+    }
+
 
   }
 
 
+  openUserInfos($event) {
+    // console.log(this.gridApi.getSelectedNodes()[0].data.userId)
+    this.userService.getUserById(this.gridApi.getSelectedNodes()[0].data.userId).subscribe(data => {
+      this.selectedUserRowIndex = this.gridApi.getSelectedNodes()[0].rowIndex;
+      this.dialog.open(UserInfosDialogComponent, {
+        width: '100%',
+        height: '85%',
+        data: {
+          selectedUser: data,
+        },
+        autoFocus: false,
+        panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel', 'custom-dialog-container']
+      });
+    })
+
+
+  }
+
+  resetFilters() {
+    this.selectedCountries = null
+    this.selectedJobs = null
+    this.selectedSectors = null
+    this.selectedCompanies = null
+    this.selectedSalaryRanges = null
+    this.selectedEducations = null
+    this.selectedContracts = null
+  }
 }

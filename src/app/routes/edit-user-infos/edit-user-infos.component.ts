@@ -81,7 +81,7 @@ export class EditUserInfosComponent implements OnInit {
   private buildModifiedUser() {
     return {
       id: this.userToModify!.id,
-      email: this.userInformationsForm.get('email')!.value,
+      email: null,
       password: this.userInformationsForm.get('password') != null ? this.userInformationsForm.get('password')!.value : null,
       username: this.userInformationsForm.get('username')!.value,
       mainSector: null,

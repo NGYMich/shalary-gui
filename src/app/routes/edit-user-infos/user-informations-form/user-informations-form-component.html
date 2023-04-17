@@ -18,12 +18,6 @@
         </mat-form-field>
         <br>
         <mat-form-field appearance="standard" class="full-width-line">
-          <mat-label>Email</mat-label>
-          <input matTooltip="Email | Max Length 100" formControlName="email" matInput maxLength="100">
-          <mat-error>Required | Email Address</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="standard" class="full-width-line">
           <mat-label>Salary Currency</mat-label>
           <mat-select [(value)]="selectedCurrency" formControlName="currency" matTooltip="Salary Currency">
             <mat-option *ngFor="let currency of currencies"
