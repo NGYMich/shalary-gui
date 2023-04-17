@@ -1,0 +1,48 @@
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: #f1f1f1 !important;
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  /*font-size: 15px;*/
+  /*background-color: palegoldenrod !important;*/
+  /*border-radius: 0;*/
+  /*border: 0;*/
+  /*border-right: 1px solid #444444;*/
+  /*border-top: 1px solid #444444;*/
+}
+
+:host ::ng-deep div.mat-form-field-outline-start {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-outline-gap {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-outline-end {
+  border-width: 0 !important;
+
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  /*font-size: 15px;*/
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background-color: palegoldenrod;
+}
+
+::ng-deep .mat-pseudo-checkbox::after {
+  color: black;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: black;
+}
+

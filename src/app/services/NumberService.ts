@@ -4,9 +4,13 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class NumberService {
-  formatBigNumberWithSpaces(salary: number) {
+  formatBigNumberWithSpaces(salary: number, currency: any = null): string {
 
-    return salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")
+    let numberWithSpaces: string = salary.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+    if (currency != null) {
+      numberWithSpaces += " " + currency
+    }
+    return numberWithSpaces
   }
 
   formatCurrency(currency: string) {

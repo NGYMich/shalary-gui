@@ -23,9 +23,7 @@ import {UserInfosDialogComponent} from "../../user-infos/user-infos-dialog/user-
   styleUrls: ['./salaries.component.css']
 })
 export class SalariesComponent implements OnInit {
-  mostPopularCountries: Country[] = [];
   @Input() rowData: any;
-  isFilteredByPopularCountry: boolean = false;
 
   currencies = ['DEFAULT', 'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD'];
   selectedCurrency = "DEFAULT";
@@ -35,6 +33,28 @@ export class SalariesComponent implements OnInit {
   tooltipShowDelay = 0;
   tooltipHideDelay = 5000;
   isLoggedIn: boolean = false;
+  selectedCountries: any;
+  selectedSalaryRanges: any;
+  selectedSectors: any;
+  selectedEducations: any;
+  selectedContracts: any;
+  selectedCompanies: any;
+  selectedJobs: any;
+
+  educations: any = commonEducationLevels;
+  contracts: any = commonContractTypes;
+  sectors: any = commonSectors.slice(1);
+  salaryRanges: any = [' <30 000€', '>= 30 000€, < 60 000€', '>= 60 000€, < 100 000€', '>= 100 000€']
+  companies: any;
+  jobNames: any;
+
+  countriesControl = new FormControl();
+  salaryRangesControl = new FormControl();
+  sectorsControl = new FormControl();
+  educationsControl = new FormControl();
+  contractsControl = new FormControl();
+  companiesControl = new FormControl();
+  jobsControl = new FormControl();
 
   gridOptions: GridOptions = {
     rowSelection: 'single',
@@ -172,28 +192,6 @@ export class SalariesComponent implements OnInit {
     },
 
   ];
-  selectedCountries: any;
-  selectedSalaryRanges: any;
-  selectedSectors: any;
-  selectedEducations: any;
-  selectedContracts: any;
-  selectedCompanies: any;
-  selectedJobs: any;
-
-  educations: any = commonEducationLevels;
-  contracts: any = commonContractTypes;
-  sectors: any = commonSectors.slice(1);
-  salaryRanges: any = [' <30 000€', '>= 30 000€, < 60 000€', '>= 60 000€, < 100 000€', '>= 100 000€']
-  companies: any;
-  jobNames: any;
-
-  countriesControl = new FormControl();
-  salaryRangesControl = new FormControl();
-  sectorsControl = new FormControl();
-  educationsControl = new FormControl();
-  contractsControl = new FormControl();
-  companiesControl = new FormControl();
-  jobsControl = new FormControl();
 
   applyNewCurrencySelected(currency: string) {
     this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
@@ -212,7 +210,6 @@ export class SalariesComponent implements OnInit {
   searchWithCriteria() {
     if (this.selectedCountries != null || this.selectedJobs != null || this.selectedSectors != null || this.selectedCompanies != null || this.selectedSalaryRanges != null || this.selectedEducations != null || this.selectedContracts != null) {
       this.salaryService.getSalariesWithSearchCriteria({
-
           locations: this.selectedCountries,
           jobs: this.selectedJobs,
           sectors: this.selectedSectors,
@@ -220,14 +217,11 @@ export class SalariesComponent implements OnInit {
           salaryRanges: this.selectedSalaryRanges,
           educationLevels: this.selectedEducations,
           contractTypes: this.selectedContracts,
-
         }
       ).subscribe((salaries: User[]) => {
         this.rowData = salaries;
       })
     }
-
-
   }
 
 
