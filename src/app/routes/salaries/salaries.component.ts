@@ -159,8 +159,8 @@ export class SalariesComponent implements OnInit {
         },
         {field: 'jobName', width: 300, headerName: 'Job', autoHeight: true, sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
         {
-          field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, autoHeight: true,
-          cellStyle: params => totalYearsOfExperienceCellStyle(params.data.yearsOfExperience, this.isLoggedIn)
+          headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, autoHeight: true,
+          cellStyle: params => totalYearsOfExperienceCellStyle(params, this.isLoggedIn)
         },
         {field: 'companyName', width: 250, headerName: 'Company', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
         {field: 'companySector', width: 250, headerName: 'Sector', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
