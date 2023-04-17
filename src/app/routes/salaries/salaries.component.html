@@ -1,4 +1,4 @@
-<div class="ag-theme-alpine" *isNotMobile>
+<div class="ag-theme-alpine">
   <div class="container-fluid">
     <div class="row">
 
@@ -61,15 +61,15 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Salary Ranges</mat-label>
-            <mat-select [formControl]="salaryRangesControl" multiple [(ngModel)]="selectedSalaryRanges">
-              <app-select-all-option [control]="salaryRangesControl" [values]="salaryRanges"></app-select-all-option>
-              <mat-option *ngFor="let salaryRange of salaryRanges" [value]="salaryRange">
-                {{salaryRange}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>Salary Ranges</mat-label>-->
+<!--            <mat-select [formControl]="salaryRangesControl" multiple [(ngModel)]="selectedSalaryRanges">-->
+<!--              <app-select-all-option [control]="salaryRangesControl" [values]="salaryRanges"></app-select-all-option>-->
+<!--              <mat-option *ngFor="let salaryRange of salaryRanges" [value]="salaryRange">-->
+<!--                {{salaryRange}}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
           <mat-form-field appearance="outline">
             <mat-label>Contract Types</mat-label>
             <mat-select [formControl]="contractsControl" multiple [(ngModel)]="selectedContracts">
