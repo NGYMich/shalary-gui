@@ -18,7 +18,11 @@ export class UserFeedbacksComponent implements OnInit {
     'Translation ?',
     'Compare two users',
     'Graph Legend : modify on click interaction to not show details in parenthesis, and maybe modify its position',
-    'Optimize get location image'
+    'Optimize get location image',
+    '------------------------------ FEATURES / FUTURE ROUTES ------------------------------',
+    'FORUM',
+    // '',
+    // 'FORUM',
   ];
   graphicalSuggestions: string[] = [
     '------------------------------ First priority -----------------------------',

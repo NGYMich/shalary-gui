@@ -68,6 +68,8 @@ import {AgGridModule} from "ag-grid-angular";
 import {TipsAndTricksDialogComponent} from './user-infos/tips-and-tricks-dialog/tips-and-tricks-dialog.component';
 import {UserFeedbacksComponent} from './routes/user-feedbacks/user-feedbacks.component';
 import { SalariesComponent } from './routes/salaries/salaries.component';
+import {SelectAllOptionComponent} from "./routes/salaries/select-all-option/select-all-option.component";
+import {MatRippleModule} from "@angular/material/core";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -137,6 +139,7 @@ const routes: Routes = [
     TipsAndTricksDialogComponent,
     UserFeedbacksComponent,
     SalariesComponent,
+    SelectAllOptionComponent
   ],
   imports: [
     BrowserModule,
@@ -164,6 +167,7 @@ const routes: Routes = [
     MatMenuModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatRippleModule,
 
   ],
   providers: [authInterceptorProviders, CookieService],

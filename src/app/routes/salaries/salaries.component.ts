@@ -14,6 +14,7 @@ import {LocationCellRenderer} from "../careers/cell-renderers/location-cell-rend
 import {SalaryCellRenderer} from "../careers/cell-renderers/salary-cell-renderer";
 import {LocationService} from "../../services/LocationService";
 import {commonContractTypes, commonEducationLevels, commonSectors} from "../global/common-variables";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-salaries',
@@ -49,7 +50,7 @@ export class SalariesComponent implements OnInit {
     }
   };
   allCountriesWithTheirFlags: Country[];
-
+  allCountriesName: any;
   constructor(private userService: UserService, private forexService: ForexService, public dialog: MatDialog, private router: Router,
               private tokenStorageService: TokenStorageService, public salaryService: SalaryService, public redirectService: RedirectService, private locationService: LocationService) {
   }
@@ -63,6 +64,7 @@ export class SalariesComponent implements OnInit {
     this.loadCompanies()
     this.loadForexes();
     this.loadCountriesWithFlag()
+
   }
 
   onGridReady(params): void {
@@ -181,6 +183,13 @@ export class SalariesComponent implements OnInit {
   companies: any;
   jobNames: any;
 
+  countriesControl = new FormControl();
+  salaryRangesControl = new FormControl();
+  sectorsControl = new FormControl();
+  educationsControl = new FormControl();
+  contractsControl = new FormControl();
+  companiesControl = new FormControl();
+  jobsControl = new FormControl();
 
   applyNewCurrencySelected(currency: string) {
     this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
@@ -192,6 +201,7 @@ export class SalariesComponent implements OnInit {
   private loadCountriesWithFlag() {
     this.locationService.getCountriesWithFlags().subscribe((data: Country[]) => {
       this.allCountriesWithTheirFlags = data
+      this.allCountriesName = this.allCountriesWithTheirFlags.map(country => country.name)
     })
   }
 
