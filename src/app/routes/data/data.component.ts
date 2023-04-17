@@ -136,8 +136,7 @@ export class DataComponent implements OnInit {
       console.log('Computing average salaries')
       this.avgSalary = this.numberService.formatBigNumberWithSpaces((+(sum / this.salaries?.length).toFixed(0)), "€")
 
-
-      this.uniqueSectors = new Set(this.salaries.map(salary => salary.sector)).size
+      this.uniqueSectors = new Set(this.salaries.map(salary => salary.companySector)).size
       this.uniqueContracts = new Set(this.salaries.map(salary => salary.contractType)).size
       this.uniqueJobs = new Set(this.salaries.map(salary => salary.jobName)).size
       this.uniqueCompanies = new Set(this.salaries.map(salary => salary.companyName)).size
