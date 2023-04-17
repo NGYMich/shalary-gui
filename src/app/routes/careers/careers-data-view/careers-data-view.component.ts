@@ -12,7 +12,7 @@ import {CompanyCellRenderer} from "../cell-renderers/company-cell-renderer";
 import {JobCellRenderer} from "../cell-renderers/job-cell-renderer";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../../services/TokenStorageService";
-import {getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/cell-style";
+import {filterParams, getDefaultCellStyle, IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER, totalSalaryCellStyle, totalYearsOfExperienceCellStyle} from "../../global/cell-style";
 import {SalaryService} from "../../../services/SalaryService";
 import {RedirectService} from "../../../services/RedirectService";
 
@@ -43,12 +43,17 @@ export class CareersDataViewComponent implements OnInit {
     domLayout: 'autoHeight',
     rowHeight: 40,
     suppressMenuHide: true
+
   };
 
   defaultColDef: ColDef = {
     tooltipValueGetter: (params) => {
       return this.isLoggedIn && !IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER ? params.value : "";
-    }
+    },
+    filterParams: filterParams,
+    sortable: true,
+    resizable: true,
+
   };
   selectedUserRowIndex: any;
 
@@ -134,19 +139,19 @@ export class CareersDataViewComponent implements OnInit {
     {
       headerName: 'User',
       children: [
-        {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'open', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {field: 'username', sortable: true, width: 150, resizable: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {valueGetter: this.currentJobGetter, width: 300, headerName: 'Current job', autoHeight: true, sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {valueGetter: this.currentCompanyGetter, width: 250, headerName: 'Current company', sortable: true, resizable: true, autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), cellRenderer: CompanyCellRenderer},
-        {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
-        {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
-        {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
-        {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
+        {field: 'id', width: 100, filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'open', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {field: 'username', width: 150, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {valueGetter: this.currentJobGetter, width: 300, headerName: 'Current job', autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {valueGetter: this.currentCompanyGetter, width: 250, headerName: 'Current company', autoHeight: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), cellRenderer: CompanyCellRenderer},
+        {field: 'age', width: 100, filter: 'agNumberColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
+        {field: 'gender', width: 100, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
+        {field: 'education', filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
+        {field: 'modifiedDate', width: 140, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,), columnGroupShow: 'open'},
         {
           field: 'salaryHistory.totalYearsOfExperience',
           headerName: 'Experience',
-          sortable: true,
-          resizable: true,
+
+
           valueFormatter: this.experienceFormatter,
           filter: 'agTextColumnFilter',
           width: 150, autoHeight: true,
@@ -154,7 +159,7 @@ export class CareersDataViewComponent implements OnInit {
 
         },
         {
-          field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
+          field: 'location', filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
           cellRenderer: LocationCellRenderer, autoHeight: true,
         },
       ]
@@ -163,68 +168,89 @@ export class CareersDataViewComponent implements OnInit {
       headerName: 'Salary',
 
       children: [
-        {field: 'salaryHistory.salaryCurrency', hide: true, autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {field: 'salaryHistory.salaryInfos', hide: true, autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {field: 'salaryHistory', hide: true, autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {field: 'salaryHistory.salaryCurrency', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {
+          field: 'salaryHistory.salaryInfos', headerName: 'Companies List', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
+          getQuickFilterText: params => {
+            return params.value.map(salaryInfo => salaryInfo.company.name).join(", ");
+          }
+        },
+        {
+          field: 'salaryHistory.salaryInfos', headerName: 'Jobs List', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
+          getQuickFilterText: params => {
+            return params.value.map(salaryInfo => salaryInfo.jobName).join(", ");
+          }
+        },
+        {field: 'salaryHistory', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
         {
           valueGetter: this.totalSalaryValueGetter.bind(this),
           width: 150,
           editable: true,
           headerName: 'Total salary',
-          sortable: true, resizable: true,
+
           filter: 'agNumberColumnFilter',
           autoHeight: true,
           cellRenderer: SalaryCellRenderer,
           cellRendererParams: {selectedCurrency: this.selectedCurrency},
           cellStyle: params => totalSalaryCellStyle(params, this.isLoggedIn),
         },
-        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
-        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)}
+        {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', filter: 'agNumberColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)},
+        {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', filter: 'agTextColumnFilter', autoHeight: true, columnGroupShow: 'closed', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,)}
       ]
     },
   ];
   mobileColumnDefs: (ColDef | ColGroupDef)[] | null | undefined = [
-    {field: 'id', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'username', sortable: true, resizable: true, filter: 'agTextColumnFilter', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'id', width: 100, filter: 'agNumberColumnFilter', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'username', filter: 'agTextColumnFilter', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
     {
-      valueGetter: this.currentJobGetter, headerName: 'Job (click user to see career)', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+      valueGetter: this.currentJobGetter, headerName: 'Job (click user to see career)', filter: 'agTextColumnFilter',
       cellRenderer: JobCellRenderer,
       cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
       autoHeight: true,
       width: 240
     },
-    {valueGetter: this.currentCompanyGetter, headerName: 'Current company', sortable: true, resizable: true, filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'age', sortable: true, resizable: true, width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'gender', sortable: true, resizable: true, width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'education', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'modifiedDate', sortable: true, resizable: true, width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {valueGetter: this.currentCompanyGetter, headerName: 'Current company', filter: 'agTextColumnFilter', cellRenderer: CompanyCellRenderer, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'age', width: 100, filter: 'agNumberColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'gender', width: 100, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'education', filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'modifiedDate', width: 140, filter: 'agTextColumnFilter', columnGroupShow: 'open', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
 
-    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', sortable: true, resizable: true, valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'salaryHistory.totalYearsOfExperience', headerName: 'Experience', valueFormatter: this.experienceFormatter, filter: 'agTextColumnFilter', width: 150, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
     {
-      field: 'location', sortable: true, resizable: true, filter: 'agTextColumnFilter',
+      field: 'location', filter: 'agTextColumnFilter',
       cellRenderer: LocationCellRenderer, hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),
     },
 
-    {field: 'salaryHistory.salaryCurrency', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'salaryHistory.salaryInfos', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {field: 'salaryHistory', hide: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {field: 'salaryHistory.salaryCurrency', hide: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {
+      field: 'salaryHistory.salaryInfos', headerName: 'Companies List', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
+      getQuickFilterText: params => {
+        return params.value.map(salaryInfo => salaryInfo.company.name).join(", ");
+      }
+    },
+    {
+      field: 'salaryHistory.salaryInfos', headerName: 'Jobs List', hide: true, filter: 'agTextColumnFilter', autoHeight: true, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn,),
+      getQuickFilterText: params => {
+        return params.value.map(salaryInfo => salaryInfo.jobName).join(", ");
+      }
+    },
+    {field: 'salaryHistory', hide: true, filter: 'agTextColumnFilter', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
     {
       valueGetter: this.totalSalaryValueGetter.bind(this),
       width: 130,
       editable: true,
       headerName: 'Salary',
-      sortable: true, resizable: true,
       filter: 'agNumberColumnFilter',
       cellRenderer: SalaryCellRenderer,
       cellRendererParams: {selectedCurrency: this.selectedCurrency},
       cellStyle: params => totalSalaryCellStyle(params, this.isLoggedIn)
     },
-    {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', sortable: true, resizable: true, filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
-    {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', sortable: true, resizable: true, filter: 'agTextColumnFilter', columnGroupShow: 'open', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {valueGetter: this.baseSalaryValueGetter.bind(this), width: 150, headerName: 'Base salary', filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {valueGetter: this.bonusSalaryValueGetter.bind(this), width: 150, headerName: 'Bonus salary', filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {valueGetter: this.stockSalaryValueGetter.bind(this), width: 150, headerName: 'Equity', filter: 'agNumberColumnFilter', columnGroupShow: 'open', cellRenderer: SalaryCellRenderer, cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
+    {valueGetter: this.increaseValueGetter.bind(this), width: 250, headerName: 'Increase since beginning', filter: 'agTextColumnFilter', columnGroupShow: 'open', cellStyle: params => getDefaultCellStyle(params, this.isLoggedIn),},
 
   ];
 

@@ -1,4 +1,4 @@
-import {CellClassParams} from "ag-grid-community";
+import {CellClassParams, INumberFilterParams} from "ag-grid-community";
 
 export let ROW_INDEX_TO_BLUR = 6;
 export let IS_BLUR_ACTIVATED_FOR_NOT_LOGGED_USER = true;
@@ -102,3 +102,8 @@ export function globalHideLegendsBecauseOfBlur(isLoggedIn, chosenUserRowIndex) {
     return isLoggedIn || chosenUserRowIndex < ROW_INDEX_TO_BLUR
   return true
 }
+
+export let filterParams = {
+  buttons: ['apply', 'reset'],
+  closeOnApply: true,
+} as INumberFilterParams;
