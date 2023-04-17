@@ -28,6 +28,9 @@
                 <span style="font-size: 14px;"> {{country.name}}</span>
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedCountries=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
 
 
@@ -39,6 +42,9 @@
                 {{sector}}
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedSectors=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -49,6 +55,9 @@
                 {{jobName}}
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedJobs=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
 
 
@@ -60,16 +69,21 @@
                 {{company}}
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedCompanies=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
-<!--          <mat-form-field appearance="outline">-->
-<!--            <mat-label>Salary Ranges</mat-label>-->
-<!--            <mat-select [formControl]="salaryRangesControl" multiple [(ngModel)]="selectedSalaryRanges">-->
-<!--              <app-select-all-option [control]="salaryRangesControl" [values]="salaryRanges"></app-select-all-option>-->
-<!--              <mat-option *ngFor="let salaryRange of salaryRanges" [value]="salaryRange">-->
-<!--                {{salaryRange}}-->
-<!--              </mat-option>-->
-<!--            </mat-select>-->
-<!--          </mat-form-field>-->
+          <!--          <mat-form-field appearance="outline">-->
+          <!--            <mat-label>Salary Ranges</mat-label>-->
+          <!--            <mat-select [formControl]="salaryRangesControl" multiple [(ngModel)]="selectedSalaryRanges">-->
+          <!--              <app-select-all-option [control]="salaryRangesControl" [values]="salaryRanges"></app-select-all-option>-->
+          <!--              <mat-option *ngFor="let salaryRange of salaryRanges" [value]="salaryRange">-->
+          <!--                {{salaryRange}}-->
+          <!--              </mat-option>-->
+          <!--                        </mat-select><button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedSalaryRanges=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button" >close</mat-icon>
+            </button>-->
+          <!--          </mat-form-field>-->
           <mat-form-field appearance="outline">
             <mat-label>Contract Types</mat-label>
             <mat-select [formControl]="contractsControl" multiple [(ngModel)]="selectedContracts">
@@ -78,6 +92,9 @@
                 {{contract}}
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedContracts=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -88,6 +105,9 @@
                 {{education}}
               </mat-option>
             </mat-select>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="selectedEducations=undefined; $event.stopPropagation()">
+              <mat-icon class="clear-filter-button">close</mat-icon>
+            </button>
           </mat-form-field>
           <br>
 

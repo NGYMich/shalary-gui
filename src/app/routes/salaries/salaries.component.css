@@ -111,8 +111,13 @@
   color: black;
 }
 
+.clear-filter-button {
+  color: gray;
+}
 
-
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: 0.1em;
+}
 /*MOBILE*/
 
 .mobile-share-your-experience-button {

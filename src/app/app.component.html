@@ -1,11 +1,11 @@
 <div [@.disabled]="temporaryDisabled">
   <mat-toolbar color="primary">
-    <div fxFlex fxLayoutAlign="flex-end center">
+
+    <div fxFlex fxLayoutAlign="flex-end center" *isMobile>
       <button matSuffix (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-
     <!--    Desktop material navbar-->
     <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -15,18 +15,7 @@
                 routerLinkActive="active_route"
                 mat-button routerLink="/home">
           SHALARY
-          <!--          $HALAR¥-->
         </button>
-
-
-        <!--        <div style="font-size: 8px; color: #121212; margin-left: 90px; ">-->
-        <!--          <mat-form-field appearance="outline" style="font-size:6px; width: 200px; " floatLabel='never'>-->
-        <!--            <input matInput style="font-size: 14px; font-style: italic" id="filter-text-box" placeholder="Search by country">-->
-        <!--            &lt;!&ndash;            <mat-icon matSuffix style="color: gray;">search</mat-icon>&ndash;&gt;-->
-        <!--          </mat-form-field>-->
-        <!--        </div>-->
-
-
       </div>
 
       <div fxFlex fxLayoutAlign="center center">
@@ -78,7 +67,7 @@
 
   <!--  Mobile material sidebar navigator-->
   <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 50%;" (click)="sidenav.toggle()" position="end">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 60%;" (click)="sidenav.toggle()" position="end">
       <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 70px; background-color: #121212; color: whitesmoke;">
 
         <a mat-button routerLink="/home">Shalary - Homepage</a>

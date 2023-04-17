@@ -192,6 +192,7 @@ export class SalariesComponent implements OnInit {
     },
 
   ];
+  selectedCountry: any;
 
   applyNewCurrencySelected(currency: string) {
     this.selectedCurrency = this.selectedCurrency != currency ? this.selectedCurrency = currency : "DEFAULT";
