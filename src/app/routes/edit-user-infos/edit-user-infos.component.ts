@@ -47,7 +47,7 @@ export class EditUserInfosComponent implements OnInit {
       }
     )
 
-    this.workHistoryFormComponent.salaryInfosForm.markAsTouched()
+    this.workHistoryFormComponent?.salaryInfosForm?.markAsTouched()
   }
 
   modifyUser($event: MouseEvent) {

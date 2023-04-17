@@ -1,8 +1,11 @@
-<div height="100vh" [@.disabled]="temporaryDisabled">
+<div [@.disabled]="temporaryDisabled">
   <mat-toolbar color="primary">
-    <button (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
+    <div fxFlex fxLayoutAlign="flex-end center">
+      <button matSuffix (click)="sidenav.toggle()" fxHide.gt-sm fxShow="true" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
     <!--    Desktop material navbar-->
     <div fxHide.lt-md fxShow="true" fxFlex fxLayout>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -60,7 +63,8 @@
 
       <div fxFlex fxLayoutAlign="flex-end center">
         <button *isLoggedIn class="router-pages-button" routerLinkActive="active_route" mat-button routerLink="/edit-user-infos"
-                style="box-shadow: 0 0 40px lightskyblue; background-color: lightsteelblue; color: #1b1e20;">My Career</button>
+                style="box-shadow: 0 0 40px lightskyblue; background-color: lightsteelblue; color: #1b1e20;">My Career
+        </button>
         <button *isLoggedIn class="router-pages-button" mat-button (click)="logOut()">Log out</button>
 
         <!--        <span style="font-size: 14px;">Version - {{shalaryGuiVersion.version}}</span>-->
@@ -74,7 +78,7 @@
 
   <!--  Mobile material sidebar navigator-->
   <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 60%;" (click)="sidenav.toggle()">
+    <mat-sidenav #sidenav class="website-background-color" [autoFocus]="false" style="position: fixed; width: 50%;" (click)="sidenav.toggle()" position="end">
       <mat-nav-list fxLayout="column" class="website-background-color" style="margin-top: 70px; background-color: #121212; color: whitesmoke;">
 
         <a mat-button routerLink="/home">Shalary - Homepage</a>
@@ -89,10 +93,10 @@
 
         <a mat-button routerLink="/articles">Articles</a>
         <a mat-button routerLink="/faq">F.A.Q</a>
-<!--        <a mat-button routerLink="/data">Data Analytics</a>-->
+        <!--        <a mat-button routerLink="/data">Data Analytics</a>-->
         <a mat-button routerLink="/user-feedbacks">User Feedbacks</a>
-<!--        <a mat-button routerLink="/test">Test</a>-->
-<!--        <a mat-button routerLink="/about">About Us</a>-->
+        <!--        <a mat-button routerLink="/test">Test</a>-->
+        <!--        <a mat-button routerLink="/about">About Us</a>-->
 
 
       </mat-nav-list>
