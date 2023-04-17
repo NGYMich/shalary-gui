@@ -7,6 +7,18 @@
 
 
         <div style="text-align: center; vertical-align: middle; align-items: center; font-size: 15px; ">
+
+          <!--          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 20%; padding-top: 0.3%;">-->
+          <!--            <mat-label style="text-align: left; display: block; width: auto;">-->
+          <!--              <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>-->
+          <!--              Search salaries-->
+          <!--            </mat-label>-->
+          <!--            <input matInput style="text-align: left;" id="filter-text-box" (input)="salaryService.onFilterTextBoxChanged(gridOptions)"/>-->
+          <!--          </mat-form-field>-->
+
+        </div>
+        <div style="text-align: center; vertical-align: middle; align-items: center; font-size: 12px;">
+
           <mat-form-field appearance="outline">
             <mat-label>Countries</mat-label>
             <mat-select [formControl]="countriesControl" multiple [(ngModel)]="selectedCountries" class="mat-primary">
@@ -18,24 +30,6 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field floatLabel="never" appearance="outline" style="font-size: 15px; width: 20%; padding-top: 0.3%;">
-            <mat-label style="text-align: left; display: block; width: auto;">
-              <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>
-              Search salaries
-            </mat-label>
-            <input matInput style="text-align: left;" id="filter-text-box" (input)="salaryService.onFilterTextBoxChanged(gridOptions)"/>
-          </mat-form-field>
-
-        </div>
-        <div style="text-align: center; vertical-align: middle; align-items: center; font-size: 12px;">
-
-          <!--          <mat-form-field>-->
-          <!--            <mat-label>Toppings</mat-label>-->
-          <!--            <mat-select [formControl]="toppings" multiple>-->
-
-          <!--              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>-->
-          <!--            </mat-select>-->
-          <!--          </mat-form-field>-->
 
           <mat-form-field appearance="outline">
             <mat-label>Sectors</mat-label>
@@ -97,13 +91,15 @@
           </mat-form-field>
           <br>
 
-          <button mat-raised-button (click)="searchWithCriteria()" style="background-color: palegoldenrod; color: black;margin-top: 10px; font-size: 16px; height:35px; text-align: left;">
-            <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>
-            SEARCH WITH FILTERS
-          </button>
-          <button mat-raised-button (click)="resetFilters()" style="background-color: palegoldenrod; margin-left: 15px; color: black;margin-top: 10px; font-size: 16px; height:35px; text-align: left;">
+
+          <button mat-raised-button (click)="resetFilters()" style="background-color: palegoldenrod; color: black;margin-top: 10px; font-size: 14px; height:35px; text-align: left;">
             <mat-icon style="font-size: 20px;  vertical-align: middle;">close</mat-icon>
             RESET
+          </button>
+          <button mat-raised-button (click)="searchWithCriteria()"
+                  style="background-color: palegoldenrod; margin-left: 15px; color: black;margin-top: 10px; font-size: 14px; height:35px; text-align: left;">
+            <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>
+            SEARCH WITH FILTERS
           </button>
         </div>
 
@@ -145,6 +141,7 @@
                  *ngFor="let currency of currencies" (click)="applyNewCurrencySelected(currency)">
               {{currency}}
             </div>
+
           </div>
 
 
@@ -154,6 +151,13 @@
 
           </div>
         </div>
+        <mat-form-field floatLabel="never" appearance="outline" style="font-size: 13px; width: 20%; padding-top: 0.3%;">
+          <mat-label style="text-align: left; display: block; width: auto;">
+            <mat-icon style="font-size: 20px;  vertical-align: middle;">search</mat-icon>
+            Search
+          </mat-label>
+          <input matInput style="text-align: left;" id="filter-text-box" (input)="salaryService.onFilterTextBoxChanged(gridOptions)"/>
+        </mat-form-field>
 
 
         <ag-grid-angular
