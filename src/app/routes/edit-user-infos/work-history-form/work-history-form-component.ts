@@ -1,18 +1,18 @@
-import {Component, ElementRef, Input, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, Input, QueryList, ViewChildren} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {commonContractTypes, commonSectors} from "../../global/common-variables";
 import {User} from "../../../model/user";
-import {TokenStorageService} from "../../../services/TokenStorageService";
 import {UserInputErrorDialogComponent} from "../../../user-infos/user-input-error-dialog/user-input-error-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {take} from "rxjs";
+import {map, startWith, take} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import jobs from '../../../data/all-job-titles.json'
 
 @Component({
   selector: 'work-history-form',
   templateUrl: './work-history-form-component.html',
   styleUrls: ['./work-history-form-component.css'],
-  animations : [
+  animations: [
     trigger("myTrigger", [
       state(
         "fadeInFlash",
@@ -21,7 +21,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         })
       ),
       transition("void => *", [
-        style({ opacity: "0", transform: "translateY(20px)" }),
+        style({opacity: "0", transform: "translateY(20px)"}),
         animate("1200ms")
       ])
     ])
@@ -33,14 +33,25 @@ export class WorkHistoryFormComponent {
   salaryInfosForm: FormGroup;
   @Input() userToModify: User | null = null;
   @Input() isEditUserPage: boolean = true;
-  @ViewChildren('experience', { read: ElementRef }) deleteElements:  QueryList<ElementRef>;
+  @ViewChildren('experience', {read: ElementRef}) deleteElements: QueryList<ElementRef>;
   flag: boolean = true;
   fadeInFlash: string = "fadeInFlash";
+  jobTitles: any = jobs;
+  jobControl: any;
+  filteredJobs: any = [];
 
+  ready: boolean = false;
 
   ngOnChanges() {
     this.initSalaryInfosForm();
     this.initWorkHistory();
+    // this.jobControl = new FormControl(this.userToModify?.salaryHistory?.salaryInfos[0]?.jobName)
+    // console.log(this.salaryInfos.get('jobName'))
+    // this.filteredJobs = this.salaryInfos.get('jobName')?.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(job => job ? this._filterJobs(job) : this.jobTitles.slice()),
+    //   );
   }
 
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
@@ -61,6 +72,8 @@ export class WorkHistoryFormComponent {
       let lastSalaryInfo = this.salaryInfos.controls[this.salaryInfos.controls.length - 1]
       let controlsConfig = this.copyLastSalaryInfoForNewJobLine(lastSalaryInfo, copyPastLine, second)
       this.salaryInfos.push(this.formBuilder.group(controlsConfig))
+      this.manageJobNamesControls(this.salaryInfos.length - 1)
+
     } else {
       this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
     }
@@ -142,8 +155,16 @@ export class WorkHistoryFormComponent {
 
   }
 
-  removeJobFormLine(pointIndex) {
-    this.salaryInfos.removeAt(pointIndex);
+  removeJobFormLine(i) {
+    this.salaryInfos.removeAt(i);
+    this.filteredJobs.splice(i, 1);
+  }
+
+
+  private initSalaryInfosForm() {
+    this.salaryInfosForm = this.formBuilder.group({
+      salaryInfos: this.formBuilder.array([])
+    });
   }
 
   async initWorkHistory() {
@@ -151,35 +172,34 @@ export class WorkHistoryFormComponent {
       this.salaryInfos.push(this.formBuilder.group(this.createEmptySalaryInfo()))
       console.log(this.salaryInfos)
     } else {
-      console.log('init work history')
       await this.userToModify
       this.userToModify?.salaryHistory?.salaryInfos?.forEach(
-        salaryInfo => this.salaryInfos.push(this.formBuilder.group({
-              // id: new FormControl(salaryInfo.id),
-              yearsOfExperience: new FormControl(salaryInfo.yearsOfExperience, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
-              jobName: new FormControl(salaryInfo.jobName, [Validators.required, Validators.minLength(2)]),
-              baseSalary: new FormControl(salaryInfo.baseSalary, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
-              stockSalary: new FormControl(salaryInfo.stockSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
-              bonusSalary: new FormControl(salaryInfo.bonusSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
-              company: this.formBuilder.group({
-                // id: new FormControl(salaryInfo.company.id),
-                name: salaryInfo.company.name,
-                sector: salaryInfo.company.sector
-              }),
-              contractType: new FormControl(salaryInfo.contractType)
-            }
-          )
-        )
+        (salaryInfo, index) => {
+          this.salaryInfos.push(this.formBuilder.group({
+                // id: new FormControl(salaryInfo.id),
+                yearsOfExperience: new FormControl(salaryInfo.yearsOfExperience, Validators.compose([Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'), Validators.required])),
+                jobName: new FormControl(salaryInfo.jobName, [Validators.required, Validators.minLength(2)]),
+                baseSalary: new FormControl(salaryInfo.baseSalary, Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$'),])),
+                stockSalary: new FormControl(salaryInfo.stockSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+                bonusSalary: new FormControl(salaryInfo.bonusSalary, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')),
+                company: this.formBuilder.group({
+                  // id: new FormControl(salaryInfo.company.id),
+                  name: salaryInfo.company.name,
+                  sector: salaryInfo.company.sector
+                }),
+                contractType: new FormControl(salaryInfo.contractType)
+              }
+            )
+          );
+          this.manageJobNamesControls(index)
+
+        }
       )
+      this.ready = true
     }
 
   }
 
-  private initSalaryInfosForm() {
-    this.salaryInfosForm = this.formBuilder.group({
-      salaryInfos: this.formBuilder.array([])
-    });
-  }
 
   openUserInputErrorDialog(salaryInformationsError, userInformationError, userInformationsForm, salaryInfosForm, message) {
     this.dialog.open(UserInputErrorDialogComponent, {
@@ -195,5 +215,19 @@ export class WorkHistoryFormComponent {
       autoFocus: false,
       panelClass: ['animate__animated', 'animate__zoomIn__fast', 'my-panel']
     });
+  }
+
+  private _filterJobs(value) {
+    const filterValue = value.toLowerCase();
+    return this.jobTitles.filter(job => job.toLowerCase().includes(filterValue));
+  }
+
+  manageJobNamesControls(index: number) {
+    this.filteredJobs[index] = this.salaryInfos.at(index).get('jobName')?.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(jobName => jobName ? this._filterJobs(jobName) : this.jobTitles.slice())
+      );
   }
 }

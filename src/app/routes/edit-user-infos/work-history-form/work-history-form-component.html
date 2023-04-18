@@ -16,28 +16,44 @@
         <br>
         <div formArrayName="salaryInfos" class="salary-infos-div" style="width: 100%;">
 
-          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let pointIndex=index" #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
-               [formGroupName]="pointIndex">
+          <div style="margin-bottom: 15px;" *ngFor="let job of salaryInfos.controls; let i=index" #scrollMe [@.disabled]="flag" [@myTrigger]='fadeInFlash'
+               [formGroupName]="i">
 
 
             <div class="form-group">
               <p class="content-divider center mt-3">
-                <span>Experience #{{pointIndex + 1}}</span>
+                <span>Experience #{{i + 1}}</span>
               </p>
             </div>
-            <mat-form-field appearance="outline"
-                            style="float: left;">
-              <input matTooltip="Job Name | Max Length 50" formControlName="jobName" matInput maxLength="50"/>
+
+
+<!--            <mat-form-field appearance="standard" style="width: 45%; float: left; margin-right: 5%;">-->
+<!--              <input matInput [matAutocomplete]="auto" [formControl]="jobControl" formControlName="jobName">-->
+<!--              <mat-label>Job Name</mat-label>-->
+<!--              <mat-autocomplete #auto="matAutocomplete">-->
+<!--                <mat-option *ngFor="let job of jobTitles" [value]="job">-->
+<!--                   {{job}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+<!--            </mat-form-field>-->
+
+
+            <mat-form-field appearance="outline" style="float: left;" *ngIf="this.ready">
               <mat-label class="optional">Job Name</mat-label>
+              <input [matAutocomplete]="auto"  matTooltip="Job Name | Max Length 50" formControlName="jobName" matInput maxLength="50"/>
+              <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" >
+                <mat-option *ngFor="let job of filteredJobs[i] | async | slice : 0 : 15" [value]="job">
+                  {{job}}
+                </mat-option>
+              </mat-autocomplete>
               <mat-error>
                 Job Name is required | Min Length 2
               </mat-error>
             </mat-form-field>
 
+
             <div formGroupName="company">
-              <mat-form-field appearance="outline"
-                              style="float: left;"
-                              class="italic">
+              <mat-form-field appearance="outline" style="float: left;" class="italic">
                 <input matTooltip="Company | Max Length 50" formControlName="name" matInput maxLength="50"/>
                 <mat-label>Company</mat-label>
               </mat-form-field>
@@ -93,7 +109,7 @@
             </mat-form-field>
 
 
-            <button (click)="removeJobFormLine(pointIndex)" color="remove-job" mat-flat-button type="button" #experience>
+            <button (click)="removeJobFormLine(i)" color="remove-job" mat-flat-button type="button" #experience>
               <mat-icon style="font-size: 30px;">delete</mat-icon>
             </button>
 
